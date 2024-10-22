@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "prepare": "husky"
+    "prepare": "husky",
+    "svgr": "rm -r src/assets/icons/* && npx @svgr/cli public/icons --no-dimensions --typescript --out-dir src/assets/icons"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
