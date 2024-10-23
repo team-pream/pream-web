@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Wrapper,
   Header,
@@ -12,12 +13,18 @@ import {
   InfoValue,
   Contents,
 } from './index.styles';
+import { SheetList } from './components/BottomSheet.tsx';
 import { useNavigate } from 'react-router-dom';
 import Carousel from './components/carousel/index.tsx';
 import option from '../../assets/icons/option.svg';
 import theme from '@/styles/theme';
 import SvgAppbarBack from '@/assets/icons/AppbarBack';
+import BottomSheet from './components/BottomSheet.tsx';
 export default function Detail() {
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+  const handleOptionClick = () => setIsSheetOpen(true);
+  const handleCloseSheet = () => setIsSheetOpen(false);
   const navigate = useNavigate();
 
   const handleBackClick = () => {
@@ -36,7 +43,7 @@ export default function Detail() {
         <div css={TitleWrapper}>
           <div css={TitleTop}>
             <div css={Title}>파는건 아니고 우리 고양이 사진보러...</div>
-            <img src={option} css={OptionIcon} />
+            <img onClick={handleOptionClick} src={option} css={OptionIcon} />
           </div>
           <div css={TitleBottom}>99,999원</div>
         </div>
@@ -81,6 +88,10 @@ export default function Detail() {
       <div css={Footer}>
         <div>푸터입니다.</div>
       </div>
+      <BottomSheet isOpen={isSheetOpen} onClose={handleCloseSheet}>
+        <div css={SheetList}>수정하기</div>
+        <div css={SheetList}>삭제하기</div>
+      </BottomSheet>
     </div>
   );
 }
