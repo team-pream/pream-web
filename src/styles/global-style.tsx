@@ -30,6 +30,7 @@ const defaultStyles = css`
   body {
     margin: 0;
     padding: 0;
+    background-color: ${theme.colors.gray100};
   }
 
   a {
