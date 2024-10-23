@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import theme from '@/styles/theme';
 
 export const Wrapper = css`
   width: 390px;
@@ -9,19 +10,28 @@ export const Wrapper = css`
   flex-direction: column;
   justify-content: space-between; //Header와 Footer를 양끝에 배치 */
   box-sizing: border-box;
+  margin: auto;
 `;
 export const Header = css`
-  /* width: 100%; */
+  width: 100%;
   height: 58px;
-  padding: 0;
+  padding: 22px 18px;
   border: 1px solid #dbdbdb;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 `;
 
 export const Contents = css`
-  height: 718px;
+  min-height: 718px;
+  height: auto;
+  overflow-y: auto;
+  -ms-overflow-style: none; /* IE와 Edge에서 스크롤바 숨기기 */
+  scrollbar-width: none; /* Firefox에서 스크롤바 숨기기 */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari에서 스크롤바 숨기기 */
+  }
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -34,7 +44,7 @@ export const DetailCarousel = css`
 `;
 
 export const TitleWrapper = css`
-  width: 90%;
+  width: 100%;
   margin: 24px auto;
   display: flex;
   flex-direction: column;
@@ -72,7 +82,7 @@ export const InfoWrapper = css`
 `;
 
 export const InfoTitle = css`
-  color: #aeaeae;
+  color: ${theme.colors.gray300};
   margin-right: 20px;
   width: 46px;
 `;
