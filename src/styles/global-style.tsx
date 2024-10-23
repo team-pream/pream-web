@@ -1,64 +1,64 @@
-import { Global, css } from '@emotion/react';
-import theme from '@/styles/theme';
-import 'normalize.css';
-import './fonts.css';
+// import { Global, css } from '@emotion/react';
+// import theme from '@/styles/theme';
+// import 'normalize.css';
+// import './fonts.css';
 
-const defaultStyles = css`
-  :root {
-    font-family: 'Pretendard Variable', 'Pretendard', '-apple-system', 'BlinkMacSystemFont',
-      'system-ui', 'Roboto', 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR',
-      'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'sans-serif';
+// const defaultStyles = css`
+//   :root {
+//     font-family: 'Pretendard Variable', 'Pretendard', '-apple-system', 'BlinkMacSystemFont',
+//       'system-ui', 'Roboto', 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR',
+//       'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'sans-serif';
 
-    width: 100%;
-    height: 100%;
-    color: ${theme.colors.black100};
-    background-color: ${theme.colors.white};
-  }
+//     width: 100%;
+//     height: 100%;
+//     color: ${theme.colors.black100};
+//     background-color: ${theme.colors.white};
+//   }
 
-  * {
-    box-sizing: border-box;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    font-family: inherit;
-  }
+//   * {
+//     box-sizing: border-box;
+//     scrollbar-width: none;
+//     -ms-overflow-style: none;
+//     font-family: inherit;
+//   }
 
-  *::before,
-  *::after {
-    box-sizing: border-box !important;
-  }
+//   *::before,
+//   *::after {
+//     box-sizing: border-box !important;
+//   }
 
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-  }
+//   html,
+//   body {
+//     margin: 0;
+//     padding: 0;
+//   }
 
-  a {
-    outline: none;
-    color: inherit;
-    text-decoration: none;
-    cursor: pointer;
-  }
+//   a {
+//     outline: none;
+//     color: inherit;
+//     text-decoration: none;
+//     cursor: pointer;
+//   }
 
-  button {
-    outline: none;
-    border: none;
-    cursor: pointer;
-  }
+//   button {
+//     outline: none;
+//     border: none;
+//     cursor: pointer;
+//   }
 
-  textarea {
-    border: none;
-    resize: none;
-    outline: none;
-  }
+//   textarea {
+//     border: none;
+//     resize: none;
+//     outline: none;
+//   }
 
-  input {
-    outline: none;
-  }
-`;
+//   input {
+//     outline: none;
+//   }
+// `;
 
-const GlobalStyle = () => {
-  return <Global styles={defaultStyles} />;
-};
+// const GlobalStyle = () => {
+//   return <Global styles={defaultStyles} />;
+// };
 
-export default GlobalStyle;
+// export default GlobalStyle;

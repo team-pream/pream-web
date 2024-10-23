@@ -1,17 +1,19 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import QueryProvider from '@/provider/query-provider';
-import GlobalStyle from '@/styles/global-style';
-import { Login, Main, SignUp } from '@/pages';
+// import GlobalStyle from '@/styles/global-style';
+import { Login, Main, OnBoarding } from '@/pages';
+import KakaoCallback from './pages/auth/pages/kakao';
 
 export default function App() {
   return (
     <QueryProvider>
-      <GlobalStyle />
+      {/* <GlobalStyle /> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/auth" element={<KakaoCallback />} />
+          <Route path="/onboarding" element={<OnBoarding />} />
         </Routes>
       </BrowserRouter>
     </QueryProvider>

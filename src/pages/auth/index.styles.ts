@@ -19,6 +19,8 @@ export const KakaoBtn = css`
   font-weight: 700;
   font-size: 12px;
   margin-top: 80px;
+  cursor: pointer;
+  border: none;
 `;
 
 export const Existing = css`
