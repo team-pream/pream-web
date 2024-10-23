@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-
+import theme from '@/styles/theme';
+import { CarouselWrapper, CarouselImg, LeftBtn, RightBtn } from './index.style';
 // 이미지 파일을 import합니다.
-import img1 from '../../../assets/images/img1.jpg';
-import img2 from '../../../assets/images/img2.jpg';
-import img3 from '../../../assets/images/img3.jpg';
-import img4 from '../../../assets/images/img4.jpg';
+import img1 from '../../../../assets/images/img1.jpg';
+import img2 from '../../../../assets/images/img2.jpg';
+import img3 from '../../../../assets/images/img3.jpg';
+import img4 from '../../../../assets/images/img4.jpg';
 
 const images = [img1, img2, img3, img4];
 
@@ -23,19 +24,10 @@ const Carousel: React.FC = () => {
   const progressPosition = (currentIndex / (images.length - 1)) * (238 - progressBar);
 
   return (
-    <div
-      style={{
-        position: 'relative',
-        width: '100%',
-        overflow: 'hidden',
-        margin: '0 auto',
-        boxSizing: 'border-box',
-      }}
-    >
+    <div css={CarouselWrapper}>
       <div
+        css={CarouselImg}
         style={{
-          display: 'flex',
-          transition: 'transform 0.5s ease',
           width: `${images.length * 390}px`,
           transform: `translateX(${-currentIndex * 390}px)`,
         }}
@@ -62,7 +54,7 @@ const Carousel: React.FC = () => {
           transform: 'translateX(-50%)',
           width: '238px',
           height: '2px',
-          backgroundColor: '#ddd',
+          backgroundColor: `${theme.colors.gray100}`,
         }}
       >
         <div
@@ -70,47 +62,17 @@ const Carousel: React.FC = () => {
             position: 'absolute',
             width: `${progressBar}px`,
             height: '100%',
-            backgroundColor: '#72DACD',
+            backgroundColor: `${theme.colors.green200}`,
             transition: 'left 0.5s ease',
             left: `${progressPosition}px`,
           }}
         ></div>
       </div>
-      <button
-        onClick={handlePrev}
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '10px',
-          transform: 'translateY(-50%)',
-          background: 'rgba(0, 0, 0, 0.5)',
-          color: 'white',
-          border: 'none',
-          borderRadius: '50%',
-          width: '30px',
-          height: '30px',
-          cursor: 'pointer',
-        }}
-      >
+      <button onClick={handlePrev} css={LeftBtn}>
         ‹
       </button>
 
-      <button
-        onClick={handleNext}
-        style={{
-          position: 'absolute',
-          top: '50%',
-          right: '10px',
-          transform: 'translateY(-50%)',
-          background: 'rgba(0, 0, 0, 0.5)',
-          color: 'white',
-          border: 'none',
-          borderRadius: '50%',
-          width: '30px',
-          height: '30px',
-          cursor: 'pointer',
-        }}
-      >
+      <button onClick={handleNext} css={RightBtn}>
         ›
       </button>
     </div>
