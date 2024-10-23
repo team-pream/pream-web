@@ -9,7 +9,13 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "prepare": "husky",
-    "svgr": "rm -r src/assets/icons/* && npx @svgr/cli public/icons --no-dimensions --typescript --out-dir src/assets/icons"
+    "svgr": "rm -r src/assets/icons/* && npx @svgr/cli public/icons --no-dimensions --typescript --out-dir src/assets/icons",
+    "upload-images": "aws s3 cp public/images/ s3://pream-assets/images/ --recursive --profile pream-develop",
+    "upload-icons": "aws s3 cp public/icons/ s3://pream-assets/icons/ --recursive --profile pream-develop",
+    "upload": "pnpm upload-images && pnpm upload-icons",
+    "download-images": "aws s3 sync s3://pream-assets/images/ public/images/ --profile pream-develop",
+    "download-icons": "aws s3 sync s3://pream-assets/icons/ public/icons/ --profile pream-develop",
+    "download": "pnpm download-images && pnpm download-icons"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -34,6 +40,7 @@
     "globals": "^15.9.0",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
+    "normalize.css": "^8.0.1",
     "prettier": "^3.3.3",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.7.0",
