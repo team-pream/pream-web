@@ -5,7 +5,6 @@ export const Wrapper = css`
   width: 390px;
   height: 844px;
   background-color: white;
-  border: 1px solid #dbdbdb;
   display: flex;
   flex-direction: column;
   justify-content: space-between; //Header와 Footer를 양끝에 배치 */
@@ -16,14 +15,13 @@ export const Header = css`
   width: 100%;
   height: 58px;
   padding: 22px 18px;
-  border: 1px solid #dbdbdb;
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
 
 export const Contents = css`
-  min-height: 718px;
+  min-height: 690px;
   height: auto;
   overflow-y: auto;
   -ms-overflow-style: none; /* IE와 Edge에서 스크롤바 숨기기 */
@@ -88,9 +86,9 @@ export const InfoTitle = css`
 `;
 export const InfoValue = css``;
 export const Footer = css`
-  height: 48px;
+  height: 76px;
   padding: 10px;
-  border: 1px solid #dbdbdb;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
   background-color: white;
   display: flex;
   justify-content: center;
