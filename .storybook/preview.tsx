@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import type { Preview } from '@storybook/react';
 import { ThemeProvider } from '@emotion/react';
 import GlobalStyle from '../src/styles/global-style';
@@ -24,10 +25,12 @@ const preview: Preview = {
   decorators: [
     (Story) => (
       <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <div style={{ width: '100vh', maxWidth: '480px', margin: '0 auto' }}>
-          <Story />
-        </div>
+        <BrowserRouter>
+          <GlobalStyle />
+          <div style={{ width: '100vh', maxWidth: '480px', margin: '0 auto' }}>
+            <Story />
+          </div>
+        </BrowserRouter>
       </ThemeProvider>
     ),
   ],

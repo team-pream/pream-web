@@ -4,6 +4,7 @@ export const ROUTE_PATHS = {
 
   MAIN: '/',
   SEARCH: '/search',
+  CATEGORY: '/category',
 
   PRODUCTS: '/products',
   PRODUCT_DETAIL: '/products',
