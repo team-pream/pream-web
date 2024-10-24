@@ -1,4 +1,11 @@
+import theme from '@/styles/theme';
 import { css } from '@emotion/react';
+
+export const wrapper = css`
+  margin: 10px;
+  width: ${theme.size.maxWidth};
+  height: 710px;
+`;
 
 export const gridWrapper = css`
   display: grid;
@@ -9,20 +16,13 @@ export const gridWrapper = css`
   padding: 10px;
 `;
 
-export const gridItem = css`
+//임시 - 나중에 삭제예정
+export const header = css`
+  width: ${theme.size.maxWidth};
+  height: 60px;
+  border-bottom: 1px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  text-align: center;
-
-  img {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 10px;
-  }
-
-  span {
-    font-size: 10px;
-    color: #333;
-  }
+  border-bottom: 1px solid ${theme.colors.black};
 `;

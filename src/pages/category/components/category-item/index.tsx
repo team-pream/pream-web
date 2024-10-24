@@ -1,4 +1,4 @@
-import { gridItem } from '../index.styles';
+import { gridItem } from './index.styles';
 
 interface Props {
   item: {
