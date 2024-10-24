@@ -6,7 +6,6 @@ export const productInfoWrapper = css`
 `;
 
 export const titleWrapper = css`
-  width: 90%;
   margin: 24px auto;
   display: flex;
   flex-direction: column;
