@@ -1,38 +1,22 @@
-import { api } from '@/api';
-import { useEffect, useState } from 'react';
 import { wrapper } from './index.styles';
 import { categoryList } from './index.styles';
 import { categoryItems } from './index.styles';
 import { categoryItem } from './index.styles';
-import { imgIcon } from './index.styles';
+import { categoryIcon } from './index.styles';
 import { useNavigate } from 'react-router-dom';
+import { useGetCategoriesQuery } from '@/queries/categories';
 
-interface ImageData {
+interface CategoryData {
   id: number;
   name: string;
   icon: string;
 }
 
 export default function Main() {
-  const [imageData, setImageData] = useState<ImageData[]>([]);
-  const nav = useNavigate();
+  const navigate = useNavigate();
+  const { data, refetch } = useGetCategoriesQuery();
 
-  useEffect(() => {
-    const getCategories = async () => {
-      try {
-        const response = await api.get('/categories');
-        console.log('response: ', response);
-        setImageData(response.data);
-      } catch (error) {
-        console.error('failed: ', error);
-      }
-    };
-    getCategories();
-  }, []);
-
-  const handleCategoryButtonClick = (link: number) => {
-    nav(link);
-  };
+  refetch();
 
   return (
     <div css={wrapper}>
@@ -41,23 +25,19 @@ export default function Main() {
         <div>carousel</div>
         <div css={categoryList}>
           <div css={categoryItems}>
-            {imageData.length > 0 ? (
-              imageData
-                .filter((item) => item.id !== 4 && item.id !== 5)
-                .map((item) => (
-                  <div key={item.id} css={categoryItem}>
-                    <img
-                      src={item.icon}
-                      alt={item.name}
-                      css={imgIcon}
-                      onClick={() => handleCategoryButtonClick(item.id)}
-                    />
-                    <span>{item.name}</span>
-                  </div>
-                ))
-            ) : (
-              <p>'Loading..'</p>
-            )}
+            {data
+              ?.filter((item: CategoryData) => item.id !== 4 && item.id !== 5)
+              .map((item: CategoryData) => (
+                <div key={item.id} css={categoryItem}>
+                  <img
+                    src={item.icon}
+                    alt={item.name}
+                    css={categoryIcon}
+                    onClick={() => navigate(item.id)}
+                  />
+                  <span>{item.name}</span>
+                </div>
+              ))}
           </div>
         </div>
         <div>list</div>
