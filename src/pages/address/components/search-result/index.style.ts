@@ -12,6 +12,7 @@ export const searchResultWrapper = css`
 export const searchTitle = css`
   font-size: 16px;
   font-weight: 600;
+  margin: 10px 0px;
 `;
 
 export const addressTag = css`
