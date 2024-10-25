@@ -2,11 +2,11 @@ import React from 'react';
 import { wrapper, kakaoButton, existing, loginText, descText } from './index.styles';
 import { KakaoLogo, Logo } from '@/assets/icons';
 
-const API_URL = import.meta.env.VITE_API_URL;
+const VITE_BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function Login() {
   const handleKakaoLoginButtonClick = () => {
-    window.location.href = `${API_URL}/auth/kakao`;
+    window.location.href = `${VITE_BASE_URL}/auth/kakao`;
   };
 
   return (
