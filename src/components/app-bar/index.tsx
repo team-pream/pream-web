@@ -1,4 +1,4 @@
-import { wrapper } from './index.styles.ts';
+import { wrapper } from './index.styles';
 import { Logo } from '@/assets/icons';
 
 interface Props {
