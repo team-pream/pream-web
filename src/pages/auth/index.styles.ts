@@ -1,7 +1,7 @@
 import { colors } from '@/styles/colors';
 import { css } from '@emotion/react';
 
-export const Wrapper = css`
+export const wrapper = css`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,7 +9,7 @@ export const Wrapper = css`
   height: 100vh;
 `;
 
-export const KakaoBtn = css`
+export const kakaoButton = css`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,17 +26,17 @@ export const KakaoBtn = css`
   color: ${colors.black};
 `;
 
-export const Existing = css`
+export const existing = css`
   color: ${colors.gray300};
   font-size: 10px;
 `;
 
-export const DescText = css`
+export const descText = css`
   color: ${colors.black};
   font-size: 14px;
   margin-top: 15px;
 `;
 
-export const LoginText = css`
+export const loginText = css`
   margin-left: 6px;
 `;
