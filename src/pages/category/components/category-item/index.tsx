@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { gridItem } from './index.styles';
 
 interface Props {
@@ -8,11 +9,13 @@ interface Props {
   };
 }
 export default function CategoryItem({ item }: Props) {
+  const navigate = useNavigate();
   return (
     <div
       css={gridItem}
       onClick={() => {
-        alert(item.id + item.name); /** 추후 카테고리 별 상품 목록으로 이동 */
+        console.log(item.id);
+        navigate(item.id);
       }}
     >
       <img alt={item.name} src={item.icon} />
