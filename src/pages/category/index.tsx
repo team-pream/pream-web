@@ -1,25 +1,29 @@
 import { useGetCategoriesQuery } from '@/queries/category';
 import CategoryItem from './components/category-item';
-import { gridWrapper, wrapper, wrapperMenu, hr } from './index.styles';
+import { gridWrapper, wrapper, menuWrapper, hr } from './index.styles';
+
+interface CategoryType {
+  id: number;
+  name: string;
+  icon: string;
+}
 
 export default function Category() {
   const { data } = useGetCategoriesQuery();
+  const ALL_MENU_ID: number = 1; //전체 메뉴에 대한 id
   if (!data) return null;
-
-  const categories = data.data;
-
-  const categoryItems: React.ReactNode[] = [];
-  for (let i = 1; i < categories.length; i++) {
-    const categoryItem = categories[i];
-    categoryItems.push(<CategoryItem key={categoryItem.id} item={categoryItem} />);
-  }
 
   return (
     <div css={wrapper}>
-      <div css={wrapperMenu}>
+      <div css={menuWrapper}>
         <h3>전체 메뉴</h3>
         <hr css={hr} />
-        <div css={gridWrapper}>{categoryItems}</div>
+        <div css={gridWrapper}>
+          {data?.map((item: CategoryType) => {
+            if (item.id !== ALL_MENU_ID)
+              return <CategoryItem key={item.id} id={item.id} name={item.name} icon={item.icon} />;
+          })}
+        </div>
       </div>
     </div>
   );

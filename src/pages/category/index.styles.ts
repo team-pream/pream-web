@@ -6,7 +6,7 @@ export const wrapper = css`
   margin: 0 auto;
 `;
 
-export const wrapperMenu = css`
+export const menuWrapper = css`
   margin: 10px;
   width: ${theme.size.maxWidth};
   height: 710px;
