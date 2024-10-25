@@ -12,6 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Box: Story = {
   args: {
+    variant: 'box',
     size: 'm',
     children: 'Button',
   },
@@ -19,6 +20,7 @@ export const Box: Story = {
 
 export const Capsule: Story = {
   args: {
+    variant: 'capsule',
     size: 'm',
     children: 'Button',
   },

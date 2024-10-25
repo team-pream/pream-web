@@ -1,4 +1,4 @@
-import { wrapper } from './index.styles.ts';
+import { wrapper } from './index.styles';
 
 export type ButtonVariant = 'box' | 'capsule';
 export type ButtonSize = 'xs' | 's' | 'm' | 'l' | 'xl';
