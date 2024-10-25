@@ -9,7 +9,7 @@ export const useGetCategoriesQuery = () => {
       try {
         return await getCategories();
       } catch {
-        throw new Error('지역 정보를 가져오는 데 실패했습니다.');
+        throw new Error('카테고리 정보를 가져오는 데 실패했습니다.');
       }
     },
   });
