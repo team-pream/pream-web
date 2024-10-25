@@ -9,12 +9,13 @@ interface CategoryData {
   icon: string;
 }
 
+const CAT_WHEEL = 4;
+const WALKING = 5;
+const EXCLUDED_CATEGORIES = [CAT_WHEEL, WALKING];
+
 export default function Main() {
   const navigate = useNavigate();
   const { data } = useGetCategoriesQuery();
-  const CAT_WHEEL = 4;
-  const WALKING = 5;
-  const excludedCategories = [CAT_WHEEL, WALKING];
 
   return (
     <div css={wrapper}>
@@ -24,7 +25,7 @@ export default function Main() {
         <div css={categoryList}>
           <div css={categoryItems}>
             {data
-              ?.filter((item: CategoryData) => !excludedCategories.includes(item.id))
+              ?.filter((item: CategoryData) => !EXCLUDED_CATEGORIES.includes(item.id))
               .map((item: CategoryData) => (
                 <div key={item.id} css={categoryItem}>
                   <img
