@@ -15,6 +15,7 @@ export default function App() {
           <Route path="/products/:productId" element={<Detail />} />
           <Route path="/address" element={<Address />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/auth/kakao" element={<KakaoCallback />} />
           <Route path="/onboarding" element={<OnBoarding />} />
           <Route path="/category" element={<Category />} />
           <Route path="/purchase" element={<Purchase />} />
