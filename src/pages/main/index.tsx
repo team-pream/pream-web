@@ -1,8 +1,5 @@
 import { wrapper } from './index.styles';
-import { categoryList } from './index.styles';
-import { categoryItems } from './index.styles';
-import { categoryItem } from './index.styles';
-import { categoryIcon } from './index.styles';
+import { categoryList, categoryItems, categoryItem, categoryIcon } from './index.styles';
 import { useNavigate } from 'react-router-dom';
 import { useGetCategoriesQuery } from '@/queries/categories';
 
@@ -14,9 +11,10 @@ interface CategoryData {
 
 export default function Main() {
   const navigate = useNavigate();
-  const { data, refetch } = useGetCategoriesQuery();
-
-  refetch();
+  const { data } = useGetCategoriesQuery();
+  const CAT_WHEEL = 4;
+  const WALKING = 5;
+  const excludedCategories = [CAT_WHEEL, WALKING];
 
   return (
     <div css={wrapper}>
@@ -26,7 +24,7 @@ export default function Main() {
         <div css={categoryList}>
           <div css={categoryItems}>
             {data
-              ?.filter((item: CategoryData) => item.id !== 4 && item.id !== 5)
+              ?.filter((item: CategoryData) => !excludedCategories.includes(item.id))
               .map((item: CategoryData) => (
                 <div key={item.id} css={categoryItem}>
                   <img
