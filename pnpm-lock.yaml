@@ -1508,6 +1508,13 @@ packages:
       }
     deprecated: This is a stub types definition. react-daum-postcode provides its own type definitions, so you do not need this installed.
 
+  '@types/react-daum-postcode@1.6.1':
+    resolution:
+      {
+        integrity: sha512-5wVpG1X4BkEqPYlZj1eTosMFRxpxEghHkZzARFZ60us/tlGwtZpJU0UbT4qVCR10qlEwFFYWlytlQEnybw4ZQw==,
+      }
+    deprecated: This is a stub types definition. react-daum-postcode provides its own type definitions, so you do not need this installed.
+
   '@types/react-dom@18.3.1':
     resolution:
       {
