@@ -44,6 +44,7 @@ const defaultStyles = css`
     outline: none;
     border: none;
     cursor: pointer;
+    background: none;
   }
 
   textarea {
@@ -54,6 +55,8 @@ const defaultStyles = css`
 
   input {
     outline: none;
+    border: none;
+    background: none;
   }
 `;
 

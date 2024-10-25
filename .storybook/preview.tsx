@@ -18,6 +18,7 @@ const preview: Preview = {
       default: 'gray',
       values: [
         { name: 'gray', value: '#EAEEF2' },
+        { name: 'light', value: '#FFFFFF' },
         { name: 'dark', value: '#262626' },
       ],
     },
