@@ -1,10 +1,6 @@
+import * as React from 'react';
 import type { SVGProps } from 'react';
-
-interface Props extends SVGProps<SVGSVGElement> {
-  color?: string;
-}
-
-const SvgMypageUploadImage = (props: Props) => (
+const SvgMypageUploadImage = (props: SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18" {...props}>
     <ellipse cx={10} cy={10} fill="#72DACD" rx={5.238} ry={5} />
     <path

@@ -1,13 +1,9 @@
+import * as React from 'react';
 import type { SVGProps } from 'react';
-
-interface Props extends SVGProps<SVGSVGElement> {
-  color?: string;
-}
-
-const SvgFabPlus = (props: Props) => (
+const SvgFabPlus = (props: SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" {...props}>
     <path
-      stroke={props.color ?? '#000'}
+      stroke="#000"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.5}
