@@ -8,6 +8,7 @@ interface AddressData {
   roadAddress: string;
   jibunAddress: string;
   zonecode: string;
+  buildingName?: string;
 }
 
 interface AddressSearchBarProps {
@@ -34,9 +35,12 @@ export default function AddressSearchBar({ onSelectAddress }: AddressSearchBarPr
   const handlePostcodeSearch = () => {
     new window.daum.Postcode({
       oncomplete: async (data: AddressData) => {
+        const buildingName = data.buildingName ? ` (${data.buildingName})` : '';
+
         setPostcode(data.zonecode);
-        setRoadAddress(data.roadAddress);
+        setRoadAddress(data.roadAddress + buildingName);
         setJibunAddress(data.jibunAddress);
+
         onSelectAddress(data.roadAddress, data.jibunAddress);
 
         try {
@@ -65,7 +69,7 @@ export default function AddressSearchBar({ onSelectAddress }: AddressSearchBarPr
     <div style={{ padding: '16px' }}>
       <SearchBar
         onSearch={handlePostcodeSearch}
-        placeholder={roadAddress || '도로명이나 주소를 입력하세요'} // Placeholder에 선택된 주소 표시
+        placeholder={roadAddress || '도로명이나 주소를 입력하세요'}
       />
 
       {latitude !== null && longitude !== null && (
