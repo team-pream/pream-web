@@ -31,6 +31,6 @@ export const SearchInput: Story = {
 export const Search: Story = {
   args: {
     prefix: <Logo width="94px" height="24px" />,
-    suffix: <SearchIcon width="20px" height="20px" />,
+    suffix: <SearchIcon width="20px" height="20px" cursor="pointer" />,
   },
 };
