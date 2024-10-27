@@ -2,9 +2,8 @@ import { DropdownUnfold, LikeOff } from '@/assets/icons';
 import {
   countText,
   dropdownIcon,
-  dropdownItem,
-  dropdownMenu,
   heartIcon,
+  image,
   imageBox,
   infoWrapper,
   item,
@@ -14,19 +13,37 @@ import {
   listWrapper,
   opacityBox,
   productsWrapper,
-  sampleImage,
   span,
   statusWrapper,
   textBox,
   title,
   wrapper,
+  dropdownOverlayStyle,
+  dropdownMenuStyle,
+  menuItemStyle,
 } from './index.styles';
 import { useState } from 'react';
+import { useGetProductsQuery } from '@/queries/products';
+import { useLocation } from 'react-router-dom';
+
+interface ProductType {
+  categoryId: number;
+  id: number;
+  description: string;
+  name: string;
+  images: string[];
+  isLiked: boolean;
+  price: number;
+  sellerId: string;
+  status: string;
+}
 
 export default function Products() {
+  const location = useLocation();
+  const { id, name } = location.state || {}; // 전달된 Props 데이터 추출
+  const { data } = useGetProductsQuery(id, null);
   const [isOpen, setIsOpen] = useState(false); // 드롭다운 열림/닫힘 상태
-  const sampleImgUrl =
-    'https://github.com/user-attachments/assets/890c728b-8e32-474f-9db1-a036e6955713'; //api 연동 후 삭제예정
+  const productList = data?.products;
   const toggleDropdown = () => {
     setIsOpen(!isOpen); // 클릭 시 드롭다운 토글
   };
@@ -37,26 +54,29 @@ export default function Products() {
   };
   return (
     <div css={wrapper}>
-      <div css={title}>{'title'}</div>
+      <h3 css={title}>{name}</h3>
       <div css={productsWrapper}>
         <div css={infoWrapper}>
           <div css={countText}>
-            <span css={span}>{'163개'}</span>의 상품
+            <span css={span}>{data?.totalCount ?? 0}개</span>의 상품
           </div>
           <div css={statusWrapper} onClick={toggleDropdown}>
             <span css={span}>상태</span>
             <DropdownUnfold css={dropdownIcon} />
+            {isOpen && ( // 드롭다운이 열렸을 때만 메뉴를 보여줌
+              <div>
+                <div css={dropdownOverlayStyle(isOpen)} onClick={() => setIsOpen(false)}></div>
 
-            {isOpen && ( // 드롭다운이 열렸을 때만 메뉴를 보여줍니다.
-              <div css={dropdownMenu}>
-                <div css={dropdownItem} onClick={() => handleItemClick('AVAILABLE')}>
-                  AVAILABLE
-                </div>
-                <div css={dropdownItem} onClick={() => handleItemClick('SOLD_OUT')}>
-                  SOLD_OUT
-                </div>
-                <div css={dropdownItem} onClick={() => handleItemClick('RESERVED')}>
-                  RESERVED
+                <div css={dropdownMenuStyle(isOpen)}>
+                  <div css={menuItemStyle} onClick={() => handleItemClick('AVAILABLE')}>
+                    AVAILABLE
+                  </div>
+                  <div css={menuItemStyle} onClick={() => handleItemClick('SOLD_OUT')}>
+                    SOLD_OUT
+                  </div>
+                  <div css={menuItemStyle} onClick={() => handleItemClick('RESERVED')}>
+                    RESERVED
+                  </div>
                 </div>
               </div>
             )}
@@ -64,17 +84,21 @@ export default function Products() {
         </div>
         <div css={listWrapper}>
           <div css={itemList}>
-            <div css={item}>
-              <div css={imageBox}>
-                <div css={opacityBox} />
-                <img src={sampleImgUrl} alt="itemImage" css={sampleImage} />
-                <LikeOff css={heartIcon} />
-              </div>
-              <div css={textBox}>
-                <span css={itemTitle}>{'"1번 사용한 강아지 카시트예요!"'}</span>
-                <span css={itemPrice}>{'15,000원'}</span>
-              </div>
-            </div>
+            {productList?.map((product: ProductType) => {
+              return (
+                <div key={product.id} css={item}>
+                  <div css={imageBox}>
+                    <div css={opacityBox} />
+                    <img src={product.images[0]} alt="itemImage" css={image} />
+                    <LikeOff css={heartIcon} />
+                  </div>
+                  <div css={textBox}>
+                    <span css={itemTitle}>{product.name}</span>
+                    <span css={itemPrice}>{product.price}원</span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

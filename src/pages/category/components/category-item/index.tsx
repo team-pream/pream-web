@@ -16,7 +16,7 @@ export default function CategoryItem({ id, name, icon }: Props) {
     <button
       css={gridItem}
       onClick={() => {
-        navigate(id);
+        navigate(`/products?category=${id}`, { state: { id, name } }); // state로 Props 전달
       }}
     >
       <img alt={name} src={icon} />

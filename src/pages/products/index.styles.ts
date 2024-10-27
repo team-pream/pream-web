@@ -2,7 +2,7 @@ import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 
 export const wrapper = css`
-  /* width: ${theme.size.maxWidth}; */
+  max-width: ${theme.size.maxWidth};
   width: 400px;
   height: 100vh;
   margin: 0 auto;
@@ -48,27 +48,40 @@ export const statusWrapper = css`
   position: relative;
 `;
 
-export const dropdownWrapper = css`
-  position: relative;
-  display: inline-block;
-`;
-
-export const dropdownMenu = css`
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: white;
-  border: 1px solid ${theme.colors.gray300};
-  border-radius: 4px;
-  width: 100px;
+export const dropdownOverlayStyle = (isOpen: boolean) => css`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
   z-index: 10;
+  display: ${isOpen ? 'block' : 'none'};
 `;
 
-export const dropdownItem = css`
-  padding: 8px 12px;
+export const dropdownMenuStyle = (isOpen: boolean) => css`
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: ${theme.size.maxWidth};
+  background: white;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  z-index: 11;
+  display: ${isOpen ? 'block' : 'none'};
+`;
+export const menuItemStyle = css`
+  padding: 20px;
+  font-size: 16px;
+  color: ${theme.colors.black100};
+  text-align: center;
+  border-bottom: 1px solid #eee;
   cursor: pointer;
-  &:hover {
-    background-color: ${theme.colors.gray100};
+  &:last-child {
+    border-bottom: none;
   }
 `;
 
@@ -96,7 +109,7 @@ export const imageBox = css`
   position: relative;
 `;
 
-export const sampleImage = css`
+export const image = css`
   background-color: lightgray;
   border-radius: 13px;
   width: 170px;
