@@ -3,7 +3,7 @@ import theme from '@/styles/theme';
 
 export const ButtonStyle = css`
   position: relative;
-  top: 240px;
+  top: 270px;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
