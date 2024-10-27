@@ -17,7 +17,8 @@
     "download-icons": "aws s3 sync s3://pream-assets/icons/ public/icons/ --profile pream-develop",
     "download": "pnpm download-images && pnpm download-icons",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "deploy-storybook": "storybook build && touch ./storybook-static/.nojekyll && gh-pages -d ./storybook-static -t true"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -49,6 +50,7 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.12",
     "eslint-plugin-storybook": "^0.10.1",
+    "gh-pages": "^6.2.0",
     "globals": "^15.9.0",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
