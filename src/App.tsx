@@ -16,6 +16,7 @@ export default function App() {
           <Route path="/category" element={<Category />} />
           <Route path="/products" element={<Products />} />
           <Route path="/mypage/purchase/history" element={<Purchase />} />
+          <Route path="/mypage/purchase/history" element={<Purchase />} />
         </Routes>
       </BrowserRouter>
     </QueryProvider>
