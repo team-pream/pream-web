@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { FAB } from '@/components/fab';
 import { FabPlus } from '@/assets/icons';
+import { FAB } from '@/components';
 
 const meta = {
   title: 'Components/FAB',

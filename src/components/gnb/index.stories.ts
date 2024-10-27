@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { GNB } from '@/components/gnb';
+import { GNB } from '@/components';
 
 const meta = {
   title: 'Components/GNB',

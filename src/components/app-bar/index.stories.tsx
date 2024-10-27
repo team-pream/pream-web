@@ -1,7 +1,6 @@
 import { StoryObj, type Meta } from '@storybook/react';
-import { AppBar } from '@/components/app-bar';
-import { SearchBar } from '@/components/search-bar';
 import { AppBarBack, Logo, Search as SearchIcon } from '@/assets/icons';
+import { AppBar, SearchBar } from '@/components';
 
 const meta: Meta<typeof AppBar> = {
   title: 'Components/AppBar',
