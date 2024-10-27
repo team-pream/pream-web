@@ -10,16 +10,16 @@ interface AddressData {
   zonecode: string;
 }
 
-interface AddressSearchBarProps {
-  onSelectAddress: (road: string, jibun: string) => void;
-}
-
-const AddressSearchBar: React.FC<AddressSearchBarProps> = ({ onSelectAddress }) => {
+const AddressSearchBar: React.FC = () => {
   const [postcode, setPostcode] = useState('');
   const [roadAddress, setRoadAddress] = useState('');
   const [jibunAddress, setJibunAddress] = useState('');
   const [latitude, setLatitude] = useState<number | null>(null);
   const [longitude, setLongitude] = useState<number | null>(null);
+  const [showDetailInput, setShowDetailInput] = useState(false);
+  const [detailAddress, setDetailAddress] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -34,6 +34,7 @@ const AddressSearchBar: React.FC<AddressSearchBarProps> = ({ onSelectAddress }) 
   const handlePostcodeSearch = () => {
     new window.daum.Postcode({
       oncomplete: async (data: AddressData) => {
+        const buildingName = data.buildingName ? ` (${data.buildingName})` : '';
         setPostcode(data.zonecode);
         setRoadAddress(data.roadAddress);
         setJibunAddress(data.jibunAddress);
@@ -61,6 +62,18 @@ const AddressSearchBar: React.FC<AddressSearchBarProps> = ({ onSelectAddress }) 
     }).open();
   };
 
+  const handleDetailAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setDetailAddress(value);
+    setIsFocused(value.trim().length > 0);
+  };
+
+  const handleSaveAddress = () => {
+    const fullAddress = `${roadAddress}, ${jibunAddress}, ${detailAddress}`;
+    console.log('저장된 전체 주소:', fullAddress);
+    setIsModalOpen(true);
+  };
+
   return (
     <div style={{ padding: '16px' }}>
       <SearchBar
@@ -82,7 +95,7 @@ const AddressSearchBar: React.FC<AddressSearchBarProps> = ({ onSelectAddress }) 
       {roadAddress && (
         <div css={resultAddress}>
           <div css={addressTag}>도로명</div>
-          <div>{roadAddress}</div>
+          <div css={{ fontWeight: '600' }}>{roadAddress}</div>
         </div>
       )}
 
@@ -92,6 +105,34 @@ const AddressSearchBar: React.FC<AddressSearchBarProps> = ({ onSelectAddress }) 
           <div>{jibunAddress}</div>
         </div>
       )}
+
+      {showDetailInput && (
+        <div style={{ paddingBottom: '10px' }}>
+          <div
+            css={inputStyle(isFocused || detailAddress.trim().length > 0)} // Conditional style
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => {
+              if (!detailAddress.trim()) setIsFocused(false); // Prevent blur if value exists
+            }}
+            tabIndex={-1}
+          >
+            <input
+              type="text"
+              placeholder="상세 주소를 입력하세요"
+              onChange={handleDetailAddressChange}
+            />
+          </div>
+          <Button onClick={handleSaveAddress}>이 주소가 확실해요</Button>
+        </div>
+      )}
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="등록 완료"
+        message="기본 주소 입력이 완료됐어요"
+        buttonText="확인"
+      />
     </div>
   );
 };
