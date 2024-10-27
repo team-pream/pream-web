@@ -13,7 +13,15 @@ interface AddressData {
   buildingName?: string;
 }
 
-const AddressSearchBar: React.FC = () => {
+interface AddressSearchBarProps {
+  onSearchStart: () => void;
+  onDetailInputStart: () => void;
+}
+
+const AddressSearchBar: React.FC<AddressSearchBarProps> = ({
+  onSearchStart,
+  onDetailInputStart,
+}) => {
   const [roadAddress, setRoadAddress] = useState('');
   const [jibunAddress, setJibunAddress] = useState('');
   const [latitude, setLatitude] = useState<number | null>(null);
@@ -21,7 +29,6 @@ const AddressSearchBar: React.FC = () => {
   const [showDetailInput, setShowDetailInput] = useState(false);
   const [detailAddress, setDetailAddress] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -34,12 +41,15 @@ const AddressSearchBar: React.FC = () => {
   }, []);
 
   const handlePostcodeSearch = () => {
+    onSearchStart(); // 검색 시작 시 AddressList 표시
+
     new window.daum.Postcode({
       oncomplete: async (data: AddressData) => {
         const buildingName = data.buildingName ? ` (${data.buildingName})` : '';
         setRoadAddress(data.roadAddress + buildingName);
         setJibunAddress(data.jibunAddress);
         setShowDetailInput(true);
+        onDetailInputStart(); // 상세 입력 시작 시 AddressList 숨기기
 
         try {
           const response = await axios.get(
@@ -63,26 +73,16 @@ const AddressSearchBar: React.FC = () => {
     }).open();
   };
 
-  const handleDetailAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setDetailAddress(value);
-    setIsFocused(value.trim().length > 0);
-  };
-
   const handleSaveAddress = () => {
     const newAddress = {
       roadAddress: roadAddress,
       detailAddress: detailAddress,
     };
 
-    // Retrieve the current list of saved addresses from sessionStorage
     const storedAddresses = sessionStorage.getItem('savedAddresses');
     const parsedAddresses = storedAddresses ? JSON.parse(storedAddresses) : [];
 
-    // Add the new address to the array
     const updatedAddresses = [...parsedAddresses, newAddress];
-
-    // Store the updated array back into sessionStorage
     sessionStorage.setItem('savedAddresses', JSON.stringify(updatedAddresses));
 
     console.log('SessionStorage에 저장된 주소 목록:', updatedAddresses);
@@ -117,18 +117,11 @@ const AddressSearchBar: React.FC = () => {
 
       {showDetailInput && (
         <div style={{ paddingBottom: '10px' }}>
-          <div
-            css={inputStyle(isFocused || detailAddress.trim().length > 0)} // Conditional style
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => {
-              if (!detailAddress.trim()) setIsFocused(false); // Prevent blur if value exists
-            }}
-            tabIndex={-1}
-          >
+          <div css={inputStyle(detailAddress.trim().length > 0)} tabIndex={-1}>
             <input
               type="text"
               placeholder="상세 주소를 입력하세요"
-              onChange={handleDetailAddressChange}
+              onChange={(e) => setDetailAddress(e.target.value)}
             />
           </div>
           <Button onClick={handleSaveAddress}>이 주소가 확실해요</Button>
@@ -139,7 +132,7 @@ const AddressSearchBar: React.FC = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         title="등록 완료"
-        message="기본 주소 입력이 완료됐어요"
+        message="주소가 입력됐어요"
         buttonText="확인"
       />
     </div>
