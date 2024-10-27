@@ -8,7 +8,7 @@ export const addressListWrapper = css`
   padding: 20px;
   position: relative; /* ::after 의사 요소를 위한 위치 설정 */
 
-  &:last-of-type {
+  &:nth-last-of-type(2) {
     border-bottom: none;
   }
 
@@ -42,4 +42,5 @@ export const defaultAddressTag = css`
 export const resultAddress2 = css`
   ${resultAddress}
   margin: 0px;
+  width: 270px;
 `;
