@@ -21,6 +21,7 @@ import {
   dropdownOverlayStyle,
   dropdownMenuStyle,
   menuItemStyle,
+  soldOutOverlayStyle,
 } from './index.styles';
 import { useState } from 'react';
 import { useGetProductsQuery } from '@/queries/products';
@@ -41,15 +42,17 @@ interface ProductType {
 export default function Products() {
   const location = useLocation();
   const { id, name } = location.state || {}; // 전달된 Props 데이터 추출
-  const { data } = useGetProductsQuery(id, null);
+  const [statusId, setStatusId] = useState<number | null>(null);
+  const { data } = useGetProductsQuery(id, statusId);
   const [isOpen, setIsOpen] = useState(false); // 드롭다운 열림/닫힘 상태
   const productList = data?.products;
+
   const toggleDropdown = () => {
     setIsOpen(!isOpen); // 클릭 시 드롭다운 토글
   };
 
-  const handleItemClick = (item: string) => {
-    console.log(item); // 드롭다운 항목 선택 시 처리 -> 필터링 된 상품
+  const handleItemClick = (id: number) => {
+    setStatusId(id);
     setIsOpen(false); // 선택 후 드롭다운 닫기
   };
   return (
@@ -68,14 +71,14 @@ export default function Products() {
                 <div css={dropdownOverlayStyle(isOpen)} onClick={() => setIsOpen(false)}></div>
 
                 <div css={dropdownMenuStyle(isOpen)}>
-                  <div css={menuItemStyle} onClick={() => handleItemClick('AVAILABLE')}>
-                    AVAILABLE
+                  <div css={menuItemStyle} onClick={() => handleItemClick(1)}>
+                    구매 가능
                   </div>
-                  <div css={menuItemStyle} onClick={() => handleItemClick('SOLD_OUT')}>
-                    SOLD_OUT
+                  <div css={menuItemStyle} onClick={() => handleItemClick(2)}>
+                    판매 종료
                   </div>
-                  <div css={menuItemStyle} onClick={() => handleItemClick('RESERVED')}>
-                    RESERVED
+                  <div css={menuItemStyle} onClick={() => handleItemClick(3)}>
+                    예약 완료
                   </div>
                 </div>
               </div>
@@ -85,12 +88,18 @@ export default function Products() {
         <div css={listWrapper}>
           <div css={itemList}>
             {productList?.map((product: ProductType) => {
+              const isSoldOut = product.status === 'SOLD_OUT';
               return (
                 <div key={product.id} css={item}>
                   <div css={imageBox}>
                     <div css={opacityBox} />
                     <img src={product.images[0]} alt="itemImage" css={image} />
                     <LikeOff css={heartIcon} />
+                    {isSoldOut && (
+                      <div css={soldOutOverlayStyle}>
+                        <span>판매완료</span>
+                      </div>
+                    )}
                   </div>
                   <div css={textBox}>
                     <span css={itemTitle}>{product.name}</span>

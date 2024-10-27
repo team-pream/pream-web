@@ -139,6 +139,25 @@ export const heartIcon = css`
   }
 `;
 
+export const soldOutOverlayStyle = css`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 170px;
+  height: 170px;
+  background-color: ${theme.colors.grayOpacity300};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 13px;
+  z-index: 2; // opacityBox보다 위에 배치
+
+  span {
+    color: ${theme.colors.white};
+    font-weight: bold;
+  }
+`;
+
 export const textBox = css`
   display: flex;
   flex-direction: column;
