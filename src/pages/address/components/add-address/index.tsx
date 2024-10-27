@@ -51,6 +51,7 @@ const AddressSearchBar: React.FC<AddressSearchBarProps> = ({
         setShowDetailInput(true);
         onDetailInputStart(); // 상세 입력 시작 시 AddressList 숨기기
 
+
         try {
           const response = await axios.get(
             `https://dapi.kakao.com/v2/local/search/address.json?query=${data.roadAddress}`,
