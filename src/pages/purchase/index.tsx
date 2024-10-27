@@ -63,7 +63,7 @@ export default function Purchase() {
               <div css={date}>{data.date}</div>
             </div>
             <div css={hiddenBlock({ isOpen: isOpen[index] || false })}>
-              <div css={shipBlock}>
+              <section css={shipBlock}>
                 <div css={blockTitle}>배송 정보</div>
                 <div css={info}>
                   <div css={infoTitle}>
@@ -77,8 +77,8 @@ export default function Purchase() {
                     <span>010-0000-0000</span>
                   </div>
                 </div>
-              </div>
-              <div css={paymentBlock}>
+              </section>
+              <section css={paymentBlock}>
                 <div css={blockTitle}>결제 정보</div>
                 <div css={info}>
                   <div css={infoTitle}>
@@ -90,7 +90,7 @@ export default function Purchase() {
                     <span>20,000원</span>
                   </div>
                 </div>
-              </div>
+              </section>
             </div>
           </div>
         ))}
