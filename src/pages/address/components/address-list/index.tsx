@@ -1,14 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  addressListWrapper,
-  defaultAddressTag,
-  addressTag2,
-  resultAddress2,
-  addressWrapper,
-  emptyMessageWrapper, // 추가된 스타일
-} from './index.style';
-import Delete from '@/assets/images/delete.png';
-import Modal from '../modal';
+import { addressListWrapper, defaultAddressTag, addressTag2, resultAddress2 } from './index.style';
 
 interface AddressObject {
   roadAddress: string;
@@ -52,11 +43,8 @@ const AddressList: React.FC = () => {
             )}
             <div css={{ display: 'flex', justifyContent: 'space-between' }}>
               <div css={addressTag2}>주소</div>
-              <div
-                onClick={() => handleAddressClick(index)}
-                css={[addressWrapper, index === 0 ? { color: 'black' } : { fontSize: '12px' }]}
-              >
-                <div css={[resultAddress2]}>{address.roadAddress}</div>
+              <div>
+                <div css={resultAddress2}>{address.roadAddress}</div>
                 <div css={resultAddress2}>{address.detailAddress}</div>
               </div>
               <img
