@@ -1,4 +1,5 @@
 import { colors } from '@/styles/colors';
+import { typography } from '@/styles/typography';
 
 const theme = {
   colors,
@@ -15,6 +16,7 @@ const theme = {
     bottomSheet: 30,
     modal: 40,
   },
+  typo: { ...typography },
 } as const;
 
 export default theme;
