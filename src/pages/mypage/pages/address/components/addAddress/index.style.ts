@@ -34,7 +34,7 @@ export const addressTag = css`
 export const resultAddress = css`
   width: 100%;
   margin: 0 auto;
-  margin: 2px 0;
+  margin: 5px 0;
   cursor: pointer;
   display: flex;
   font-size: 14px;
