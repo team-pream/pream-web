@@ -13,12 +13,7 @@ interface AddressData {
   buildingName?: string;
 }
 
-interface AddressSearchBarProps {
-  onSelectAddress: (road: string, jibun: string) => void;
-}
-
-export default function AddressSearchBar({ onSelectAddress }: AddressSearchBarProps) {
-  const [postcode, setPostcode] = useState('');
+const AddressSearchBar: React.FC = () => {
   const [roadAddress, setRoadAddress] = useState('');
   const [jibunAddress, setJibunAddress] = useState('');
   const [latitude, setLatitude] = useState<number | null>(null);
@@ -149,4 +144,6 @@ export default function AddressSearchBar({ onSelectAddress }: AddressSearchBarPr
       />
     </div>
   );
-}
+};
+
+export default AddressSearchBar;
