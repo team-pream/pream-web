@@ -21,7 +21,7 @@ export const Header = css`
 `;
 
 export const Contents = css`
-  min-height: 690px;
+  min-height: 710px;
   height: auto;
   overflow-y: auto;
   -ms-overflow-style: none; /* IE와 Edge에서 스크롤바 숨기기 */
