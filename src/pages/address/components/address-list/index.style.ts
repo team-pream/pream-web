@@ -44,3 +44,19 @@ export const resultAddress2 = css`
   margin: 0px;
   width: 270px;
 `;
+
+export const addressWrapper = css`
+  cursor: pointer;
+  color: ${theme.colors.gray300};
+`;
+
+export const emptyMessageWrapper = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 660px;
+  font-size: 16px;
+  font-weight: 600;
+  color: ${theme.colors.gray300};
+  text-align: center;
+`;

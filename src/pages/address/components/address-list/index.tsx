@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { addressListWrapper, defaultAddressTag, addressTag2, resultAddress2 } from './index.style';
+import {
+  addressListWrapper,
+  defaultAddressTag,
+  addressTag2,
+  resultAddress2,
+  addressWrapper,
+  emptyMessageWrapper, // 추가된 스타일
+} from './index.style';
 import Delete from '@/assets/images/delete.png';
 import Modal from '../modal';
 
@@ -45,8 +52,11 @@ const AddressList: React.FC = () => {
             )}
             <div css={{ display: 'flex', justifyContent: 'space-between' }}>
               <div css={addressTag2}>주소</div>
-              <div onClick={() => handleAddressClick(index)} style={{ cursor: 'pointer' }}>
-                <div css={resultAddress2}>{address.roadAddress}</div>
+              <div
+                onClick={() => handleAddressClick(index)}
+                css={[addressWrapper, index === 0 ? { color: 'black' } : { fontSize: '12px' }]}
+              >
+                <div css={[resultAddress2]}>{address.roadAddress}</div>
                 <div css={resultAddress2}>{address.detailAddress}</div>
               </div>
               <img
@@ -58,7 +68,7 @@ const AddressList: React.FC = () => {
           </div>
         ))
       ) : (
-        <div>저장된 주소가 없습니다.</div>
+        <div css={emptyMessageWrapper}>저장된 주소가 없습니다</div>
       )}
       <Modal
         isOpen={isModalOpen}
