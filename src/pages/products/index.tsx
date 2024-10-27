@@ -75,7 +75,7 @@ export default function Products() {
                     구매 가능
                   </div>
                   <div css={menuItemStyle} onClick={() => handleItemClick(2)}>
-                    판매 종료
+                    판매 완료
                   </div>
                   <div css={menuItemStyle} onClick={() => handleItemClick(3)}>
                     예약 완료
