@@ -26,18 +26,7 @@ import {
 import { useState } from 'react';
 import { useGetProductsQuery } from '@/queries/products';
 import { useLocation } from 'react-router-dom';
-
-interface ProductType {
-  categoryId: number;
-  id: number;
-  description: string;
-  name: string;
-  images: string[];
-  isLiked: boolean;
-  price: number;
-  sellerId: string;
-  status: string;
-}
+import { ProductType } from '@/types';
 
 export default function Products() {
   const location = useLocation();
@@ -46,8 +35,7 @@ export default function Products() {
   const category = id;
 
   const { data } = useGetProductsQuery({ category, status });
-  const [isOpen, setIsOpen] = useState(false); // 드롭다운 열림/닫힘 상태
-  const productList = data?.products;
+  const [isOpen, setIsOpen] = useState<boolean>(false); // 드롭다운 열림/닫힘 상태
   const toggleDropdown = () => {
     setIsOpen(!isOpen); // 클릭 시 드롭다운 토글
   };
@@ -85,7 +73,7 @@ export default function Products() {
         </div>
         <div css={listWrapper}>
           <div css={itemList}>
-            {productList?.map((product: ProductType) => {
+            {data?.products?.map((product: ProductType) => {
               const isSoldOut = product.status === 'SOLD_OUT';
               return (
                 <div key={product.id} css={item}>
