@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 
 export const wrapper = css`
   max-width: ${theme.size.maxWidth};
-  width: 400px;
+  min-width: 400px;
   height: 100vh;
   margin: 0 auto;
   /* border: 1px solid ${theme.colors.gray200}; */
@@ -160,6 +160,7 @@ export const soldOutOverlayStyle = css`
 
 export const textBox = css`
   display: flex;
+  width: 170px;
   flex-direction: column;
   gap: 6px;
   padding: 8px 0 0 7px;

@@ -42,17 +42,18 @@ interface ProductType {
 export default function Products() {
   const location = useLocation();
   const { id, name } = location.state || {}; // 전달된 Props 데이터 추출
-  const [statusId, setStatusId] = useState<number | null>(null);
-  const { data } = useGetProductsQuery(id, statusId);
+  const [status, setStatus] = useState<number>();
+  const category = id;
+
+  const { data } = useGetProductsQuery({ category, status });
   const [isOpen, setIsOpen] = useState(false); // 드롭다운 열림/닫힘 상태
   const productList = data?.products;
-
   const toggleDropdown = () => {
     setIsOpen(!isOpen); // 클릭 시 드롭다운 토글
   };
 
-  const handleItemClick = (id: number) => {
-    setStatusId(id);
+  const handleItemClick = (statusId: number) => {
+    setStatus(statusId);
     setIsOpen(false); // 선택 후 드롭다운 닫기
   };
   return (
@@ -76,9 +77,6 @@ export default function Products() {
                   </div>
                   <div css={menuItemStyle} onClick={() => handleItemClick(2)}>
                     판매 완료
-                  </div>
-                  <div css={menuItemStyle} onClick={() => handleItemClick(3)}>
-                    예약 완료
                   </div>
                 </div>
               </div>
