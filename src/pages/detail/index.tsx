@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { useGetProductQuery } from '@/queries/detail/index.ts';
-import { Wrapper, Contents } from './index.styles';
+import { Wrapper, Contents, Header } from './index.styles';
 import { SheetList } from './components/bottom-sheet/index.style.ts';
 import BottomSheet from './components/bottom-sheet/index.tsx';
 import ProductInfo from './components/product-infomation/index.tsx';
-import SvgAppbarBack from '@/assets/icons/AppbarBack.tsx';
-import { AppBar } from '@/Components/index.ts';
-import { AppBarBack } from '@/assets/icons/index.ts';
-//import { GNB } from '@/Components/index.ts';
-import { BGNB } from './components/gnb-buy/index.tsx';
+import { AppBar } from '@/components/index.ts';
+import { GNB } from '@/components/index.ts';
 // import { useParams } from 'react-router-dom';
 import Carousel from './components/carousel/index.tsx';
+import SvgAppbarBack from '@/assets/icons/AppbarBack.tsx';
+import { BGNB } from './components/gnb-buy/index.tsx';
 
 const Detail: React.FC = () => {
   //const { id } = '5'; //useParams<{ id: string }>(); // URL에서 상품 ID 가져오기

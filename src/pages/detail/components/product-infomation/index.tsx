@@ -53,13 +53,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ onOptionClick, product }) => 
     <div css={{ width: '100%', borderBottom: '4px solid #F6F6F6' }} />
     <div css={titleWrapper}>
       <div css={explainTitle}>상세 정보</div>
-      <div css={explainProduct}>
-        {product.description}
-        {product.description}
-        {product.description}
-        {product.description}
-        {product.description}
-      </div>
+      <div css={explainProduct}>{product.description}</div>
     </div>
   </div>
 );
