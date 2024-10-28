@@ -1,6 +1,9 @@
 import { useGetCategoriesQuery } from '@/queries/category';
 import CategoryItem from './components/category-item';
 import { gridWrapper, wrapper, menuWrapper, hr } from './index.styles';
+import { AppBar, GNB, SearchBar, Text } from '@/components';
+import theme from '@/styles/theme';
+import { AppBarBack } from '@/assets/icons';
 
 interface CategoryType {
   id: number;
@@ -8,16 +11,21 @@ interface CategoryType {
   icon: string;
 }
 
+const ALL_MENU_ID: number = 1; //전체 메뉴에 대한 id
+
 export default function Category() {
   const { data } = useGetCategoriesQuery();
-  const ALL_MENU_ID: number = 1; //전체 메뉴에 대한 id
-  if (!data) return null;
 
   return (
     <div css={wrapper}>
+      <AppBar prefix={<AppBarBack height="24px" cursor="pointer" />} suffix={<SearchBar />} />
+
       <div css={menuWrapper}>
-        <h3>전체 메뉴</h3>
+        <Text typo="title1" color={theme.colors.black}>
+          전체 메뉴
+        </Text>
         <hr css={hr} />
+
         <div css={gridWrapper}>
           {data?.map((item: CategoryType) => {
             if (item.id !== ALL_MENU_ID)
@@ -25,6 +33,8 @@ export default function Category() {
           })}
         </div>
       </div>
+
+      <GNB />
     </div>
   );
 }

@@ -17,26 +17,18 @@ export const kakaoButton = css`
   width: 354px;
   height: 45px;
   border-radius: 10px;
-  font-weight: 700;
-  font-size: 12px;
-  margin-top: 70px;
+  margin: 85px 0 12px 0;
   cursor: pointer;
   border: none;
   gap: 10px;
   color: ${colors.black};
 `;
 
-export const existing = css`
-  color: ${colors.gray300};
-  font-size: 10px;
-`;
-
-export const descText = css`
-  color: ${colors.black};
-  font-size: 14px;
+export const subtitle = css`
   margin-top: 15px;
 `;
 
 export const loginText = css`
   margin-left: 6px;
+  cursor: pointer;
 `;

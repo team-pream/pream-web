@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
-import { FABSize } from '.';
+import { FABSize } from '@/components/fab';
 
 export const wrapper = ({ size }: { size: FABSize }) => css`
   position: fixed;

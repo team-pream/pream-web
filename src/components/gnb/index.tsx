@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { GnbCategory, GnbHome, GnbMy, LikeOff } from '@/assets/icons';
-import { menuItem, menuLabel, wrapper } from './index.styles';
+import { menuItem, wrapper } from './index.styles';
+import { Text } from '@/components';
+import theme from '@/styles/theme';
 
 const MENUS = [
   {
@@ -31,7 +33,12 @@ export function GNB() {
           onClick={() => navigate(menu.path)}
         >
           {menu.icon}
-          <span css={menuLabel({ isActive: pathname === menu.path })}>{menu.name}</span>
+          <Text
+            typo="body2"
+            color={pathname === menu.path ? theme.colors.green200 : theme.colors.black100}
+          >
+            {menu.name}
+          </Text>
         </div>
       ))}
     </nav>

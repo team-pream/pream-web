@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 export const wrapper = css`
   position: fixed;
   bottom: 0;
-  left: 0;
+  margin: 0 auto;
   z-index: ${theme.zIndex.gnb};
   width: 100%;
   max-width: ${theme.size.maxWidth};
@@ -33,11 +33,4 @@ export const menuItem = ({ isActive }: { isActive: boolean }) => css`
       stroke: ${isActive ? theme.colors.green200 : theme.colors.black100};
     }
   }
-`;
-
-// TODO: Text 컴포넌트로 전환
-export const menuLabel = ({ isActive }: { isActive: boolean }) => css`
-  font-weight: 400;
-  font-size: 12px;
-  color: ${isActive ? theme.colors.green200 : theme.colors.black100};
 `;

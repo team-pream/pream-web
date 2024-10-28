@@ -24,5 +24,5 @@ export default function KakaoCallback() {
     }
   }, [navigate]);
 
-  return <div></div>;
+  return <></>;
 }

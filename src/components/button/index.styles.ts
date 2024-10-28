@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
-import { ButtonSize } from '.';
+import { ButtonSize } from '@/components/button';
 
 interface WrapperProps {
   size: ButtonSize;
