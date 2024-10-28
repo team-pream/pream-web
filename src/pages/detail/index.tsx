@@ -4,9 +4,11 @@ import { Wrapper, Contents } from './index.styles';
 import { SheetList } from './components/bottom-sheet/index.style.ts';
 import BottomSheet from './components/bottom-sheet/index.tsx';
 import ProductInfo from './components/product-infomation/index.tsx';
+import SvgAppbarBack from '@/assets/icons/AppbarBack.tsx';
 import { AppBar } from '@/Components/index.ts';
 import { AppBarBack } from '@/assets/icons/index.ts';
-import { GNB } from '@/Components/index.ts';
+//import { GNB } from '@/Components/index.ts';
+import { BGNB } from './components/gnb-buy/index.tsx';
 // import { useParams } from 'react-router-dom';
 import Carousel from './components/carousel/index.tsx';
 
@@ -39,9 +41,7 @@ const Detail: React.FC = () => {
           product={product} // 상품 정보 전달
         />
       </div>
-      <div css={Footer}>
-        <div>푸터입니다.</div>
-      </div>
+      <BGNB />
       <BottomSheet isOpen={isSheetOpen} onClose={handleCloseSheet}>
         <div css={SheetList}>수정하기</div>
         <div css={SheetList}>삭제하기</div>
