@@ -2,14 +2,14 @@ import { css } from '@emotion/react';
 
 export const CarouselWrapper = css`
   position: relative;
-  width: 100%;
+  max-width: 480px;
   margin: 0 auto;
   box-sizing: border-box;
 `;
 
 export const CarouselImg = css`
   display: flex;
-  transition: transfrom 0.5s ease;
+  transition: transform 0.5s ease; // 수정
 `;
 
 export const LeftBtn = css`
