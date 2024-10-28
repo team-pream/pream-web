@@ -2,6 +2,7 @@ import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 
 export const wrapper = css`
+
   width: ${theme.size.maxWidth};
   height: 100vh;
   margin: 0 auto;
@@ -25,6 +26,7 @@ export const dropdownIcon = css`
   width: 12px;
   margin-inline-start: 5px;
 `;
+
 
 export const countText = css`
   flex: 1;
@@ -71,6 +73,7 @@ export const menuItemStyle = css`
   cursor: pointer;
   &:last-child {
     border-bottom: none;
+
   }
 `;
 
@@ -98,6 +101,7 @@ export const item = css`
 export const imageBox = css`
   position: relative;
 `;
+
 
 export const image = css`
   background-color: lightgray;
@@ -138,3 +142,4 @@ export const textBox = css`
   padding: 8px 0 0 7px;
   cursor: pointer;
 `;
+
