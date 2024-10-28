@@ -25,7 +25,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
       <div
         css={CarouselImg}
         style={{
-          width: `${images.length * 480}px`, // 최대 너비 1440px
+          width: `${Math.min(images.length * 480, 1440)}px`, // 최대 너비 1440px
           transform: `translateX(${-currentIndex * 480}px)`,
         }}
       >

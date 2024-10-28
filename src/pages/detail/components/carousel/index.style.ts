@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 export const CarouselWrapper = css`
   position: relative;
   max-width: 480px;
-  margin: 58px auto 0;
+  margin: 0 auto;
   box-sizing: border-box;
 `;
 
