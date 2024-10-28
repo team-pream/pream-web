@@ -55,3 +55,10 @@ export const timeInfo = css`
   color: ${theme.colors.gray200};
   margin: 20px 0px;
 `;
+
+export const explainProduct = css`
+  font-size: ${typography.body2.fontSize};
+  font-weight: ${typography.body2.fontWeight};
+  white-space: pre-line;
+  line-height: 1.5;
+`;

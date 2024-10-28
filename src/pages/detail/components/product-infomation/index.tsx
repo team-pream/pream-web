@@ -1,3 +1,4 @@
+import React from 'react';
 import option from '@/assets/icons/option.svg';
 import {
   productInfoWrapper,
@@ -11,35 +12,48 @@ import {
   infoTitle,
   infoValue,
 } from './index.style';
+
 interface ProductInfoProps {
   onOptionClick: () => void;
+  product: {
+    name: string;
+    price: number;
+    status: string;
+    condition: string;
+    images: string[];
+    description: string;
+    seller: {
+      id: string;
+      nickname: string;
+    };
+    likesCount: number;
+    isLiked: boolean;
+  };
 }
 
-const ProductInfo: React.FC<ProductInfoProps> = ({ onOptionClick }) => (
+const ProductInfo: React.FC<ProductInfoProps> = ({ onOptionClick, product }) => (
   <div css={productInfoWrapper}>
     <div css={titleWrapper}>
       <div css={titleTop}>
-        <div css={title}>파는건 아니고 우리 고양이 사진보러...</div>
+        <div css={title}>{product.name}</div> {/* 상품 이름 출력 */}
         <img onClick={onOptionClick} src={option} css={optionIcon} />
       </div>
-      <div css={titleBottom}>99,999원</div>
+      <div css={titleBottom}>{product.price.toLocaleString()}원</div> {/* 가격 출력 */}
     </div>
     <div css={infoWrapper}>
-      <InfoRow title="판매자" value="판매자" />
-      <InfoRow title="상태" value="사용감 없음" />
+      <InfoRow title="판매자" value={product.seller.nickname} /> {/* 판매자 닉네임 출력 */}
+      <InfoRow title="상태" value={product.condition} /> {/* 상태 출력 */}
       <InfoRow title="오픈채팅" value="https://open.kakao.com/o/sn7a8Y" />
       <div css={timeInfo}>
         <span>10분전</span>
         <span css={{ margin: '10px', fontSize: '8px' }}>•</span>
-        <span>찜 0</span>
+        <span>찜 {product.likesCount}</span> {/* 찜 개수 출력 */}
       </div>
     </div>
     <div css={{ width: '100%', borderBottom: '4px solid #F6F6F6' }} />
     <div css={titleWrapper}>
-      <div css={title}>상세설명</div>
-      <div css={{ fontSize: '12px', marginTop: '28px', whiteSpace: 'pre-line' }}>
-        어쩌구 저쩌구...졸려 죽겠다. 어쩌구... 낮잠 자고 싶어.. 아임 쏘 타이어드
-      </div>
+      <div css={explainTitle}>상세 정보</div>
+      <div css={explainProduct}>{product.description}</div>
     </div>
   </div>
 );
