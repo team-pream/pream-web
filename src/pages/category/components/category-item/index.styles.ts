@@ -11,9 +11,4 @@ export const gridItem = css`
     height: 60px;
     margin-bottom: 10px;
   }
-
-  span {
-    font-size: 10px;
-    color: #333;
-  }
 `;

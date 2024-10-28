@@ -1,22 +1,28 @@
 import { useNavigate } from 'react-router-dom';
 import { gridItem } from './index.styles';
+import { Text } from '@/components';
+import theme from '@/styles/theme';
 
 interface Props {
   id: number;
   name: string;
   icon: string;
 }
+
 export default function CategoryItem({ id, name, icon }: Props) {
   const navigate = useNavigate();
+
   return (
-    <div
+    <button
       css={gridItem}
       onClick={() => {
         navigate(id);
       }}
     >
       <img alt={name} src={icon} />
-      <span>{name}</span>
-    </div>
+      <Text typo="body3" color={theme.colors.black}>
+        {name}
+      </Text>
+    </button>
   );
 }

@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 export const wrapper = css`
   position: fixed;
   top: 0;
-  left: 0;
+  margin: 0 auto;
   z-index: ${theme.zIndex.appBar};
   width: 100%;
   height: 58px;

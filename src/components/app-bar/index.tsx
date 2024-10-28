@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-import { wrapper } from './index.styles';
 import { Logo } from '@/assets/icons';
+import { wrapper } from './index.styles';
 
 interface Props {
   prefix?: ReactNode;
