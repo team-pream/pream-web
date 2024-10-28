@@ -61,4 +61,5 @@ export const explainProduct = css`
   font-weight: ${typography.body2.fontWeight};
   white-space: pre-line;
   line-height: 1.5;
+  padding-bottom: 20px;
 `;
