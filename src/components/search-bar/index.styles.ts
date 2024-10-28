@@ -14,6 +14,5 @@ export const wrapper = css`
 export const input = css`
   display: flex;
   flex: 1;
-  font-weight: 500;
-  font-size: 12px;
+  ${theme.typo.body2};
 `;
