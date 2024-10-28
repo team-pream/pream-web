@@ -1,4 +1,4 @@
-export { default as AppbarBack } from './AppbarBack';
+export { default as AppBarBack } from './AppbarBack';
 export { default as DropdownFold } from './DropdownFold';
 export { default as DropdownUnfold } from './DropdownUnfold';
 export { default as FabPlus } from './FabPlus';

@@ -14,7 +14,6 @@
   ```bash
   npm install -g pnpm@9.9.0
   pnpm install
-  npx prisma generate
   ```
 - 서버를 실행합니다.
   ```bash
