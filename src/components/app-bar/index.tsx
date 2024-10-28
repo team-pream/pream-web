@@ -1,9 +1,10 @@
+import { ReactNode } from 'react';
 import { wrapper } from './index.styles';
 import { Logo } from '@/assets/icons';
 
 interface Props {
-  prefix?: React.ReactNode;
-  suffix?: React.ReactNode;
+  prefix?: ReactNode;
+  suffix?: ReactNode;
 }
 
 export function AppBar({ prefix, suffix }: Props) {

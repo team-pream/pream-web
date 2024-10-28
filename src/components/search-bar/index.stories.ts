@@ -1,5 +1,5 @@
 import { StoryObj, type Meta } from '@storybook/react';
-import { SearchBar } from '@/components/search-bar';
+import { SearchBar } from '@/components';
 
 const meta: Meta<typeof SearchBar> = {
   title: 'Components/SearchBar',

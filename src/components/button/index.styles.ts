@@ -13,12 +13,14 @@ export const wrapper = ({ size, variant, status }: WrapperProps) => css`
   align-items: center;
   justify-content: center;
 
-  ${variant === 'box' && box({ size })}
-  ${variant === 'capsule' && capsule}
+  ${variant === 'box' && box({ size })};
+  ${variant === 'capsule' && capsule};
 
-  ${status === 'active' && active}
-  ${status === 'pressed' && pressed}
-  ${status === 'disabled' && disabled}
+  ${status === 'active' && active};
+  ${status === 'pressed' && pressed};
+  ${status === 'disabled' && disabled};
+
+  transition: background 0.3s ease;
 `;
 
 export const box = ({ size }: { size: ButtonSize }) => css`

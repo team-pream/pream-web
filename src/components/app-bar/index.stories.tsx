@@ -1,7 +1,6 @@
 import { StoryObj, type Meta } from '@storybook/react';
-import { AppBar } from '@/components/app-bar';
-import { SearchBar } from '@/components/search-bar';
 import { AppBarBack, Logo, Search as SearchIcon } from '@/assets/icons';
+import { AppBar, SearchBar } from '@/components';
 
 const meta: Meta<typeof AppBar> = {
   title: 'Components/AppBar',
@@ -31,6 +30,6 @@ export const SearchInput: Story = {
 export const Search: Story = {
   args: {
     prefix: <Logo width="94px" height="24px" />,
-    suffix: <SearchIcon width="20px" height="20px" />,
+    suffix: <SearchIcon width="20px" height="20px" cursor="pointer" />,
   },
 };

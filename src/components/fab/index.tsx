@@ -1,10 +1,11 @@
+import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { wrapper } from './index.styles';
 
 export type FABSize = 's' | 'm';
 
-export interface FABProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface FABProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: FABSize;
-  icon: React.ReactNode;
+  icon: ReactNode;
 }
 
 export function FAB({ size = 's', icon, ...rest }: FABProps) {

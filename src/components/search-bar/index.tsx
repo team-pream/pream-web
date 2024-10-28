@@ -1,8 +1,8 @@
-import { forwardRef } from 'react';
+import { forwardRef, InputHTMLAttributes } from 'react';
 import { Search } from '@/assets/icons';
 import { input, wrapper } from './index.styles';
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name?: string;
 }
 
