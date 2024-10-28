@@ -3,6 +3,11 @@ import { gridWrapper, menuWrapper, hr } from './index.styles';
 import { AppBar, GNB, Layout, SearchBar, Text } from '@/components';
 import { AppBarBack } from '@/assets/icons';
 import CategoryItem from './components/category-item';
+<<<<<<< HEAD
+import theme from '@/styles/theme';
+=======
+import { gridWrapper, wrapper, menuWrapper, hr } from './index.styles';
+import { AppBar, GNB, SearchBar, Text } from '@/components';
 import theme from '@/styles/theme';
 import { Category } from '@/types';
 
@@ -12,6 +17,7 @@ export default function Categories() {
   const { data } = useGetCategoriesQuery();
 
   return (
+<<<<<<< HEAD
     <Layout>
       <AppBar prefix={<AppBarBack height="24px" cursor="pointer" />} suffix={<SearchBar />} />
 
@@ -30,6 +36,10 @@ export default function Categories() {
       </div>
 
       <GNB />
+<<<<<<< HEAD
     </Layout>
+=======
+    </div>
+>>>>>>> a93b084 ([PREAM-108] 공통 UI 컴포넌트 적용 (#38))
   );
 }
