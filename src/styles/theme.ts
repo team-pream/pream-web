@@ -9,6 +9,7 @@ const theme = {
     gnbHeight: '76px',
   },
   zIndex: {
+    overlay: 5,
     appBar: 10,
     gnb: 10,
     fab: 10,

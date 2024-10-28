@@ -1,22 +1,16 @@
-import { DropdownUnfold, LikeOff } from '@/assets/icons';
+import { AppBarBack, DropdownUnfold } from '@/assets/icons';
 import {
-  countText,
   dropdownIcon,
-  heartIcon,
   image,
   imageBox,
   infoWrapper,
   item,
   itemList,
-  itemPrice,
-  itemTitle,
   listWrapper,
   opacityBox,
   productsWrapper,
-  span,
   statusWrapper,
   textBox,
-  title,
   wrapper,
   dropdownOverlayStyle,
   dropdownMenuStyle,
@@ -25,8 +19,10 @@ import {
 } from './index.styles';
 import { useState } from 'react';
 import { useGetProductsQuery } from '@/queries/products';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ProductType } from '@/types';
+import { AppBar, GNB, Text } from '@/components';
+import theme from '@/styles/theme';
 
 export default function Products() {
   const location = useLocation();
@@ -36,6 +32,8 @@ export default function Products() {
 
   const { data } = useGetProductsQuery({ category, status });
   const [isOpen, setIsOpen] = useState<boolean>(false); // 드롭다운 열림/닫힘 상태
+  const navigate = useNavigate();
+
   const toggleDropdown = () => {
     setIsOpen(!isOpen); // 클릭 시 드롭다운 토글
   };
@@ -46,25 +44,40 @@ export default function Products() {
   };
   return (
     <div css={wrapper}>
-      <h3 css={title}>{name}</h3>
+      <AppBar
+        prefix={
+          <AppBarBack
+            height="24px"
+            cursor="pointer"
+            onClick={() => {
+              navigate('/category');
+            }}
+          />
+        }
+      />
       <div css={productsWrapper}>
+        <Text typo="title1" color={theme.colors.black}>
+          {name}
+        </Text>
         <div css={infoWrapper}>
-          <div css={countText}>
-            <span css={span}>{data?.totalCount ?? 0}개</span>의 상품
-          </div>
+          <Text typo="body2" color={theme.colors.gray300}>
+            <Text typo="body2" color={theme.colors.black}>
+              {data?.totalCount ?? 0}개
+            </Text>
+            의 상품
+          </Text>
           <div css={statusWrapper} onClick={toggleDropdown}>
-            <span css={span}>상태</span>
+            <Text typo="body2">상태</Text>
             <DropdownUnfold css={dropdownIcon} />
             {isOpen && ( // 드롭다운이 열렸을 때만 메뉴를 보여줌
               <div>
                 <div css={dropdownOverlayStyle(isOpen)} onClick={() => setIsOpen(false)}></div>
-
                 <div css={dropdownMenuStyle(isOpen)}>
                   <div css={menuItemStyle} onClick={() => handleItemClick(1)}>
-                    구매 가능
+                    <Text typo="subtitle2">구매 가능</Text>
                   </div>
                   <div css={menuItemStyle} onClick={() => handleItemClick(2)}>
-                    판매 완료
+                    <Text typo="subtitle2">판매 완료</Text>
                   </div>
                 </div>
               </div>
@@ -75,21 +88,23 @@ export default function Products() {
           <div css={itemList}>
             {data?.products?.map((product: ProductType) => {
               const isSoldOut = product.status === 'SOLD_OUT';
+              const price = product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); //천 단위 콤마
               return (
                 <div key={product.id} css={item}>
                   <div css={imageBox}>
                     <div css={opacityBox} />
                     <img src={product.images[0]} alt="itemImage" css={image} />
-                    <LikeOff css={heartIcon} />
                     {isSoldOut && (
                       <div css={soldOutOverlayStyle}>
-                        <span>판매완료</span>
+                        <Text typo="body1" color={theme.colors.white}>
+                          판매완료
+                        </Text>
                       </div>
                     )}
                   </div>
                   <div css={textBox}>
-                    <span css={itemTitle}>{product.name}</span>
-                    <span css={itemPrice}>{product.price}원</span>
+                    <Text typo="body2">{product.name}</Text>
+                    <Text typo="subtitle1">{price}원</Text>
                   </div>
                 </div>
               );
@@ -97,6 +112,7 @@ export default function Products() {
           </div>
         </div>
       </div>
+      <GNB />
     </div>
   );
 }

@@ -2,29 +2,23 @@ import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 
 export const wrapper = css`
-  max-width: ${theme.size.maxWidth};
-  min-width: 400px;
+  width: ${theme.size.maxWidth};
   height: 100vh;
   margin: 0 auto;
-  /* border: 1px solid ${theme.colors.gray200}; */
-`;
-
-export const title = css`
-  font-size: 24px;
-  font-weight: 600;
-  margin: 18px;
+  padding: ${theme.size.appBarHeight} 0 0 0;
 `;
 
 export const productsWrapper = css`
-  width: 100%;
-  padding: 0 18px;
+  width: ${theme.size.maxWidth};
+  padding: 24px 18px ${theme.size.gnbHeight};
 `;
 
 export const infoWrapper = css`
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
   align-items: center;
+  margin: 21px 0 0 0;
+  padding: 0 18px;
 `;
 
 export const dropdownIcon = css`
@@ -32,20 +26,15 @@ export const dropdownIcon = css`
   margin-inline-start: 5px;
 `;
 
-export const span = css`
-  width: fit-content;
-  color: ${theme.colors.black100};
-`;
-
 export const countText = css`
   flex: 1;
-  color: ${theme.colors.gray300};
 `;
 
 export const statusWrapper = css`
   display: flex;
   align-items: center;
   position: relative;
+  cursor: pointer;
 `;
 
 export const dropdownOverlayStyle = (isOpen: boolean) => css`
@@ -54,8 +43,8 @@ export const dropdownOverlayStyle = (isOpen: boolean) => css`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 10;
+  background: ${theme.colors.grayOpacity300};
+  z-index: ${theme.zIndex.dim};
   display: ${isOpen ? 'block' : 'none'};
 `;
 
@@ -67,10 +56,10 @@ export const dropdownMenuStyle = (isOpen: boolean) => css`
   width: 100%;
   max-width: ${theme.size.maxWidth};
   background: white;
-  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 -4px 8px ${theme.colors.grayOpacity200};
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
-  z-index: 11;
+  z-index: ${theme.zIndex.dim};
   display: ${isOpen ? 'block' : 'none'};
 `;
 export const menuItemStyle = css`
@@ -97,6 +86,7 @@ export const itemList = css`
   grid-template-columns: repeat(2, 1fr);
   overflow: auto;
   gap: 18px;
+  justify-items: center;
 `;
 
 export const item = css`
@@ -122,21 +112,8 @@ export const opacityBox = css`
   width: 170px;
   height: 170px;
   position: absolute;
-  z-index: 1;
+  z-index: ${theme.zIndex.overlay};
   background-color: ${theme.colors.grayOpacity100};
-`;
-
-export const heartIcon = css`
-  width: 18px;
-  height: 15px;
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  z-index: 2;
-  cursor: pointer;
-  path {
-    fill: ${theme.colors.white};
-  }
 `;
 
 export const soldOutOverlayStyle = css`
@@ -150,12 +127,7 @@ export const soldOutOverlayStyle = css`
   justify-content: center;
   align-items: center;
   border-radius: 13px;
-  z-index: 2; // opacityBox보다 위에 배치
-
-  span {
-    color: ${theme.colors.white};
-    font-weight: bold;
-  }
+  z-index: ${theme.zIndex.overlay};
 `;
 
 export const textBox = css`
@@ -165,14 +137,4 @@ export const textBox = css`
   gap: 6px;
   padding: 8px 0 0 7px;
   cursor: pointer;
-`;
-
-export const itemTitle = css`
-  font-size: 12px;
-  font-weight: 500;
-`;
-
-export const itemPrice = css`
-  font-size: 16px;
-  font-weight: 600;
 `;
