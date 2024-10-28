@@ -38,7 +38,6 @@ export default function Products() {
     setIsOpen(!isOpen); // 클릭 시 드롭다운 토글
   };
 
-
   const handleItemClick = (statusId: number) => {
     setStatus(statusId);
     setIsOpen(false); // 선택 후 드롭다운 닫기
@@ -80,7 +79,6 @@ export default function Products() {
                   <div css={menuItemStyle} onClick={() => handleItemClick(2)}>
                     <Text typo="subtitle2">판매 완료</Text>
                   </div>
-
                 </div>
               </div>
             )}
@@ -105,7 +103,7 @@ export default function Products() {
                     )}
                   </div>
                   <div css={textBox}>
-                    <Text typo="body2">{product.name}</Text>
+                    <Text typo="body2">{product.title}</Text>
                     <Text typo="subtitle1">{price}원</Text>
                   </div>
                 </div>

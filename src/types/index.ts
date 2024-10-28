@@ -7,7 +7,7 @@ export interface ProductType {
   categoryId: number;
   id: number;
   description: string;
-  name: string;
+  title: string;
   images: string[];
   isLiked: boolean;
   price: number;
