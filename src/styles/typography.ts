@@ -1,13 +1,48 @@
+import { css } from '@emotion/react';
+
 export const typography = {
-  title1: { fontWeight: 600, fontSize: '24px' },
-  title2: { fontWeight: 600, fontSize: '20px' },
-  subtitle1: { fontWeight: 600, fontSize: '16px' },
-  subtitle2: { fontWeight: 600, fontSize: '14px' },
-  subtitle3: { fontWeight: 500, fontSize: '16px' },
-  body1: { fontWeight: 600, fontSize: '12px' },
-  body2: { fontWeight: 500, fontSize: '12px' },
-  body3: { fontWeight: 500, fontSize: '10px' },
-  body4: { fontWeight: 400, fontSize: '14px' },
-  body5: { fontWeight: 400, fontSize: '12px' },
-  body6: { fontWeight: 400, fontSize: '10px' },
+  title1: css`
+    font-weight: 600;
+    font-size: 24px;
+  `,
+  title2: css`
+    font-weight: 600;
+    font-size: 20px;
+  `,
+  subtitle1: css`
+    font-weight: 600;
+    font-size: 16px;
+  `,
+  subtitle2: css`
+    font-weight: 600;
+    font-size: 14px;
+  `,
+  subtitle3: css`
+    font-weight: 500;
+    font-size: 16px;
+  `,
+  body1: css`
+    font-weight: 600;
+    font-size: 12px;
+  `,
+  body2: css`
+    font-weight: 500;
+    font-size: 12px;
+  `,
+  body3: css`
+    font-weight: 500;
+    font-size: 10px;
+  `,
+  body4: css`
+    font-weight: 400;
+    font-size: 14px;
+  `,
+  body5: css`
+    font-weight: 400;
+    font-size: 12px;
+  `,
+  body6: css`
+    font-weight: 400;
+    font-size: 10px;
+  `,
 } as const;
