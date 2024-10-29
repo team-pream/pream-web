@@ -1,6 +1,6 @@
-import { ParamType } from '@/types';
+import { GetProductsParamType } from '@/types';
 
 export const QUERY_KEYS = {
   GET_CATEGORIES: () => ['GET_CATEGORIES'],
-  GET_PRODUCTS: (params: ParamType) => ['GET_PRODUCTS', params],
+  GET_PRODUCTS: (params: GetProductsParamType) => ['GET_PRODUCTS', params],
 } as const;

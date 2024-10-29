@@ -1,4 +1,4 @@
-export interface ParamType {
+export interface GetProductsParamType {
   category?: number;
   status?: number;
 }
