@@ -36,7 +36,7 @@ const Detail: React.FC = () => {
   // 정상적인 렌더링
   return (
     <div css={Wrapper}>
-      <AppBar prefix={<AppBarBack height="24px" cursor="pointer" />} />
+      <AppBar prefix={<AppBarBack height="17px" cursor="pointer" />} />
       <div css={[Contents, { overflowX: 'hidden' }]}>
         <Carousel
           images={product.images}
