@@ -16,6 +16,8 @@ export default function App() {
           <Route path="/address" element={<Address />} />
           <Route path="/login" element={<Login />} />
           <Route path="/onboarding" element={<OnBoarding />} />
+          <Route path="/category" element={<Category />} />
+          <Route path="/purchase" element={<Purchase />} />
         </Routes>
       </BrowserRouter>
     </QueryProvider>
