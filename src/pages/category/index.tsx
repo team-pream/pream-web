@@ -1,9 +1,9 @@
 import { useGetCategoriesQuery } from '@/queries/category';
-import CategoryItem from './components/category-item';
-import { gridWrapper, wrapper, menuWrapper, hr } from './index.styles';
-import { AppBar, GNB, SearchBar, Text } from '@/components';
-import theme from '@/styles/theme';
+import { gridWrapper, menuWrapper, hr } from './index.styles';
+import { AppBar, GNB, Layout, SearchBar, Text } from '@/components';
 import { AppBarBack } from '@/assets/icons';
+import CategoryItem from './components/category-item';
+import theme from '@/styles/theme';
 
 interface CategoryType {
   id: number;
@@ -17,7 +17,7 @@ export default function Category() {
   const { data } = useGetCategoriesQuery();
 
   return (
-    <div css={wrapper}>
+    <Layout>
       <AppBar prefix={<AppBarBack height="24px" cursor="pointer" />} suffix={<SearchBar />} />
 
       <div css={menuWrapper}>
@@ -35,6 +35,6 @@ export default function Category() {
       </div>
 
       <GNB />
-    </div>
+    </Layout>
   );
 }

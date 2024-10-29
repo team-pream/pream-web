@@ -4,7 +4,8 @@ import { css } from '@emotion/react';
 export const wrapper = css`
   position: fixed;
   bottom: 0;
-  margin: 0 auto;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   flex-direction: column;
