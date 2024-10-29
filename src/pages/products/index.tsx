@@ -79,6 +79,9 @@ export default function Products() {
                   <div css={menuItemStyle} onClick={() => handleItemClick(2)}>
                     <Text typo="subtitle2">판매 완료</Text>
                   </div>
+                  <div css={menuItemStyle} onClick={() => handleItemClick(3)}>
+                    <Text typo="subtitle2">예약 중</Text>
+                  </div>
                 </div>
               </div>
             )}
@@ -88,6 +91,7 @@ export default function Products() {
           <div css={itemList}>
             {data?.products?.map((product: ProductType) => {
               const isSoldOut = product.status === 'SOLD_OUT';
+              const isReserved = product.status === 'RESERVED';
               const price = product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); //천 단위 콤마
               return (
                 <div key={product.id} css={item}>
@@ -98,6 +102,13 @@ export default function Products() {
                       <div css={soldOutOverlayStyle}>
                         <Text typo="body1" color={theme.colors.white}>
                           판매완료
+                        </Text>
+                      </div>
+                    )}
+                    {isReserved && (
+                      <div css={soldOutOverlayStyle}>
+                        <Text typo="body1" color={theme.colors.white}>
+                          예약 중
                         </Text>
                       </div>
                     )}
