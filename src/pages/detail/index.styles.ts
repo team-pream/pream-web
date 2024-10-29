@@ -4,7 +4,7 @@ import theme from '@/styles/theme';
 export const Wrapper = css`
   /* width: 480px; */
   max-width: 480px;
-  height: 100vh;
+  height: 100%;
   min-height: 844px;
   background-color: white;
   display: flex;
@@ -24,7 +24,7 @@ export const Header = css`
 
 export const Contents = css`
   min-height: 710px;
-  overflow-x: hidden; // 캐러셀 이미지 숨기기
+  /* overflow-x: hidden; // 캐러셀 이미지 숨기기 */
   height: 100%;
   padding-bottom: 78px;
   -ms-overflow-style: none; /* IE와 Edge에서 스크롤바 숨기기 */
