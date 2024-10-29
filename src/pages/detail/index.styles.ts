@@ -25,7 +25,7 @@ export const Header = css`
 export const Contents = css`
   min-height: 710px;
   overflow-x: hidden; // 캐러셀 이미지 숨기기
-  height: 100%;
+  /* height: 100%; */
   padding-bottom: 78px;
   -ms-overflow-style: none; /* IE와 Edge에서 스크롤바 숨기기 */
   scrollbar-width: none; /* Firefox에서 스크롤바 숨기기 */
