@@ -25,3 +25,12 @@ export const Capsule: Story = {
     children: 'Button',
   },
 };
+
+export const Error: Story = {
+  args: {
+    variant: 'box',
+    status: 'error',
+    size: 'm',
+    children: 'Button',
+  },
+};

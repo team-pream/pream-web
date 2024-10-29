@@ -1,5 +1,6 @@
 export * from './app-bar';
 export * from './button';
+export * from './dialog';
 export * from './fab';
 export * from './gnb';
 export * from './input';
