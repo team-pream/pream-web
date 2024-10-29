@@ -20,6 +20,7 @@ export const myPetWrapper = css`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
 `;
 
 export const profileAddWrapper = css`
@@ -29,6 +30,29 @@ export const profileAddWrapper = css`
   border-radius: 10px;
   border: 1px solid ${theme.colors.gray200};
   display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+export const imageStyle = css`
+  width: 80px;
+  height: 80px;
+`;
+
+export const nicknameStyle = css`
+  width: 100%;
+  height: 80px;
+  padding-inline-start: 22px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+export const petNameWrapper = css`
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
 `;
@@ -43,6 +67,17 @@ export const myAccountWrapper = css`
   height: 40vh;
 `;
 
-export const menuWrapper = css`
+export const nextIcon = css`
+  width: 10px;
+  height: 12px;
   cursor: pointer;
+`;
+
+export const logout = css`
+  cursor: pointer;
+`;
+
+export const plusIcon = css`
+  height: 14px;
+  margin: 8px;
 `;
