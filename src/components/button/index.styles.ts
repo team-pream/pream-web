@@ -29,30 +29,35 @@ export const box = ({ size }: { size: ButtonSize }) => css`
     width: 100%;
     padding: 16px 25px;
     border-radius: 10px;
+    ${theme.typo.subtitle2};
   `}
   ${size === 'l' &&
   css`
     width: 354px;
     padding: 16px 25px;
     border-radius: 10px;
+    ${theme.typo.subtitle2};
   `}
   ${size === 'm' &&
   css`
     width: 307px;
     padding: 16px 25px;
     border-radius: 10px;
+    ${theme.typo.subtitle2};
   `}
   ${size === 's' &&
   css`
     width: 100px;
     padding: 13px 22px;
     border-radius: 8px;
+    ${theme.typo.body4};
   `}
   ${size === 'xs' &&
   css`
     width: 60px;
     padding: 10px 0;
     border-radius: 6px;
+    ${theme.typo.body6};
   `}
 `;
 

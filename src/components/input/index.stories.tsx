@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Input } from '@/components/input';
+import { Button } from '../button';
 
 const meta = {
   title: 'Components/Input',
@@ -28,6 +29,20 @@ export const Error: Story = {
   args: {
     label: '판매 희망가',
     errorMessage: '최소 판매 가격은 100원입니다.',
+  },
+};
+
+export const Confirmed: Story = {
+  args: {
+    label: '판매 희망가',
+    confirmMessage: '판매 희망가가 확인되었습니다.',
+    icon: {
+      suffix: (
+        <Button variant="box" size="xs">
+          중복확인
+        </Button>
+      ),
+    },
   },
 };
 
