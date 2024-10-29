@@ -7,11 +7,6 @@ export const Wrapper = css`
   height: 100vh;
   min-height: 844px;
   background-color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; //Header와 Footer를 양끝에 배치 */
-  box-sizing: border-box;
-  margin: auto;
 `;
 export const Header = css`
   width: 100%;
