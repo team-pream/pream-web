@@ -13,19 +13,14 @@ import {
   opacityBox,
   textBox,
   itemTitle,
+  itemTitle,
 } from './index.styles';
 import { useNavigate } from 'react-router-dom';
 import { useGetCategoriesQuery } from '@/queries/category';
-import { useGetCurationQuery } from '@/queries/curation';
 import { Logo, Search } from '@/assets/icons';
 import { AppBar, GNB, Text } from '@/components';
 import Carousel from '@/components/carousel';
-=======
-import { wrapper } from './index.styles';
-import { categoryList, categoryItems, categoryItem, categoryIcon } from './index.styles';
-import { useNavigate } from 'react-router-dom';
-import { useGetCategoriesQuery } from '@/queries/categories';
->>>>>>> 5cb61ad ([PREAM-87] 메인페이지 카테고리 UI 구현 및 라우터 연결 (#8))
+import { useGetCurationQuery } from '@/queries/curation';
 
 interface CategoryData {
   id: number;
@@ -33,7 +28,6 @@ interface CategoryData {
   icon: string;
 }
 
-<<<<<<< HEAD
 interface CurationData {
   id: number;
   title: string;
@@ -43,19 +37,24 @@ interface CurationData {
   categoryId: number;
 }
 
-=======
->>>>>>> 5cb61ad ([PREAM-87] 메인페이지 카테고리 UI 구현 및 라우터 연결 (#8))
+interface CurationData {
+  id: number;
+  title: string;
+  price: number;
+  status: string;
+  images: [];
+  categoryId: number;
+}
+
+
 const CAT_WHEEL = 4;
 const WALKING = 5;
 const EXCLUDED_CATEGORIES = [CAT_WHEEL, WALKING];
 
 export default function Main() {
   const navigate = useNavigate();
-<<<<<<< HEAD
   const { data: category } = useGetCategoriesQuery();
   const { data: curation } = useGetCurationQuery();
-
-  // 섹션 제목
   const listArray = [
     '새로 등록된 상품',
     '이 상품은 어때요?',
@@ -140,30 +139,69 @@ export default function Main() {
 
   return (
     <div css={wrapper}>
-      <header>header</header>
+      <AppBar
+        prefix={<Logo width="94" height="20" />}
+        suffix={
+          <Search
+            width="19"
+            height="20"
+            style={{ cursor: 'pointer' }}
+            onClick={() => navigate('/search')}
+          />
+        }
+      />
       <main>
-        <div>carousel</div>
+        <Carousel
+          images={imageList}
+          width={390}
+          height={270}
+          showButtons={true}
+          autoPlay={true}
+          autoPlayInterval={5000}
+        />
+        {/* Category */}
         <div css={categoryList}>
           <div css={categoryItems}>
-            {data
+            {category
               ?.filter((item: CategoryData) => !EXCLUDED_CATEGORIES.includes(item.id))
               .map((item: CategoryData) => (
-                <div key={item.id} css={categoryItem}>
-                  <img
-                    src={item.icon}
-                    alt={item.name}
-                    css={categoryIcon}
-                    onClick={() => navigate(item.id)}
-                  />
-                  <span>{item.name}</span>
+                <div
+                  key={item.id}
+                  css={categoryItem}
+                  onClick={() => navigate(`/products?category=${item.id}&status=${1}`)}
+                >
+                  <img src={item.icon} alt={item.name} css={categoryIcon} />
+                  <Text typo="body3">{item.name}</Text>
                 </div>
               ))}
           </div>
         </div>
-        <div>list</div>
+        {/* Curation */}
+        <div css={listWrapper}>
+          {listArray.map((listTitleText, index) => (
+            <div key={index}>
+              <Text typo="subtitle1">{listTitleText}</Text>
+              <div css={itemList}>
+                {curation?.[curationKeys[index]]?.map((curationItem: CurationData) => (
+                  <div key={curationItem.id} css={item}>
+                    <div css={imageBox}>
+                      <div css={opacityBox} />
+                      <img src={curationItem.images[0]} alt="itemImage" css={sampleImage} />
+                    </div>
+                    <div css={textBox}>
+                      <Text typo="body2" css={itemTitle}>
+                        {curationItem.title}
+                      </Text>
+                      <Text typo="subtitle1">{curationItem.price.toLocaleString()}원</Text>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </main>
-      <nav>nav</nav>
->>>>>>> 5cb61ad ([PREAM-87] 메인페이지 카테고리 UI 구현 및 라우터 연결 (#8))
+      <GNB />
     </div>
   );
 }
