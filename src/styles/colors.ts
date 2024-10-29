@@ -14,8 +14,8 @@ export const colors = {
 
   yellow100: '#ffc450',
 
-  red100: '#FFD4D4',
-  red200: '#FFB4B4',
+  red100: '#ffd4d4',
+  red200: '#ffb4b4',
   red300: '#fa2626',
 
   kakaoBackground: '#f6e24b',
