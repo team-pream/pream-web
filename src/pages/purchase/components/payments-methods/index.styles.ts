@@ -33,5 +33,5 @@ export const buttonstyle = css`
 `;
 
 export const otherPaymentsWrapper = css`
-  margin: 7px auto 0px;
+  margin: 7px auto;
 `;
