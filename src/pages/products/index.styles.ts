@@ -2,29 +2,24 @@ import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 
 export const wrapper = css`
-  /* width: ${theme.size.maxWidth}; */
-  width: 400px;
+
+  width: ${theme.size.maxWidth};
   height: 100vh;
   margin: 0 auto;
-  /* border: 1px solid ${theme.colors.gray200}; */
-`;
-
-export const title = css`
-  font-size: 24px;
-  font-weight: 600;
-  margin: 18px;
+  padding: ${theme.size.appBarHeight} 0 0 0;
 `;
 
 export const productsWrapper = css`
-  width: 100%;
-  padding: 0 18px;
+  width: ${theme.size.maxWidth};
+  padding: 24px 18px ${theme.size.gnbHeight};
 `;
 
 export const infoWrapper = css`
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
   align-items: center;
+  margin: 21px 0 0 0;
+  padding: 0 18px;
 `;
 
 export const dropdownIcon = css`
@@ -32,43 +27,53 @@ export const dropdownIcon = css`
   margin-inline-start: 5px;
 `;
 
-export const span = css`
-  width: fit-content;
-  color: ${theme.colors.black100};
-`;
 
 export const countText = css`
   flex: 1;
-  color: ${theme.colors.gray300};
 `;
 
 export const statusWrapper = css`
   display: flex;
   align-items: center;
   position: relative;
-`;
-
-export const dropdownWrapper = css`
-  position: relative;
-  display: inline-block;
-`;
-
-export const dropdownMenu = css`
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: white;
-  border: 1px solid ${theme.colors.gray300};
-  border-radius: 4px;
-  width: 100px;
-  z-index: 10;
-`;
-
-export const dropdownItem = css`
-  padding: 8px 12px;
   cursor: pointer;
-  &:hover {
-    background-color: ${theme.colors.gray100};
+`;
+
+export const dropdownOverlayStyle = (isOpen: boolean) => css`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: ${theme.colors.grayOpacity300};
+  z-index: ${theme.zIndex.dim};
+  display: ${isOpen ? 'block' : 'none'};
+`;
+
+export const dropdownMenuStyle = (isOpen: boolean) => css`
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: ${theme.size.maxWidth};
+  background: white;
+  box-shadow: 0 -4px 8px ${theme.colors.grayOpacity200};
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  z-index: ${theme.zIndex.dim};
+  display: ${isOpen ? 'block' : 'none'};
+`;
+export const menuItemStyle = css`
+  padding: 20px;
+  font-size: 16px;
+  color: ${theme.colors.black100};
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  &:last-child {
+    border-bottom: none;
+
   }
 `;
 
@@ -84,6 +89,7 @@ export const itemList = css`
   grid-template-columns: repeat(2, 1fr);
   overflow: auto;
   gap: 18px;
+  justify-items: center;
 `;
 
 export const item = css`
@@ -96,7 +102,8 @@ export const imageBox = css`
   position: relative;
 `;
 
-export const sampleImage = css`
+
+export const image = css`
   background-color: lightgray;
   border-radius: 13px;
   width: 170px;
@@ -109,37 +116,30 @@ export const opacityBox = css`
   width: 170px;
   height: 170px;
   position: absolute;
-  z-index: 1;
+  z-index: ${theme.zIndex.overlay};
   background-color: ${theme.colors.grayOpacity100};
 `;
 
-export const heartIcon = css`
-  width: 18px;
-  height: 15px;
+export const soldOutOverlayStyle = css`
   position: absolute;
-  right: 10px;
-  bottom: 10px;
-  z-index: 2;
-  cursor: pointer;
-  path {
-    fill: ${theme.colors.white};
-  }
+  top: 0;
+  left: 0;
+  width: 170px;
+  height: 170px;
+  background-color: ${theme.colors.grayOpacity300};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 13px;
+  z-index: ${theme.zIndex.overlay};
 `;
 
 export const textBox = css`
   display: flex;
+  width: 170px;
   flex-direction: column;
   gap: 6px;
   padding: 8px 0 0 7px;
   cursor: pointer;
 `;
 
-export const itemTitle = css`
-  font-size: 12px;
-  font-weight: 500;
-`;
-
-export const itemPrice = css`
-  font-size: 16px;
-  font-weight: 600;
-`;
