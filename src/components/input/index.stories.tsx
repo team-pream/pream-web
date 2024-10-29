@@ -36,13 +36,18 @@ export const Confirmed: Story = {
   args: {
     label: '판매 희망가',
     confirmMessage: '판매 희망가가 확인되었습니다.',
-    icon: {
-      suffix: (
-        <Button variant="box" size="xs">
-          중복확인
-        </Button>
-      ),
-    },
+  },
+};
+
+export const WithSuffix: Story = {
+  args: {
+    label: '판매 희망가',
+    confirmMessage: '판매 희망가가 확인되었습니다.',
+    suffix: (
+      <Button variant="box" size="xs">
+        확인
+      </Button>
+    ),
   },
 };
 

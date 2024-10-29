@@ -22,7 +22,7 @@ export const inputWrapper = ({
   padding: 4px 0;
 
   border-bottom: ${errorMessage
-    ? `1px solid ${theme.colors.red100}`
+    ? `1px solid ${theme.colors.red300}`
     : isFocused
       ? `1px solid ${theme.colors.green200}`
       : `1px solid ${theme.colors.gray200}`};

@@ -15,7 +15,7 @@ const theme = {
     fab: 10,
     dim: 20,
     bottomSheet: 30,
-    modal: 40,
+    dialog: 40,
   },
   typo: { ...typography },
 } as const;
