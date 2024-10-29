@@ -1,7 +1,7 @@
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 
-export const wrapper = ({ isShow }: { isShow: boolean }) => css`
+export const wrapper = css`
   position: fixed;
   bottom: 0;
   left: 50%;
@@ -15,8 +15,6 @@ export const wrapper = ({ isShow }: { isShow: boolean }) => css`
   border-radius: 10px 10px 0 0;
   background: ${theme.colors.white};
   z-index: ${theme.zIndex.actionSheet};
-  transform: translateX(-50%) ${isShow ? 'translateY(0)' : 'translateY(100%)'};
-  transition: transform 0.3s ease-out;
 `;
 
 export const handle = css`
