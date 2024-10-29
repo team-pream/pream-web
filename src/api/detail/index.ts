@@ -26,7 +26,11 @@ export interface Product {
   isLiked: boolean;
 }
 
-export const getProduct = async (productId: string): Promise<Product> => {
-  const response = await api.get(`/products/${productId}`);
+export const getProduct = async (productId: number): Promise<Product> => {
+  const response = await api.get(`/products/${productId}`, {
+    // headers: {
+    //   Authorization: `Bearer ${AccessToken}`,
+    // }, //아직 로그인과 연결안됨
+  });
   return response.data;
 };

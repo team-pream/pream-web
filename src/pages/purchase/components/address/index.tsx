@@ -1,9 +1,14 @@
-import { Input } from '@/components/input';
+import { Input } from '@/Components/input';
 import { addressWrapper } from './index.styles';
 import SelectBasic from './select-default';
 import { colors } from '@/styles/colors';
-
+import { useNavigate } from 'react-router-dom';
 const AddAddress: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleAddress = () => {
+    navigate('/address');
+  };
   return (
     <div css={addressWrapper}>
       <SelectBasic />
@@ -11,6 +16,7 @@ const AddAddress: React.FC = () => {
       <div css={{ display: 'flex', alignItems: 'center' }}>
         <Input label="배송지" placeholder="주소를 입력해주세요" />
         <div
+          onClick={handleAddress}
           css={{
             backgroundColor: colors.green200,
             fontSize: '12px',
