@@ -13,7 +13,7 @@ export interface Seller {
 
 export interface Product {
   id: number;
-  name: string;
+  title: string;
   price: number;
   status: string;
   condition: string;
