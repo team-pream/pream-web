@@ -8,15 +8,16 @@ export const wrapper = css`
   padding: 0px 18px;
 `;
 
+export const appBar = css`
+  height: ${theme.size.appBarHeight};
+  display: flex;
+  align-items: center;
+`;
+
 export const mainTitleBox = css`
   width: 354px;
   padding: 20px 0;
   border-bottom: 2px solid;
-`;
-
-export const mainTitle = css`
-  font-size: 24px;
-  font-weight: 600;
 `;
 
 export const image = css`
@@ -44,6 +45,7 @@ export const textBox = css`
   display: flex;
   flex-direction: column;
   padding: 6px 0;
+  cursor: pointer;
 `;
 
 export const salesStatus = css`
@@ -53,18 +55,9 @@ export const salesStatus = css`
 `;
 
 export const contentTitle = css`
-  font-size: 12px;
-  font-weight: 500;
   padding: 23px 0 7px 0;
 `;
 
-export const price = css`
-  font-size: 16px;
-  font-weight: 600;
-`;
-
 export const date = css`
-  font-size: 12px;
-  font-weight: 600;
   padding: 6px 0;
 `;
