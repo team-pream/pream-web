@@ -8,11 +8,7 @@ import {
 } from './index.styles';
 import { DropdownFold, DropdownUnfold } from '@/assets/icons';
 import { colors } from '@/styles/colors';
-
-interface CardCompanys {
-  id: string;
-  name: string;
-}
+interface CardCompanys {}
 
 interface CardCompanySelectorProps {
   provider: CardCompanys[];
