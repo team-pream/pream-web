@@ -1,4 +1,6 @@
-import { miniButton, buttonWrapper } from './index.styles';
+import { FC } from 'react';
+import { buttonWrapper, activeButton, inactiveButton } from './index.styles';
+
 interface PaymentsMethodProps {
   id: number;
   name: string;
@@ -12,14 +14,26 @@ const paymentsMethods: PaymentsMethodProps[] = [
   { id: 5, name: '카카오페이' },
   { id: 6, name: '토스페이' },
 ];
-const PaymentButtonGrid: React.FC = () => {
+
+interface PaymentButtonGridProps {
+  selectedPaymentId: number | null;
+  onPaymentChange: (id: number) => void;
+}
+
+const PaymentButtonGrid: FC<PaymentButtonGridProps> = ({ selectedPaymentId, onPaymentChange }) => {
   return (
     <div css={buttonWrapper}>
       {paymentsMethods.map((method) => (
-        <div css={miniButton}>{method.name}</div>
+        <div
+          key={method.id}
+          css={selectedPaymentId === method.id ? activeButton : inactiveButton}
+          onClick={() => onPaymentChange(method.id)}
+        >
+          {method.name}
+        </div>
       ))}
-      <div></div>
     </div>
   );
 };
+
 export default PaymentButtonGrid;
