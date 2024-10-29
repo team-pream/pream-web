@@ -1,5 +1,5 @@
 // api/detail.ts
-import { api } from '..';
+import { api } from '../api';
 
 export interface Category {
   id: number;
