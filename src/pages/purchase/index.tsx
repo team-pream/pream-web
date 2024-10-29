@@ -3,14 +3,12 @@ import {
   wrapper,
   appBar,
   mainTitleBox,
-  mainTitle,
   itemWrapper,
   item,
   content,
   topBox,
   image,
   textBox,
-  contentTitle,
   price,
   purchaseInfo,
   date,
@@ -25,6 +23,7 @@ import {
 } from './index.style';
 import { AppBarBack } from '@/assets/icons';
 import { useNavigate } from 'react-router-dom';
+import { Text } from '@/components';
 
 export default function Purchase() {
   // 각 아이템의 열림 상태를 배열로 관리
@@ -59,7 +58,7 @@ export default function Purchase() {
       </header>
       <main>
         <div css={mainTitleBox}>
-          <span css={mainTitle}>구매내역</span>
+          <Text typo="title1">구매내역</Text>
         </div>
         {items.map((data, index) => (
           <div css={itemWrapper} key={index}>
@@ -68,45 +67,55 @@ export default function Purchase() {
               <div css={content}>
                 <div css={topBox}>
                   <div css={textBox} onClick={() => navigate('/products/:productId')}>
-                    <span css={contentTitle}>{data.title}</span>
-                    <span css={price}>{data.price}</span>
+                    <Text typo="body2">{data.title}</Text>
+                    <Text typo="subtitle1" css={price}>
+                      {data.price}
+                    </Text>
                   </div>
-                  <div css={date}>{data.date}</div>
+                  <Text typo="body1" css={date}>
+                    {data.date}
+                  </Text>
                 </div>
                 <button css={button}>
-                  <div css={purchaseInfo} onClick={() => handleArrowToggle(index)}>
+                  <Text typo="body3" css={purchaseInfo} onClick={() => handleArrowToggle(index)}>
                     주문 정보 보기
-                  </div>
-                  <div css={purchaseInfo}>구매 확정</div>
+                  </Text>
+                  <Text typo="body3" css={purchaseInfo}>
+                    구매 확정
+                  </Text>
                 </button>
               </div>
             </div>
             <div css={hiddenBlock({ isOpen: isOpen[index] || false })}>
               <section css={shipBlock}>
-                <div css={blockTitle}>배송 정보</div>
+                <Text typo="subtitle1" css={blockTitle}>
+                  배송 정보
+                </Text>
                 <div css={info}>
                   <div css={infoTitle}>
-                    <span>받는 분</span>
-                    <span>주소</span>
-                    <span>휴대폰번호</span>
+                    <Text typo="subtitle2">받는 분</Text>
+                    <Text typo="subtitle2">주소</Text>
+                    <Text typo="subtitle2">휴대폰번호</Text>
                   </div>
                   <div css={infoContent}>
-                    <span>고윤정</span>
-                    <span>서울 강남구 선릉로 428 멀티캠퍼스</span>
-                    <span>010-0000-0000</span>
+                    <Text typo="body4">고윤정</Text>
+                    <Text typo="body4">서울 강남구 선릉로 428 멀티캠퍼스</Text>
+                    <Text typo="body4">010-0000-0000</Text>
                   </div>
                 </div>
               </section>
               <section css={paymentBlock}>
-                <div css={blockTitle}>결제 정보</div>
+                <Text typo="subtitle1" css={blockTitle}>
+                  결제 정보
+                </Text>
                 <div css={info}>
                   <div css={infoTitle}>
-                    <span>결제 방법</span>
-                    <span>결제 금액</span>
+                    <Text typo="subtitle2">결제 방법</Text>
+                    <Text typo="subtitle2">결제 금액</Text>
                   </div>
                   <div css={infoContent}>
-                    <span>토스페이먼츠</span>
-                    <span>20,000원</span>
+                    <Text typo="body4">토스페이먼츠</Text>
+                    <Text typo="body4">20,000원</Text>
                   </div>
                 </div>
               </section>

@@ -21,11 +21,6 @@ export const mainTitleBox = css`
   border-bottom: 2px solid;
 `;
 
-export const mainTitle = css`
-  font-size: 24px;
-  font-weight: 600;
-`;
-
 export const itemWrapper = css`
   padding: 18px 0;
   border-bottom: 1px solid ${theme.colors.gray100};
@@ -57,14 +52,7 @@ export const textBox = css`
   cursor: pointer;
 `;
 
-export const contentTitle = css`
-  font-size: 12px;
-  font-weight: 500;
-`;
-
 export const price = css`
-  font-size: 16px;
-  font-weight: 600;
   padding: 7px 0 12px 0;
 `;
 
@@ -73,9 +61,6 @@ export const purchaseInfo = css`
   height: 32px;
   border: 0.5px solid ${theme.colors.gray200};
   border-radius: 7px;
-  font-size: ${theme.typo.body3};
-  font-weight: 600;
-  color: ${theme.colors.black};
   cursor: pointer;
   &:hover {
     color: ${theme.colors.gray300};
@@ -87,8 +72,6 @@ export const purchaseInfo = css`
 `;
 
 export const date = css`
-  font-size: 12px;
-  font-weight: 600;
   padding-top: 6px;
 `;
 
@@ -112,8 +95,7 @@ export const shipBlock = css`
 `;
 
 export const blockTitle = css`
-  font-size: 16px;
-  font-weight: 600;
+  display: block;
   padding: 0 0 21px 0;
 `;
 
@@ -123,15 +105,11 @@ export const info = css`
 `;
 
 export const infoTitle = css`
-  font-size: 14px;
-  font-weight: 600;
   display: flex;
   flex-direction: column;
   gap: 11px;
 `;
 export const infoContent = css`
-  font-size: 14px;
-  font-weight: 400;
   display: flex;
   flex-direction: column;
   gap: 11px;
