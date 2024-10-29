@@ -1,4 +1,4 @@
-import { Input } from '@/Components/input';
+import { Input } from '@/components/input';
 import { addressWrapper } from './index.styles';
 import SelectBasic from './select-default';
 import { colors } from '@/styles/colors';
