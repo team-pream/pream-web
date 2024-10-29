@@ -17,7 +17,7 @@ import {
   textBox,
 } from './index.styles';
 import { useNavigate } from 'react-router-dom';
-import { useGetCategoriesQuery } from '@/queries/categories';
+import { useGetCategoriesQuery } from '@/queries/category';
 import Image from '/images/sampleImage.png';
 import { LikeOff } from '@/assets/icons';
 
