@@ -1,7 +1,6 @@
 import { HTMLAttributes } from 'react';
-import { buttonWrapper, dim, secondaryButton, text, wrapper } from './index.styles';
-import { Text } from '../text';
-import { Button } from '../button';
+import { buttonWrapper, secondaryButton, text, wrapper } from './index.styles';
+import { Text, Button, Dim } from '@/components';
 
 export type DialogType = 'action' | 'error';
 export type SecondaryActionType = 'neutral';
@@ -28,7 +27,7 @@ export function Dialog({
 }: DialogProps) {
   return (
     <>
-      <div css={dim} />
+      <Dim fullScreen />
 
       <div {...rest} css={wrapper}>
         <div css={text}>
