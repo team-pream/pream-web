@@ -1,17 +1,20 @@
 import { useState } from 'react';
 import {
   wrapper,
+  appBar,
   mainTitleBox,
   mainTitle,
   itemWrapper,
   item,
   content,
+  topBox,
   image,
   textBox,
   contentTitle,
   price,
   purchaseInfo,
   date,
+  button,
   hiddenBlock,
   shipBlock,
   blockTitle,
@@ -20,6 +23,8 @@ import {
   infoContent,
   paymentBlock,
 } from './index.style';
+import { AppBarBack } from '@/assets/icons';
+import { useNavigate } from 'react-router-dom';
 
 export default function Purchase() {
   // 각 아이템의 열림 상태를 배열로 관리
@@ -40,9 +45,18 @@ export default function Purchase() {
     date: '24.10.24',
   }));
 
+  const navigate = useNavigate();
+
   return (
     <div css={wrapper}>
-      <header>header</header>
+      <header css={appBar}>
+        <AppBarBack
+          width="11"
+          height="24"
+          style={{ cursor: 'pointer' }}
+          onClick={() => navigate('/mypage')}
+        />
+      </header>
       <main>
         <div css={mainTitleBox}>
           <span css={mainTitle}>구매내역</span>
@@ -50,17 +64,22 @@ export default function Purchase() {
         {items.map((data, index) => (
           <div css={itemWrapper} key={index}>
             <div css={item}>
+              <img src="/images/sampleImage2.png" css={image} />
               <div css={content}>
-                <img src="/images/sampleImage2.png" css={image} />
-                <div css={textBox}>
-                  <span css={contentTitle}>{data.title}</span>
-                  <span css={price}>{data.price}</span>
-                  <span css={purchaseInfo} onClick={() => handleArrowToggle(index)}>
-                    주문 정보 보기
-                  </span>
+                <div css={topBox}>
+                  <div css={textBox} onClick={() => navigate('/products/:productId')}>
+                    <span css={contentTitle}>{data.title}</span>
+                    <span css={price}>{data.price}</span>
+                  </div>
+                  <div css={date}>{data.date}</div>
                 </div>
+                <button css={button}>
+                  <div css={purchaseInfo} onClick={() => handleArrowToggle(index)}>
+                    주문 정보 보기
+                  </div>
+                  <div css={purchaseInfo}>구매 확정</div>
+                </button>
               </div>
-              <div css={date}>{data.date}</div>
             </div>
             <div css={hiddenBlock({ isOpen: isOpen[index] || false })}>
               <section css={shipBlock}>
