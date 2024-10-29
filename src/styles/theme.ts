@@ -13,6 +13,7 @@ const theme = {
     gnb: 10,
     fab: 10,
     dim: 20,
+    actionSheet: 30,
     bottomSheet: 30,
     dialog: 40,
   },

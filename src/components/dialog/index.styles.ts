@@ -2,17 +2,6 @@ import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { SecondaryActionType } from '.';
 
-export const dim = css`
-  width: 100%;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: ${theme.colors.grayOpacity300};
-  z-index: ${theme.zIndex.dim};
-  overflow: hidden;
-`;
-
 export const wrapper = css`
   position: fixed;
   top: 50%;

@@ -1,4 +1,4 @@
-import { typography } from '@/styles/typography.ts';
+import { typography } from '@/styles/typography';
 import { HTMLAttributes, ReactNode } from 'react';
 
 type Typo = keyof typeof typography;
