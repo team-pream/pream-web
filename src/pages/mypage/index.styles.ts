@@ -3,13 +3,14 @@ import { css } from '@emotion/react';
 
 export const wrapper = css`
   width: ${theme.size.maxWidth};
+  height: 100vh;
   padding: ${theme.size.appBarHeight} 0 0 0;
   margin: 0 auto;
 `;
 
 export const mypageWrapper = css`
   width: ${theme.size.maxWidth};
-  height: 100vh;
+  height: 80vh;
   padding: 24px 18px;
 `;
 
@@ -40,4 +41,8 @@ export const myTradeWrapper = css`
 export const myAccountWrapper = css`
   width: 100%;
   height: 40vh;
+`;
+
+export const menuWrapper = css`
+  cursor: pointer;
 `;

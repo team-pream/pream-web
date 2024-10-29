@@ -1,5 +1,6 @@
 import { AppBar, GNB, Text } from '@/components';
 import {
+  menuWrapper,
   myAccountWrapper,
   mypageWrapper,
   myPetWrapper,
@@ -23,30 +24,30 @@ export default function Mypage() {
         <div css={myTradeWrapper}>
           <Text typo="subtitle1">나의 거래 내역</Text>
           <hr color={theme.colors.black} />
-          <div>
+          <div css={menuWrapper}>
             <Text typo="body2">판매내역</Text>
           </div>
           <hr color={theme.colors.gray100} />
-          <div>
+          <div css={menuWrapper}>
             <Text typo="body2">구매내역</Text>
           </div>
         </div>
         <div css={myAccountWrapper}>
           <Text typo="subtitle1">나의 계정 정보</Text>
           <hr color={theme.colors.black} />
-          <div>
+          <div css={menuWrapper}>
             <Text typo="body2">주소 관리</Text>
           </div>
           <hr color={theme.colors.gray100} />
-          <div>
+          <div css={menuWrapper}>
             <Text typo="body2">간편결제 관리</Text>
           </div>
           <hr color={theme.colors.gray100} />
-          <div>
+          <div css={menuWrapper}>
             <Text typo="body2">판매 정산 계좌</Text>
           </div>
           <hr color={theme.colors.gray100} />
-          <div>
+          <div css={menuWrapper}>
             <Text typo="body2" color={theme.colors.gray300}>
               로그아웃
             </Text>
