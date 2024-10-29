@@ -24,7 +24,7 @@ export default function Mypage() {
   const navigate = useNavigate();
   const accessToken = localStorage.getItem('access');
   const login = () => {
-    navigate('/login');
+    navigate(ROUTE_PATHS.LOGIN);
   };
   return (
     <div css={wrapper}>
@@ -54,7 +54,7 @@ export default function Mypage() {
               <Next
                 css={nextIcon}
                 onClick={() => {
-                  navigate('/mypage/user/edit');
+                  navigate(ROUTE_PATHS.MYPAGE_INFO);
                 }}
               ></Next>
             </>
@@ -70,11 +70,11 @@ export default function Mypage() {
         <div css={myAccountWrapper}>
           <Text typo="subtitle1">나의 계정 정보</Text>
           <hr color={theme.colors.black} />
-          <Menu menuTitle="주소 관리" path={'/mypage'}></Menu>
+          <Menu menuTitle="주소 관리" path={ROUTE_PATHS.MYPAGE_ADDRESS}></Menu>
           <hr color={theme.colors.gray100} />
-          <Menu menuTitle="간편결제 관리" path={'/mypage'}></Menu>
+          <Menu menuTitle="간편결제 관리" path={ROUTE_PATHS.MYPAGE}></Menu>
           <hr color={theme.colors.gray100} />
-          <Menu menuTitle="판매 정산 계좌" path={'/mypage'}></Menu>
+          <Menu menuTitle="판매 정산 계좌" path={ROUTE_PATHS.MYPAGE}></Menu>
           <hr color={theme.colors.gray100} />
           {!accessToken ? (
             <div css={logout} onClick={login}>
