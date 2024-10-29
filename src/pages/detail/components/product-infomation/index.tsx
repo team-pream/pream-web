@@ -16,7 +16,7 @@ import {
 interface ProductInfoProps {
   onOptionClick: () => void;
   product: {
-    name: string;
+    title: string;
     price: number;
     status: string;
     condition: string;
@@ -35,7 +35,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ onOptionClick, product }) => 
   <div css={productInfoWrapper}>
     <div css={titleWrapper}>
       <div css={titleTop}>
-        <div css={title}>{product.name}</div> {/* 상품 이름 출력 */}
+        <div css={title}>{product.title}</div> {/* 상품 이름 출력 */}
         <img onClick={onOptionClick} src={option} css={optionIcon} />
       </div>
       <div css={titleBottom}>{product.price.toLocaleString()}원</div> {/* 가격 출력 */}
@@ -54,11 +54,12 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ onOptionClick, product }) => 
     <div css={titleWrapper}>
       <div css={explainTitle}>상세 정보</div>
       <div css={explainProduct}>
-        {product.description}
-        {product.description}
-        {product.description}
-        {product.description}
-        {product.description}
+        {product.description.split('\\n').map((line, index) => (
+          <React.Fragment key={index}>
+            {line}
+            <br />
+          </React.Fragment>
+        ))}
       </div>
     </div>
   </div>

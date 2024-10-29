@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getProduct, Product } from '@/api/detail';
 import { QUERY_KEYS } from '../query-keys';
 
-export const useGetProductQuery = (productId: string) => {
+export const useGetProductQuery = (productId: number) => {
   return useQuery<Product, Error>({
     queryKey: QUERY_KEYS.GET_PRODUCT(productId),
     queryFn: async () => {
