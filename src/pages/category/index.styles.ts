@@ -15,5 +15,5 @@ export const gridWrapper = css`
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 기본적으로 4개의 열로 나누기 */
   padding: 26px 28px;
-  gap: 21px;
+  gap: 18px;
 `;

@@ -1,16 +1,8 @@
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 
-export const wrapper = css`
-
-  width: ${theme.size.maxWidth};
-  height: 100vh;
-  margin: 0 auto;
-  padding: ${theme.size.appBarHeight} 0 0 0;
-`;
-
 export const productsWrapper = css`
-  width: ${theme.size.maxWidth};
+  width: 100%;
   padding: 24px 18px ${theme.size.gnbHeight};
 `;
 
@@ -26,7 +18,6 @@ export const dropdownIcon = css`
   width: 12px;
   margin-inline-start: 5px;
 `;
-
 
 export const countText = css`
   flex: 1;
@@ -73,7 +64,6 @@ export const menuItemStyle = css`
   cursor: pointer;
   &:last-child {
     border-bottom: none;
-
   }
 `;
 
@@ -102,19 +92,18 @@ export const imageBox = css`
   position: relative;
 `;
 
-
 export const image = css`
   background-color: lightgray;
   border-radius: 13px;
-  width: 170px;
-  height: 170px;
+  width: 100%;
+  height: 100%;
 `;
 
 export const opacityBox = css`
   display: flex;
   border-radius: 13px;
-  width: 170px;
-  height: 170px;
+  width: 100%;
+  height: 100%;
   position: absolute;
   z-index: ${theme.zIndex.overlay};
   background-color: ${theme.colors.grayOpacity100};
@@ -124,8 +113,8 @@ export const soldOutOverlayStyle = css`
   position: absolute;
   top: 0;
   left: 0;
-  width: 170px;
-  height: 170px;
+  width: 100%;
+  height: 100%;
   background-color: ${theme.colors.grayOpacity300};
   display: flex;
   justify-content: center;
@@ -136,10 +125,9 @@ export const soldOutOverlayStyle = css`
 
 export const textBox = css`
   display: flex;
-  width: 170px;
+  width: 100%;
   flex-direction: column;
   gap: 6px;
   padding: 8px 0 0 7px;
   cursor: pointer;
 `;
-

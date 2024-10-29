@@ -7,7 +7,7 @@ export const gridItem = css`
   gap: 8px;
 
   img {
-    width: 58px;
-    height: 58px;
+    width: 100%;
+    max-width: 64px;
   }
 `;

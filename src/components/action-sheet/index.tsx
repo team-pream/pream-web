@@ -8,14 +8,15 @@ interface Menu {
 }
 
 interface ActionSheetProps {
+  isShow: boolean;
   menus: Menu[];
 }
 
-export function ActionSheet({ menus }: ActionSheetProps) {
+export function ActionSheet({ isShow, menus }: ActionSheetProps) {
   return (
     <>
       <Dim fullScreen />
-      <div css={wrapper}>
+      <div css={wrapper({ isShow })}>
         <div css={handle} />
         <div css={menuWrapper}>
           {menus.map((item) => (

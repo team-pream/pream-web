@@ -1,10 +1,11 @@
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 
-export const wrapper = css`
+export const wrapper = ({ isShow }: { isShow: boolean }) => css`
   position: fixed;
   bottom: 0;
-  margin: 0 auto;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -14,6 +15,8 @@ export const wrapper = css`
   border-radius: 10px 10px 0 0;
   background: ${theme.colors.white};
   z-index: ${theme.zIndex.actionSheet};
+  transform: translateX(-50%) ${isShow ? 'translateY(0)' : 'translateY(100%)'};
+  transition: transform 0.3s ease-out;
 `;
 
 export const handle = css`
