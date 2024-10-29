@@ -7,24 +7,32 @@ import {
   listWrapper,
   itemList,
   item,
-  itemTitle,
-  itemPrice,
   imageBox,
   sampleImage,
   opacityBox,
-  heartIcon,
-  listTitle,
   textBox,
+  itemTitle,
 } from './index.styles';
 import { useNavigate } from 'react-router-dom';
 import { useGetCategoriesQuery } from '@/queries/category';
-import Image from '/images/sampleImage.png';
-import { LikeOff } from '@/assets/icons';
+import { Logo, Search } from '@/assets/icons';
+import { AppBar, GNB, Text } from '@/components';
+import Carousel from '@/components/carousel';
+import { useGetCurationQuery } from '@/queries/curation';
 
 interface CategoryData {
   id: number;
   name: string;
   icon: string;
+}
+
+interface CurationData {
+  id: number;
+  title: string;
+  price: number;
+  status: string;
+  images: [];
+  categoryId: number;
 }
 
 const CAT_WHEEL = 4;
@@ -33,7 +41,8 @@ const EXCLUDED_CATEGORIES = [CAT_WHEEL, WALKING];
 
 export default function Main() {
   const navigate = useNavigate();
-  const { data } = useGetCategoriesQuery();
+  const { data: category } = useGetCategoriesQuery();
+  const { data: curation } = useGetCurationQuery();
   const listArray = [
     '새로 등록된 상품',
     '이 상품은 어때요?',
@@ -42,58 +51,86 @@ export default function Main() {
   ];
 
   // 상품 더미 데이터
-  const items = Array.from({ length: 10 }, (_, i) => ({
-    id: i + 1,
-  }));
+  // const items = Array.from({ length: 10 }, (_, i) => ({
+  //   id: i + 1,
+  // }));
+
+  // 배너 이미지
+  const imageList = [
+    'images/carouselImage.png',
+    'images/carouselImage.png',
+    'images/carouselImage.png',
+  ];
+
+  console.log(curation);
+
+  const curationKeys = ['new', 'random', 'cheap', 'popular'];
 
   return (
     <div css={wrapper}>
-      <header>header</header>
+      <AppBar
+        prefix={<Logo width="94" height="20" />}
+        suffix={
+          <Search
+            width="19"
+            height="20"
+            style={{ cursor: 'pointer' }}
+            onClick={() => navigate('/search')}
+          />
+        }
+      />
       <main>
-        <div>carousel</div>
+        <Carousel
+          images={imageList}
+          width={390}
+          height={270}
+          showButtons={true}
+          autoPlay={true}
+          autoPlayInterval={5000}
+        />
+        {/* Category */}
         <div css={categoryList}>
           <div css={categoryItems}>
-            {data
+            {category
               ?.filter((item: CategoryData) => !EXCLUDED_CATEGORIES.includes(item.id))
               .map((item: CategoryData) => (
-                <div key={item.id} css={categoryItem}>
-                  <img
-                    src={item.icon}
-                    alt={item.name}
-                    css={categoryIcon}
-                    onClick={() => navigate(item.id)}
-                  />
-                  <span>{item.name}</span>
+                <div
+                  key={item.id}
+                  css={categoryItem}
+                  onClick={() => navigate(`/products?category=${item.id}&status=${1}`)}
+                >
+                  <img src={item.icon} alt={item.name} css={categoryIcon} />
+                  <Text typo="body3">{item.name}</Text>
                 </div>
               ))}
           </div>
         </div>
+        {/* Curation */}
         <div css={listWrapper}>
           {listArray.map((listTitleText, index) => (
-            <>
-              <span key={index} css={listTitle}>
-                {listTitleText}
-              </span>
+            <div key={index}>
+              <Text typo="subtitle1">{listTitleText}</Text>
               <div css={itemList}>
-                {items.map((product) => (
-                  <div key={product.id} css={item}>
+                {curation?.[curationKeys[index]]?.map((curationItem: CurationData) => (
+                  <div key={curationItem.id} css={item}>
                     <div css={imageBox}>
                       <div css={opacityBox} />
-                      <img src={Image} alt="itemImage" css={sampleImage} />
-                      <LikeOff css={heartIcon} />
+                      <img src={curationItem.images[0]} alt="itemImage" css={sampleImage} />
                     </div>
                     <div css={textBox}>
-                      <span css={itemTitle}>와그웨어 강아지 신발</span>
-                      <span css={itemPrice}>15,000원</span>
+                      <Text typo="body2" css={itemTitle}>
+                        {curationItem.title}
+                      </Text>
+                      <Text typo="subtitle1">{curationItem.price.toLocaleString()}원</Text>
                     </div>
                   </div>
                 ))}
               </div>
-            </>
+            </div>
           ))}
         </div>
       </main>
-      <nav>nav</nav>
+      <GNB />
     </div>
   );
 }
