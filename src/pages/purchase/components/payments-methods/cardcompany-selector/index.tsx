@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { DropdownFold } from '@/assets/icons';
-import { DropdownUnfold } from '@/assets/icons';
 import {
   selecterWrapper,
   selectWrapper,
@@ -8,6 +6,7 @@ import {
   optionActive,
   optionDisabled,
 } from './index.styles';
+import { DropdownFold, DropdownUnfold } from '@/assets/icons';
 import { colors } from '@/styles/colors';
 
 interface CardCompanys {
@@ -19,17 +18,21 @@ interface CardCompanySelectorProps {
   provider: CardCompanys[];
   seletedCompanyId: string;
   onCompanyChange: (id: string) => void;
+  disabled: boolean;
 }
 
 const CardCompanySelector: React.FC<CardCompanySelectorProps> = ({
   provider,
   seletedCompanyId,
   onCompanyChange,
+  disabled,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSelectClick = () => {
-    setIsOpen((prev) => !prev);
+    if (!disabled) {
+      setIsOpen((prev) => !prev);
+    }
   };
 
   const handleBlur = () => {
@@ -42,14 +45,12 @@ const CardCompanySelector: React.FC<CardCompanySelectorProps> = ({
     <div css={selectWrapper}>
       <select
         id="card-company"
-        value={seletedCompanyId}
+        value={seletedCompanyId} // 선택된 카드사 표시
         onClick={handleSelectClick}
-        onChange={(e) => {
-          onCompanyChange(e.target.value);
-          setIsOpen(false);
-        }}
+        onChange={(e) => onCompanyChange(e.target.value)} // 카드사 선택 업데이트
         onBlur={handleBlur}
-        css={selecterWrapper(isSelected)} // 선택 여부에 따른 스타일 적용
+        css={selecterWrapper(isSelected)} // 스타일 적용
+        disabled={disabled} // 비활성화 여부 제어
       >
         <option value="" css={optionDisabled}>
           카드사를 선택하세요

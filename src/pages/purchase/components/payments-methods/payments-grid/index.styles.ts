@@ -24,3 +24,16 @@ export const miniButton = css`
     color: ${colors.black100};
   }
 `;
+export const activeButton = css`
+  ${miniButton};
+  border: 1px solid ${colors.black100};
+  color: ${colors.black};
+  font-size: ${typography.subtitle2.fontSize};
+  font-weight: ${typography.subtitle2.fontWeight};
+`;
+
+export const inactiveButton = css`
+  ${miniButton};
+  border: 1px solid ${colors.gray200};
+  color: ${colors.gray300};
+`;
