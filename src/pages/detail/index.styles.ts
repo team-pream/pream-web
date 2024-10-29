@@ -2,16 +2,8 @@ import { css } from '@emotion/react';
 import theme from '@/styles/theme';
 
 export const Wrapper = css`
-  /* width: 480px; */
-  max-width: 480px;
-  height: 100%;
-  min-height: 844px;
+  width: ${theme.size.maxWidth};
   background-color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; //Header와 Footer를 양끝에 배치 */
-  box-sizing: border-box;
-  margin: auto;
 `;
 export const Header = css`
   width: 100%;
