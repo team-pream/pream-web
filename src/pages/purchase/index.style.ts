@@ -8,6 +8,13 @@ export const wrapper = css`
   padding: 0px 18px;
 `;
 
+export const appBar = css`
+  width: 390px;
+  height: ${theme.size.appBarHeight};
+  display: flex;
+  align-items: center;
+`;
+
 export const mainTitleBox = css`
   width: 354px;
   padding: 20px 0;
@@ -26,12 +33,16 @@ export const itemWrapper = css`
 
 export const item = css`
   display: flex;
-  justify-content: space-between;
+  gap: 20px;
 `;
 
 export const content = css`
+  width: 240px;
+`;
+
+export const topBox = css`
   display: flex;
-  gap: 20px;
+  justify-content: space-between;
 `;
 
 export const image = css`
@@ -42,7 +53,8 @@ export const image = css`
 export const textBox = css`
   display: flex;
   flex-direction: column;
-  padding: 6px 0;
+  padding-top: 6px;
+  cursor: pointer;
 `;
 
 export const contentTitle = css`
@@ -53,23 +65,37 @@ export const contentTitle = css`
 export const price = css`
   font-size: 16px;
   font-weight: 600;
-  padding: 7px 0 21px 0;
+  padding: 7px 0 12px 0;
 `;
 
 export const purchaseInfo = css`
-  font-size: 14px;
+  width: 117px;
+  height: 32px;
+  border: 0.5px solid ${theme.colors.gray200};
+  border-radius: 7px;
+  font-size: ${theme.typo.body3};
   font-weight: 600;
-  color: ${theme.colors.green200};
+  color: ${theme.colors.black};
   cursor: pointer;
   &:hover {
-    color: #68c9bd;
+    color: ${theme.colors.gray300};
   }
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const date = css`
   font-size: 12px;
   font-weight: 600;
-  padding: 6px 0;
+  padding-top: 6px;
+`;
+
+export const button = css`
+  display: flex;
+  gap: 6px;
+  padding: 0;
 `;
 
 export const hiddenBlock = ({ isOpen }: { isOpen: boolean }) => ({
