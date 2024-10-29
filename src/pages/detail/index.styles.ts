@@ -20,3 +20,21 @@ export const Contents = css`
   flex-direction: column;
   justify-content: flex-start;
 `;
+export const Footer = css`
+  height: 76px;
+  padding: 10px;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+`;
+export const Header = css`
+  width: 100%;
+  height: 58px;
+  padding: 22px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
