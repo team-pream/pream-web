@@ -11,4 +11,5 @@ export { default as LikeOn } from './LikeOn';
 export { default as Logo } from './Logo';
 export { default as MypageUploadImage } from './MypageUploadImage';
 export { default as Next } from './Next';
+export { default as Plus } from './Plus';
 export { default as Search } from './Search';
