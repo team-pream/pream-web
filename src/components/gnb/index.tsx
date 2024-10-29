@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_PATHS } from '@/constants/routes';
-import { GnbCategory, GnbHome, GnbMy, LikeOff } from '@/assets/icons';
+import { GnbCategory, GnbHome, GnbMy } from '@/assets/icons';
 import { menuItem, wrapper } from './index.styles';
 import { Text } from '@/components';
 import theme from '@/styles/theme';
@@ -16,7 +16,6 @@ const MENUS = [
     icon: <GnbCategory width="20px" height="20px" />,
     path: ROUTE_PATHS.CATEGORY,
   },
-  { name: '찜', icon: <LikeOff width="20px" height="20px" />, path: ROUTE_PATHS.LIKE },
   { name: '마이', icon: <GnbMy width="20px" height="20px" />, path: ROUTE_PATHS.MYPAGE },
 ];
 
