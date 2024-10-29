@@ -3,11 +3,13 @@ import theme from '@/styles/theme';
 export const overlayStyle = (isOpen: boolean) => css`
   position: fixed;
   top: 0;
-  width: 389px;
+  left: 0;
+  width: ${theme.size.maxWidth};
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: ${isOpen ? 'block' : 'none'};
   z-index: 1000;
+  pointer-events: ${isOpen ? 'auto' : 'none'};
 `;
 
 export const sheetStyle = css`
