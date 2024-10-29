@@ -2,7 +2,7 @@ import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 
 export const wrapper = css`
-  position: fixed;
+  position: sticky;
   top: 0;
   margin: 0 auto;
   z-index: ${theme.zIndex.appBar};

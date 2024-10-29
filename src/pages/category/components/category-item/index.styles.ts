@@ -4,11 +4,10 @@ export const gridItem = css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
+  gap: 8px;
 
   img {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 10px;
+    width: 58px;
+    height: 58px;
   }
 `;

@@ -20,6 +20,11 @@ const defaultStyles = css`
     scrollbar-width: none;
     -ms-overflow-style: none;
     font-family: inherit;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
   *::before,
@@ -45,6 +50,8 @@ const defaultStyles = css`
     border: none;
     cursor: pointer;
     background: none;
+    padding-block: 0;
+    padding-inline: 0;
   }
 
   textarea {

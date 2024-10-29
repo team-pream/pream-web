@@ -1,16 +1,9 @@
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 
-export const wrapper = css`
-  width: ${theme.size.maxWidth};
-  padding: ${theme.size.appBarHeight} 0 0 0;
-  margin: 0 auto;
-`;
-
 export const menuWrapper = css`
-  width: ${theme.size.maxWidth};
+  width: 100%;
   padding: 24px 18px;
-  margin: 0 auto;
 `;
 
 export const hr = css`
