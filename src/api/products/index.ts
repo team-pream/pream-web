@@ -45,6 +45,8 @@ export const getProducts = async (params: GetProductsParamType) => {
 
 export const getCuration = async () => {
   const response = await api.get('/products/curation');
+  return response.data;
+};
 export const getProduct = async (productId: string): Promise<Product> => {
   const response = await api.get(`/products/${productId}`, {
     // headers: {
