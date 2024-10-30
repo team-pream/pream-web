@@ -1,25 +1,17 @@
-import { wrapper } from './index.styles';
 import {
   categoryList,
   categoryItems,
   categoryItem,
   categoryIcon,
   listWrapper,
-  itemList,
-  item,
-  itemTitle,
-  itemPrice,
-  imageBox,
-  sampleImage,
-  opacityBox,
-  heartIcon,
-  listTitle,
-  textBox,
 } from './index.styles';
 import { useNavigate } from 'react-router-dom';
-import { useGetCategoriesQuery } from '@/queries/categories';
-import Image from '/images/sampleImage.png';
-import { LikeOff } from '@/assets/icons';
+import { useGetCategoriesQuery } from '@/queries/category';
+import { useGetCurationQuery } from '@/queries/curation';
+import { Logo, Search } from '@/assets/icons';
+import { AppBar, GNB, Layout, Text } from '@/components';
+import Carousel from '@/components/carousel';
+import ProductList from './components/product-list';
 
 interface CategoryData {
   id: number;
@@ -33,67 +25,76 @@ const EXCLUDED_CATEGORIES = [CAT_WHEEL, WALKING];
 
 export default function Main() {
   const navigate = useNavigate();
-  const { data } = useGetCategoriesQuery();
+  const { data: category } = useGetCategoriesQuery();
+  const { data: curation } = useGetCurationQuery();
+
+  // 섹션
   const listArray = [
-    '새로 등록된 상품',
-    '이 상품은 어때요?',
-    '판매가 1만원 이하 베스트',
-    '실시간 인기 상품',
+    { title: '새로 등록된 상품', data: curation?.new },
+    { title: '이 상품은 어때요?', data: curation?.random },
+    { title: '판매가 1만원 이하 베스트', data: curation?.cheap },
+    { title: '실시간 인기 상품', data: curation?.popular },
   ];
 
-  // 상품 더미 데이터
-  const items = Array.from({ length: 10 }, (_, i) => ({
-    id: i + 1,
-  }));
+  // 배너 이미지
+  const imageList = [
+    'images/carouselImage.png',
+    'images/carouselImage.png',
+    'images/carouselImage.png',
+  ];
 
   return (
-    <div css={wrapper}>
-      <header>header</header>
+    <Layout>
+      <AppBar
+        prefix={<Logo width="94" height="20" />}
+        suffix={
+          <Search
+            width="19"
+            height="20"
+            style={{ cursor: 'pointer' }}
+            onClick={() => navigate('/search')}
+          />
+        }
+      />
       <main>
-        <div>carousel</div>
-        <div css={categoryList}>
+        <Carousel
+          images={imageList}
+          width={390}
+          height={270}
+          showButtons={true}
+          autoPlay={true}
+          autoPlayInterval={5000}
+        />
+        <section css={categoryList}>
           <div css={categoryItems}>
-            {data
+            {category
               ?.filter((item: CategoryData) => !EXCLUDED_CATEGORIES.includes(item.id))
               .map((item: CategoryData) => (
-                <div key={item.id} css={categoryItem}>
-                  <img
-                    src={item.icon}
-                    alt={item.name}
-                    css={categoryIcon}
-                    onClick={() => navigate(item.id)}
-                  />
-                  <span>{item.name}</span>
+                <div
+                  key={item.id}
+                  css={categoryItem}
+                  onClick={
+                    item.id !== 1
+                      ? () =>
+                          navigate(`/products?category=${item.id}`, {
+                            state: { id: item.id, name: item.name },
+                          })
+                      : () => navigate('/category')
+                  }
+                >
+                  <img src={item.icon} alt={item.name} css={categoryIcon} />
+                  <Text typo="body3">{item.name}</Text>
                 </div>
               ))}
           </div>
-        </div>
-        <div css={listWrapper}>
-          {listArray.map((listTitleText, index) => (
-            <>
-              <span key={index} css={listTitle}>
-                {listTitleText}
-              </span>
-              <div css={itemList}>
-                {items.map((product) => (
-                  <div key={product.id} css={item}>
-                    <div css={imageBox}>
-                      <div css={opacityBox} />
-                      <img src={Image} alt="itemImage" css={sampleImage} />
-                      <LikeOff css={heartIcon} />
-                    </div>
-                    <div css={textBox}>
-                      <span css={itemTitle}>와그웨어 강아지 신발</span>
-                      <span css={itemPrice}>15,000원</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </>
+        </section>
+        <section css={listWrapper}>
+          {listArray.map((list) => (
+            <ProductList key={list.title} products={list.data} title={list.title} />
           ))}
-        </div>
+        </section>
       </main>
-      <nav>nav</nav>
-    </div>
+      <GNB />
+    </Layout>
   );
 }

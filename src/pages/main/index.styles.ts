@@ -1,13 +1,5 @@
-import theme from '@/styles/theme';
 import { css } from '@emotion/react';
-
-export const wrapper = css`
-  width: 390px;
-  height: 100vh;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-`;
+import theme from '@/styles/theme';
 
 export const categoryIcon = css`
   width: 46px;
@@ -16,7 +8,8 @@ export const categoryIcon = css`
 
 export const categoryList = css`
   display: flex;
-  margin-left: 67px;
+  justify-content: center;
+  margin-top: 37px;
 `;
 
 export const categoryItems = css`
@@ -36,12 +29,7 @@ export const categoryItem = css`
 `;
 
 export const listWrapper = css`
-  margin: 40px 0 0 18px;
-`;
-
-export const listTitle = css`
-  font-size: 16px;
-  font-weight: 600;
+  margin: 40px 0 ${theme.size.gnbHeight} 18px;
 `;
 
 export const itemList = css`
@@ -50,6 +38,7 @@ export const itemList = css`
   gap: 9px;
   margin-bottom: 30px;
   overflow: auto;
+  padding-right: 18px;
 `;
 
 export const item = css`
@@ -100,11 +89,11 @@ export const textBox = css`
 `;
 
 export const itemTitle = css`
-  font-size: 12px;
-  font-weight: 500;
-`;
-
-export const itemPrice = css`
-  font-size: 16px;
-  font-weight: 600;
+  display: block;
+  width: 106px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
