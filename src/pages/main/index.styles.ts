@@ -1,15 +1,6 @@
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
 
-export const wrapper = css`
-  width: 390px;
-  height: 100vh;
-  margin: 0 auto;
-  padding: 0 0 ${theme.size.gnbHeight} 0;
-  display: flex;
-  flex-direction: column;
-`;
-
 export const categoryIcon = css`
   width: 46px;
   height: 46px;
@@ -17,7 +8,8 @@ export const categoryIcon = css`
 
 export const categoryList = css`
   display: flex;
-  margin: 37px 0 0 67px;
+  justify-content: center;
+  margin-top: 37px;
 `;
 
 export const categoryItems = css`

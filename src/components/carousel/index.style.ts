@@ -1,19 +1,18 @@
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
 
-export const CarouselWrapper = css`
+export const carouselWrapper = css`
   position: relative;
-  margin: 58px auto 0;
+  margin: 0 auto;
   overflow: hidden;
-  box-sizing: border-box;
 `;
 
-export const CarouselImg = css`
+export const carouselImg = css`
   display: flex;
   transition: transform 0.5s ease;
 `;
 
-export const LeftBtn = css`
+export const leftButton = css`
   position: absolute;
   top: 50%;
   left: 10px;
@@ -27,7 +26,7 @@ export const LeftBtn = css`
   cursor: pointer;
 `;
 
-export const RightBtn = css`
+export const rightButton = css`
   position: absolute;
   top: 50%;
   right: 10px;
@@ -41,7 +40,7 @@ export const RightBtn = css`
   cursor: pointer;
 `;
 
-export const ProgressBarWrapper = css`
+export const progressBarWrapper = css`
   position: absolute;
   bottom: 20px;
   left: 50%;
@@ -51,7 +50,7 @@ export const ProgressBarWrapper = css`
   background-color: ${theme.colors.grayOpacity200};
 `;
 
-export const ProgressBar = css`
+export const progressBar = css`
   position: absolute;
   height: 100%;
   background-color: ${theme.colors.black};

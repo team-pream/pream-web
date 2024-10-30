@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
-  CarouselWrapper,
-  CarouselImg,
-  LeftBtn,
-  RightBtn,
-  ProgressBarWrapper,
-  ProgressBar,
+  carouselWrapper,
+  carouselImg,
+  leftBtn,
+  rightBtn,
+  progressBarWrapper,
+  progressBar,
 } from './index.style';
 
 interface CarouselProps {
@@ -26,28 +26,29 @@ const Carousel: React.FC<CarouselProps> = ({
   autoPlayInterval = 3000,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const handlePrev = () => {
+
+  const handlePrev = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
-  };
-  const handleNext = () => {
+  }, [images.length]);
+  const handleNext = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
-  };
+  }, [images.length]);
 
   // 자동 재생 기능
-  React.useEffect(() => {
+  useEffect(() => {
     if (autoPlay) {
       const interval = setInterval(handleNext, autoPlayInterval);
       return () => clearInterval(interval); // 컴포넌트 언마운트 시 정리
     }
-  }, [autoPlay, autoPlayInterval, currentIndex]);
+  }, [autoPlay, autoPlayInterval, handleNext]);
 
   const progressBarWidth = 238 / images.length;
   const progressPosition = (currentIndex / (images.length - 1)) * (238 - progressBarWidth);
 
   return (
-    <div css={CarouselWrapper} style={{ maxWidth: `${width}px` }}>
+    <div css={carouselWrapper} style={{ maxWidth: `${width}px` }}>
       <div
-        css={CarouselImg}
+        css={carouselImg}
         style={{
           width: `${images.length * width}px`,
           transform: `translateX(${-currentIndex * width}px)`,
@@ -66,18 +67,18 @@ const Carousel: React.FC<CarouselProps> = ({
           />
         ))}
       </div>
-      <div css={ProgressBarWrapper}>
+      <div css={progressBarWrapper}>
         <div
-          css={ProgressBar}
+          css={progressBar}
           style={{ width: `${progressBarWidth}px`, left: `${progressPosition}px` }}
         />
       </div>
       {showButtons && (
         <>
-          <button onClick={handlePrev} css={LeftBtn}>
+          <button onClick={handlePrev} css={leftBtn}>
             ‹
           </button>
-          <button onClick={handleNext} css={RightBtn}>
+          <button onClick={handleNext} css={rightBtn}>
             ›
           </button>
         </>
