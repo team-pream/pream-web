@@ -4,7 +4,7 @@ import {
   itemList,
   item,
   imageBox,
-  sampleImage,
+  image,
   opacityBox,
   textBox,
   itemTitle,
@@ -35,7 +35,7 @@ export default function ProductList({ products, title }: Props) {
           <div key={product.id} css={item}>
             <div css={imageBox}>
               <div css={opacityBox} />
-              <img src={product.images[0]} alt="itemImage" css={sampleImage} />
+              <img src={product.images[0]} alt="itemImage" css={image} />
             </div>
             <div css={textBox} onClick={() => navigate(`/products/:${product.id}`)}>
               <Text typo="body2" css={itemTitle}>

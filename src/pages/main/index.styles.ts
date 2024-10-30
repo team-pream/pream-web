@@ -50,7 +50,7 @@ export const imageBox = css`
   position: relative;
 `;
 
-export const sampleImage = css`
+export const image = css`
   background-color: lightgray;
   border-radius: 13px;
   width: 120px;
@@ -65,19 +65,6 @@ export const opacityBox = css`
   position: absolute;
   z-index: 1;
   background-color: ${theme.colors.grayOpacity200};
-`;
-
-export const heartIcon = css`
-  width: 18px;
-  height: 15px;
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  z-index: 2;
-  cursor: pointer;
-  path {
-    fill: ${theme.colors.white};
-  }
 `;
 
 export const textBox = css`
