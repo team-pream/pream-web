@@ -12,7 +12,7 @@ import {
   infoTitle,
   infoValue,
 } from './index.style';
-
+import { Text } from '@/components';
 interface ProductInfoProps {
   onOptionClick: () => void;
   product: {
@@ -43,7 +43,20 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ onOptionClick, product }) => 
     <div css={infoWrapper}>
       <InfoRow title="판매자" value={product.seller.nickname} /> {/* 판매자 닉네임 출력 */}
       <InfoRow title="상태" value={product.condition} /> {/* 상태 출력 */}
-      <InfoRow title="오픈채팅" value="https://open.kakao.com/o/sn7a8Y" />
+      {/* <InfoRow title="오픈채팅" value="https://open.kakao.com/o/sn7a8Y" /> */}
+      <InfoRow
+        title="오픈채팅"
+        value={
+          <a
+            href="https://open.kakao.com/o/sn7a8Y"
+            target="_blank"
+            rel="noopener noreferrer"
+            css={{ textDecoration: 'none', color: '#007bff' }}
+          >
+            오픈채팅방 열기
+          </a>
+        }
+      />
       <div css={timeInfo}>
         <span>10분전</span>
         <span css={{ margin: '10px', fontSize: '8px' }}>•</span>
@@ -52,20 +65,22 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ onOptionClick, product }) => 
     </div>
     <div css={{ width: '100%', borderBottom: '4px solid #F6F6F6' }} />
     <div css={titleWrapper}>
-      <div css={explainTitle}>상세 정보</div>
-      <div css={explainProduct}>
-        {product.description.split('\\n').map((line, index) => (
-          <React.Fragment key={index}>
-            {line}
-            <br />
-          </React.Fragment>
-        ))}
+      <Text typo="subtitle1">상세 정보</Text>
+      <div css={{ marginTop: '25px' }}>
+        <Text typo="body2">
+          {product.description.split('\\n').map((line, index) => (
+            <React.Fragment key={index}>
+              {line}
+              <br />
+            </React.Fragment>
+          ))}
+        </Text>
       </div>
     </div>
   </div>
 );
 
-const InfoRow: React.FC<{ title: string; value: string }> = ({ title, value }) => (
+const InfoRow: React.FC<{ title: string; value: React.ReactNode }> = ({ title, value }) => (
   <div css={{ display: 'flex', flexDirection: 'row', marginBottom: '5px' }}>
     <div css={infoTitle}>{title}</div>
     <div css={infoValue}>{value}</div>

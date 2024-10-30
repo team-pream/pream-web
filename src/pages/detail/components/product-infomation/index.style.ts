@@ -3,6 +3,7 @@ import theme from '@/styles/theme';
 
 export const productInfoWrapper = css`
   width: 100%;
+  height: calc(100vh - ${theme.size.gnbHeight} - ${theme.size.appBarHeight});
 `;
 
 export const titleWrapper = css`
@@ -54,12 +55,4 @@ export const infoValue = css``;
 export const timeInfo = css`
   color: ${theme.colors.gray200};
   margin: 20px 0px;
-`;
-
-export const explainProduct = css`
-  font-size: ${typography.body2.fontSize};
-  font-weight: ${typography.body2.fontWeight};
-  white-space: pre-line;
-  line-height: 1.5;
-  padding-bottom: 20px;
 `;

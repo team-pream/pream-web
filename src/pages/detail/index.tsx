@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetProductQuery } from '@/queries/detail/index';
-import { Wrapper, Contents } from './index.styles';
 import { SheetList } from './components/bottom-sheet/index.style';
 import BottomSheet from './components/bottom-sheet';
 import ProductInfo from './components/product-infomation';
@@ -9,7 +8,7 @@ import { AppBar } from '@/components';
 import { AppBarBack } from '@/assets/icons';
 import { BGNB } from './components/gnb-buy';
 import Carousel from '@/components/carousel';
-
+import { Layout } from '@/components';
 const Detail: React.FC = () => {
   const { productId } = useParams<{ productId: string }>();
 
@@ -35,23 +34,16 @@ const Detail: React.FC = () => {
 
   // 정상적인 렌더링
   return (
-    <div css={Wrapper}>
+    <Layout>
       <AppBar prefix={<AppBarBack height="17px" cursor="pointer" />} />
-      <div css={[Contents, { overflowX: 'hidden' }]}>
-        <Carousel
-          images={product.images}
-          showButtons={true}
-          autoPlay={false}
-          // autoPlayInterval={5000}
-        />
-        <ProductInfo onOptionClick={handleOptionClick} product={product} />
-      </div>
+      <Carousel images={product.images} showButtons={true} autoPlay={false} />
+      <ProductInfo onOptionClick={handleOptionClick} product={product} />
       <BGNB />
       <BottomSheet isOpen={isSheetOpen} onClose={handleCloseSheet}>
         <div css={SheetList}>수정하기</div>
         <div css={SheetList}>삭제하기</div>
       </BottomSheet>
-    </div>
+    </Layout>
   );
 };
 
