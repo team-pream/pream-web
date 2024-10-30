@@ -29,6 +29,7 @@ export const profileAddWrapper = css`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin: 0 18px;
 `;
 
 export const imageStyle = css`
