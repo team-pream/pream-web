@@ -12,7 +12,8 @@ export const wrapper = css`
 
 export const main = css`
   width: 100%;
-  padding: ${theme.size.gnbHeight} 0 0 0;
+  height: 100%;
+  padding: ${theme.size.appBarHeight} 0 0 0;
   display: flex;
   flex-direction: column;
   flex: 1;
