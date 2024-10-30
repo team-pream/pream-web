@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '../query-keys';
-import { getCuration } from '@/api/curation';
+import { getCuration } from '@/api/products';
 
 export const useGetCurationQuery = () => {
   return useQuery({
