@@ -76,9 +76,21 @@ export const nextIcon = css`
 
 export const logoutStyle = css`
   cursor: pointer;
+  height: 38px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const plusIcon = css`
   height: 14px;
   margin: 8px;
+`;
+
+export const hr = css`
+  margin: 10px 0 0 0;
+`;
+
+export const menuline = css`
+  margin: 0;
 `;
