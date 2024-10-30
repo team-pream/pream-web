@@ -7,11 +7,11 @@ import {
 } from './index.styles';
 import { useNavigate } from 'react-router-dom';
 import { useGetCategoriesQuery } from '@/queries/category';
+import { useGetCurationQuery } from '@/queries/curation';
 import { Logo, Search } from '@/assets/icons';
 import { AppBar, GNB, Layout, Text } from '@/components';
 import Carousel from '@/components/carousel';
 import ProductList from './components/product-list';
-import { useGetCurationQuery } from '@/queries/curation';
 
 interface CategoryData {
   id: number;

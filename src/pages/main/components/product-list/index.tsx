@@ -24,7 +24,6 @@ interface Props {
   title: string;
 }
 
-// { children }: Props
 export default function ProductList({ products, title }: Props) {
   const navigate = useNavigate();
 
