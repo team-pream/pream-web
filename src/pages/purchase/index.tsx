@@ -30,13 +30,13 @@ export default function Purchase() {
   // 각 아이템의 열림 상태를 배열로 관리
   const [isOpen, setIsOpen] = useState<boolean[]>([]);
 
-  function handleArrowToggle(index: number) {
+  const handleArrowToggle = (index: number) => {
     setIsOpen((prev) => {
       const newIsOpen = [...prev];
       newIsOpen[index] = !newIsOpen[index];
       return newIsOpen;
     });
-  }
+  };
 
   // 더미데이터
   const items = Array.from({ length: 6 }, () => ({
