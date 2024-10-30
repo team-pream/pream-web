@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import type { Meta } from '@storybook/react';
-import { RadioGroup } from '@/components';
+import { ChipRadioGroup } from '.';
 
 const meta = {
-  title: 'Components/RadioGroup',
-  component: RadioGroup,
+  title: 'Components/Chip/ChipRadioGroup',
+  component: ChipRadioGroup,
   tags: ['autodocs'],
-} satisfies Meta<typeof RadioGroup>;
+} satisfies Meta<typeof ChipRadioGroup>;
 
 export default meta;
 
@@ -21,7 +21,7 @@ export function Default() {
   const [selected, setSelected] = useState<string>(ITEMS[0].value);
 
   return (
-    <RadioGroup
+    <ChipRadioGroup
       items={ITEMS}
       defaultValue={selected}
       onChange={(value: string) => setSelected(value)}

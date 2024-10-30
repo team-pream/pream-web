@@ -6,10 +6,10 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name?: string;
 }
 
-export const SearchBar = forwardRef<HTMLInputElement, Props>(({ name, ...rest }: Props, ref) => {
+export const SearchBar = forwardRef<HTMLInputElement, Props>(({ name, ...props }: Props, ref) => {
   return (
     <div css={wrapper}>
-      <input ref={ref} id={name} name={name} css={input} {...rest} />
+      <input ref={ref} id={name} name={name} css={input} {...props} />
       <Search width="20px" height="20px" cursor="pointer" />
     </div>
   );
