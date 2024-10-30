@@ -1,4 +1,4 @@
-import"./index-CpYw8l4t.js";import{B as d}from"./index-BwdbtUkM.js";import"./theme-BvZHPoXC.js";import"./extends-CKwpSh1k.js";import"./index-CTjT7uj6.js";import"./index-BZqGpNeu.js";const z={title:"Components/Button",component:d,tags:["autodocs"]},r={args:{variant:"box",size:"m",children:"Button"}},e={args:{variant:"capsule",size:"m",children:"Button"}},o={args:{variant:"box",status:"error",size:"m",children:"Button"}};var t,a,s;r.parameters={...r.parameters,docs:{...(t=r.parameters)==null?void 0:t.docs,source:{originalSource:`{
+import"./index-C1oavCFu.js";import{B as d}from"./index-BwdbtUkM.js";import"./theme-BvZHPoXC.js";import"./extends-CKwpSh1k.js";import"./index-CTjT7uj6.js";import"./index-BZqGpNeu.js";const z={title:"Components/Button",component:d,tags:["autodocs"]},r={args:{variant:"box",size:"m",children:"Button"}},e={args:{variant:"capsule",size:"m",children:"Button"}},o={args:{variant:"box",status:"error",size:"m",children:"Button"}};var t,a,s;r.parameters={...r.parameters,docs:{...(t=r.parameters)==null?void 0:t.docs,source:{originalSource:`{
   args: {
     variant: 'box',
     size: 'm',

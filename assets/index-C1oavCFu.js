@@ -162,7 +162,7 @@ import{c as a,a as i,b as n,j as t,F as m}from"./theme-BvZHPoXC.js";import{T as 
   overscroll-behavior-y: contain;
 `;a`
   width: 100%;
-  padding: ${i.size.gnbHeight} 0 0 0;
+  padding: ${i.size.appBarHeight} 0 0 0;
   display: flex;
   flex-direction: column;
   flex: 1;
