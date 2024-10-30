@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta } from '@storybook/react';
-import { Button, RadioGroup } from '@/components';
+import { RadioGroup } from '@/components';
 
 const meta = {
   title: 'Components/RadioGroup',
@@ -10,44 +10,21 @@ const meta = {
 
 export default meta;
 
-export const Default = () => {
-  const [selected, setSelected] = useState<string>('1');
+const ITEMS = [
+  { value: '1', label: '전체' },
+  { value: '2', label: '위생용품' },
+  { value: '3', label: '훈련용품' },
+  { value: '4', label: '이동용품' },
+];
 
-  const options = [
-    {
-      value: '1',
-      node: (
-        <Button variant="capsule" size="s" status={selected === '1' ? 'pressed' : 'active'}>
-          option1
-        </Button>
-      ),
-    },
-    {
-      value: '2',
-      node: (
-        <Button variant="capsule" size="s" status={selected === '2' ? 'pressed' : 'active'}>
-          option2
-        </Button>
-      ),
-    },
-    {
-      value: '3',
-      node: (
-        <Button variant="capsule" size="s" status={selected === '3' ? 'pressed' : 'active'}>
-          option3
-        </Button>
-      ),
-    },
-  ];
+export function Default() {
+  const [selected, setSelected] = useState<string>(ITEMS[0].value);
 
   return (
     <RadioGroup
-      options={options}
-      selectedValue={selected}
-      onChange={(value: string) => {
-        setSelected(value);
-      }}
-      style={{ gap: '8px' }}
+      items={ITEMS}
+      defaultValue={selected}
+      onChange={(value: string) => setSelected(value)}
     />
   );
-};
+}
