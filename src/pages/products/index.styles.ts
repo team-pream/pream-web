@@ -11,7 +11,6 @@ export const infoWrapper = css`
   justify-content: space-between;
   align-items: center;
   margin: 21px 0 0 0;
-  padding: 0 18px;
 `;
 
 export const dropdownIcon = css`
