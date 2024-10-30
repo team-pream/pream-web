@@ -52,10 +52,25 @@ const Detail: React.FC = () => {
 
   // 로딩 중이거나 에러 발생 시 조건부 렌더링
   if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error fetching product: {error.message}</div>;
-  if (!product) return <div>No product found</div>;
+  if (error)
+    return (
+      <Dialog
+        type="error"
+        title="ERROR"
+        description={error.message}
+        primaryActionLabel="메인으로 돌아가기"
+      />
+    );
+  if (!product)
+    return (
+      <Dialog
+        type="error"
+        title="ERROR"
+        description="상품을 찾을 수 없습니다"
+        primaryActionLabel="메인으로 돌아가기"
+      />
+    );
 
-  // 정상적인 렌더링
   return (
     <Layout>
       <AppBar prefix={<AppbarBack height="17px" cursor="pointer" />} />
