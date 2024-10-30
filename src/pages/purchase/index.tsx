@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import {
-  wrapper,
-  appBar,
+  mainWrapper,
   mainTitleBox,
   itemWrapper,
   item,
@@ -10,8 +9,10 @@ import {
   image,
   textBox,
   price,
-  purchaseInfo,
+  purchaseInfoButton,
+  purchaseButton,
   date,
+  buttonContainer,
   button,
   hiddenBlock,
   shipBlock,
@@ -23,7 +24,7 @@ import {
 } from './index.style';
 import { AppBarBack } from '@/assets/icons';
 import { useNavigate } from 'react-router-dom';
-import { Text } from '@/components';
+import { AppBar, Layout, Text } from '@/components';
 
 export default function Purchase() {
   // 각 아이템의 열림 상태를 배열로 관리
@@ -47,16 +48,18 @@ export default function Purchase() {
   const navigate = useNavigate();
 
   return (
-    <div css={wrapper}>
-      <header css={appBar}>
-        <AppBarBack
-          width="11"
-          height="24"
-          style={{ cursor: 'pointer' }}
-          onClick={() => navigate('/mypage')}
-        />
-      </header>
-      <main>
+    <Layout>
+      <AppBar
+        prefix={
+          <AppBarBack
+            width="11"
+            height="24"
+            style={{ cursor: 'pointer' }}
+            onClick={() => navigate('/mypage')}
+          />
+        }
+      />
+      <main css={mainWrapper}>
         <div css={mainTitleBox}>
           <Text typo="title1">구매내역</Text>
         </div>
@@ -76,14 +79,22 @@ export default function Purchase() {
                     {data.date}
                   </Text>
                 </div>
-                <button css={button}>
-                  <Text typo="body3" css={purchaseInfo} onClick={() => handleArrowToggle(index)}>
-                    주문 정보 보기
-                  </Text>
-                  <Text typo="body3" css={purchaseInfo}>
-                    구매 확정
-                  </Text>
-                </button>
+                <div css={buttonContainer}>
+                  <button css={button}>
+                    <Text
+                      typo="body3"
+                      css={purchaseInfoButton}
+                      onClick={() => handleArrowToggle(index)}
+                    >
+                      주문 정보 보기
+                    </Text>
+                  </button>
+                  <button css={button}>
+                    <Text typo="body3" css={purchaseButton}>
+                      구매 확정
+                    </Text>
+                  </button>
+                </div>
               </div>
             </div>
             <div css={hiddenBlock({ isOpen: isOpen[index] || false })}>
@@ -123,6 +134,6 @@ export default function Purchase() {
           </div>
         ))}
       </main>
-    </div>
+    </Layout>
   );
 }

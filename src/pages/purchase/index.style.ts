@@ -1,22 +1,12 @@
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 
-export const wrapper = css`
-  width: 390px;
-  height: 100vh;
-  margin: 0 auto;
-  padding: 0px 18px;
-`;
-
-export const appBar = css`
-  width: 390px;
-  height: ${theme.size.appBarHeight};
-  display: flex;
-  align-items: center;
+export const mainWrapper = css`
+  padding: 0 18px;
 `;
 
 export const mainTitleBox = css`
-  width: 354px;
+  width: 100%;
   padding: 20px 0;
   border-bottom: 2px solid;
 `;
@@ -32,7 +22,7 @@ export const item = css`
 `;
 
 export const content = css`
-  width: 240px;
+  width: 100%;
 `;
 
 export const topBox = css`
@@ -56,8 +46,39 @@ export const price = css`
   padding: 7px 0 12px 0;
 `;
 
-export const purchaseInfo = css`
-  width: 117px;
+export const buttonContainer = css`
+  display: flex;
+  gap: 6px;
+`;
+
+export const button = css`
+  display: flex;
+  gap: 6px;
+  padding: 0;
+  position: relative;
+  width: 50%;
+  height: 32px;
+`;
+
+export const purchaseInfoButton = css`
+  position: absolute;
+  width: 100%;
+  height: 32px;
+  border: 0.5px solid ${theme.colors.gray200};
+  border-radius: 7px;
+  cursor: pointer;
+  &:hover {
+    color: ${theme.colors.gray300};
+  }
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const purchaseButton = css`
+  position: absolute;
+  width: 100%;
   height: 32px;
   border: 0.5px solid ${theme.colors.gray200};
   border-radius: 7px;
@@ -73,12 +94,6 @@ export const purchaseInfo = css`
 
 export const date = css`
   padding-top: 6px;
-`;
-
-export const button = css`
-  display: flex;
-  gap: 6px;
-  padding: 0;
 `;
 
 export const hiddenBlock = ({ isOpen }: { isOpen: boolean }) => ({
