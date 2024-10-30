@@ -1,4 +1,4 @@
-import { AppBarBack, DropdownUnfold } from '@/assets/icons';
+import { AppbarBack, DropdownUnfold } from '@/assets/icons';
 import {
   dropdownIcon,
   image,
@@ -46,7 +46,7 @@ export default function Products() {
     <Layout>
       <AppBar
         prefix={
-          <AppBarBack
+          <AppbarBack
             height="24px"
             cursor="pointer"
             onClick={() => {

@@ -16,52 +16,8 @@ export const textBox = css`
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: 70px 0 30px 0;
-`;
-
-export const welcomeText = css`
-  font-size: 24px;
-  color: ${colors.black};
-`;
-
-export const highlightText = css`
-  font-size: 24px;
-  color: ${colors.green200};
-`;
-
-export const pleaseText = css`
-  color: ${colors.gray300};
-  font-size: 14px;
-`;
-
-export const inputWrapper = css`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 354px;
-  margin-top: 80px;
-`;
-
-export const inputField = css`
-  width: 100%;
-  padding: 8px;
-  border: 2px solid ${colors.gray200};
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  margin-top: 10px;
-
-  &:focus {
-    border-color: ${colors.green200};
-    outline: none;
-  }
-  &::placeholder {
-    color: ${colors.gray200};
-  }
-`;
-
-export const inputContainer = css`
-  position: relative;
+  margin: 150px 0 15px 0;
+  gap: 8px;
 `;
 
 export const duplicateCheckButton = css`
@@ -78,11 +34,6 @@ export const duplicateCheckButton = css`
   height: 35px;
 `;
 
-export const styledLabel = css`
-  font-size: 14px;
-  color: ${colors.gray300};
-`;
-
 export const progressBarContainer = css`
   width: 100%;
   height: 3px;
@@ -95,7 +46,7 @@ export const progressBar = (step) => css`
   height: 100%;
   background-color: ${colors.green200};
   position: absolute;
-  left: 0;
+  top: 58px;
   transform: translateX(${(step - 1) * 100}%);
   transition: transform 0.3s ease;
 `;
@@ -127,14 +78,7 @@ export const selectBox = css`
   }
 `;
 
-export const navBar = css`
-  width: 390px;
-  height: 58px;
-  display: flex;
-  align-items: center;
-`;
-
-export const nextButton = (isValid) => css`
+export const nextButton = ({ isValid }: { isValid: boolean }) => css`
   position: absolute;
   display: flex;
   justify-content: center;

@@ -1,12 +1,12 @@
-import { patchOnboarding } from '@/api/user/userProfile';
+import { patchUserOnboarding } from '@/api/user/userProfile';
 import { useMutation } from '@tanstack/react-query';
-import { OnboardingRequestBody } from '@/types';
+import { PatchUserOnboardingBody } from '@/types';
 
-export const usePatchOnboardingMutation = (onSuccessCallback: () => void) => {
+export const usePatchUserOnboardingMutation = (onSuccessCallback: () => void) => {
   return useMutation({
-    mutationFn: async (data: { body: OnboardingRequestBody; accessToken: string }) => {
+    mutationFn: async (data: { body: PatchUserOnboardingBody; accessToken: string }) => {
       const { body, accessToken } = data;
-      return await patchOnboarding(body, accessToken);
+      return await patchUserOnboarding(body, accessToken);
     },
     onSuccess: onSuccessCallback,
     onError: () => {

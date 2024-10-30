@@ -15,17 +15,17 @@ export interface ProductType {
   status: string;
 }
 
-export interface OnboardingRequestBody {
+export interface PatchUserOnboardingBody {
   email: string;
   nickname: string;
   phone: string;
 }
 
-export interface CheckNicknameRequestBody {
+export interface PostCheckNicknameBody {
   nickname: string;
 }
 
-export interface PetProfileRequestBody {
-  name: string;
-  petType: string;
+export interface PostUserPetBody {
+  name?: string;
+  petType?: string;
 }

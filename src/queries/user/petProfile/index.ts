@@ -1,12 +1,12 @@
-import { postPetProfile } from '@/api/user/petProfile';
+import { postUserPet } from '@/api/user/petProfile';
 import { useMutation } from '@tanstack/react-query';
-import { PetProfileRequestBody } from '@/types';
+import { PostUserPetBody } from '@/types';
 
 export const usePostPetProfileMutation = (onSuccessCallback: () => void) => {
   return useMutation({
-    mutationFn: async (data: { body: PetProfileRequestBody; accessToken: string }) => {
+    mutationFn: async (data: { body: PostUserPetBody; accessToken: string }) => {
       const { body, accessToken } = data;
-      return await postPetProfile(body, accessToken);
+      return await postUserPet(body, accessToken);
     },
     onSuccess: onSuccessCallback,
     onError: () => {

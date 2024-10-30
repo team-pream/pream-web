@@ -9,30 +9,16 @@ export const inputWrapper = css`
   margin-top: 80px;
 `;
 
-export const inputField = css`
-  width: 100%;
-  padding: 8px;
-  border: 2px solid ${theme.colors.gray200};
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  margin-top: 10px;
-
-  &:focus {
-    border-color: ${theme.colors.green200};
-    outline: none;
-  }
-  &::placeholder {
-    color: ${theme.colors.gray200};
-  }
-`;
-
-export const styledLabel = css`
-  font-size: 14px;
-  color: ${theme.colors.gray300};
-`;
-
 export const selectContainer = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 60px;
+  gap: 30px;
+`;
+
+export const selectZone = css`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,7 +45,7 @@ export const selectBox = css`
   }
 `;
 
-export const nextButton = (isValid) => css`
+export const nextButton = ({ isValid }: { isValid: boolean }) => css`
   position: absolute;
   bottom: 73px;
   background-color: ${isValid ? theme.colors.green200 : theme.colors.gray300};
@@ -85,4 +71,23 @@ export const skipButton = css`
   border-radius: 10px;
   font-weight: 700;
   font-size: 12px;
+`;
+
+export const textBox = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 90px 0 45px 0;
+  gap: 8px;
+`;
+
+export const fixedButtonWrapper = css`
+  position: fixed;
+  bottom: 73px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `;

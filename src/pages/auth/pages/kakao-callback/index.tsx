@@ -10,7 +10,7 @@ export default function KakaoCallback() {
     const accessToken = queryParams.get('access');
     const refreshToken = queryParams.get('refresh');
     const needOnboarding = queryParams.get('needOnboarding');
-    console.log(needOnboarding);
+
     if (accessToken && refreshToken && needOnboarding) {
       localStorage.setItem('access', accessToken);
       localStorage.setItem('refresh', refreshToken);

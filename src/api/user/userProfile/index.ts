@@ -1,12 +1,8 @@
-import { api } from '@/api';
-import { OnboardingRequestBody } from '@/types';
+// src/api/user.ts
+import { api } from '@/api/api';
+import { PatchUserOnboardingBody } from '@/types';
 
-export const patchOnboarding = async (body: OnboardingRequestBody, accessToken: string) => {
-  const response = await api.patch('/user/onboarding', body, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      'Content-Type': 'application/json',
-    },
-  });
-  return response;
+export const patchUserOnboarding = async (body: PatchUserOnboardingBody) => {
+  const response = await api.patch('/user/onboarding', body);
+  return response.data;
 };
