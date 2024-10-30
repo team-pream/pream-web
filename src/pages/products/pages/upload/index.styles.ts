@@ -3,27 +3,17 @@ import { css } from '@emotion/react';
 
 export const wrapper = css`
   width: 100%;
-  padding: 24px 0px 100px 0px;
+  padding: 24px 18px;
   display: flex;
   flex-direction: column;
   flex: 1;
   overflow-y: auto;
 `;
 
-export const wrap = css`
-  width: 100%;
-  padding: 0 18px;
-`;
-
-export const nowrap = css`
-  width: 100%;
-  padding: 0 0 0 18px;
-`;
-
 export const hr = css`
   width: 100%;
   height: 2px;
-  margin: 19px auto;
+  margin: 19px 0;
 `;
 
 export const productInfo = css`
