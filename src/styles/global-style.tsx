@@ -36,6 +36,7 @@ const defaultStyles = css`
   body {
     margin: 0;
     padding: 0;
+    overscroll-behavior: none;
   }
 
   a {
