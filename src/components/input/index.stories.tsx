@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Input } from '@/components/input';
-import { Button } from '../button';
+import { Input, Button } from '@/components';
 
 const meta = {
   title: 'Components/Input',
@@ -44,7 +43,7 @@ export const WithSuffix: Story = {
     label: '판매 희망가',
     confirmMessage: '판매 희망가가 확인되었습니다.',
     suffix: (
-      <Button variant="box" size="xs">
+      <Button shape="box" size="xs">
         확인
       </Button>
     ),

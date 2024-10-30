@@ -9,9 +9,9 @@ interface Props extends HTMLAttributes<HTMLSpanElement> {
   children: ReactNode;
 }
 
-export function Text({ color, typo, children, ...rest }: Props) {
+export function Text({ color, typo, children, ...props }: Props) {
   return (
-    <span style={{ color }} css={{ ...typography[typo] }} {...rest}>
+    <span style={{ color }} css={{ ...typography[typo] }} {...props}>
       {children}
     </span>
   );

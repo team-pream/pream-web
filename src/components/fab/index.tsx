@@ -8,10 +8,10 @@ export interface FABProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: ReactNode;
 }
 
-export function FAB({ size = 's', icon, ...rest }: FABProps) {
+export function FAB({ size = 's', icon, ...props }: FABProps) {
   return (
     <div css={wrapper}>
-      <button css={button({ size })} {...rest}>
+      <button css={button({ size })} {...props}>
         {icon}
       </button>
     </div>

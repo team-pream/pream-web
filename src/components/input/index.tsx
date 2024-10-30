@@ -35,7 +35,7 @@ export const Input = forwardRef<InputRef, InputProps>(
       suffix,
       confirmMessage,
       errorMessage,
-      ...rest
+      ...props
     },
     ref
   ) => {
@@ -76,7 +76,7 @@ export const Input = forwardRef<InputRef, InputProps>(
             disabled={disabled}
             css={input}
             onBlur={() => setIsFocused(false)}
-            {...rest}
+            {...props}
           />
           {suffix && suffix}
         </div>
