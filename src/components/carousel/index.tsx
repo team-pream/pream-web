@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import {
   carouselWrapper,
   carouselImg,
-  leftBtn,
-  rightBtn,
+  leftButton,
+  rightButton,
   progressBarWrapper,
   progressBar,
 } from './index.style';
@@ -75,10 +75,10 @@ const Carousel: React.FC<CarouselProps> = ({
       </div>
       {showButtons && (
         <>
-          <button onClick={handlePrev} css={leftBtn}>
+          <button onClick={handlePrev} css={leftButton}>
             ‹
           </button>
-          <button onClick={handleNext} css={rightBtn}>
+          <button onClick={handleNext} css={rightButton}>
             ›
           </button>
         </>
