@@ -11,7 +11,6 @@ import {
   productsWrapper,
   statusWrapper,
   textBox,
-  wrapper,
   dropdownOverlayStyle,
   dropdownMenuStyle,
   menuItemStyle,
@@ -21,7 +20,7 @@ import { useState } from 'react';
 import { useGetProductsQuery } from '@/queries/products';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ProductType } from '@/types';
-import { AppBar, GNB, Text } from '@/components';
+import { AppBar, GNB, Layout, Text } from '@/components';
 import theme from '@/styles/theme';
 
 export default function Products() {
@@ -42,8 +41,9 @@ export default function Products() {
     setStatus(statusId);
     setIsOpen(false); // 선택 후 드롭다운 닫기
   };
+
   return (
-    <div css={wrapper}>
+    <Layout>
       <AppBar
         prefix={
           <AppBarBack
@@ -124,6 +124,6 @@ export default function Products() {
         </div>
       </div>
       <GNB />
-    </div>
+    </Layout>
   );
 }

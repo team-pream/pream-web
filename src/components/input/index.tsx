@@ -1,29 +1,54 @@
-import React, { forwardRef, InputHTMLAttributes, useRef } from 'react';
-import { input, wrapper, label as labelCss, error } from './index.styles';
+import {
+  forwardRef,
+  InputHTMLAttributes,
+  ReactNode,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
+import { input, wrapper, label as labelCss, infoTextWrapper, inputWrapper } from './index.styles';
 import { Text } from '@/components/text';
 import theme from '@/styles/theme';
 
-export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputRef {
+  focus: () => void;
+}
+
+export interface InputProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix' | 'suffix'> {
   label?: string;
-  icon?: {
-    prefix?: React.ReactElement;
-    suffix?: React.ReactElement;
-  };
+  prefix?: ReactNode;
+  suffix?: ReactNode;
+  confirmMessage?: string;
   errorMessage?: string;
 }
 
-export const Input = forwardRef<HTMLInputElement, IInputProps>(
-  ({
-    type = 'text',
-    label,
-    disabled,
-    spellCheck = false,
-    autoComplete = 'off',
-    icon,
-    errorMessage,
-    ...rest
-  }) => {
+export const Input = forwardRef<InputRef, InputProps>(
+  (
+    {
+      type = 'text',
+      label,
+      disabled,
+      spellCheck = false,
+      autoComplete = 'off',
+      prefix,
+      suffix,
+      confirmMessage,
+      errorMessage,
+      ...rest
+    },
+    ref
+  ) => {
     const inputRef = useRef<HTMLInputElement>(null);
+    const [isFocused, setIsFocused] = useState<boolean>(false);
+
+    useImperativeHandle(ref, () => {
+      return {
+        focus: () => {
+          if (inputRef.current) inputRef.current.focus();
+        },
+      };
+    });
 
     return (
       <div css={wrapper}>
@@ -35,25 +60,38 @@ export const Input = forwardRef<HTMLInputElement, IInputProps>(
 
         <div
           onClick={() => {
-            if (inputRef.current) inputRef.current.focus();
+            if (inputRef.current) {
+              inputRef.current.focus();
+              setIsFocused(true);
+            }
           }}
+          css={inputWrapper({ errorMessage, isFocused })}
         >
-          {icon && icon.prefix}
+          {prefix && prefix}
           <input
             ref={inputRef}
             type={type}
             spellCheck={spellCheck}
             autoComplete={autoComplete}
             disabled={disabled}
-            css={input({ errorMessage })}
+            css={input}
+            onBlur={() => setIsFocused(false)}
             {...rest}
           />
-          {icon && icon.suffix}
+          {suffix && suffix}
         </div>
 
+        {confirmMessage && (
+          <div css={infoTextWrapper}>
+            <Text typo="body6" color={theme.colors.green200}>
+              {confirmMessage}
+            </Text>
+          </div>
+        )}
+
         {errorMessage && (
-          <div css={error}>
-            <Text typo="body6" color={theme.colors.red100}>
+          <div css={infoTextWrapper}>
+            <Text typo="body6" color={theme.colors.red300}>
               {errorMessage}
             </Text>
           </div>

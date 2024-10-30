@@ -1,4 +1,4 @@
-import { typography } from '@/styles/typography.ts';
+import { typography } from '@/styles/typography';
 import { HTMLAttributes, ReactNode } from 'react';
 
 type Typo = keyof typeof typography;
@@ -11,7 +11,7 @@ interface Props extends HTMLAttributes<HTMLSpanElement> {
 
 export function Text({ color, typo, children, ...rest }: Props) {
   return (
-    <span style={{ color, ...typography[typo] }} {...rest}>
+    <span style={{ color }} css={{ ...typography[typo] }} {...rest}>
       {children}
     </span>
   );

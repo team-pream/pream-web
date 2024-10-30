@@ -11,27 +11,38 @@ export const label = css`
   margin-bottom: 6px;
 `;
 
-export const input = ({ errorMessage }: { errorMessage?: string }) => css`
-  width: 100%;
-  padding: 10px 12px;
-  ${theme.typo.body5};
+export const inputWrapper = ({
+  errorMessage,
+  isFocused,
+}: {
+  errorMessage?: string;
+  isFocused: boolean;
+}) => css`
+  display: flex;
+  padding: 4px 0;
 
   border-bottom: ${errorMessage
-    ? `1px solid ${theme.colors.red100}`
-    : `1px solid ${theme.colors.gray200}`};
+    ? `1px solid ${theme.colors.red300}`
+    : isFocused
+      ? `1px solid ${theme.colors.green200}`
+      : `1px solid ${theme.colors.gray200}`};
 
-  &:focus {
-    border-bottom: ${errorMessage
-      ? `1px solid ${theme.colors.red100}`
-      : `1px solid ${theme.colors.green200}`};
-  }
+  transition: border-bottom 0.2s ease;
+`;
+
+export const input = css`
+  display: flex;
+  flex: 1;
+  padding: 6px 12px;
+
+  ${theme.typo.body5};
 
   &::placeholder {
     color: ${theme.colors.gray200};
   }
 `;
 
-export const error = css`
+export const infoTextWrapper = css`
   margin: 5px 0 0 0;
   padding: 0 12px;
 `;

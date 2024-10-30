@@ -4,9 +4,10 @@ import { typography } from '@/styles/typography';
 const theme = {
   colors,
   size: {
+    minWidth: '320px',
     maxWidth: '480px',
     appBarHeight: '58px',
-    gnbHeight: '76px',
+    gnbHeight: '70px',
   },
   zIndex: {
     overlay: 5,
@@ -14,8 +15,9 @@ const theme = {
     gnb: 10,
     fab: 10,
     dim: 20,
+    actionSheet: 30,
     bottomSheet: 30,
-    modal: 40,
+    dialog: 40,
   },
   typo: { ...typography },
 } as const;
