@@ -23,13 +23,13 @@ export function Dialog({
   primaryActionLabel,
   secondaryActionLabel,
   secondaryActionType = 'neutral',
-  ...rest
+  ...props
 }: DialogProps) {
   return (
     <>
       <Dim fullScreen />
 
-      <div {...rest} css={wrapper}>
+      <div {...props} css={wrapper}>
         <div css={text}>
           <Text typo="subtitle1">{title}</Text>
           <Text typo="body2">{description}</Text>

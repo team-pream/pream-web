@@ -19,10 +19,10 @@ export function Button({
   status = 'active',
   fullWidth = false,
   children,
-  ...rest
+  ...props
 }: ButtonProps) {
   return (
-    <button {...rest} css={wrapper({ variant, size, status, fullWidth })}>
+    <button {...props} css={wrapper({ variant, size, status, fullWidth })}>
       {children}
     </button>
   );
