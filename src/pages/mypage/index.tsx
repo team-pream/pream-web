@@ -12,6 +12,8 @@ import {
   petNameWrapper,
   plusIcon,
   imageIcon,
+  hr,
+  menuline,
 } from './index.styles';
 import theme from '@/styles/theme';
 import Badge from './components/badge';
@@ -78,20 +80,20 @@ export default function Mypage() {
         </div>
         <div css={myTradeWrapper}>
           <Text typo="subtitle1">나의 거래 내역</Text>
-          <hr color={theme.colors.black} />
+          <hr color={theme.colors.black} css={hr} />
           <Menu menuTitle="판매내역" path={ROUTE_PATHS.MYPAGE_SALES_HISTORY}></Menu>
-          <hr color={theme.colors.gray100} />
+          <hr color={theme.colors.gray100} css={menuline} />
           <Menu menuTitle="구매내역" path={ROUTE_PATHS.MYPAGE_PURCHASE_HISTORY}></Menu>
         </div>
         <div css={myAccountWrapper}>
           <Text typo="subtitle1">나의 계정 정보</Text>
-          <hr color={theme.colors.black} />
+          <hr color={theme.colors.black} css={hr} />
           <Menu menuTitle="주소 관리" path={ROUTE_PATHS.MYPAGE_ADDRESS}></Menu>
-          <hr color={theme.colors.gray100} />
+          <hr color={theme.colors.gray100} css={menuline} />
           <Menu menuTitle="간편결제 관리" path={ROUTE_PATHS.MYPAGE}></Menu>
-          <hr color={theme.colors.gray100} />
+          <hr color={theme.colors.gray100} css={menuline} />
           <Menu menuTitle="판매 정산 계좌" path={ROUTE_PATHS.MYPAGE}></Menu>
-          <hr color={theme.colors.gray100} />
+          <hr color={theme.colors.gray100} css={menuline} />
           {!accessToken ? (
             <div
               css={logoutStyle}
