@@ -1,4 +1,4 @@
-import { useGetCategoriesQuery } from '@/queries/category';
+import { useGetProductsCategoryQuery } from '@/queries/category';
 import { gridWrapper, menuWrapper, hr } from './index.styles';
 import { AppBar, GNB, Layout, SearchBar, Text } from '@/components';
 import { AppBarBack } from '@/assets/icons';
@@ -14,7 +14,7 @@ interface CategoryType {
 const ALL_MENU_ID: number = 1; //전체 메뉴에 대한 id
 
 export default function Category() {
-  const { data } = useGetCategoriesQuery();
+  const { data } = useGetProductsCategoryQuery();
 
   return (
     <Layout>

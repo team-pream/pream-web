@@ -2,9 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/queries/query-keys';
 import { getCategories } from '@/api';
 
-export const useGetCategoriesQuery = () => {
+export const useGetProductsCategoryQuery = () => {
   return useQuery({
-    queryKey: QUERY_KEYS.GET_CATEGORIES(),
+    queryKey: QUERY_KEYS.GET_CATEGORIES,
     queryFn: async () => {
       try {
         return await getCategories();

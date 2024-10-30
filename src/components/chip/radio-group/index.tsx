@@ -6,9 +6,15 @@ interface ChipRadioGroupProps {
   items: { value: string; label: string }[];
   defaultValue?: string;
   onChange?: (value: string) => void;
+  wrap?: boolean;
 }
 
-export function ChipRadioGroup({ items, defaultValue, onChange }: ChipRadioGroupProps) {
+export function ChipRadioGroup({
+  items,
+  defaultValue,
+  onChange,
+  wrap = false,
+}: ChipRadioGroupProps) {
   const [selected, setSelected] = useState<string | undefined>(defaultValue);
 
   useEffect(() => {
@@ -18,10 +24,11 @@ export function ChipRadioGroup({ items, defaultValue, onChange }: ChipRadioGroup
   }, [selected, onChange]);
 
   return (
-    <div css={chipRadioGroup}>
-      {items.map((item) => (
+    <div css={chipRadioGroup({ wrap })}>
+      {items?.map((item) => (
         <ChipRadio
           key={item.value}
+          label={item.label}
           value={item.value}
           isSelected={selected === item.value}
           onChange={() => setSelected(item.value)}
@@ -33,17 +40,24 @@ export function ChipRadioGroup({ items, defaultValue, onChange }: ChipRadioGroup
 
 interface ChipRadioProps {
   name?: string;
+  label: string;
   value: string;
   defaultValue?: string;
   isSelected?: boolean;
   onChange?: () => void;
 }
 
-function ChipRadio({ name = 'radio-group', isSelected = false, value, onChange }: ChipRadioProps) {
+function ChipRadio({
+  name = 'radio-group',
+  isSelected = false,
+  label,
+  value,
+  onChange,
+}: ChipRadioProps) {
   return (
     <label css={chipRadio({ isSelected })} onChange={onChange}>
       <input type="radio" name={name} value={value} />
-      <Text typo="body5">{value}</Text>
+      <Text typo="body5">{label}</Text>
     </label>
   );
 }
