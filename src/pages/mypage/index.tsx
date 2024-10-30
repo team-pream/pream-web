@@ -56,7 +56,7 @@ export default function Mypage() {
           ) : (
             <>
               <div css={imageStyle}>
-                <img src={profileImage} alt="profil" css={imageIcon} />
+                <img src={profileImage} alt="profile" css={imageIcon} />
               </div>
               <div css={nicknameStyle}>
                 <Text typo="title2">{data.nickname || data.username || '이름이 없습니다'}</Text>
