@@ -1,22 +1,19 @@
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 
-export const wrapper = css`
-  width: ${theme.size.maxWidth};
-  height: 100vh;
-  padding: ${theme.size.appBarHeight} 0 0 0;
-  margin: 0 auto;
-`;
-
 export const mypageWrapper = css`
-  width: ${theme.size.maxWidth};
-  height: 80vh;
+  width: 100%;
+  height: 100%;
   padding: 24px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 `;
 
 export const myPetWrapper = css`
   width: 100%;
-  height: 20vh;
+  height: 100%;
+  gap: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,7 +23,6 @@ export const myPetWrapper = css`
 export const profileAddWrapper = css`
   width: 100%;
   height: 80px;
-  margin: 28px 32px 38px;
   border-radius: 10px;
   border: 1px solid ${theme.colors.gray200};
   display: flex;
@@ -40,10 +36,15 @@ export const imageStyle = css`
   height: 80px;
 `;
 
+export const imageIcon = css`
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+`;
+
 export const nicknameStyle = css`
   width: 100%;
   height: 80px;
-  padding-inline-start: 22px;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -59,12 +60,12 @@ export const petNameWrapper = css`
 
 export const myTradeWrapper = css`
   width: 100%;
-  height: 20vh;
+  height: 100%;
 `;
 
 export const myAccountWrapper = css`
   width: 100%;
-  height: 40vh;
+  height: 100%;
 `;
 
 export const nextIcon = css`
@@ -73,7 +74,7 @@ export const nextIcon = css`
   cursor: pointer;
 `;
 
-export const logout = css`
+export const logoutStyle = css`
   cursor: pointer;
 `;
 
