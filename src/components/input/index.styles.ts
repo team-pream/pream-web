@@ -40,6 +40,12 @@ export const input = css`
   &::placeholder {
     color: ${theme.colors.gray200};
   }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
 export const infoTextWrapper = css`
