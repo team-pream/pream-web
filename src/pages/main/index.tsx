@@ -1,5 +1,5 @@
-import { wrapper } from './index.styles';
 import {
+  wrapper,
   categoryList,
   categoryItems,
   categoryItem,
@@ -15,10 +15,10 @@ import {
 } from './index.styles';
 import { useNavigate } from 'react-router-dom';
 import { useGetCategoriesQuery } from '@/queries/category';
+import { useGetCurationQuery } from '@/queries/curation';
 import { Logo, Search } from '@/assets/icons';
 import { AppBar, GNB, Text } from '@/components';
 import Carousel from '@/components/carousel';
-import { useGetCurationQuery } from '@/queries/curation';
 
 interface CategoryData {
   id: number;
@@ -43,6 +43,8 @@ export default function Main() {
   const navigate = useNavigate();
   const { data: category } = useGetCategoriesQuery();
   const { data: curation } = useGetCurationQuery();
+
+  // 섹션 제목
   const listArray = [
     '새로 등록된 상품',
     '이 상품은 어때요?',
@@ -50,19 +52,12 @@ export default function Main() {
     '실시간 인기 상품',
   ];
 
-  // 상품 더미 데이터
-  // const items = Array.from({ length: 10 }, (_, i) => ({
-  //   id: i + 1,
-  // }));
-
   // 배너 이미지
   const imageList = [
     'images/carouselImage.png',
     'images/carouselImage.png',
     'images/carouselImage.png',
   ];
-
-  console.log(curation);
 
   const curationKeys = ['new', 'random', 'cheap', 'popular'];
 
@@ -88,8 +83,7 @@ export default function Main() {
           autoPlay={true}
           autoPlayInterval={5000}
         />
-        {/* Category */}
-        <div css={categoryList}>
+        <section css={categoryList}>
           <div css={categoryItems}>
             {category
               ?.filter((item: CategoryData) => !EXCLUDED_CATEGORIES.includes(item.id))
@@ -104,9 +98,8 @@ export default function Main() {
                 </div>
               ))}
           </div>
-        </div>
-        {/* Curation */}
-        <div css={listWrapper}>
+        </section>
+        <section css={listWrapper}>
           {listArray.map((listTitleText, index) => (
             <div key={index}>
               <Text typo="subtitle1">{listTitleText}</Text>
@@ -117,7 +110,7 @@ export default function Main() {
                       <div css={opacityBox} />
                       <img src={curationItem.images[0]} alt="itemImage" css={sampleImage} />
                     </div>
-                    <div css={textBox}>
+                    <div css={textBox} onClick={() => navigate(`/products/:${curationItem.id}`)}>
                       <Text typo="body2" css={itemTitle}>
                         {curationItem.title}
                       </Text>
@@ -128,7 +121,7 @@ export default function Main() {
               </div>
             </div>
           ))}
-        </div>
+        </section>
       </main>
       <GNB />
     </div>
