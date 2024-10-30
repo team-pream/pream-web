@@ -2,6 +2,7 @@ export * from './action-sheet';
 export * from './app-bar';
 export * from './button';
 export * from './chip';
+export * from './chip/radio-group';
 export * from './dialog';
 export * from './dim';
 export * from './fab';
