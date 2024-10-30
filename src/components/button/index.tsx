@@ -1,12 +1,12 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { wrapper } from './index.styles';
 
-export type ButtonVariant = 'box' | 'capsule';
+export type ButtonShape = 'box' | 'capsule';
 export type ButtonSize = 'xs' | 's' | 'm' | 'l' | 'xl';
 export type ButtonStatus = 'active' | 'pressed' | 'error' | 'disabled';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: ButtonVariant;
+  shape?: ButtonShape;
   size?: ButtonSize;
   status?: ButtonStatus;
   fullWidth?: boolean;
@@ -14,7 +14,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export function Button({
-  variant = 'box',
+  shape = 'box',
   size = 'm',
   status = 'active',
   fullWidth = false,
@@ -22,7 +22,7 @@ export function Button({
   ...props
 }: ButtonProps) {
   return (
-    <button {...props} css={wrapper({ variant, size, status, fullWidth })}>
+    <button {...props} css={wrapper({ shape, size, status, fullWidth })}>
       {children}
     </button>
   );

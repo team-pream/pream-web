@@ -36,17 +36,12 @@ export function Dialog({
         </div>
 
         <div css={buttonWrapper}>
-          <Button variant="box" size="xs" fullWidth status={type === 'error' ? 'error' : 'active'}>
+          <Button shape="box" size="xs" fullWidth status={type === 'error' ? 'error' : 'active'}>
             {primaryActionLabel}
           </Button>
 
           {secondaryActionLabel && (
-            <Button
-              variant="box"
-              size="xs"
-              fullWidth
-              css={secondaryButton({ secondaryActionType })}
-            >
+            <Button shape="box" size="xs" fullWidth css={secondaryButton({ secondaryActionType })}>
               {secondaryActionLabel}
             </Button>
           )}
