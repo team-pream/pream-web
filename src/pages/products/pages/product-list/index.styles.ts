@@ -89,6 +89,7 @@ export const item = css`
 
 export const imageBox = css`
   position: relative;
+  cursor: pointer;
 `;
 
 export const image = css`

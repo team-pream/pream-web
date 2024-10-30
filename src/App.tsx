@@ -14,7 +14,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/onboarding" element={<OnBoarding />} />
           <Route path="/category" element={<Category />} />
-          <Route path="/products" element={<Products />} />
+          <Route path="/products/*" element={<Products />} />
         </Routes>
       </BrowserRouter>
     </QueryProvider>
