@@ -8,7 +8,11 @@ import {
 } from './index.styles';
 import { DropdownFold, DropdownUnfold } from '@/assets/icons';
 import { colors } from '@/styles/colors';
-interface CardCompanys {}
+import { Text } from '@/components';
+interface CardCompanys {
+  id: string;
+  name: string;
+}
 
 interface CardCompanySelectorProps {
   provider: CardCompanys[];
@@ -49,7 +53,7 @@ const CardCompanySelector: React.FC<CardCompanySelectorProps> = ({
         disabled={disabled} // 비활성화 여부 제어
       >
         <option value="" css={optionDisabled}>
-          카드사를 선택하세요
+          <Text typo="subtitle2">카드사를 선택하세요</Text>
         </option>
         {provider.map((company) => (
           <option key={company.id} value={company.id} css={optionActive}>

@@ -1,24 +1,25 @@
-import { Wrapper } from '../detail/index.styles';
-import { AppBar } from '@/Components';
+import { AppBar } from '@/components';
 import { AppBarBack } from '@/assets/icons';
-import { title, contentsWrapper, line } from './index.styles';
+import { title, line } from './index.styles';
 import AddAddress from './components/address';
 import ProductInfo from './components/product-info';
 import PaymentMethods from './components/payments-methods';
 import OrderTotal from './components/order-total';
+import { Layout } from '@/components';
+import { Text } from '@/components';
 const Purchase: React.FC = () => {
   return (
-    <div css={Wrapper}>
+    <Layout>
       <AppBar prefix={<AppBarBack height="17px" cursor="pointer" />} />
-      <div css={contentsWrapper}>
-        <div css={title}>구매</div>
-        <div css={line}></div>
-        <AddAddress />
-        <ProductInfo />
-        <PaymentMethods />
-        <OrderTotal />
+      <div css={title}>
+        <Text typo="title1">구매</Text>
       </div>
-    </div>
+      <div css={line}></div>
+      <AddAddress />
+      <ProductInfo />
+      <PaymentMethods />
+      <OrderTotal />
+    </Layout>
   );
 };
 export default Purchase;

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { buttonWrapper, activeButton, inactiveButton } from './index.styles';
-
+import { Text } from '@/components';
 interface PaymentsMethodProps {
   id: number;
   name: string;
@@ -29,7 +29,7 @@ const PaymentButtonGrid: FC<PaymentButtonGridProps> = ({ selectedPaymentId, onPa
           css={selectedPaymentId === method.id ? activeButton : inactiveButton}
           onClick={() => onPaymentChange(method.id)}
         >
-          {method.name}
+          <Text typo="body4">{method.name}</Text>
         </div>
       ))}
     </div>

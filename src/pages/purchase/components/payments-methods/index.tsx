@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { plusSaleText, paymentsWrapper, otherPaymentsWrapper } from './index.styles';
-import { line, title } from '../../index.styles';
-
+import { line } from '../../index.styles';
+import { Text } from '@/components';
 import PaymentButtonGrid from './payments-grid';
 import CardCompanySelector from './cardcompany-selector';
 import { activeButton, inactiveButton } from './payments-grid/index.styles';
@@ -26,15 +26,17 @@ const PaymentMethods: React.FC = () => {
     <div>
       <div css={line} />
       <div css={paymentsWrapper}>
-        <div css={title}>결제 방법</div>
+        <Text typo="subtitle1">결제 방법</Text>
         <div css={{ margin: '14px 0' }}>
           {/* 신용 체크카드 버튼 */}
-          <div
-            css={selectedPaymentId === 0 ? activeButton : inactiveButton}
-            onClick={() => handlePaymentChange(0)}
-          >
-            신용 체크카드
-          </div>
+          <Text typo="subtitle2">
+            <div
+              css={selectedPaymentId === 0 ? activeButton : inactiveButton}
+              onClick={() => handlePaymentChange(0)}
+            >
+              신용 체크카드
+            </div>
+          </Text>
           <div css={otherPaymentsWrapper}>
             {/* 결제 방법 그리드 */}
             <PaymentButtonGrid
@@ -50,11 +52,13 @@ const PaymentMethods: React.FC = () => {
             disabled={selectedPaymentId !== 0} // 신용 체크카드가 선택되지 않으면 비활성화
           />
         </div>
-        <div css={plusSaleText}>
-          <div>네이버페이 • 5만원 이상 결제시 2천원 할인</div>
-          <div>카카오페이 • 1천원 캐시백</div>
-          <div>토스페이 • 첫 결제 3천원 캐시백</div>
-        </div>
+        <Text typo="body1">
+          <div css={plusSaleText}>
+            <div>네이버페이 • 5만원 이상 결제시 2천원 할인</div>
+            <div>카카오페이 • 1천원 캐시백</div>
+            <div>토스페이 • 첫 결제 3천원 캐시백</div>
+          </div>
+        </Text>
       </div>
     </div>
   );
