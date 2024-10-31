@@ -1,9 +1,5 @@
-import {
-  GetProductsParamType,
-  PatchUserOnboardingBody,
-  PostCheckNicknameBody,
-  PostUserPetBody,
-} from '@/types';
+import { PatchUserOnboardingBody, PostCheckNicknameBody, PostUserPetBody } from '@/types/user';
+import { GetProductsParamType } from '@/types/product';
 
 export const QUERY_KEYS = {
   GET_CATEGORIES: () => ['GET_CATEGORIES'],

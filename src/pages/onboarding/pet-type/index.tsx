@@ -8,8 +8,7 @@ import {
 import { SelectCat, SelectDog } from '@/assets/icons';
 import { Text, Button } from '@/components';
 import theme from '@/styles/theme';
-import { useGetUserNameQuery } from '@/queries/user/user-name'; // 추가
-import { useEffect, useState } from 'react';
+import { useGetUserNameQuery } from '@/queries/user';
 
 interface PetTypeProps {
   formData: { petType: string };
@@ -19,12 +18,6 @@ interface PetTypeProps {
 
 export default function PetType({ formData, setFormData, onNext }: PetTypeProps) {
   const { data } = useGetUserNameQuery();
-  const [nickName, setNickName] = useState('');
-
-  useEffect(() => {
-    setNickName(data.nickname);
-  }, []);
-
   const isPetTypeValid = formData.petType !== '';
 
   return (
@@ -33,7 +26,7 @@ export default function PetType({ formData, setFormData, onNext }: PetTypeProps)
         <Text typo="title1" color={theme.colors.black}>
           반가워요{' '}
           <Text typo="title1" color={theme.colors.green200}>
-            {nickName}{' '}
+            {data?.nickname}{' '}
           </Text>
           님!
         </Text>

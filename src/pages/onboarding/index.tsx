@@ -3,7 +3,7 @@ import UserInfo from './user-info';
 import PetType from './pet-type';
 import PetName from './pet-name';
 import Completion from './completion';
-import { usePostPetProfileMutation } from '@/queries/user/pet-profile';
+import { usePostPetProfileMutation } from '@/queries/user';
 import { progressBarContainer, progressBar, skipButton } from './index.styles';
 import { AppbarBack } from '@/assets/icons';
 import { AppBar, Layout } from '@/components';
@@ -32,7 +32,6 @@ export default function OnBoarding() {
     if (step === STEPS.PET_NAME) {
       mutate({
         body: { name: formData.petName, petType: formData.petType },
-        accessToken: localStorage.getItem('access') || '',
       });
     } else {
       setStep(step + 1);

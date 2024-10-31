@@ -1,12 +1,11 @@
-// src/pages/onboarding/userInfo/index.tsx
 import { inputWrapper, fixedButtonWrapper, textBox } from './index.styles';
 import { Button, Input, Text } from '@/components';
-import { usePatchUserOnboardingMutation } from '@/queries/user/user-profile';
-import { usePostCheckNicknameMutation } from '@/queries/user/check-nickname';
-import { PatchUserOnboardingBody } from '@/types';
+import { usePatchUserOnboardingMutation } from '@/queries/user';
+import { usePostCheckNicknameMutation } from '@/queries/user';
+import { PatchUserOnboardingBody } from '@/types/user';
 import theme from '@/styles/theme';
-import { useGetUserNameQuery } from '@/queries/user/user-name';
-import { useState, useEffect } from 'react';
+import { useGetUserNameQuery } from '@/queries/user';
+import { useState } from 'react';
 
 interface UserInfoProps {
   onNext: () => void;
@@ -25,13 +24,6 @@ export default function UserInfo({ onNext, setFormData, formData }: UserInfoProp
   });
 
   const { data } = useGetUserNameQuery();
-  const [userName, setUserName] = useState('');
-
-  useEffect(() => {
-    if (data) {
-      setUserName(data.username);
-    }
-  }, [data]);
 
   const handleNicknameCheck = async () => {
     if (!formData.nickname) return;
@@ -56,7 +48,7 @@ export default function UserInfo({ onNext, setFormData, formData }: UserInfoProp
         <Text typo="title1" color={theme.colors.black}>
           반가워요{' '}
           <Text typo="title1" color={theme.colors.green200}>
-            {userName}{' '}
+            {data?.username}{' '}
           </Text>
           님!
         </Text>

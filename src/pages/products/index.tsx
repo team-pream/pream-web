@@ -19,7 +19,7 @@ import {
 import { useState } from 'react';
 import { useGetProductsQuery } from '@/queries/products';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ProductType } from '@/types';
+import { ProductType } from '@/types/user';
 import { AppBar, GNB, Layout, Text } from '@/components';
 import theme from '@/styles/theme';
 
