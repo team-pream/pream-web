@@ -17,9 +17,15 @@ importers:
       axios:
         specifier: ^1.7.7
         version: 1.7.7
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
       react:
         specifier: ^18.3.1
         version: 18.3.1
+      react-daum-postcode:
+        specifier: ^3.1.3
+        version: 3.1.3(react@18.3.1)
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
@@ -72,6 +78,9 @@ importers:
       '@types/react':
         specifier: ^18.3.10
         version: 18.3.11
+      '@types/react-daum-postcode':
+        specifier: ^1.6.1
+        version: 1.6.1(react@18.3.1)
       '@types/react-dom':
         specifier: ^18.3.0
         version: 18.3.1
@@ -952,6 +961,10 @@ packages:
   '@types/range-parser@1.2.7':
     resolution: {integrity: sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==}
 
+  '@types/react-daum-postcode@1.6.1':
+    resolution: {integrity: sha512-5wVpG1X4BkEqPYlZj1eTosMFRxpxEghHkZzARFZ60us/tlGwtZpJU0UbT4qVCR10qlEwFFYWlytlQEnybw4ZQw==}
+    deprecated: This is a stub types definition. react-daum-postcode provides its own type definitions, so you do not need this installed.
+
   '@types/react-dom@18.3.1':
     resolution: {integrity: sha512-qW1Mfv8taImTthu4KoXgDfLuk4bydU6Q/TkADnDWWHwi4NX4BR+LWfTp2sVmTqRrsHvyDDTelgelxJ+SsejKKQ==}
 
@@ -1426,6 +1439,10 @@ packages:
   dot-prop@5.3.0:
     resolution: {integrity: sha512-QM8q3zDe58hqUqjraQOmzZ1LIH9SWQJTlEKCH4kJ2oQvLZk7RbQXvtDM2XEq3fwkV9CCvvH4LA0AV+ogFsBM2Q==}
     engines: {node: '>=8'}
+
+  dotenv@16.4.5:
+    resolution: {integrity: sha512-ZmdL2rui+eB2YwhsWzjInR8LldtZHGDoQ1ugH85ppHKwpUHL7j7rN0Ti9NCnGiQbhaZ11FpR+7ao1dNsmduNUg==}
+    engines: {node: '>=12'}
 
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
@@ -2387,6 +2404,11 @@ packages:
     engines: {node: '>=10.18'}
     peerDependencies:
       react: ^16.3.0 || ^17.0.1 || ^18.0.0
+
+  react-daum-postcode@3.1.3:
+    resolution: {integrity: sha512-qTyzUb1BeszPFO4FXSj6p83Wrn5Zpo6YqI2EZ46XSVRZT+du9CrKg9p3KshBRFKYxXmFE1Mv7wEynzXdRFNlmQ==}
+    peerDependencies:
+      react: '>=16.8.0'
 
   react-docgen-typescript@2.2.2:
     resolution: {integrity: sha512-tvg2ZtOpOi6QDwsb3GZhOjDkkX0h8Z2gipvTg6OVMUyoYoURhEiRNePT8NZItTVCDh39JJHnLdfCOkzoLbFnTg==}
@@ -3882,6 +3904,12 @@ snapshots:
 
   '@types/range-parser@1.2.7': {}
 
+  '@types/react-daum-postcode@1.6.1(react@18.3.1)':
+    dependencies:
+      react-daum-postcode: 3.1.3(react@18.3.1)
+    transitivePeerDependencies:
+      - react
+
   '@types/react-dom@18.3.1':
     dependencies:
       '@types/react': 18.3.11
@@ -4377,6 +4405,8 @@ snapshots:
   dot-prop@5.3.0:
     dependencies:
       is-obj: 2.0.0
+
+  dotenv@16.4.5: {}
 
   ee-first@1.1.1: {}
 
@@ -5303,6 +5333,10 @@ snapshots:
     dependencies:
       react: 18.3.1
       tween-functions: 1.2.0
+
+  react-daum-postcode@3.1.3(react@18.3.1):
+    dependencies:
+      react: 18.3.1
 
   react-docgen-typescript@2.2.2(typescript@5.6.3):
     dependencies:
