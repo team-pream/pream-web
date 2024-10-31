@@ -15,3 +15,4 @@ export { default as ProductsDetailOption } from './ProductsDetailOption';
 export { default as Search } from './Search';
 export { default as SelectCat } from './SelectCat';
 export { default as SelectDog } from './SelectDog';
+export { default as UploadPlus } from './UploadPlus';

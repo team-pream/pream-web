@@ -1,11 +1,16 @@
-import { getProducts, getProductsCuration, getProductsDetail } from '@/api/products';
+import {
+  getProducts,
+  getProductsCuration,
+  getProductsDetail,
+  postProductsUpload,
+} from '@/api/products';
 import {
   GetProductsParams,
   GetProductsDetailResponse,
   GetProductsResponse,
   GetProductsCurationResponse,
 } from '@/types/products';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/queries/query-keys';
 
 export const useGetProductsQuery = (params: GetProductsParams) => {
@@ -42,6 +47,19 @@ export const useGetProductsCurationQuery = () => {
         return await getProductsCuration();
       } catch {
         throw new Error('상품 목록을 가져오는 데 실패했습니다.');
+      }
+    },
+  });
+};
+
+export const usePostProductsUploadMutation = () => {
+  return useMutation({
+    mutationKey: QUERY_KEYS.POST_PRODUCTS_UPLOAD,
+    mutationFn: async (body: FormData) => {
+      try {
+        return await postProductsUpload(body);
+      } catch {
+        throw new Error('상품 등록에 실패했습니다.');
       }
     },
   });

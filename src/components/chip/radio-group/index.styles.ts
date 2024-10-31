@@ -1,13 +1,25 @@
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 
-export const chipRadioGroup = css`
+export const chipRadioGroup = ({ wrap }: { wrap: boolean }) => css`
   display: flex;
-  flex-wrap: wrap;
   gap: 8px;
+
+  ${wrap
+    ? css`
+        width: 100%;
+        flex-wrap: wrap;
+      `
+    : css`
+        flex-wrap: nowrap;
+        overflow: auto;
+      `}
 `;
 
 export const chipRadio = ({ isSelected }: { isSelected: boolean }) => css`
+  display: flex;
+  flex-shrink: 0;
+  position: relative;
   padding: 8px 20px;
   border-radius: 20px;
   transition: all 0.2s;
@@ -26,15 +38,7 @@ export const chipRadio = ({ isSelected }: { isSelected: boolean }) => css`
       `}
 
   input {
-    border: 0px;
-    clip: rect(0px, 0px, 0px, 0px);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0px;
-    position: absolute;
-    width: 1px;
-    white-space: nowrap;
-    overflow-wrap: normal;
+    display: none;
+    padding: 0;
   }
 `;

@@ -4,7 +4,7 @@ import {
   GetProductsResponse,
   GetProductsCurationResponse,
 } from '@/types';
-import { api } from '@/api/api';
+import { api, formApi } from '@/api/api';
 
 export const getProducts = async (params: GetProductsParams) => {
   const response = await api.get<GetProductsResponse>('/products', { params });
@@ -28,5 +28,10 @@ export const getProductsDetail = async (productId: string) => {
     productData.status = '판매완료';
   }
 
+  return response.data;
+};
+
+export const postProductsUpload = async (body: FormData) => {
+  const response = await formApi.post('/products/upload', body);
   return response.data;
 };

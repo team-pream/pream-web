@@ -17,8 +17,8 @@ import { useState } from 'react';
 import { ActionSheet, AppBar, GNB, Layout, Text } from '@/components';
 import { useGetProductsQuery } from '@/queries/products';
 import { useLocation, useNavigate } from 'react-router-dom';
-import theme from '@/styles/theme';
 import { ProductListProduct } from '@/types';
+import theme from '@/styles/theme';
 
 export default function Products() {
   const location = useLocation();

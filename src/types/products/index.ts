@@ -1,5 +1,8 @@
 import { Category } from '@/types/categories';
 
+export type ProductStatus = 'AVAILABLE' | 'RESERVED' | 'SOLD_OUT';
+export type ProductCondition = 'NEW' | 'SLIGHTLY_USED' | 'HEAVILY_USED';
+
 export interface GetProductsParams {
   category?: number;
   status?: number;
@@ -29,8 +32,6 @@ export interface GetProductsCurationResponse {
   popular: ProductsCurationProduct[];
 }
 
-export type ProductStatus = 'AVAILABLE' | 'RESERVED' | 'SOLD_OUT';
-
 export interface ProductsCurationProduct {
   id: number;
   title: string;
@@ -56,4 +57,14 @@ export interface GetProductsDetailResponse {
   };
   likesCount: number;
   isLiked: boolean;
+}
+
+export interface PostProductsUploadBody {
+  images: File[];
+  condition: ProductCondition;
+  price: number;
+  categoryId: number;
+  title: string;
+  description: string;
+  contact: string;
 }
