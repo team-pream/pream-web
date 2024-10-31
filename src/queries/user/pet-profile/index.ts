@@ -1,5 +1,5 @@
 // src/queries/user/petProfile/index.ts
-import { postUserPet } from '@/api/user/petProfile';
+import { postUserPet } from '@/api/user/pet-profile';
 import { useMutation } from '@tanstack/react-query';
 import { PostUserPetBody } from '@/types';
 

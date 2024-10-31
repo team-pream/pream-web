@@ -9,7 +9,7 @@ interface PetNameProps {
 }
 
 export default function PetName({ formData, setFormData, onComplete }: PetNameProps) {
-  const isStep3Valid = formData.petName;
+  const isPetNameValid = formData.petName;
 
   return (
     <div css={inputWrapper}>
@@ -34,9 +34,9 @@ export default function PetName({ formData, setFormData, onComplete }: PetNamePr
       <div css={fixedButtonWrapper}>
         <Button
           size="l"
-          status={isStep3Valid ? 'active' : 'disabled'}
+          status={isPetNameValid ? 'active' : 'disabled'}
           onClick={onComplete}
-          disabled={!isStep3Valid}
+          disabled={!isPetNameValid}
         >
           다음
         </Button>

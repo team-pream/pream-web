@@ -1,11 +1,11 @@
 // src/pages/onboarding/userInfo/index.tsx
 import { inputWrapper, fixedButtonWrapper, textBox } from './index.styles';
 import { Button, Input, Text } from '@/components';
-import { usePatchUserOnboardingMutation } from '@/queries/user/userProfile';
-import { usePostCheckNicknameMutation } from '@/queries/user/checkNickname';
+import { usePatchUserOnboardingMutation } from '@/queries/user/user-profile';
+import { usePostCheckNicknameMutation } from '@/queries/user/check-nickname';
 import { PatchUserOnboardingBody } from '@/types';
 import theme from '@/styles/theme';
-import { useGetUserNameQuery } from '@/queries/user/userName';
+import { useGetUserNameQuery } from '@/queries/user/user-name';
 import { useState, useEffect } from 'react';
 
 interface UserInfoProps {
@@ -16,7 +16,8 @@ interface UserInfoProps {
 
 export default function UserInfo({ onNext, setFormData, formData }: UserInfoProps) {
   const [nicknameAvailable, setNicknameAvailable] = useState<boolean | null>(null);
-  const isStep1Valid = formData.email && formData.nickname && formData.phone && nicknameAvailable;
+  const isUserInfoValid =
+    formData.email && formData.nickname && formData.phone && nicknameAvailable;
 
   const { mutate: patchUserOnboarding } = usePatchUserOnboardingMutation(onNext);
   const checkNicknameMutation = usePostCheckNicknameMutation(() => {
@@ -44,7 +45,7 @@ export default function UserInfo({ onNext, setFormData, formData }: UserInfoProp
   };
 
   const handleNextButtonClick = () => {
-    if (isStep1Valid) {
+    if (isUserInfoValid) {
       patchUserOnboarding(formData);
     }
   };
@@ -98,9 +99,9 @@ export default function UserInfo({ onNext, setFormData, formData }: UserInfoProp
       <div css={fixedButtonWrapper}>
         <Button
           size="l"
-          status={isStep1Valid ? 'active' : 'disabled'}
+          status={isUserInfoValid ? 'active' : 'disabled'}
           onClick={handleNextButtonClick}
-          disabled={!isStep1Valid}
+          disabled={!isUserInfoValid}
         >
           다음
         </Button>

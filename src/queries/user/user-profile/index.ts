@@ -1,5 +1,5 @@
 // src/queries/user/userProfile/index.ts
-import { patchUserOnboarding } from '@/api/user/userProfile';
+import { patchUserOnboarding } from '@/api/user/user-profile';
 import { useMutation } from '@tanstack/react-query';
 import { PatchUserOnboardingBody } from '@/types';
 

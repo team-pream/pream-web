@@ -8,7 +8,7 @@ import {
 import { SelectCat, SelectDog } from '@/assets/icons';
 import { Text, Button } from '@/components';
 import theme from '@/styles/theme';
-import { useGetUserNameQuery } from '@/queries/user/userName'; // 추가
+import { useGetUserNameQuery } from '@/queries/user/user-name'; // 추가
 import { useEffect, useState } from 'react';
 
 interface PetTypeProps {
@@ -25,7 +25,7 @@ export default function PetType({ formData, setFormData, onNext }: PetTypeProps)
     setNickName(data.nickname);
   }, []);
 
-  const isStep2Valid = formData.petType !== '';
+  const isPetTypeValid = formData.petType !== '';
 
   return (
     <div css={selectContainer}>
@@ -46,16 +46,14 @@ export default function PetType({ formData, setFormData, onNext }: PetTypeProps)
       </Text>
       <div css={selectZone}>
         <div
-          css={selectBox}
-          onClick={() => setFormData({ ...formData, petType: 'dog' })}
-          style={{ borderColor: formData.petType === 'dog' ? '#72dacd' : '' }}
+          css={selectBox(formData.petType === 'DOG')}
+          onClick={() => setFormData({ ...formData, petType: 'DOG' })}
         >
           <SelectDog width="120px" /> 강아지
         </div>
         <div
-          css={selectBox}
-          onClick={() => setFormData({ ...formData, petType: 'cat' })}
-          style={{ borderColor: formData.petType === 'cat' ? '#72dacd' : '' }}
+          css={selectBox(formData.petType === 'CAT')}
+          onClick={() => setFormData({ ...formData, petType: 'CAT' })}
         >
           <SelectCat width="120px" /> 고양이
         </div>
@@ -63,9 +61,9 @@ export default function PetType({ formData, setFormData, onNext }: PetTypeProps)
       <div css={fixedButtonWrapper}>
         <Button
           size="l"
-          status={isStep2Valid ? 'active' : 'disabled'}
+          status={isPetTypeValid ? 'active' : 'disabled'}
           onClick={onNext}
-          disabled={!isStep2Valid}
+          disabled={!isPetTypeValid}
         >
           다음
         </Button>

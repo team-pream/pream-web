@@ -4,8 +4,8 @@ export const inputWrapper = css`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 354px;
-  margin-top: 80px;
+  margin-top: 20px;
+  padding: 40px;
 `;
 
 export const textBox = css`
@@ -14,7 +14,7 @@ export const textBox = css`
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: 200px 0 30px 0;
+  margin: 200px 0 55px 0;
   gap: 8px;
 `;
 

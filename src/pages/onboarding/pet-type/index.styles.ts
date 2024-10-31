@@ -14,7 +14,7 @@ export const selectContainer = css`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 60px;
+  margin-top: 25px;
   gap: 30px;
 `;
 
@@ -25,7 +25,7 @@ export const selectZone = css`
   gap: 10px;
 `;
 
-export const selectBox = css`
+export const selectBox = (isSelected: boolean) => css`
   width: 163px;
   height: 194px;
   border-radius: 15px;
@@ -35,7 +35,7 @@ export const selectBox = css`
   flex-direction: column;
   gap: 15px;
   background-color: ${theme.colors.gray100};
-  border: 2px solid ${theme.colors.gray200};
+  border: 2px solid ${isSelected ? '#72dacd' : theme.colors.gray200};
   color: ${theme.colors.gray300};
 
   &:hover {
@@ -43,19 +43,6 @@ export const selectBox = css`
     color: ${theme.colors.green200};
     border-color: ${theme.colors.green200};
   }
-`;
-
-export const nextButton = ({ isValid }: { isValid: boolean }) => css`
-  position: absolute;
-  bottom: 73px;
-  background-color: ${isValid ? theme.colors.green200 : theme.colors.gray300};
-  color: ${theme.colors.white};
-  width: 354px;
-  height: 45px;
-  border-radius: 10px;
-  font-weight: 700;
-  font-size: 12px;
-  cursor: ${isValid ? 'pointer' : 'not-allowed'};
 `;
 
 export const skipButton = css`
@@ -79,7 +66,7 @@ export const textBox = css`
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: 90px 0 45px 0;
+  margin: 80px 0 45px 0;
   gap: 8px;
 `;
 

@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/queries/query-keys';
-import { getUserName } from '@/api/user/UserName';
+import { getUserName } from '@/api/user/user-name';
 
 export const useGetUserNameQuery = () => {
   return useQuery({
-    queryKey: QUERY_KEYS.GET_USERNAME(),
+    queryKey: QUERY_KEYS.GET_USERNAME,
     queryFn: async () => {
       try {
         return await getUserName();

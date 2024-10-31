@@ -3,9 +3,10 @@ import { css } from '@emotion/react';
 export const inputWrapper = css`
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  width: 354px;
-  margin-top: 60px;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  padding: 40px;
 `;
 
 export const fixedButtonWrapper = css`
@@ -23,6 +24,6 @@ export const textBox = css`
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: 90px 0 75px 0;
+  margin: 80px 0 60px 0;
   gap: 8px;
 `;

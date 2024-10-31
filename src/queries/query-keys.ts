@@ -11,5 +11,5 @@ export const QUERY_KEYS = {
   PATCH_ONBOARDING: (body: PatchUserOnboardingBody) => ['PATCH_ONBOARDING', body],
   POST_CHECKNICKNAME: (body: PostCheckNicknameBody) => ['POST_CHECKNICKNAME', body],
   POST_PETPROFILE: (body: PostUserPetBody) => ['POST_PETPROFILE', body],
-  GET_USERNAME: () => ['GET_USERNAME'],
+  GET_USERNAME: ['GET_USERNAME'],
 } as const;
