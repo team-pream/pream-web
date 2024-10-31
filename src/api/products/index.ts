@@ -27,6 +27,5 @@ export const getProductsDetail = async (productId: string) => {
   if (productData.status === 'SOLD_OUT') {
     productData.status = '판매완료';
   }
-
   return response.data;
 };

@@ -9,4 +9,5 @@ export const QUERY_KEYS = {
   GET_USERS_ME: ['GET_USERS_ME'],
   GET_PRODUCTS_CURATION: ['GET_PRODUCTS_CURATION'],
   GET_PRODUCTS_DETAIL: (productId: string) => ['GET_PRODUCTS_DETAIL', productId],
+  GET_SALES_LIST: ['GET_SALES_LIST'],
 } as const;

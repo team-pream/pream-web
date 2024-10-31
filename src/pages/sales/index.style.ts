@@ -11,13 +11,6 @@ export const mainTitleBox = css`
   border-bottom: 2px solid;
 `;
 
-export const image = css`
-  width: 90px;
-  height: 90px;
-  background-color: gray;
-  border-radius: 13px;
-`;
-
 export const item = css`
   display: flex;
   gap: 20px;
@@ -30,12 +23,37 @@ export const item = css`
 export const content = css`
   display: flex;
   gap: 20px;
+  width: 100%;
 `;
 
-export const textBox = css`
+export const image = css`
+  width: 90px;
+  height: 90px;
+  background-color: gray;
+  border-radius: 13px;
+`;
+
+export const textContainer = css`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 6px 0;
+  gap: 23px;
+  overflow: hidden;
+`;
+
+export const topBox = css`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 6px;
+`;
+
+export const bottomBox = css`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
   cursor: pointer;
 `;
 
@@ -46,9 +64,10 @@ export const salesStatus = css`
 `;
 
 export const contentTitle = css`
-  padding: 23px 0 7px 0;
-`;
+  width: 100%;
 
-export const date = css`
-  padding: 6px 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  overflow: hidden;
 `;

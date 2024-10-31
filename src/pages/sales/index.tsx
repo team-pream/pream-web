@@ -3,26 +3,30 @@ import {
   mainWrapper,
   mainTitleBox,
   item,
-  textBox,
+  textContainer,
+  topBox,
+  bottomBox,
   image,
-  date,
   content,
   contentTitle,
 } from './index.style';
 import { useNavigate } from 'react-router-dom';
 import { AppBar, Layout, Text } from '@/components';
 import theme from '@/styles/theme';
+import { useGetProductsSalesListQuery } from '@/queries/sales-list';
+
+interface SalesListData {
+  createdAt: string;
+  id: number;
+  title: string;
+  price: number;
+  status: string;
+  images: string[];
+}
 
 export default function Sales() {
-  // 더미데이터
-  const items = Array.from({ length: 6 }, () => ({
-    status: '판매중',
-    title: '아이캣유 제품',
-    price: '620,000원',
-    date: '24.10.24',
-  }));
-
   const navigate = useNavigate();
+  const { data } = useGetProductsSalesListQuery();
 
   return (
     <Layout>
@@ -40,23 +44,38 @@ export default function Sales() {
         <div css={mainTitleBox}>
           <Text typo="title1">판매내역</Text>
         </div>
-        {items.map((data, index) => (
-          <div css={item} key={index}>
+        {data?.map((listData: SalesListData) => (
+          <div css={item} key={listData.id}>
             <div css={content}>
-              <img src="/images/sampleImage2.png" css={image} />
-              <div css={textBox} onClick={() => navigate('/products/:productId')}>
-                <Text typo="subtitle2" color={theme.colors.green200}>
-                  {data.status}
-                </Text>
-                <Text typo="body2" css={contentTitle}>
-                  {data.title}
-                </Text>
-                <Text typo="subtitle1">{data.price}</Text>
+              <img src={listData.images[0]} css={image} />
+              <div css={textContainer}>
+                <div css={topBox}>
+                  <Text
+                    typo="subtitle2"
+                    color={
+                      listData.status === 'AVAILABLE'
+                        ? theme.colors.green200
+                        : listData.status === 'SOLD_OUT'
+                          ? theme.colors.gray300
+                          : theme.colors.yellow100
+                    }
+                  >
+                    {listData.status === 'AVAILABLE'
+                      ? '판매중'
+                      : listData.status === 'SOLD_OUT'
+                        ? '판매완료'
+                        : '예약중'}
+                  </Text>
+                  <Text typo="body1">{listData.createdAt.substring(2, 10).replace(/-/g, '.')}</Text>
+                </div>
+                <div css={bottomBox} onClick={() => navigate(`/products/:${listData.id}`)}>
+                  <Text typo="body2" css={contentTitle}>
+                    {listData.title}
+                  </Text>
+                  <Text typo="subtitle1">{listData.price.toLocaleString()}원</Text>
+                </div>
               </div>
             </div>
-            <Text typo="body1" css={date}>
-              {data.date}
-            </Text>
           </div>
         ))}
       </main>
