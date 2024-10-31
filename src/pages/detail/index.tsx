@@ -10,6 +10,7 @@ import { BGNB } from './components/gnb-buy';
 import Carousel from '@/components/carousel';
 import { Layout } from '@/components';
 import { Dialog } from '@/components';
+import { colors } from '@/styles/colors';
 const Detail: React.FC = () => {
   const { productId } = useParams<{ productId: string }>();
 
@@ -51,7 +52,12 @@ const Detail: React.FC = () => {
   return (
     <Layout>
       <AppBar prefix={<AppBarBack height="17px" cursor="pointer" />} />
-      <Carousel images={product.images} showButtons={true} autoPlay={false} />
+      <Carousel
+        images={product.images}
+        showButtons={true}
+        autoPlay={false}
+        progressBarColor={colors.white}
+      />
       <ProductInfo onOptionClick={handleOptionClick} product={product} />
       <BGNB />
       <BottomSheet isOpen={isSheetOpen} onClose={handleCloseSheet}>

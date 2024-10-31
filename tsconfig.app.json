@@ -27,7 +27,7 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": ["vite/client", "kakao"]
+    "types": ["vite/client"]
   },
   "include": ["src", "src/styles"]
 }
