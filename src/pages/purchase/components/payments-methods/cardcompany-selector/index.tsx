@@ -21,12 +21,12 @@ interface CardCompanySelectorProps {
   disabled: boolean;
 }
 
-const CardCompanySelector: React.FC<CardCompanySelectorProps> = ({
+const CardCompanySelector = ({
   provider,
   seletedCompanyId,
   onCompanyChange,
   disabled,
-}) => {
+}: CardCompanySelectorProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSelectClick = () => {

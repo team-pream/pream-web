@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { plusSaleText, paymentsWrapper, otherPaymentsWrapper } from './index.styles';
 import { line } from '../../index.styles';
 import { Text } from '@/components';
@@ -6,7 +6,7 @@ import PaymentButtonGrid from './payments-grid';
 import CardCompanySelector from './cardcompany-selector';
 import { activeButton, inactiveButton } from './payments-grid/index.styles';
 import { CARD_COMPANIES } from '../..';
-const PaymentMethods: React.FC = () => {
+const PaymentMethods = () => {
   const [selectedPaymentId, setSelectedPaymentId] = useState<number | null>(null); // 결제 방법 ID 상태
   const [selectedCompanyId, setSelectedCompanyId] = useState<string>(''); // 카드사 선택 상태
 

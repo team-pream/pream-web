@@ -1,7 +1,7 @@
 import { line } from '../../index.styles';
 import { productInfoWrapper, InnerWrapper, productImg, textWrapperStyle } from './index.styles';
 import { Text } from '@/components';
-const ProductInfo: React.FC = () => {
+const ProductInfo = () => {
   return (
     <div>
       <div css={line} />

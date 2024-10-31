@@ -15,7 +15,7 @@ export const CARD_COMPANIES = [
   { id: 'hana', name: '하나' },
   { id: 'woori', name: '우리' },
 ];
-const Purchase: React.FC = () => {
+const Purchase = () => {
   return (
     <Layout>
       <AppBar prefix={<AppBarBack height="17px" cursor="pointer" />} />

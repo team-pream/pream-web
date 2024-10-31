@@ -3,7 +3,7 @@ import { radioButtonWrapper, customCheckbox, customCheckboxInner } from './index
 import { useState } from 'react';
 import { Text } from '@/components';
 
-const SelectBasic: React.FC = () => {
+const SelectBasic = () => {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {

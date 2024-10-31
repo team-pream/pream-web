@@ -2,7 +2,7 @@ import { Input } from '@/components/input';
 import { addressWrapper, addressBtn } from './index.styles';
 import SelectBasic from './select-default';
 import { useNavigate } from 'react-router-dom';
-const AddAddress: React.FC = () => {
+const AddAddress = () => {
   const navigate = useNavigate();
 
   const handleAddress = () => {

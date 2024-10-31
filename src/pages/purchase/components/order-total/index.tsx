@@ -2,7 +2,7 @@ import { line } from '../../index.styles';
 import { totalOrderWrapper, totalTextStyle, totalTextWrapper } from './index.styles';
 import { Button } from '@/components';
 import { Text } from '@/components';
-const OrderTotal: React.FC = () => {
+const OrderTotal = () => {
   return (
     <div>
       <div css={line} />

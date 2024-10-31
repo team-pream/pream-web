@@ -1,6 +1,6 @@
-import { FC } from 'react';
 import { buttonWrapper, activeButton, inactiveButton } from './index.styles';
 import { Text } from '@/components';
+
 interface PaymentsMethodProps {
   id: number;
   name: string;
@@ -20,7 +20,8 @@ interface PaymentButtonGridProps {
   onPaymentChange: (id: number) => void;
 }
 
-const PaymentButtonGrid: FC<PaymentButtonGridProps> = ({ selectedPaymentId, onPaymentChange }) => {
+// React.FC 대신 Props 타입을 직접 지정
+const PaymentButtonGrid = ({ selectedPaymentId, onPaymentChange }: PaymentButtonGridProps) => {
   return (
     <div css={buttonWrapper}>
       {paymentsMethods.map((method) => (
