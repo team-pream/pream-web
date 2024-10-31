@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import QueryProvider from '@/provider/query-provider';
 import GlobalStyle from '@/styles/global-style';
-import { Main, OnBoarding, Category, Login, Auth,  Detail, Address } from '@/pages';
+import { Main, OnBoarding, Category, Login, Auth, Detail, Address } from '@/pages';
 import Purchase from './pages/purchase';
 
 export default function App() {
@@ -17,7 +17,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/onboarding" element={<OnBoarding />} />
           <Route path="/category" element={<Category />} />
-          <Route path="/checkout" element={<Purchase />} />
+          <Route path="/checkout/" element={<Purchase />} />
         </Routes>
       </BrowserRouter>
     </QueryProvider>

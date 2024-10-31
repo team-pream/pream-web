@@ -9,13 +9,7 @@ export const addressWrapper = css`
   gap: 16px;
 `;
 
-export const AddAddressInput = css`
-  display: flex; /* Flexbox를 사용하여 Input과 버튼을 나란히 배치 */
-  gap: 10px; /* Input과 버튼 사이의 간격 */
-  align-items: center; /* 세로 정렬 */
-`;
-
-export const addressBtn = css`
+export const addressButton = css`
   background-color: ${colors.green200};
   font-size: 12px;
   color: white;

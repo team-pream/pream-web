@@ -8,7 +8,7 @@ export const selectWrapper = css`
   align-items: center;
 `;
 
-export const selecterWrapper = (isSelected: boolean) => css`
+export const selectorWrapper = (isSelected: boolean) => css`
   width: 100%;
   padding: 15px 30px;
   border-radius: 10px;

@@ -1,5 +1,5 @@
 import { Input } from '@/components/input';
-import { addressWrapper, addressBtn } from './index.styles';
+import { addressWrapper, addressButton } from './index.styles';
 import SelectBasic from './select-default';
 import { useNavigate } from 'react-router-dom';
 const AddAddress = () => {
@@ -14,7 +14,7 @@ const AddAddress = () => {
       <Input label="이름" placeholder="이름을 입력해주세요" />
       <div css={{ display: 'flex', alignItems: 'center' }}>
         <Input label="배송지" placeholder="주소를 입력해주세요" />
-        <div onClick={handleAddress} css={addressBtn}>
+        <div onClick={handleAddress} css={addressButton}>
           주소 검색
         </div>
       </div>
