@@ -1,4 +1,4 @@
-import { GetProductsParamType } from '@/types';
+import { GetProductsParamType } from '@/types/product';
 import { api } from '@/api/api';
 import { Product } from '@/types';
 
