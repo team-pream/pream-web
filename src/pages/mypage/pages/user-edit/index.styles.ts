@@ -6,7 +6,7 @@ export const profileEditWrapper = css`
   padding: 0 18px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  position: relative;
 `;
 
 export const profileImageWrapper = css`
@@ -16,6 +16,7 @@ export const profileImageWrapper = css`
   align-items: center;
   justify-content: center;
   position: relative;
+  margin: 40px 0 33px 0;
 `;
 
 export const imageIcon = css`
@@ -33,9 +34,9 @@ export const uploadIconWrapper = css`
   justify-content: center;
   position: absolute;
   bottom: 8px;
-  right: 130px;
+  right: 30%;
   background-color: ${theme.colors.white};
-  box-shadow: 0 0 8px ${theme.colors.gray300};
+  border: 1px solid ${theme.colors.gray100};
 `;
 
 export const uploadIcon = css`
@@ -47,6 +48,7 @@ export const formStyle = css`
   display: flex;
   flex-direction: column;
   gap: 24px;
+  margin: 34px 0 100px 0;
 `;
 
 export const radioStyle = css`
@@ -62,10 +64,34 @@ export const hr = css`
   border-color: ${theme.colors.black};
 `;
 
-export const bottomButton = css`
+export const fixedButtonWrapper = css`
+  position: relative;
+  margin-bottom: 12px;
+  width: 100%;
   display: flex;
-  gap: 10px;
-  flex-direction: column;
+  justify-content: center;
+`;
+
+export const DeleteButton = css`
+  position: relative;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  margin-top: 100px;
+  width: 100%;
+  height: 48px;
+  color: ${theme.colors.gray300};
+  background-color: ${theme.colors.white};
+`;
+
+export const buttonWrapper = css`
+  position: fixed;
+  bottom: 10px;
+  margin: 0 auto;
+  z-index: ${theme.zIndex.gnb};
+  width: 100%;
+  max-width: ${theme.size.maxWidth};
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 `;

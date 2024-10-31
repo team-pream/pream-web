@@ -2,7 +2,9 @@ import { AppBarBack, MypageUploadImage } from '@/assets/icons';
 import { AppBar, Button, Dialog, Input, Layout, RadioGroup, Text } from '@/components';
 import { useNavigate } from 'react-router-dom';
 import {
-  bottomButton,
+  buttonWrapper,
+  DeleteButton,
+  fixedButtonWrapper,
   formStyle,
   hr,
   imageIcon,
@@ -83,25 +85,27 @@ export default function UserEdit() {
           <Input label="닉네임" placeholder="사용자의 닉네임을 입력해주세요"></Input>
           <Input label="반려동물" placeholder="반려동물의 이름을 입력해주세요"></Input>
         </div>
-        <div css={bottomButton}>
-          <Button fullWidth>수정하기</Button>
-          <div onClick={openDialog}>
-            <Text typo="subtitle2" color={theme.colors.gray300}>
-              프로필 삭제
-            </Text>
-            {isDialogOpen && (
-              <Dialog
-                title="프로필 삭제"
-                description="프로필을 삭제하시겠습니까?"
-                primaryActionLabel="Save"
-                secondaryActionLabel="Cancle"
-                onPrimaryAction={() => {
-                  console.log('click');
-                }}
-                onSecondaryAction={closeDialog}
-              />
-            )}
-          </div>
+      </div>
+      <div css={buttonWrapper}>
+        <div css={fixedButtonWrapper}>
+          <Button size="xl">수정하기</Button>
+        </div>
+        <div onClick={openDialog} css={DeleteButton}>
+          <Text typo="subtitle2" color={theme.colors.gray300}>
+            프로필 삭제
+          </Text>
+          {isDialogOpen && (
+            <Dialog
+              title="프로필 삭제"
+              description="프로필을 삭제하시겠습니까?"
+              primaryActionLabel="Save"
+              secondaryActionLabel="Cancle"
+              onPrimaryAction={() => {
+                console.log('click');
+              }}
+              onSecondaryAction={closeDialog}
+            />
+          )}
         </div>
       </div>
     </Layout>
