@@ -1,20 +1,6 @@
 import { GetProductsParamType } from '@/types';
 import { api } from '@/api/api';
-import { Category, Seller } from '@/types';
-export interface Product {
-  id: number;
-  title: string;
-  price: number;
-  status: string;
-  condition: string;
-  images: string[];
-  description: string;
-  createdAt: string;
-  category: Category;
-  seller: Seller;
-  likesCount: number;
-  isLiked: boolean;
-}
+import { Product } from '@/types';
 
 export const getProducts = async (params: GetProductsParamType) => {
   const response = await api.get('/products', { params });
