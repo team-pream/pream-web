@@ -43,24 +43,26 @@ const CardCompanySelector = ({
 
   return (
     <div css={selectWrapper}>
-      <select
-        id="card-company"
-        value={seletedCompanyId} // 선택된 카드사 표시
-        onClick={handleSelectClick}
-        onChange={(e) => onCompanyChange(e.target.value)} // 카드사 선택 업데이트
-        onBlur={handleBlur}
-        css={selectorWrapper(isSelected)} // 스타일 적용
-        disabled={disabled} // 비활성화 여부 제어
-      >
-        <option value="" css={optionDisabled}>
-          <Text typo="subtitle2">카드사를 선택하세요</Text>
-        </option>
-        {provider.map((company) => (
-          <option key={company.id} value={company.id} css={optionActive}>
-            {company.name}
+      <Text typo="subtitle2" css={{ width: '100%' }}>
+        <select
+          id="card-company"
+          value={seletedCompanyId} // 선택된 카드사 표시
+          onClick={handleSelectClick}
+          onChange={(e) => onCompanyChange(e.target.value)} // 카드사 선택 업데이트
+          onBlur={handleBlur}
+          css={selecterWrapper(isSelected)} // 스타일 적용
+          disabled={disabled} // 비활성화 여부 제어
+        >
+          <option value="" css={optionDisabled}>
+            카드사를 선택하세요
           </option>
-        ))}
-      </select>
+          {provider.map((company) => (
+            <option key={company.id} value={company.id} css={optionActive}>
+              {company.name}
+            </option>
+          ))}
+        </select>
+      </Text>
       <div css={arrowIcon}>
         {isOpen ? (
           <DropdownUnfold width="12px" stroke={colors.gray200} />

@@ -16,6 +16,12 @@ export const productImg = css`
   border-radius: 8px;
   background-color: ${colors.gray200};
   margin-right: 20px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
 `;
 
 export const textWrapperStyle = css`
