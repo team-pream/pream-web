@@ -59,3 +59,17 @@ export const radioStyle = css`
 export const radio = css`
   gap: 10px;
 `;
+
+export const hr = css`
+  margin-top: 19px;
+  margin-bottom: 0;
+  border-color: ${theme.colors.black};
+`;
+
+export const bottomButton = css`
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+`;
