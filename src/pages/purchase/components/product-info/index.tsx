@@ -11,8 +11,8 @@ const ProductInfo: React.FC = () => {
           <div css={productImg}></div>
           <div css={textWrapperStyle}>
             <Text typo="body4">판매명</Text>
+            <Text typo="subtitle1">22,800원</Text>
           </div>
-          <Text typo="subtitle1">22,800원</Text>
         </div>
       </div>
     </div>
