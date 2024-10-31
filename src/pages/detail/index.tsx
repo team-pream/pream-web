@@ -1,52 +1,79 @@
 import React, { useState } from 'react';
-import { useGetProductQuery } from '@/queries/detail/index.ts';
-import { Wrapper, Contents } from './index.styles';
-import { SheetList } from './components/bottom-sheet/index.style.ts';
-import BottomSheet from './components/bottom-sheet/index.tsx';
-import ProductInfo from './components/product-infomation/index.tsx';
-import SvgAppbarBack from '@/assets/icons/AppbarBack.tsx';
-import { AppBar } from '@/Components/index.ts';
-import { AppBarBack } from '@/assets/icons/index.ts';
-//import { GNB } from '@/Components/index.ts';
-import { BGNB } from './components/gnb-buy/index.tsx';
-// import { useParams } from 'react-router-dom';
-import Carousel from './components/carousel/index.tsx';
+import { useParams } from 'react-router-dom';
+import { useGetProductQuery } from '@/queries/products/index';
+import { SheetList } from './components/bottom-sheet/index.style';
+import BottomSheet from './components/bottom-sheet';
+import ProductInfo from './components/product-infomation';
+import { AppBar } from '@/components';
+import { AppBarBack } from '@/assets/icons';
+import { BGNB } from './components/gnb-buy';
+import Carousel from '@/components/carousel';
+import { Layout, Dialog } from '@/components';
+import { colors } from '@/styles/colors';
+import { statusImgStyle, overlayStyle, statusTextStyle } from './index.style';
 
 const Detail: React.FC = () => {
-  //const { id } = '5'; //useParams<{ id: string }>(); // URL에서 상품 ID 가져오기
-  const { data: product, error, isLoading } = useGetProductQuery('5'); // 상품 정보 쿼리
-  console.log(product?.description);
+  const { productId } = useParams<{ productId: string }>();
 
+  // productId를 숫자 타입으로 변환
+  const parsedProductId = parseInt(productId!, 10);
+
+  // 항상 컴포넌트 최상단에서 모든 Hook 호출
+  const { data: product, error, isLoading } = useGetProductQuery(productId!);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   const handleOptionClick = () => setIsSheetOpen(true);
   const handleCloseSheet = () => setIsSheetOpen(false);
 
-  if (isLoading) return <div>Loading...</div>; // 로딩 중
-  if (error) return <div>Error fetching product: {error.message}</div>; // 에러 처리
-
-  if (!product) {
-    return <div>No product found</div>; // 상품이 없는 경우 처리
+  // 잘못된 ID일 경우 조건부 렌더링
+  if (!parsedProductId) {
+    return <div>잘못된 상품 ID입니다.</div>;
   }
+  // 로딩 중이거나 에러 발생 시 조건부 렌더링
+  if (isLoading) return <div>Loading...</div>;
+  if (error)
+    return (
+      <Dialog
+        type="error"
+        title="ERROR"
+        description={error.message}
+        primaryActionLabel="메인으로 돌아가기"
+      />
+    );
+  if (!product)
+    return (
+      <Dialog
+        type="error"
+        title="ERROR"
+        description="상품을 찾을 수 없습니다"
+        primaryActionLabel="메인으로 돌아가기"
+      />
+    );
 
   return (
-    <div css={Wrapper}>
-      <div css={Header}>
-        <SvgAppbarBack css={{ width: '7px', height: '14px', cursor: 'pointer' }} />
-      </div>
-      <div css={Contents}>
-        <Carousel images={product.images} /> {/* 상품 이미지 전달 */}
-        <ProductInfo
-          onOptionClick={handleOptionClick} // 클릭 이벤트 핸들러
-          product={product} // 상품 정보 전달
+    <Layout>
+      <AppBar prefix={<AppBarBack height="17px" cursor="pointer" />} />
+      <div css={statusImgStyle}>
+        <Carousel
+          images={product.images}
+          showButtons={true}
+          autoPlay={false}
+          progressBarColor={colors.white}
         />
+        {product.status !== 'AVAILABLE' && (
+          <>
+            <div css={overlayStyle} /> {/* 어두운 오버레이 */}
+            <div css={statusTextStyle}>{product.status}</div> {/* 상태 텍스트 */}
+          </>
+        )}
       </div>
+      <ProductInfo onOptionClick={handleOptionClick} product={product} />
       <BGNB />
       <BottomSheet isOpen={isSheetOpen} onClose={handleCloseSheet}>
         <div css={SheetList}>수정하기</div>
         <div css={SheetList}>삭제하기</div>
       </BottomSheet>
-    </div>
+    </Layout>
   );
 };
 

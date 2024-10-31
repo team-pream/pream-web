@@ -14,3 +14,13 @@ export interface ProductType {
   sellerId: string;
   status: string;
 }
+
+export interface Category {
+  id: number;
+  name: string;
+}
+
+export interface Seller {
+  id: string;
+  nickname: string;
+}

@@ -3,11 +3,13 @@ import theme from '@/styles/theme';
 export const overlayStyle = (isOpen: boolean) => css`
   position: fixed;
   top: 0;
-  width: 389px;
+
+  width: ${theme.size.maxWidth};
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: ${isOpen ? 'block' : 'none'};
   z-index: 1000;
+  pointer-events: ${isOpen ? 'auto' : 'none'};
 `;
 
 export const sheetStyle = css`
@@ -16,7 +18,7 @@ export const sheetStyle = css`
   left: 50%;
   transform: translateX(-50%); /* 가로 중앙 정렬 */
   width: 100%;
-  max-width: 390px;
+  max-width: ${theme.size.maxWidth};
   background-color: white;
   border-radius: 16px 16px 0 0;
   animation: slide-up 0.3s ease-out;

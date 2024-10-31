@@ -50,9 +50,11 @@ export const progressBarWrapper = css`
   background-color: ${theme.colors.grayOpacity200};
 `;
 
-export const progressBar = css`
+export const progressBar = (color: string, width: number, left: number) => css`
   position: absolute;
   height: 100%;
-  background-color: ${theme.colors.black};
+  background-color: ${color};
   transition: left 0.5s ease;
+  width: ${width}px;
+  left: ${left}px;
 `;

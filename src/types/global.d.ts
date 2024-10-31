@@ -14,4 +14,4 @@ declare global {
   }
 }
 
-export {}; // 글로벌 선언 시 필요
+export {};
