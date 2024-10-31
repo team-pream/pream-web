@@ -56,10 +56,6 @@ export const radioStyle = css`
   justify-content: center;
 `;
 
-export const radio = css`
-  gap: 10px;
-`;
-
 export const hr = css`
   margin-top: 19px;
   margin-bottom: 0;

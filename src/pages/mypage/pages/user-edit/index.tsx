@@ -23,7 +23,7 @@ export default function UserEdit() {
     {
       value: 'DOG',
       node: (
-        <Button variant="capsule" size="s" status={selected === 'DOG' ? 'active' : 'disabled'}>
+        <Button variant="capsule" status={selected === 'DOG' ? 'active' : 'disabled'}>
           강아지
         </Button>
       ),
@@ -31,7 +31,7 @@ export default function UserEdit() {
     {
       value: 'CAT',
       node: (
-        <Button variant="capsule" size="s" status={selected === 'CAT' ? 'active' : 'disabled'}>
+        <Button variant="capsule" status={selected === 'CAT' ? 'active' : 'disabled'}>
           고양이
         </Button>
       ),
