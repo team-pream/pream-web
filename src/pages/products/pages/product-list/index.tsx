@@ -17,10 +17,10 @@ import {
   soldOutOverlayStyle,
 } from './index.styles';
 import { useState } from 'react';
-import { useGetProductsQuery } from '@/queries/products';
+import { useGetProductsQuery } from '@/queries/product';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ProductType } from '@/types';
 import { AppBar, GNB, Layout, Text } from '@/components';
+import { ProductType } from '@/types/product';
 import theme from '@/styles/theme';
 
 export default function ProductList() {

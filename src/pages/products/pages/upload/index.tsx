@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { AppBarBack } from '@/assets/icons';
 import { Category } from '@/types/category';
 import { AppBar, Button, ChipRadioGroup, Input, Layout, RadioGroup, Text } from '@/components';
-import { usePostProductsUploadMutation } from '@/queries/product';
+import { useGetCategoriesQuery } from '@/queries/categories';
+import { usePostProductsUploadMutation } from '@/queries/products';
 import theme from '@/styles/theme';
 import {
   fixedCTAButtonWrapper,
@@ -14,7 +15,6 @@ import {
   wrapper,
 } from './index.styles';
 import { UploadImage, Info } from './components';
-import { useGetCategoriesQuery } from '@/queries/categories';
 import { PostProductsUploadBody } from '@/types';
 
 export default function Upload() {
@@ -92,10 +92,12 @@ export default function Upload() {
           <div css={nowrap}>
             <Info title="카테고리">
               <ChipRadioGroup
-                items={categories?.slice(1).map((category: Category) => ({
-                  value: category.id,
-                  label: category.name,
-                }))}
+                items={
+                  categories?.slice(1).map((category: Category) => ({
+                    value: category.id,
+                    label: category.name,
+                  })) ?? []
+                }
               />
             </Info>
           </div>

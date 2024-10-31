@@ -3,9 +3,9 @@ import { chipRadio, chipRadioGroup } from './index.styles';
 import { useEffect, useState } from 'react';
 
 interface ChipRadioGroupProps {
-  items: { value: string; label: string }[];
+  items: { value: string | number; label: string }[];
   defaultValue?: string;
-  onChange?: (value: string) => void;
+  onChange?: (value: string | number) => void;
   wrap?: boolean;
 }
 
@@ -15,7 +15,7 @@ export function ChipRadioGroup({
   onChange,
   wrap = false,
 }: ChipRadioGroupProps) {
-  const [selected, setSelected] = useState<string | undefined>(defaultValue);
+  const [selected, setSelected] = useState<string | number | undefined>(defaultValue);
 
   useEffect(() => {
     if (selected && onChange) {
@@ -41,7 +41,7 @@ export function ChipRadioGroup({
 interface ChipRadioProps {
   name?: string;
   label: string;
-  value: string;
+  value: string | number;
   defaultValue?: string;
   isSelected?: boolean;
   onChange?: () => void;
