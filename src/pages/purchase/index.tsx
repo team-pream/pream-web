@@ -7,18 +7,21 @@ import PaymentMethods from './components/payments-methods';
 import OrderTotal from './components/order-total';
 import { Layout } from '@/components';
 import { Text } from '@/components';
+import { contentsWrapper } from './index.styles';
 const Purchase: React.FC = () => {
   return (
     <Layout>
       <AppBar prefix={<AppBarBack height="17px" cursor="pointer" />} />
-      <div css={title}>
-        <Text typo="title1">구매</Text>
+      <div css={contentsWrapper}>
+        <div css={title}>
+          <Text typo="title1">구매</Text>
+        </div>
+        <div css={line}></div>
+        <AddAddress />
+        <ProductInfo />
+        <PaymentMethods />
+        <OrderTotal />
       </div>
-      <div css={line}></div>
-      <AddAddress />
-      <ProductInfo />
-      <PaymentMethods />
-      <OrderTotal />
     </Layout>
   );
 };
