@@ -13,7 +13,6 @@ const ProductInfo = () => {
             <Text typo="body4">판매명</Text>
             <Text typo="subtitle1">22,800원</Text>
           </div>
-          <Text typo="subtitle1">22,800원</Text>
         </div>
       </div>
     </div>
