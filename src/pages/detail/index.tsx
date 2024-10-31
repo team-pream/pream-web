@@ -8,9 +8,10 @@ import { AppBar } from '@/components';
 import { AppBarBack } from '@/assets/icons';
 import { BGNB } from './components/gnb-buy';
 import Carousel from '@/components/carousel';
-import { Layout } from '@/components';
-import { Dialog } from '@/components';
+import { Layout, Dialog } from '@/components';
 import { colors } from '@/styles/colors';
+import { statusImgStyle, overlayStyle, statusTextStyle } from './index.style';
+
 const Detail: React.FC = () => {
   const { productId } = useParams<{ productId: string }>();
 
@@ -52,12 +53,20 @@ const Detail: React.FC = () => {
   return (
     <Layout>
       <AppBar prefix={<AppBarBack height="17px" cursor="pointer" />} />
-      <Carousel
-        images={product.images}
-        showButtons={true}
-        autoPlay={false}
-        progressBarColor={colors.white}
-      />
+      <div css={statusImgStyle}>
+        <Carousel
+          images={product.images}
+          showButtons={true}
+          autoPlay={false}
+          progressBarColor={colors.white}
+        />
+        {product.status !== 'AVAILABLE' && (
+          <>
+            <div css={overlayStyle} /> {/* 어두운 오버레이 */}
+            <div css={statusTextStyle}>{product.status}</div> {/* 상태 텍스트 */}
+          </>
+        )}
+      </div>
       <ProductInfo onOptionClick={handleOptionClick} product={product} />
       <BGNB />
       <BottomSheet isOpen={isSheetOpen} onClose={handleCloseSheet}>

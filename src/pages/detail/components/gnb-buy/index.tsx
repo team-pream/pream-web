@@ -1,5 +1,5 @@
 import { wrapper } from './index.styles';
-import { Button } from '@/Components';
+import { Button } from '@/components';
 
 export function BGNB() {
   return (

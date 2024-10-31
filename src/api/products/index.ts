@@ -1,12 +1,12 @@
 import { GetProductsParamType } from '@/types';
 import { api } from '@/api/api';
-import { ProductStatus, ProductCondition, Category, Seller } from '@/types';
+import { Category, Seller } from '@/types';
 export interface Product {
   id: number;
   title: string;
   price: number;
-  status: ProductStatus;
-  condition: ProductCondition;
+  status: string;
+  condition: string;
   images: string[];
   description: string;
   createdAt: string;
@@ -28,8 +28,11 @@ export const getCuration = async () => {
 export const getProduct = async (productId: string): Promise<Product> => {
   const response = await api.get(`/products/${productId}`);
   const productData = response.data;
-  if (productData.status === 'AVAILABLE') {
+  if (productData.status === 'RESERVED') {
     productData.status = '예약중';
+  }
+  if (productData.status === 'SOLD_OUT') {
+    productData.status = '판매완료';
   }
   return response.data;
 };

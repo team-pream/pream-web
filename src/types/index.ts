@@ -24,15 +24,3 @@ export interface Seller {
   id: string;
   nickname: string;
 }
-
-export enum ProductCondition {
-  NEW = 'NEW',
-  SLIGHTLY_USED = 'SLIGHTLY_USED',
-  HEAVILY_USED = 'HEAVILY_USED',
-}
-
-export enum ProductStatus {
-  AVAILABLE = '구매 가능',
-  SOLD_OUT = '판매 완료',
-  RESERVED = '예약중',
-}

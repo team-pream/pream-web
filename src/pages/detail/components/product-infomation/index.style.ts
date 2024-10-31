@@ -16,7 +16,6 @@ export const titleWrapper = css`
 
 export const titleTop = css`
   display: flex;
-  height: 20px;
   margin-bottom: 5px;
 `;
 
