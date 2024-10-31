@@ -1,12 +1,12 @@
+// src/queries/user/petProfile/index.ts
 import { postUserPet } from '@/api/user/petProfile';
 import { useMutation } from '@tanstack/react-query';
 import { PostUserPetBody } from '@/types';
 
 export const usePostPetProfileMutation = (onSuccessCallback: () => void) => {
   return useMutation({
-    mutationFn: async (data: { body: PostUserPetBody; accessToken: string }) => {
-      const { body, accessToken } = data;
-      return await postUserPet(body, accessToken);
+    mutationFn: async (body: PostUserPetBody) => {
+      return await postUserPet(body);
     },
     onSuccess: onSuccessCallback,
     onError: () => {

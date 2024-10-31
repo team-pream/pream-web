@@ -26,6 +26,6 @@ export interface PostCheckNicknameBody {
 }
 
 export interface PostUserPetBody {
-  name?: string;
-  petType?: string;
+  name: string;
+  petType: string;
 }

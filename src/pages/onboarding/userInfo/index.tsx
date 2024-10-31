@@ -1,3 +1,4 @@
+// src/pages/onboarding/userInfo/index.tsx
 import { inputWrapper, fixedButtonWrapper, textBox } from './index.styles';
 import { Button, Input, Text } from '@/components';
 import { usePatchUserOnboardingMutation } from '@/queries/user/userProfile';
@@ -5,7 +6,8 @@ import { usePostCheckNicknameMutation } from '@/queries/user/checkNickname';
 import { PatchUserOnboardingBody } from '@/types';
 import theme from '@/styles/theme';
 import { useGetUserNameQuery } from '@/queries/user/userName';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
 interface UserInfoProps {
   onNext: () => void;
   setFormData: (data: PatchUserOnboardingBody) => void;
@@ -14,7 +16,6 @@ interface UserInfoProps {
 
 export default function UserInfo({ onNext, setFormData, formData }: UserInfoProps) {
   const [nicknameAvailable, setNicknameAvailable] = useState<boolean | null>(null);
-
   const isStep1Valid = formData.email && formData.nickname && formData.phone && nicknameAvailable;
 
   const { mutate: patchUserOnboarding } = usePatchUserOnboardingMutation(onNext);
@@ -23,14 +24,19 @@ export default function UserInfo({ onNext, setFormData, formData }: UserInfoProp
   });
 
   const { data } = useGetUserNameQuery();
-  const userName = data.username;
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    if (data) {
+      setUserName(data.username);
+    }
+  }, [data]);
+
   const handleNicknameCheck = async () => {
     if (!formData.nickname) return;
 
     try {
-      await checkNicknameMutation.mutateAsync({
-        body: { nickname: formData.nickname },
-      });
+      await checkNicknameMutation.mutateAsync({ body: { nickname: formData.nickname } });
       setNicknameAvailable(true);
     } catch {
       setNicknameAvailable(false);
@@ -39,7 +45,7 @@ export default function UserInfo({ onNext, setFormData, formData }: UserInfoProp
 
   const handleNextButtonClick = () => {
     if (isStep1Valid) {
-      patchUserOnboarding({ body: formData });
+      patchUserOnboarding(formData);
     }
   };
 
