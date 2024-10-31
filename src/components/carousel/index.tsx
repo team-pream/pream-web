@@ -42,6 +42,7 @@ const Carousel: React.FC<CarouselProps> = ({
     }
   }, [autoPlay, autoPlayInterval, handleNext]);
 
+  // progress bar의 너비와 위치 계산
   const progressBarWidth = 238 / images.length;
   const progressPosition = (currentIndex / (images.length - 1)) * (238 - progressBarWidth);
 
@@ -67,13 +68,17 @@ const Carousel: React.FC<CarouselProps> = ({
           />
         ))}
       </div>
-      <div css={progressBarWrapper}>
-        <div
-          css={progressBar}
-          style={{ width: `${progressBarWidth}px`, left: `${progressPosition}px` }}
-        />
-      </div>
-      {showButtons && (
+
+      {images.length > 1 && (
+        <div css={progressBarWrapper}>
+          <div
+            css={progressBar}
+            style={{ width: `${progressBarWidth}px`, left: `${progressPosition}px` }}
+          />
+        </div>
+      )}
+
+      {showButtons && images.length > 1 && (
         <>
           <button onClick={handlePrev} css={leftButton}>
             ‹
@@ -86,4 +91,5 @@ const Carousel: React.FC<CarouselProps> = ({
     </div>
   );
 };
+
 export default Carousel;
