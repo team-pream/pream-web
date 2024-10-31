@@ -5,18 +5,12 @@ import { Text } from '@/components';
 import PaymentButtonGrid from './payments-grid';
 import CardCompanySelector from './cardcompany-selector';
 import { activeButton, inactiveButton } from './payments-grid/index.styles';
-
+import { CARD_COMPANIES } from '../..';
 const PaymentMethods: React.FC = () => {
   const [selectedPaymentId, setSelectedPaymentId] = useState<number | null>(null); // 결제 방법 ID 상태
   const [selectedCompanyId, setSelectedCompanyId] = useState<string>(''); // 카드사 선택 상태
 
-  const cardCompanies = [
-    { id: 'KB', name: '국민' },
-    { id: 'shinhan', name: '신한' },
-    { id: 'hana', name: '하나' },
-    { id: 'woori', name: '우리' },
-  ];
-
+  const cardCompanies = CARD_COMPANIES;
   const handlePaymentChange = (id: number) => {
     setSelectedPaymentId(id); // 결제 방법 업데이트
     setSelectedCompanyId(''); // 결제 방법 변경 시 카드사 초기화
