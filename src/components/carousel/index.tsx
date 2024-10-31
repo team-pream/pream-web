@@ -74,13 +74,7 @@ const Carousel: React.FC<CarouselProps> = ({
 
       {images.length > 1 && (
         <div css={progressBarWrapper}>
-          <div
-            css={progressBar(progressBarColor)}
-            style={{
-              width: `${progressBarWidth}px`,
-              left: `${progressPosition}px`,
-            }}
-          />
+          <div css={progressBar(progressBarColor, progressBarWidth, progressPosition)} />
         </div>
       )}
 
