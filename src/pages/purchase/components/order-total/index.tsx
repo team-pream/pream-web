@@ -22,7 +22,7 @@ const OrderTotal: React.FC<totalPriceProps> = ({ price }) => {
             <Text typo="body5">무료</Text>
           </div>
         </div>
-        <Button size="xl">20,000원 결제하기</Button>
+        <Button size="xl">{price.toLocaleString()}원 결제하기</Button>
       </div>
     </div>
   );
