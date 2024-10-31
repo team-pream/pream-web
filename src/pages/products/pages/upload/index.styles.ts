@@ -34,39 +34,6 @@ export const productInfo = css`
   gap: 32px;
 `;
 
-export const images = css`
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: scroll;
-  padding: 0 18px 0 0;
-  gap: 8px;
-`;
-
-export const image = css`
-  width: 70px;
-  height: 70px;
-  flex-shrink: 0;
-  border-radius: 7px;
-  background: ${theme.colors.gray100};
-`;
-
-export const uploadButton = css`
-  width: 70px;
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  border-radius: 7px;
-  border: 1px solid ${theme.colors.gray200};
-
-  input {
-    display: none;
-    width: 100%;
-    height: 100%;
-  }
-`;
-
 export const textarea = css`
   width: 100%;
   height: 233px;

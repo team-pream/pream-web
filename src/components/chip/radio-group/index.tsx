@@ -48,7 +48,7 @@ interface ChipRadioProps {
 }
 
 function ChipRadio({
-  name = 'radio-group',
+  name = 'chip-radio-group',
   isSelected = false,
   label,
   value,

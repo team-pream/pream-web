@@ -10,6 +10,7 @@ export const api = axios.create({
 export const formApi = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
   headers: {
-    'Content-Type': 'multipart/form-data',
+    // TODO: 토큰 사용방법 변경 (현재는 임시로 localStorage에 저장)
+    Authorization: `Bearer ${localStorage.getItem('access')}`,
   },
 });

@@ -3,9 +3,11 @@ export interface GetProductsParamsType {
   status?: number;
 }
 
+export type PRODUCT_CONDITON = 'NEW' | 'SLIGHTLY_USED' | 'HEAVILY_USED';
+
 export interface PostProductsUploadBodyType {
   images: File[];
-  status: string;
+  condition: PRODUCT_CONDITON;
   price: number;
   categoryId: number;
   title: string;

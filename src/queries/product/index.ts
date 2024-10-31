@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { getProducts, postProductsUpload } from '@/api/product';
-import { GetProductsParamsType, PostProductsUploadBodyType } from '@/types/product';
+import { GetProductsParamsType } from '@/types/product';
 import { QUERY_KEYS } from '@/queries/query-keys';
 
 export const useGetProductsQuery = (params: GetProductsParamsType) => {
@@ -16,10 +16,10 @@ export const useGetProductsQuery = (params: GetProductsParamsType) => {
   });
 };
 
-export const usePostProductsUpload = () => {
+export const usePostProductsUploadMutation = () => {
   return useMutation({
     mutationKey: QUERY_KEYS.POST_PRODUCTS_UPLOAD,
-    mutationFn: async (body: PostProductsUploadBodyType) => {
+    mutationFn: async (body: FormData) => {
       try {
         return await postProductsUpload(body);
       } catch {
