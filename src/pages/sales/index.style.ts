@@ -1,21 +1,12 @@
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 
-export const wrapper = css`
-  width: 390px;
-  height: 100vh;
-  margin: 0 auto;
-  padding: 0px 18px;
-`;
-
-export const appBar = css`
-  height: ${theme.size.appBarHeight};
-  display: flex;
-  align-items: center;
+export const mainWrapper = css`
+  padding: 0 18px;
 `;
 
 export const mainTitleBox = css`
-  width: 354px;
+  width: 100%;
   padding: 20px 0;
   border-bottom: 2px solid;
 `;
@@ -30,7 +21,7 @@ export const image = css`
 export const item = css`
   display: flex;
   gap: 20px;
-  width: 354px;
+  width: 100%;
   justify-content: space-between;
   padding: 18px 0;
   border-bottom: 1px solid ${theme.colors.gray100};

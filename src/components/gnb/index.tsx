@@ -1,10 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_PATHS } from '@/constants/routes';
-<<<<<<< HEAD
 import { GnbCategory, GnbHome, GnbMy } from '@/assets/icons';
-=======
-import { GnbCategory, GnbHome, GnbMy, LikeOff } from '@/assets/icons';
->>>>>>> a93b084 ([PREAM-108] 공통 UI 컴포넌트 적용 (#38))
 import { menuItem, wrapper } from './index.styles';
 import { Text } from '@/components';
 import theme from '@/styles/theme';

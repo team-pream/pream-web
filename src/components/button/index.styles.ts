@@ -1,10 +1,6 @@
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
-<<<<<<< HEAD
 import { ButtonSize, ButtonStatus, ButtonVariant } from '@/components/button';
-=======
-import { ButtonSize } from '@/components/button';
->>>>>>> a93b084 ([PREAM-108] 공통 UI 컴포넌트 적용 (#38))
 
 interface WrapperProps {
   size: ButtonSize;

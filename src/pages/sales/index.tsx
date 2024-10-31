@@ -1,7 +1,6 @@
 import { AppBarBack } from '@/assets/icons';
 import {
-  wrapper,
-  appBar,
+  mainWrapper,
   mainTitleBox,
   item,
   textBox,
@@ -11,7 +10,7 @@ import {
   contentTitle,
 } from './index.style';
 import { useNavigate } from 'react-router-dom';
-import { Text } from '@/components';
+import { AppBar, Layout, Text } from '@/components';
 import theme from '@/styles/theme';
 
 export default function Sales() {
@@ -26,16 +25,18 @@ export default function Sales() {
   const navigate = useNavigate();
 
   return (
-    <div css={wrapper}>
-      <header css={appBar}>
-        <AppBarBack
-          width="11"
-          height="24"
-          style={{ cursor: 'pointer' }}
-          onClick={() => navigate('/mypage')}
-        />
-      </header>
-      <main>
+    <Layout>
+      <AppBar
+        prefix={
+          <AppBarBack
+            width="11"
+            height="24"
+            style={{ cursor: 'pointer' }}
+            onClick={() => navigate('/mypage')}
+          />
+        }
+      />
+      <main css={mainWrapper}>
         <div css={mainTitleBox}>
           <Text typo="title1">판매내역</Text>
         </div>
@@ -59,6 +60,6 @@ export default function Sales() {
           </div>
         ))}
       </main>
-    </div>
+    </Layout>
   );
 }
