@@ -36,7 +36,7 @@ export default function MyInfo() {
   const logout = () => {
     localStorage.removeItem('access'); // access 키만 삭제
     setAccessToken(''); // 상태를 빈 문자열로 설정
-    navigate(ROUTE_PATHS.LOGIN);
+    location.replace(ROUTE_PATHS.MAIN);
   };
 
   return (
