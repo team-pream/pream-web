@@ -1,7 +1,5 @@
 import { api } from '@/api/api';
-import { PostCheckNicknameBody } from '@/types/user';
-import { PostUserPetBody } from '@/types/user';
-import { PatchUserOnboardingBody } from '@/types/user';
+import { PostCheckNicknameBody, PostUserPetBody, PatchUserOnboardingBody } from '@/types/user';
 
 export const patchUserOnboarding = async (body: PatchUserOnboardingBody) => {
   const response = await api.patch('/user/onboarding', body);
