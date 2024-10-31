@@ -53,5 +53,9 @@ export const getProduct = async (productId: string): Promise<Product> => {
     //   Authorization: `Bearer ${AccessToken}`,
     // }, //아직 로그인과 연결안됨
   });
+  const productData = response.data;
+  if (productData.status === 'AVAILABLE') {
+    productData.status = '예약중';
+  }
   return response.data;
 };

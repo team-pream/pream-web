@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
+import { colors } from '@/styles/colors';
 
 export const productInfoWrapper = css`
   width: 100%;
@@ -50,9 +51,14 @@ export const infoTitle = css`
   width: 46px;
 `;
 
-export const infoValue = css``;
-
 export const timeInfo = css`
   color: ${theme.colors.gray200};
   margin: 20px 0px;
+`;
+
+export const reservedTag = css`
+  background-color: ${colors.yellow100};
+  border-radius: 5px;
+  margin-right: 10px;
+  padding: 0 12px;
 `;

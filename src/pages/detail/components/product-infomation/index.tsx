@@ -10,7 +10,7 @@ import {
   infoWrapper,
   timeInfo,
   infoTitle,
-  infoValue,
+  reservedTag,
 } from './index.style';
 import { Text } from '@/components';
 interface ProductInfoProps {
@@ -35,7 +35,15 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ onOptionClick, product }) => 
   <div css={productInfoWrapper}>
     <div css={titleWrapper}>
       <div css={titleTop}>
-        <div css={title}>{product.title}</div> {/* 상품 이름 출력 */}
+        <div css={title}>
+          <span css={reservedTag}>
+            <Text typo="subtitle2" color="white">
+              {product.status}
+            </Text>
+          </span>
+          {product.title}
+        </div>{' '}
+        {/* 상품 이름 출력 */}
         <img onClick={onOptionClick} src={option} css={optionIcon} />
       </div>
       <div css={titleBottom}>{product.price.toLocaleString()}원</div> {/* 가격 출력 */}
@@ -83,7 +91,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ onOptionClick, product }) => 
 const InfoRow: React.FC<{ title: string; value: React.ReactNode }> = ({ title, value }) => (
   <div css={{ display: 'flex', flexDirection: 'row', marginBottom: '5px' }}>
     <div css={infoTitle}>{title}</div>
-    <div css={infoValue}>{value}</div>
+    <div>{value}</div>
   </div>
 );
 
