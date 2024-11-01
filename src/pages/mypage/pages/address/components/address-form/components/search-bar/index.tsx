@@ -1,13 +1,13 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Search } from '@/assets/icons';
 import { searchBarWrapper } from './index.style';
 
-interface searchbarProps {
+interface SearchBarProps {
   onSearch: () => void;
   placeholder?: string; // Placeholder 텍스트를 설정 가능하도록
 }
 
-const SearchBar = ({ onSearch, placeholder = '도로명이나 주소를 입력하세요' }: searchbarProps) => {
+const SearchBar = ({ onSearch, placeholder = '도로명이나 주소를 입력하세요' }: SearchBarProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
