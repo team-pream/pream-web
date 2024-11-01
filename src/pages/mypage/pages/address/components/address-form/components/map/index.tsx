@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { loadKakaoMapScript } from '@/libs/kako-map';
 
 interface KakaoMapProps {
@@ -6,7 +6,7 @@ interface KakaoMapProps {
   longitude: number;
 }
 
-const KakaoMap: React.FC<KakaoMapProps> = ({ latitude, longitude }) => {
+const KakaoMap = ({ latitude, longitude }: KakaoMapProps) => {
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

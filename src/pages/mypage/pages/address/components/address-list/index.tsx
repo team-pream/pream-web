@@ -1,26 +1,16 @@
-import theme from '@/styles/theme';
-import { addressWrapper, defaultAddressTag, tagStyle } from './index.styles';
+import { addressListWrapper, addressWrapper, defaultAddressTag, tagStyle } from './index.styles';
 import { Text } from '@/components';
 import { colors } from '@/styles/colors';
 
-interface AddressListProps {
+interface addressListProps {
   address: string;
   // onEditClick: () => void;
 }
-const AddressList: React.FC<AddressListProps> = ({ address }) => {
+const AddressList = ({ address }: addressListProps) => {
   return (
     <div>
       {address.length === 0 ? (
-        <div
-          css={{
-            width: '90%',
-            margin: '0 auto',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: `calc(100vh - ${theme.size.appBarHeight} - ${theme.size.gnbHeight})`,
-          }}
-        >
+        <div css={addressListWrapper}>
           <div>등록된 주소가 없습니다.</div>
         </div>
       ) : (
