@@ -7,18 +7,18 @@ import { Text } from '@/components';
 import { containTagWrapper, addressFormWrapper, defaultWrapper } from './insex.styles';
 import { Input, Button, Dialog } from '@/components';
 
-interface AddressData {
+interface addressData {
   roadAddress: string;
   jibunAddress: string;
   zonecode: string;
   buildingName?: string;
 }
 
-interface AddressFormProps {
+interface addressFormProps {
   onSave: () => void; // 부모 컴포넌트에서 목록 페이지로 이동하도록 하는 함수
 }
 
-const AddressForm: React.FC<AddressFormProps> = ({ onSave }) => {
+const AddressForm = ({ onSave }: addressFormProps) => {
   const [roadAddress, setRoadAddress] = useState('');
   const [jibunAddress, setJibunAddress] = useState('');
   const [latitude, setLatitude] = useState<number | null>(null);
@@ -38,7 +38,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ onSave }) => {
 
   const handlePostcodeSearch = () => {
     new window.daum.Postcode({
-      oncomplete: async (data: AddressData) => {
+      oncomplete: async (data: addressData) => {
         const buildingName = data.buildingName ? ` (${data.buildingName})` : '';
         setRoadAddress(data.roadAddress + buildingName);
         setJibunAddress(data.jibunAddress);

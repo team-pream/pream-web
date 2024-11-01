@@ -8,7 +8,7 @@ import AddressForm from './components/address-form';
 
 type PageState = 'list' | 'form';
 
-export default function Juso() {
+export default function Address() {
   const [page, setPage] = useState<PageState>('list'); // 현재 페이지 상태를 관리
   const address = '주소주소'; //임시주소
 

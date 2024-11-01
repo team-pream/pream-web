@@ -1,6 +1,15 @@
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
 
+export const addressListWrapper = css`
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - ${theme.size.appBarHeight} - ${theme.size.gnbHeight});
+`;
+
 export const addressWrapper = css`
   width: 90%;
   margin: 0 auto;
