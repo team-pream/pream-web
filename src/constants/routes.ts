@@ -4,7 +4,7 @@ export const ROUTE_PATHS = {
 
   MAIN: '/',
 
-  CATEGORY: '/category',
+  CATEGORIES: '/categories',
 
   PRODUCTS: '/products',
   PRODUCTS_DETAIL: (productId: number) => `/products/${productId}`,

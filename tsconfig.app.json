@@ -27,7 +27,7 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": ["vite/client"]
+    "types": ["vite/client", "kakao.maps.d.ts"]
   },
   "include": ["src", "src/styles"]
 }

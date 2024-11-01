@@ -9,12 +9,13 @@ interface Menu {
 
 interface ActionSheetProps {
   menus: Menu[];
+  onClose: () => void;
 }
 
-export function ActionSheet({ menus }: ActionSheetProps) {
+export function ActionSheet({ menus, onClose }: ActionSheetProps) {
   return (
     <>
-      <Dim fullScreen />
+      <Dim fullScreen onClick={onClose} />
       <div css={wrapper}>
         <div css={handle} />
         <div css={menuWrapper}>

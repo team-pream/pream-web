@@ -20,6 +20,6 @@ export const wrapper = ({ fullScreen }: { fullScreen?: boolean }) =>
         top: 0;
         left: 0;
         background: ${theme.colors.grayOpacity300};
-        z-index: ${theme.zIndex.dim};
+        z-index: ${theme.zIndex.overlay};
         overflow: hidden;
       `;

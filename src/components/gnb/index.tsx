@@ -14,7 +14,7 @@ const MENUS = [
   {
     name: '카테고리',
     icon: <GnbCategory width="20px" height="20px" />,
-    path: ROUTE_PATHS.CATEGORY,
+    path: ROUTE_PATHS.CATEGORIES,
   },
   { name: '마이', icon: <GnbMy width="20px" height="20px" />, path: ROUTE_PATHS.MYPAGE },
 ];

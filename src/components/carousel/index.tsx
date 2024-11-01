@@ -1,11 +1,12 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
-  carouselWrapper,
-  carouselImg,
+  wrapper,
+  carouselImage,
   leftButton,
   rightButton,
   progressBarWrapper,
   progressBar,
+  image,
 } from './index.style';
 import { colors } from '@/styles/colors';
 
@@ -13,21 +14,25 @@ interface CarouselProps {
   images: string[]; // 이미지 배열
   width?: number; // 슬라이드 하나의 너비
   height?: number; // 슬라이드 높이
+  fullWidth?: boolean; // 전체 너비 사용 여부
   showButtons?: boolean; // 버튼 표시 여부
   autoPlay?: boolean; // 자동 재생 여부
   autoPlayInterval?: number; // 자동 재생 시간 간격
   progressBarColor?: string;
 }
 
-const Carousel: React.FC<CarouselProps> = ({
+export function Carousel({
   images,
   width = 480,
   height = 408,
+  fullWidth = false,
   showButtons = true,
   autoPlay = false,
   autoPlayInterval = 3000,
   progressBarColor = `${colors.black}`,
-}) => {
+}: CarouselProps) {
+  const screenWidth = window.innerWidth;
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handlePrev = useCallback(() => {
@@ -50,24 +55,19 @@ const Carousel: React.FC<CarouselProps> = ({
   const progressPosition = (currentIndex / (images.length - 1)) * (238 - progressBarWidth);
 
   return (
-    <div css={carouselWrapper} style={{ maxWidth: `${width}px` }}>
+    <div css={wrapper({ maxWidth: fullWidth ? '100%' : `${width}px` })}>
       <div
-        css={carouselImg}
-        style={{
-          width: `${images.length * width}px`,
-          transform: `translateX(${-currentIndex * width}px)`,
-        }}
+        css={carouselImage({
+          width: fullWidth ? images.length * screenWidth : images.length * width,
+          transform: `translateX(${fullWidth ? -currentIndex * screenWidth : -currentIndex * width}px)`,
+        })}
       >
         {images.map((src, index) => (
           <img
             key={index}
             src={src}
             alt={`Slide ${index + 1}`}
-            style={{
-              height: `${height}px`,
-              width: `${width}px`,
-              borderRadius: '0px 0px 20px 20px',
-            }}
+            css={image({ width: fullWidth ? screenWidth : width, height })}
           />
         ))}
       </div>
@@ -90,6 +90,4 @@ const Carousel: React.FC<CarouselProps> = ({
       )}
     </div>
   );
-};
-
-export default Carousel;
+}
