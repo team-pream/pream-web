@@ -1,7 +1,7 @@
 import { useGetCategoriesQuery } from '@/queries/category';
 import { gridWrapper, menuWrapper, hr } from './index.styles';
 import { AppBar, GNB, Layout, SearchBar, Text } from '@/components';
-import { AppBarBack } from '@/assets/icons';
+import { AppbarBack } from '@/assets/icons';
 import CategoryItem from './components/category-item';
 import theme from '@/styles/theme';
 
@@ -18,7 +18,7 @@ export default function Category() {
 
   return (
     <Layout>
-      <AppBar prefix={<AppBarBack height="24px" cursor="pointer" />} suffix={<SearchBar />} />
+      <AppBar prefix={<AppbarBack height="24px" cursor="pointer" />} suffix={<SearchBar />} />
 
       <div css={menuWrapper}>
         <Text typo="title1" color={theme.colors.black}>

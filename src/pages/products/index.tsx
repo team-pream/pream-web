@@ -1,4 +1,4 @@
-import { AppBarBack, DropdownUnfold } from '@/assets/icons';
+import { AppbarBack, DropdownUnfold } from '@/assets/icons';
 import {
   dropdownIcon,
   image,
@@ -19,7 +19,7 @@ import {
 import { useState } from 'react';
 import { useGetProductsQuery } from '@/queries/products';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ProductType } from '@/types';
+import { ProductType } from '@/types/user';
 import { AppBar, GNB, Layout, Text } from '@/components';
 import theme from '@/styles/theme';
 
@@ -46,7 +46,7 @@ export default function Products() {
     <Layout>
       <AppBar
         prefix={
-          <AppBarBack
+          <AppbarBack
             height="24px"
             cursor="pointer"
             onClick={() => {

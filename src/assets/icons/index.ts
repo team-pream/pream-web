@@ -1,4 +1,5 @@
-export { default as AppBarBack } from './AppbarBack';
+export { default as AppbarBack } from './AppbarBack';
+export { default as Complete } from './Complete';
 export { default as DropdownFold } from './DropdownFold';
 export { default as DropdownUnfold } from './DropdownUnfold';
 export { default as FabPlus } from './FabPlus';
@@ -11,3 +12,5 @@ export { default as LikeOn } from './LikeOn';
 export { default as Logo } from './Logo';
 export { default as MypageUploadImage } from './MypageUploadImage';
 export { default as Search } from './Search';
+export { default as SelectCat } from './SelectCat';
+export { default as SelectDog } from './SelectDog';
