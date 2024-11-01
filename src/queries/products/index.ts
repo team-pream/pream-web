@@ -6,7 +6,9 @@ import {
   GetProductsCurationResponse,
 } from '@/types/products';
 import { useQuery } from '@tanstack/react-query';
-import { QUERY_KEYS } from '@/queries/query-keys';
+import { QUERY_KEYS } from '../query-keys';
+import { GetProductsParamType } from '@/types';
+import { getProduct, Product } from '@/api/products';
 
 export const useGetProductsQuery = (params: GetProductsParams) => {
   return useQuery<GetProductsResponse, Error>({
@@ -22,7 +24,7 @@ export const useGetProductsQuery = (params: GetProductsParams) => {
 };
 
 export const useGetProductQuery = (productId: string) => {
-  return useQuery<GetProductsDetailResponse, Error>({
+  return useQuery<Product, Error>({
     queryKey: QUERY_KEYS.GET_PRODUCTS_DETAIL(productId),
     queryFn: async () => {
       try {

@@ -5,7 +5,7 @@ export const productInfoWrapper = css`
   margin: 18px auto;
 `;
 
-export const InnerWrapper = css`
+export const innerWrapper = css`
   display: flex;
   margin: 15px auto;
 `;
