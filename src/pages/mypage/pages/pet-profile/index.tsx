@@ -17,7 +17,7 @@ import {
 import { useState } from 'react';
 import theme from '@/styles/theme';
 
-export default function UserEdit() {
+export default function PetProfile() {
   const navigate = useNavigate();
   const [selected, setSelected] = useState<string>('DOG');
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
@@ -61,7 +61,7 @@ export default function UserEdit() {
       />
       <div css={profileEditWrapper}>
         <div>
-          <Text typo="title1">프로필 편집</Text>
+          <Text typo="title1">댕냥이 정보 수정</Text>
           <hr css={hr} />
         </div>
         <div css={profileImageWrapper}>
@@ -82,8 +82,7 @@ export default function UserEdit() {
           ></RadioGroup>
         </div>
         <div css={formStyle}>
-          <Input label="닉네임" placeholder="사용자의 닉네임을 입력해주세요"></Input>
-          <Input label="반려동물" placeholder="반려동물의 이름을 입력해주세요"></Input>
+          <Input label="이름" placeholder="반려동물의 이름을 입력해주세요"></Input>
         </div>
       </div>
       <div css={buttonWrapper}>
@@ -92,7 +91,7 @@ export default function UserEdit() {
         </div>
         <div onClick={openDialog} css={DeleteButton}>
           <Text typo="subtitle2" color={theme.colors.gray300}>
-            프로필 삭제
+            삭제하기
           </Text>
           {isDialogOpen && (
             <Dialog

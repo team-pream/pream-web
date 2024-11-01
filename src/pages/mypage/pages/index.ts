@@ -1,2 +1,2 @@
 export { default as MyInfo } from './myinfo';
-export { default as UserEdit } from './user-edit';
+export { default as PetProfile } from './pet-profile';
