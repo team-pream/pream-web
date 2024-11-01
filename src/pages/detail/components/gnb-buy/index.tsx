@@ -4,7 +4,7 @@ import { Button } from '@/components';
 export function BGNB() {
   return (
     <nav css={wrapper}>
-      <Button size="l">구매하기</Button>
+      <Button size="xl">구매하기</Button>
     </nav>
   );
 }

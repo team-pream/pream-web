@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetProductQuery } from '@/queries/products/index';
 import { SheetList } from './components/bottom-sheet/index.style';
@@ -11,8 +11,7 @@ import Carousel from '@/components/carousel';
 import { Layout, Dialog } from '@/components';
 import { colors } from '@/styles/colors';
 import { statusImgStyle, overlayStyle, statusTextStyle } from './index.style';
-
-const Detail: React.FC = () => {
+const Detail = () => {
   const { productId } = useParams<{ productId: string }>();
 
   // productId를 숫자 타입으로 변환
@@ -52,15 +51,18 @@ const Detail: React.FC = () => {
 
   // 로딩 중이거나 에러 발생 시 조건부 렌더링
   if (isLoading) return <div>Loading...</div>;
-  if (error)
+
+  if (error) {
+    const errorMessage = (error as Error).message;
     return (
       <Dialog
         type="error"
         title="ERROR"
-        description={error.message}
+        description={errorMessage}
         primaryActionLabel="메인으로 돌아가기"
       />
     );
+  }
   if (!product)
     return (
       <Dialog
@@ -70,7 +72,6 @@ const Detail: React.FC = () => {
         primaryActionLabel="메인으로 돌아가기"
       />
     );
-
   return (
     <Layout>
       <AppBar prefix={<AppbarBack height="17px" cursor="pointer" />} />

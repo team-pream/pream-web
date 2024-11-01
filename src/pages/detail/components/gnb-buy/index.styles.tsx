@@ -7,7 +7,7 @@ export const wrapper = css`
   z-index: ${theme.zIndex.gnb};
   width: 100%;
   max-width: ${theme.size.maxWidth};
-  padding: 12px 0;
+  padding: 14px 2.5%;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
