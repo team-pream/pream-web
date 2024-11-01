@@ -16,15 +16,15 @@ import {
   menuline,
 } from './index.styles';
 import theme from '@/styles/theme';
-import Badge from './components/badge';
+import Badge from '../../components/badge';
 import { Next, Plus } from '@/assets/icons';
-import Menu from './components/menu';
+import Menu from '../../components/menu';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { useNavigate } from 'react-router-dom';
 import { useGetProfile } from '@/queries/user/profile';
 import { useState } from 'react';
 
-export default function Mypage() {
+export default function MyInfo() {
   const navigate = useNavigate();
   const [accessToken, setAccessToken] = useState(localStorage.getItem('access') || '');
 
@@ -36,7 +36,7 @@ export default function Mypage() {
   const logout = () => {
     localStorage.removeItem('access'); // access 키만 삭제
     setAccessToken(''); // 상태를 빈 문자열로 설정
-    navigate(ROUTE_PATHS.LOGIN);
+    location.replace(ROUTE_PATHS.MAIN);
   };
 
   return (

@@ -4,7 +4,7 @@ import { getProfile } from '@/api/user/profile';
 
 export const useGetProfile = (accessToken: string) => {
   return useQuery({
-    queryKey: QUERY_KEYS.GET_PROFILE(),
+    queryKey: QUERY_KEYS.GET_PROFILE,
     queryFn: async () => {
       if (!accessToken) {
         throw new Error('Access token is missing');
