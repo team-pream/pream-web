@@ -21,6 +21,10 @@ export default function PetProfile() {
   const navigate = useNavigate();
   const [selected, setSelected] = useState<string>('DOG');
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+  const data = {
+    name: null,
+  }; //추후 api 연동 후 삭제
+
   const PET_TYPE_OPTION = [
     {
       value: 'DOG',
@@ -61,7 +65,11 @@ export default function PetProfile() {
       />
       <div css={profileEditWrapper}>
         <div>
-          <Text typo="title1">댕냥이 정보 수정</Text>
+          {!data || !data?.name ? (
+            <Text typo="title1">댕냥이 등록</Text>
+          ) : (
+            <Text typo="title1">댕냥이 정보 수정</Text>
+          )}
           <hr css={hr} />
         </div>
         <div css={profileImageWrapper}>
@@ -86,26 +94,36 @@ export default function PetProfile() {
         </div>
       </div>
       <div css={buttonWrapper}>
-        <div css={fixedButtonWrapper}>
-          <Button size="xl">수정하기</Button>
-        </div>
-        <div onClick={openDialog} css={DeleteButton}>
-          <Text typo="subtitle2" color={theme.colors.gray300}>
-            삭제하기
-          </Text>
-          {isDialogOpen && (
-            <Dialog
-              title="프로필 삭제"
-              description="프로필을 삭제하시겠습니까?"
-              primaryActionLabel="Save"
-              secondaryActionLabel="Cancle"
-              onPrimaryAction={() => {
-                console.log('click');
-              }}
-              onSecondaryAction={closeDialog}
-            />
-          )}
-        </div>
+        {!data || !data?.name ? (
+          <>
+            <div css={fixedButtonWrapper}>
+              <Button size="xl">등록하기</Button>
+            </div>
+          </>
+        ) : (
+          <>
+            <div css={fixedButtonWrapper}>
+              <Button size="xl">수정하기</Button>
+            </div>
+            <div onClick={openDialog} css={DeleteButton}>
+              <Text typo="subtitle2" color={theme.colors.gray300}>
+                삭제하기
+              </Text>
+              {isDialogOpen && (
+                <Dialog
+                  title="프로필 삭제"
+                  description="프로필을 삭제하시겠습니까?"
+                  primaryActionLabel="Save"
+                  secondaryActionLabel="Cancle"
+                  onPrimaryAction={() => {
+                    console.log('click');
+                  }}
+                  onSecondaryAction={closeDialog}
+                />
+              )}
+            </div>
+          </>
+        )}
       </div>
     </Layout>
   );
