@@ -6,6 +6,7 @@ import PaymentButtonGrid from './payments-grid';
 import CardCompanySelector from './cardcompany-selector';
 import { activeButton, inactiveButton } from './payments-grid/index.styles';
 import { CARD_COMPANIES } from '../../types';
+
 const PaymentMethods = () => {
   const [selectedPaymentId, setSelectedPaymentId] = useState<number | null>(null); // 결제 방법 ID 상태
   const [selectedCompanyId, setSelectedCompanyId] = useState<string>(''); // 카드사 선택 상태
