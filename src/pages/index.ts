@@ -5,3 +5,4 @@ export { default as Main } from './main';
 export { default as MyPage } from './mypage';
 export { default as Onboarding } from './onboarding';
 export { default as Products } from './products';
+export { default as Address } from './address';
