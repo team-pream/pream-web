@@ -14,7 +14,7 @@ interface AddressSearchBarProps {
   onSelectAddress: (road: string, jibun: string) => void;
 }
 
-const AddressSearchBar: React.FC<AddressSearchBarProps> = ({ onSelectAddress }) => {
+export default function AddressSearchBar({ onSelectAddress }: AddressSearchBarProps) {
   const [postcode, setPostcode] = useState('');
   const [roadAddress, setRoadAddress] = useState('');
   const [jibunAddress, setJibunAddress] = useState('');
@@ -94,6 +94,4 @@ const AddressSearchBar: React.FC<AddressSearchBarProps> = ({ onSelectAddress }) 
       )}
     </div>
   );
-};
-
-export default AddressSearchBar;
+}
