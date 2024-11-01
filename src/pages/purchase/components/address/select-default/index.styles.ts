@@ -1,17 +1,9 @@
 import { colors } from '@/styles/colors';
-import { typography } from '@/styles/typography';
 import { css } from '@emotion/react';
 
 export const radioButtonWrapper = css`
   display: flex;
-  font-size: ${typography.body3.fontSize};
-  font-weight: ${typography.body3.fontWeight};
   align-items: center;
-`;
-
-export const title = css`
-  font-size: ${typography.subtitle1.fontSize};
-  font-weight: ${typography.subtitle1.fontWeight};
 `;
 
 export const customCheckbox = css`

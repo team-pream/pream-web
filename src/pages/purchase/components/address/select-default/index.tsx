@@ -1,8 +1,9 @@
 import { colors } from '@/styles/colors';
-import { radioButtonWrapper, title, customCheckbox, customCheckboxInner } from './index.styles';
+import { radioButtonWrapper, customCheckbox, customCheckboxInner } from './index.styles';
 import { useState } from 'react';
+import { Text } from '@/components';
 
-const SelectBasic: React.FC = () => {
+const SelectBasic = () => {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
@@ -11,7 +12,7 @@ const SelectBasic: React.FC = () => {
 
   return (
     <div css={{ display: 'flex', justifyContent: 'space-between' }}>
-      <div css={title}>배송주소</div>
+      <Text typo="subtitle1">배송주소</Text>
       <div css={radioButtonWrapper} onClick={handleCheckboxChange}>
         <input type="checkbox" style={{ display: 'none' }} checked={isChecked} readOnly />
         <div css={customCheckbox}>
@@ -22,7 +23,7 @@ const SelectBasic: React.FC = () => {
             }}
           ></div>
         </div>
-        <span>기본 배송지로 등록</span>
+        <Text typo="body3">기본 배송지로 등록</Text>
       </div>
     </div>
   );
