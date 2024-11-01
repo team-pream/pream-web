@@ -38,7 +38,7 @@ export const useUsersPetMutation = (onSuccess: () => void) => {
   });
 };
 
-export const useGetUsersMeQuery = () => {
+export const useGetUsersMeQuery = (enabled: boolean) => {
   return useQuery<GetUsersMeResponse, Error>({
     queryKey: QUERY_KEYS.GET_USERS_ME,
     queryFn: async () => {
@@ -48,6 +48,7 @@ export const useGetUsersMeQuery = () => {
         throw new Error('유저 정보를 가져오는 데 실패했습니다.');
       }
     },
+    enabled,
   });
 };
 
