@@ -8,3 +8,4 @@ export { default as Orders } from './orders';
 export { default as Products } from './products';
 export { default as NotFound } from './not-found';
 export { default as Purchase } from './purchase';
+export { default as PurchaseList } from './mypage/pages/purchase-list';
