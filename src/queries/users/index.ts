@@ -9,13 +9,10 @@ import {
   PostUsersPetBody,
 } from '@/types';
 
-export const usePostUsersCheckNicknameMutation = (
-  body: PostUsersCheckNicknameBody,
-  onSuccess: () => void
-) => {
+export const usePostUsersCheckNicknameMutation = (onSuccess: () => void) => {
   return useMutation({
-    mutationKey: QUERY_KEYS.POST_USERS_CHECK_NICKNAME(body),
-    mutationFn: async () => {
+    mutationKey: QUERY_KEYS.POST_USERS_CHECK_NICKNAME,
+    mutationFn: async (body: PostUsersCheckNicknameBody) => {
       try {
         return await postUsersCheckNickname(body);
       } catch {
@@ -27,10 +24,10 @@ export const usePostUsersCheckNicknameMutation = (
 };
 
 // TODO: User와 Pet 분리
-export const useUsersPetMutation = (body: PostUsersPetBody, onSuccess: () => void) => {
-  return useMutation<PostUsersPetBody, Error>({
-    mutationKey: QUERY_KEYS.POST_PETS_PROFILE(body),
-    mutationFn: async () => {
+export const useUsersPetMutation = (onSuccess: () => void) => {
+  return useMutation({
+    mutationKey: QUERY_KEYS.POST_PETS_PROFILE,
+    mutationFn: async (body: PostUsersPetBody) => {
       try {
         return await postUsersPet(body);
       } catch {
@@ -54,13 +51,10 @@ export const useGetUsersMeQuery = () => {
   });
 };
 
-export const usePatchUsersOnboardingMutation = (
-  body: PatchAuthOnboardingBody,
-  onSuccess: () => void
-) => {
-  return useMutation<PatchAuthOnboardingBody, Error>({
-    mutationKey: QUERY_KEYS.PATCH_AUTH_ONBOARDING(body),
-    mutationFn: async () => {
+export const usePatchUsersOnboardingMutation = (onSuccess: () => void) => {
+  return useMutation({
+    mutationKey: QUERY_KEYS.PATCH_AUTH_ONBOARDING,
+    mutationFn: async (body: PatchAuthOnboardingBody) => {
       try {
         return await patchUsersOnboarding(body);
       } catch {

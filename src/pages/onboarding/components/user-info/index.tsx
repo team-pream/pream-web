@@ -1,11 +1,11 @@
-import { inputWrapper, fixedButtonWrapper, textBox } from './index.styles';
+import { useState } from 'react';
+import { fixedButtonWrapper, textBox, wrapper } from './index.styles';
 import { Button, Input, Text } from '@/components';
 import { usePatchUsersOnboardingMutation } from '@/queries/users';
 import { usePostUsersCheckNicknameMutation } from '@/queries/users';
 import { PatchAuthOnboardingBody } from '@/types/users';
-import theme from '@/styles/theme';
 import { useGetUsersMeQuery } from '@/queries/users';
-import { useState } from 'react';
+import theme from '@/styles/theme';
 
 interface UserInfoProps {
   onNext: () => void;
@@ -29,7 +29,7 @@ export default function UserInfo({ onNext, setFormData, formData }: UserInfoProp
     if (!formData.nickname) return;
 
     try {
-      await checkNicknameMutation.mutateAsync({ body: { nickname: formData.nickname } });
+      await checkNicknameMutation.mutateAsync({ nickname: formData.nickname });
       setNicknameAvailable(true);
     } catch {
       setNicknameAvailable(false);
@@ -43,7 +43,7 @@ export default function UserInfo({ onNext, setFormData, formData }: UserInfoProp
   };
 
   return (
-    <div css={inputWrapper}>
+    <div css={wrapper}>
       <div css={textBox}>
         <Text typo="title1" color={theme.colors.black}>
           반가워요{' '}

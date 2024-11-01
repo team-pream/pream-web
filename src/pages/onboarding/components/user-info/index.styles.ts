@@ -1,12 +1,22 @@
 import { css } from '@emotion/react';
 
-export const inputWrapper = css`
+export const wrapper = css`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 40px;
-  padding: 40px;
+  padding: 48px 18px 0 18px;
+  gap: 26px;
+`;
+
+export const textBox = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 0 60px 0;
+  gap: 8px;
 `;
 
 export const fixedButtonWrapper = css`
@@ -16,14 +26,4 @@ export const fixedButtonWrapper = css`
   width: 100%;
   display: flex;
   justify-content: center;
-`;
-
-export const textBox = css`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin: 80px 0 60px 0;
-  gap: 8px;
 `;

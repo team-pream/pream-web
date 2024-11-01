@@ -1,12 +1,22 @@
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
 
-export const inputWrapper = css`
+export const wrapper = css`
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  width: 354px;
-  margin-top: 80px;
+  justify-content: center;
+  align-items: center;
+  padding: 0 18px;
+`;
+
+export const textBox = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0 44px 0;
+  gap: 8px;
 `;
 
 export const selectContainer = css`
@@ -14,7 +24,6 @@ export const selectContainer = css`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 25px;
   gap: 30px;
 `;
 
@@ -33,9 +42,9 @@ export const selectBox = (isSelected: boolean) => css`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 15px;
+  gap: 17px;
   background-color: ${theme.colors.gray100};
-  border: 2px solid ${isSelected ? '#72dacd' : theme.colors.gray200};
+  border: 1px solid ${isSelected ? theme.colors.green200 : theme.colors.gray200};
   color: ${theme.colors.gray300};
 
   &:hover {
@@ -58,16 +67,6 @@ export const skipButton = css`
   border-radius: 10px;
   font-weight: 700;
   font-size: 12px;
-`;
-
-export const textBox = css`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin: 80px 0 45px 0;
-  gap: 8px;
 `;
 
 export const fixedButtonWrapper = css`

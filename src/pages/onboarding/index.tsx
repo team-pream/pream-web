@@ -3,7 +3,7 @@ import { useUsersPetMutation } from '@/queries/users';
 import { AppBarBack } from '@/assets/icons';
 import { AppBar, Layout } from '@/components';
 import { Completion, PetName, PetType, UserInfo } from './components';
-import { progressBarContainer, progressBar, skipButton } from './index.styles';
+import { progressBarContainer, progressBar, skipButton, wrapper } from './index.styles';
 import { UserInfoForm } from './types';
 
 const STEPS = {
@@ -79,15 +79,19 @@ export default function Onboarding() {
   return (
     <Layout>
       <AppBar prefix={<AppBarBack height="24px" cursor="pointer" />} />
-      <div css={progressBarContainer}>
-        <div css={progressBar(step === STEPS.COMPLETE ? 3 : step)} />
-      </div>
-      {renderStep()}
-      {(step === STEPS.PET_TYPE || step === STEPS.PET_NAME) && (
-        <div css={skipButton} onClick={handleSkipButtonClick}>
-          건너뛰기
+      <section css={wrapper}>
+        <div css={progressBarContainer}>
+          <div css={progressBar({ step: step === STEPS.COMPLETE ? 3 : step })} />
         </div>
-      )}
+
+        {renderStep()}
+
+        {(step === STEPS.PET_TYPE || step === STEPS.PET_NAME) && (
+          <div css={skipButton} onClick={handleSkipButtonClick}>
+            건너뛰기
+          </div>
+        )}
+      </section>
     </Layout>
   );
 }
