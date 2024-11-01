@@ -50,7 +50,7 @@ const CardCompanySelector = ({
           onClick={handleSelectClick}
           onChange={(e) => onCompanyChange(e.target.value)} // 카드사 선택 업데이트
           onBlur={handleBlur}
-          css={selecterWrapper(isSelected)} // 스타일 적용
+          css={selectorWrapper(isSelected)} // 스타일 적용
           disabled={disabled} // 비활성화 여부 제어
         >
           <option value="" css={optionDisabled}>
