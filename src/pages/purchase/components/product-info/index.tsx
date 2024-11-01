@@ -1,5 +1,5 @@
 import { line } from '../../index.styles';
-import { productInfoWrapper, InnerWrapper, productImg, textWrapperStyle } from './index.styles';
+import { productInfoWrapper, innerWrapper, productImg, textWrapperStyle } from './index.styles';
 import { Text } from '@/components';
 
 interface productInfoProps {
@@ -16,7 +16,7 @@ const ProductInfo: React.FC<productInfoProps> = ({ product }) => {
       <div css={line} />
       <div css={productInfoWrapper}>
         <Text typo="subtitle1">주문 상품</Text>
-        <div css={InnerWrapper}>
+        <div css={innerWrapper}>
           <div css={productImg}>
             <img src={product.images} />
           </div>
