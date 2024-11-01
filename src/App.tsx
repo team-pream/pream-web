@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Main, Category, Login, Auth, Products, MyPage, Onboarding } from '@/pages';
+import { Main, Category, Login, Auth, Products, MyPage, Onboarding, Address } from '@/pages';
 import QueryProvider from '@/provider/query-provider';
 import GlobalStyle from '@/styles/global-style';
 
@@ -16,6 +16,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/products/*" element={<Products />} />
+          <Route path="/address" element={<Address />} />
         </Routes>
       </BrowserRouter>
     </QueryProvider>
