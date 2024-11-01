@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { addressListWrapper, defaultAddressTag, addressTag2, resultAddress2 } from './index.style';
+import theme from '@/styles/theme';
+import { addressWrapper, defaultAddressTag, tagStyle } from './index.styles';
+import { Text } from '@/components';
+import { colors } from '@/styles/colors';
 
-interface AddressObject {
-  roadAddress: string;
-  detailAddress: string;
+interface AddressListProps {
+  address: string;
+  // onEditClick: () => void;
 }
 
 const AddressList: React.FC = () => {
@@ -52,5 +54,4 @@ const AddressList: React.FC = () => {
     </div>
   );
 };
-
 export default AddressList;
