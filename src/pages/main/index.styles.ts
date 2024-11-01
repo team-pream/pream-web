@@ -29,7 +29,7 @@ export const categoryItem = css`
 `;
 
 export const listWrapper = css`
-  margin: 40px 0 ${theme.size.gnbHeight} 18px;
+  margin: 40px 0 calc(${theme.size.gnbHeight} + 18px) 18px;
 `;
 
 export const itemList = css`

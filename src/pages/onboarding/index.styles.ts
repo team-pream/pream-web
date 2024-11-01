@@ -1,5 +1,13 @@
 import { colors } from '@/styles/colors';
+import theme from '@/styles/theme';
 import { css } from '@emotion/react';
+
+export const wrapper = css`
+  width: 100%;
+  padding: 0 0 calc(${theme.size.gnbHeight} + 18px);
+  display: flex;
+  flex-direction: column;
+`;
 
 export const progressBarContainer = css`
   width: 100%;
@@ -8,7 +16,7 @@ export const progressBarContainer = css`
   position: relative;
 `;
 
-export const progressBar = (step) => css`
+export const progressBar = ({ step }: { step: number }) => css`
   width: 33.33%;
   height: 100%;
   background-color: ${colors.green200};

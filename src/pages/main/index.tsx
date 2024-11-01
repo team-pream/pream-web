@@ -6,18 +6,13 @@ import {
   listWrapper,
 } from './index.styles';
 import { useNavigate } from 'react-router-dom';
-import { useGetCategoriesQuery } from '@/queries/category';
-import { useGetCurationQuery } from '@/queries/curation';
+import { useGetCategoriesQuery } from '@/queries/categories';
+import { useGetProductsCurationQuery } from '@/queries/products';
 import { Logo, Search } from '@/assets/icons';
-import { AppBar, GNB, Layout, Text } from '@/components';
-import Carousel from '@/components/carousel';
+import { AppBar, GNB, Layout, Text, Carousel } from '@/components';
 import ProductList from './components/product-list';
-
-interface CategoryData {
-  id: number;
-  name: string;
-  icon: string;
-}
+import { Category } from '@/types';
+import theme from '@/styles/theme';
 
 const CAT_WHEEL = 4;
 const WALKING = 5;
@@ -25,8 +20,8 @@ const EXCLUDED_CATEGORIES = [CAT_WHEEL, WALKING];
 
 export default function Main() {
   const navigate = useNavigate();
-  const { data: category } = useGetCategoriesQuery();
-  const { data: curation } = useGetCurationQuery();
+  const { data: categories } = useGetCategoriesQuery();
+  const { data: curation } = useGetProductsCurationQuery();
 
   // 섹션
   const listArray = [
@@ -59,38 +54,39 @@ export default function Main() {
       <main>
         <Carousel
           images={imageList}
-          width={390}
+          fullWidth={true}
           height={270}
-          showButtons={true}
           autoPlay={true}
           autoPlayInterval={5000}
+          showButtons={false}
+          progressBarColor={theme.colors.white}
         />
         <section css={categoryList}>
           <div css={categoryItems}>
-            {category
-              ?.filter((item: CategoryData) => !EXCLUDED_CATEGORIES.includes(item.id))
-              .map((item: CategoryData) => (
+            {categories
+              ?.filter((category: Category) => !EXCLUDED_CATEGORIES.includes(category.id))
+              .map((category: Category) => (
                 <div
-                  key={item.id}
+                  key={category.id}
                   css={categoryItem}
                   onClick={
-                    item.id !== 1
+                    category.id !== 1
                       ? () =>
-                          navigate(`/products?category=${item.id}`, {
-                            state: { id: item.id, name: item.name },
+                          navigate(`/products?category=${category.id}`, {
+                            state: { id: category.id, name: category.name },
                           })
                       : () => navigate('/category')
                   }
                 >
-                  <img src={item.icon} alt={item.name} css={categoryIcon} />
-                  <Text typo="body3">{item.name}</Text>
+                  <img src={category.icon} alt={category.name} css={categoryIcon} />
+                  <Text typo="body3">{category.name}</Text>
                 </div>
               ))}
           </div>
         </section>
         <section css={listWrapper}>
           {listArray.map((list) => (
-            <ProductList key={list.title} products={list.data} title={list.title} />
+            <ProductList key={list.title} products={list.data ?? []} title={list.title} />
           ))}
         </section>
       </main>

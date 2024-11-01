@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import UserInfo from './user-info';
-import PetType from './pet-type';
-import PetName from './pet-name';
-import Completion from './completion';
-import { usePostPetProfileMutation } from '@/queries/user';
-import { progressBarContainer, progressBar, skipButton } from './index.styles';
-import { AppbarBack } from '@/assets/icons';
+import { useUsersPetMutation } from '@/queries/users';
+import { AppBarBack } from '@/assets/icons';
 import { AppBar, Layout } from '@/components';
+import { Completion, PetName, PetType, UserInfo } from './components';
+import { progressBarContainer, progressBar, skipButton, wrapper } from './index.styles';
+import { UserInfoForm } from './types';
+
 const STEPS = {
   USER_INFO: 1,
   PET_TYPE: 2,
@@ -14,25 +13,23 @@ const STEPS = {
   COMPLETE: 4,
 };
 
-export default function OnBoarding() {
+export default function Onboarding() {
   const [step, setStep] = useState(STEPS.USER_INFO);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<UserInfoForm>({
     email: '',
     nickname: '',
     phone: '',
-    petType: '',
+    petType: null,
     petName: '',
   });
 
-  const { mutate } = usePostPetProfileMutation(() => {
+  const { mutate } = useUsersPetMutation(() => {
     setStep(STEPS.COMPLETE);
   });
 
   const handleNextButtonClick = () => {
-    if (step === STEPS.PET_NAME) {
-      mutate({
-        body: { name: formData.petName, petType: formData.petType },
-      });
+    if (step === STEPS.PET_NAME && formData.petType) {
+      mutate({ name: formData.petName, petType: formData.petType });
     } else {
       setStep(step + 1);
     }
@@ -58,7 +55,11 @@ export default function OnBoarding() {
         );
       case STEPS.PET_TYPE:
         return (
-          <PetType formData={formData} setFormData={setFormData} onNext={handleNextButtonClick} />
+          <PetType
+            formData={formData}
+            setFormData={(data) => setFormData({ ...formData, ...data })}
+            onNext={handleNextButtonClick}
+          />
         );
       case STEPS.PET_NAME:
         return (
@@ -77,16 +78,20 @@ export default function OnBoarding() {
 
   return (
     <Layout>
-      <AppBar prefix={<AppbarBack height="24px" cursor="pointer" />} />
-      <div css={progressBarContainer}>
-        <div css={progressBar(step === STEPS.COMPLETE ? 3 : step)} />
-      </div>
-      {renderStep()}
-      {(step === STEPS.PET_TYPE || step === STEPS.PET_NAME) && (
-        <div css={skipButton} onClick={handleSkipButtonClick}>
-          건너뛰기
+      <AppBar prefix={<AppBarBack height="24px" cursor="pointer" />} />
+      <section css={wrapper}>
+        <div css={progressBarContainer}>
+          <div css={progressBar({ step: step === STEPS.COMPLETE ? 3 : step })} />
         </div>
-      )}
+
+        {renderStep()}
+
+        {(step === STEPS.PET_TYPE || step === STEPS.PET_NAME) && (
+          <div css={skipButton} onClick={handleSkipButtonClick}>
+            건너뛰기
+          </div>
+        )}
+      </section>
     </Layout>
   );
 }

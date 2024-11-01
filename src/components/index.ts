@@ -1,6 +1,7 @@
 export * from './action-sheet';
 export * from './app-bar';
 export * from './button';
+export * from './carousel';
 export * from './dialog';
 export * from './dim';
 export * from './fab';

@@ -1,15 +1,25 @@
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
 
-export const carouselWrapper = css`
+export const wrapper = ({ maxWidth }: { maxWidth: string }) => css`
   position: relative;
   margin: 0 auto;
   overflow: hidden;
+  max-width: ${maxWidth};
 `;
 
-export const carouselImg = css`
+export const carouselImage = ({ width, transform }: { width: number; transform: string }) => css`
   display: flex;
+  width: ${width}px;
+  transform: ${transform};
   transition: transform 0.5s ease;
+`;
+
+export const image = ({ width, height }: { width: number; height: number }) => css`
+  width: ${width}px;
+  height: ${height}px;
+  border-radius: 0 0 20px 20px;
+  object-fit: cover;
 `;
 
 export const leftButton = css`

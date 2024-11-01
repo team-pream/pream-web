@@ -25,7 +25,10 @@ export default function Login() {
         </button>
 
         <Text typo="body6" color={theme.colors.gray300}>
-          이미 계정이 있으신가요? <span css={loginText}>로그인하기</span>
+          이미 계정이 있으신가요?{' '}
+          <span css={loginText} onClick={handleKakaoLoginButtonClick}>
+            로그인하기
+          </span>
         </Text>
       </div>
     </Layout>

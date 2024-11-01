@@ -9,19 +9,11 @@ import {
   textBox,
   itemTitle,
 } from '../../index.styles';
-
-interface CurationData {
-  id: number;
-  title: string;
-  price: number;
-  status: string;
-  images: [];
-  categoryId: number;
-}
+import { ProductsCurationProduct } from '@/types';
 
 interface Props {
-  products: CurationData[];
   title: string;
+  products: ProductsCurationProduct[];
 }
 
 export default function ProductList({ products, title }: Props) {
@@ -31,13 +23,13 @@ export default function ProductList({ products, title }: Props) {
     <>
       <Text typo="subtitle1">{title}</Text>
       <div css={itemList}>
-        {products?.map((product) => (
-          <div key={product.id} css={item}>
+        {products.map((product) => (
+          <div key={product.id} css={item} onClick={() => navigate(`/products/${product.id}`)}>
             <div css={imageBox}>
               <div css={opacityBox} />
               <img src={product.images[0]} alt="itemImage" css={image} />
             </div>
-            <div css={textBox} onClick={() => navigate(`/products/:${product.id}`)}>
+            <div css={textBox}>
               <Text typo="body2" css={itemTitle}>
                 {product.title}
               </Text>
