@@ -10,7 +10,7 @@ interface productInfoProps {
     images: string;
   };
 }
-const ProductInfo: React.FC<productInfoProps> = ({ product }) => {
+const ProductInfo = ({ product }: productInfoProps) => {
   return (
     <div>
       <div css={line} />
