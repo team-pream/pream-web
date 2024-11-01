@@ -1,5 +1,4 @@
-import Button from './components/button';
-import { Layout } from '@/components';
+import { Button, Layout } from '@/components';
 
 export default function Address() {
   return (

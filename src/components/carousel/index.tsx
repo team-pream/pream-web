@@ -31,7 +31,7 @@ export function Carousel({
   autoPlayInterval = 3000,
   progressBarColor = `${colors.black}`,
 }: CarouselProps) {
-  const screenWidth = window.innerWidth;
+  const screenWidth = window.innerWidth > 480 ? 480 : window.innerWidth;
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
