@@ -1,5 +1,4 @@
 import { colors } from '@/styles/colors';
-import { typography } from '@/styles/typography';
 import { css } from '@emotion/react';
 
 export const selectWrapper = css`
@@ -9,13 +8,11 @@ export const selectWrapper = css`
   align-items: center;
 `;
 
-export const selecterWrapper = (isSelected: boolean) => css`
+export const selectorWrapper = (isSelected: boolean) => css`
   width: 100%;
   padding: 15px 30px;
   border-radius: 10px;
   border: 1px solid ${colors.gray200};
-  font-size: ${typography.subtitle2.fontSize};
-  font-weight: ${typography.subtitle2.fontWeight};
   color: ${colors.gray300};
   background-color: ${isSelected ? colors.gray100 : colors.white}; /* 조건부 배경색 */
   appearance: none; /* 기본 화살표 제거 */
