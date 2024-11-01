@@ -4,6 +4,7 @@ import { AppBar, GNB, Layout, SearchBar, Text } from '@/components';
 import { AppBarBack } from '@/assets/icons';
 import CategoryItem from './components/category-item';
 import theme from '@/styles/theme';
+import { Category } from '@/types';
 
 const ALL_MENU_ID: number = 1; //전체 메뉴에 대한 id
 

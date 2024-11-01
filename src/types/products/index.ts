@@ -57,3 +57,14 @@ export interface GetProductsDetailResponse {
   likesCount: number;
   isLiked: boolean;
 }
+
+export interface GetProductsSalesProductResponse {
+  createdAt: string;
+  id: number;
+  title: string;
+  price: number;
+  status: ProductStatus;
+  images: string[];
+}
+
+export type GetProductsSalesListResponse = GetProductsSalesProductResponse[];

@@ -3,6 +3,7 @@ import {
   GetProductsDetailResponse,
   GetProductsResponse,
   GetProductsCurationResponse,
+  GetProductsSalesListResponse,
 } from '@/types';
 import { api } from '@/api/api';
 
@@ -27,5 +28,10 @@ export const getProductsDetail = async (productId: string) => {
   if (productData.status === 'SOLD_OUT') {
     productData.status = '판매완료';
   }
+  return response.data;
+};
+
+export const getProductsSalesList = async () => {
+  const response = await api.get<GetProductsSalesListResponse>(`/products/sales-list`);
   return response.data;
 };
