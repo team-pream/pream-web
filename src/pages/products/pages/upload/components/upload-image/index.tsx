@@ -9,53 +9,43 @@ import {
 } from './index.styles';
 
 interface Props {
-  images: string[];
-  onChange: (images: string[]) => void;
-  onFilesChange?: (files: File[]) => void;
+  onChange?: (files: File[]) => void;
 }
 
-export default function UploadImage({ images, onChange, onFilesChange }: Props) {
+export default function UploadImage({ onChange }: Props) {
   const [files, setFiles] = useState<File[]>([]);
 
-  const handleImageInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleFileInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
+
     const uploadedImages = Array.from(e.target.files);
-
-    if (uploadedImages.length + images.length > 10) {
-      alert('최대 10장의 이미지만 업로드할 수 있습니다.');
-      return;
-    }
-
-    const previews = uploadedImages.map((file) => URL.createObjectURL(file));
-    setFiles([...files, ...uploadedImages]);
-
-    onChange([...images, ...previews]);
-    onFilesChange?.([...files, ...uploadedImages]);
+    setFiles((prev) => [...prev, ...uploadedImages]);
+    onChange?.([...files, ...uploadedImages]);
   };
 
   const handleRemoveImage = (index: number) => {
-    const updatedPreviews = images.filter((_, idx) => idx !== index);
-    const updatedFiles = files.filter((_, idx) => idx !== index);
-
-    onChange(updatedPreviews);
-
-    setFiles(updatedFiles);
-    onFilesChange?.(updatedFiles);
+    setFiles((prev) => prev.filter((_, idx) => idx !== index));
+    onChange?.(files.filter((_, idx) => idx !== index));
   };
 
   return (
     <div css={wrapper}>
       <label css={uploadImageButton}>
         <UploadPlus width="24px" height="24px" />
-        <input type="file" accept="image/*" multiple onChange={handleImageInputChange} />
+        <input type="file" accept="image/*" multiple onChange={handleFileInputChange} />
       </label>
 
-      {images.map((image, index) => (
+      {files.map((file, index) => (
         <div css={imageWrapper}>
           <button css={deleteImageButton} onClick={() => handleRemoveImage(index)}>
             <div />
           </button>
-          <img key={image} src={image} alt={image} css={thumbnailImage} />
+          <img
+            key={file.name}
+            src={URL.createObjectURL(file)}
+            alt={file.name}
+            css={thumbnailImage}
+          />
         </div>
       ))}
     </div>
