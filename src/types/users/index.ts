@@ -21,7 +21,7 @@ export interface GetUsersMeResponse {
   address: string;
   email: string;
   contact: string;
-  pets: GetPetsResponse[];
+  pet: GetPetsResponse;
 }
 
 // TODO: User와 Pet 분리

@@ -6,9 +6,10 @@ import { useNavigate } from 'react-router-dom';
 interface Props {
   menuTitle: string;
   path: string;
+  color: string;
 }
 
-export default function Menu({ menuTitle, path }: Props) {
+export default function Menu({ menuTitle, path, color }: Props) {
   const navigate = useNavigate();
   return (
     <div
@@ -17,7 +18,9 @@ export default function Menu({ menuTitle, path }: Props) {
         navigate(path);
       }}
     >
-      <Text typo="body2">{menuTitle}</Text>
+      <Text typo="body2" color={color}>
+        {menuTitle}
+      </Text>
       <Next css={nextIcon}></Next>
     </div>
   );
