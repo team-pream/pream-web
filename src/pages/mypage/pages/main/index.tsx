@@ -42,7 +42,7 @@ export default function Main() {
   }, []);
 
   const { data } = useGetUsersMeQuery(isLogin); //로그인 상태(isLogin=true)일때만 실행
-  const petInfo = data?.pets[0]; //대표 펫 정보 하나만 조회
+  const petInfo = data?.pet; //대표 펫 정보 하나만 조회
   const profileImage = petInfo?.image || 'images/petprofile.png';
 
   const logout = () => {
