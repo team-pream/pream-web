@@ -34,8 +34,8 @@ export default function Main() {
   // 배너 이미지
   const imageList = [
     'images/carouselImage.png',
-    'images/carouselImage.png',
-    'images/carouselImage.png',
+    'images/carouselImage2.png',
+    'images/carouselImage3.png',
   ];
 
   return (
