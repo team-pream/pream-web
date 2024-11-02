@@ -8,8 +8,8 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useGetCategoriesQuery } from '@/queries/categories';
 import { useGetProductsCurationQuery } from '@/queries/products';
-import { Logo, Search } from '@/assets/icons';
-import { AppBar, GNB, Layout, Text, Carousel } from '@/components';
+import { FabPlus, Logo, Search } from '@/assets/icons';
+import { AppBar, GNB, Layout, Text, Carousel, FAB } from '@/components';
 import ProductList from './components/product-list';
 import { Category } from '@/types';
 import theme from '@/styles/theme';
@@ -40,6 +40,7 @@ export default function Main() {
 
   return (
     <Layout>
+      <FAB icon={<FabPlus width="20" height="20" />} onClick={() => navigate('/products/upload')} />
       <AppBar
         prefix={<Logo width="94" height="20" />}
         suffix={
@@ -75,7 +76,7 @@ export default function Main() {
                           navigate(`/products?category=${category.id}`, {
                             state: { id: category.id, name: category.name },
                           })
-                      : () => navigate('/category')
+                      : () => navigate('/categories')
                   }
                 >
                   <img src={category.icon} alt={category.name} css={categoryIcon} />
