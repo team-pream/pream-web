@@ -10,6 +10,7 @@ import {
   infoTitle,
   InnerWrapper,
   orderInfoWrapper,
+  payInfo,
   paymentBlock,
   productImg,
   productInfoWrapper,
@@ -73,7 +74,7 @@ export default function OrderComplete() {
             <Text typo="subtitle1" css={blockTitle}>
               결제 정보
             </Text>
-            <div css={info}>
+            <div css={payInfo}>
               <div css={infoTitle}>
                 <Text typo="subtitle2">결제 방법</Text>
                 <Text typo="subtitle2">결제 금액</Text>

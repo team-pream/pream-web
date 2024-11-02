@@ -13,12 +13,12 @@ export const confirmWrapper = css`
   justify-content: center;
   flex-direction: column;
   gap: 35px;
-  margin: 65px 0 85px 0;
+  margin: 65px 0 82px 0;
 `;
 
 export const orderInfoWrapper = css`
   height: 50%;
-  padding: 18px;
+  padding: 34px 18px;
 `;
 
 export const completeIcon = css`
@@ -27,7 +27,8 @@ export const completeIcon = css`
 `;
 
 export const hr = css`
-  border: 2px solid ${theme.colors.gray100};
+  border: 4px solid ${theme.colors.gray100};
+  margin: 0;
 `;
 
 export const productInfoWrapper = css`
@@ -37,15 +38,15 @@ export const productInfoWrapper = css`
 
 export const InnerWrapper = css`
   display: flex;
-  margin: 21px 0 35px 0;
+  margin: 21px 0 33px 0;
 `;
 
 export const productImg = css`
-  width: 62px;
+  width: 60px;
   height: 60px;
   border-radius: 8px;
   background-color: ${theme.colors.gray200};
-  margin-right: 20px;
+  margin-right: 16px;
   position: relative;
   img {
     width: 100%;
@@ -89,8 +90,13 @@ export const infoContent = css`
   gap: 11px;
 `;
 
+export const payInfo = css`
+  display: flex;
+  gap: 37px;
+`;
+
 export const paymentBlock = css`
-  padding: 18px 0 40px 0;
+  padding-top: 18px;
   display: flex;
   flex-direction: column;
 `;
