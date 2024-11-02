@@ -49,7 +49,7 @@ export default function Main() {
   const logout = () => {
     localStorage.removeItem('access'); // access 키만 삭제
     setIsLogin(false);
-    location.replace(ROUTE_PATHS.MAIN);
+    navigate(ROUTE_PATHS.MAIN, { replace: true });
   };
 
   const handleClickPlus = () => {
