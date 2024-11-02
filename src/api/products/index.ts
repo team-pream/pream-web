@@ -30,8 +30,3 @@ export const getProductsDetail = async (productId: string) => {
 
   return response.data;
 };
-
-export const getCuration = async () => {
-  const response = await api.get('/products/curation');
-  return response.data;
-};
