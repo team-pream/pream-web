@@ -1,6 +1,11 @@
-import { addressListWrapper, addressWrapper, defaultAddressTag, tagStyle } from './index.styles';
+import {
+  addressListWrapper,
+  addressWrapper,
+  defaultAddressTag,
+  tagStyle,
+  modifyButtonStyle,
+} from './index.styles';
 import { Text } from '@/components';
-import { colors } from '@/styles/colors';
 
 interface addressListProps {
   address: string;
@@ -22,13 +27,7 @@ const AddressList = ({ address }: addressListProps) => {
                 <Text typo="body3">기본 배송지</Text>
               </div>
             </div>
-            <div
-              css={{
-                cursor: 'pointer',
-                display: 'flex',
-                color: `${colors.green300}`,
-              }}
-            >
+            <div css={modifyButtonStyle}>
               <Text typo="body3">변경</Text>
             </div>
           </div>

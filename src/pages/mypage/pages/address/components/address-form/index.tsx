@@ -2,9 +2,14 @@ import { useEffect, useState } from 'react';
 import SearchBar from './components/search-bar';
 import KakaoMap from './components/map';
 import axios from 'axios';
-import { tagStyle } from '../address-list/index.styles';
 import { Text } from '@/components';
-import { containTagWrapper, addressFormWrapper, defaultWrapper } from './insex.styles';
+import {
+  containTagWrapper,
+  addressFormWrapper,
+  defaultWrapper,
+  buttonWrapper,
+  formTagStyle,
+} from './insex.styles';
 import { Input, Button, Dialog } from '@/components';
 
 interface addressData {
@@ -89,7 +94,7 @@ const AddressForm = ({ onSave }: addressFormProps) => {
       <div css={defaultWrapper}>
         {roadAddress && (
           <div css={containTagWrapper}>
-            <div css={tagStyle}>
+            <div css={formTagStyle}>
               <Text typo="body3">도로명</Text>
             </div>
             <Text typo="subtitle2">{roadAddress}</Text>
@@ -97,7 +102,7 @@ const AddressForm = ({ onSave }: addressFormProps) => {
         )}
         {jibunAddress && (
           <div css={containTagWrapper}>
-            <div css={tagStyle}>
+            <div css={formTagStyle}>
               <Text typo="body3">지번</Text>
             </div>
             <Text typo="body4">{jibunAddress}</Text>
@@ -105,19 +110,12 @@ const AddressForm = ({ onSave }: addressFormProps) => {
         )}
         {showDetailInput && (
           <div>
-            <div tabIndex={-1}>
+            <div tabIndex={-1} css={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <Input type="text" placeholder="상세 주소를 입력하세요" />
+              <Input type="text" placeholder="받는 사람" />
+              <Input type="text" placeholder="전화번호" />
             </div>
-            <div
-              css={{
-                position: 'absolute',
-                bottom: '10px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                width: '95%',
-                padding: '16px 0',
-              }}
-            >
+            <div css={buttonWrapper}>
               <Button size="xl" onClick={handleSave}>
                 이 주소가 확실해요
               </Button>
