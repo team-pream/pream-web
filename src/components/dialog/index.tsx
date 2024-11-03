@@ -23,6 +23,8 @@ export function Dialog({
   primaryActionLabel,
   secondaryActionLabel,
   secondaryActionType = 'neutral',
+  onPrimaryAction,
+  onSecondaryAction,
   ...props
 }: DialogProps) {
   return (
@@ -36,12 +38,24 @@ export function Dialog({
         </div>
 
         <div css={buttonWrapper}>
-          <Button shape="box" size="xs" fullWidth status={type === 'error' ? 'error' : 'active'}>
+          <Button
+            shape="box"
+            size="xs"
+            fullWidth
+            status={type === 'error' ? 'error' : 'active'}
+            onClick={onPrimaryAction}
+          >
             {primaryActionLabel}
           </Button>
 
           {secondaryActionLabel && (
-            <Button shape="box" size="xs" fullWidth css={secondaryButton({ secondaryActionType })}>
+            <Button
+              shape="box"
+              size="xs"
+              fullWidth
+              css={secondaryButton({ secondaryActionType })}
+              onClick={onSecondaryAction}
+            >
               {secondaryActionLabel}
             </Button>
           )}
