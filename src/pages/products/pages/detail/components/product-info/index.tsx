@@ -14,6 +14,7 @@ import { Text } from '@/components';
 import { ProductsDetailOption } from '@/assets/icons';
 import { ProductDetail } from '@/pages/products/pages/detail/types';
 import theme from '@/styles/theme';
+import { useGetUsersMeQuery } from '@/queries/users';
 
 interface Props {
   onOptionClick: () => void;
@@ -21,17 +22,19 @@ interface Props {
 }
 
 export default function ProductInfo({ onOptionClick, product }: Props) {
+  const { data: user } = useGetUsersMeQuery();
+
   return (
     <div css={wrapper}>
       <section css={titleWrapper}>
         <div css={titleTop}>
           <Text typo="subtitle3">{product.title}</Text>
-          <ProductsDetailOption
-            width="16px"
-            height="16px"
-            onClick={onOptionClick}
-            cursor="pointer"
-          />
+          {user?.id === product.seller.id && (
+            <ProductsDetailOption
+              onClick={onOptionClick}
+              css={{ cursor: 'pointer', width: '24px', height: '24px' }}
+            />
+          )}
         </div>
         <Text typo="title1">{product.price.toLocaleString()}원</Text> {/* 가격 출력 */}
       </section>
