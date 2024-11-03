@@ -34,7 +34,8 @@ export default function Upload() {
   const [isCancelDialogOpen, setIsCancelDialogOpen] = useState<boolean>(false);
 
   const { data: categories } = useGetCategoriesQuery();
-  const { mutateAsync: uploadProduct } = usePostProductsUploadMutation();
+  const { mutateAsync: uploadProduct, isSuccess: isUploadSuccess } =
+    usePostProductsUploadMutation();
 
   const {
     handleSubmit,
@@ -72,9 +73,7 @@ export default function Upload() {
             <AppBarBack
               height="24px"
               cursor="pointer"
-              onClick={() => {
-                setIsCancelDialogOpen(true);
-              }}
+              onClick={() => (isUploadSuccess ? navigate(-1) : setIsCancelDialogOpen(true))}
             />
           }
         />
