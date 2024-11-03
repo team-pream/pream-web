@@ -13,7 +13,7 @@ import {
 } from '@/components';
 import { useGetCategoriesQuery } from '@/queries/categories';
 import { usePostProductsUploadMutation } from '@/queries/products';
-import { PostProductsUploadBodyType, PRODUCT_CONDITION } from '@/types/product';
+import { PostProductsUploadBody, PRODUCT_CONDITION } from '@/types/products';
 import { AppBarBack } from '@/assets/icons';
 import { Category } from '@/types/category';
 import theme from '@/styles/theme';
@@ -43,10 +43,10 @@ export default function Upload() {
     control,
     clearErrors,
     setError,
-  } = useForm<PostProductsUploadBodyType>();
+  } = useForm<PostProductsUploadBody>();
   const validationRules = useValidation();
 
-  const onSubmit = async (form: PostProductsUploadBodyType) => {
+  const onSubmit = async (form: PostProductsUploadBody) => {
     if (!form) return;
 
     const formData = new FormData();
