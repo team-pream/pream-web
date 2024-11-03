@@ -4,6 +4,7 @@ import {
   PostUsersPetBody,
   PatchAuthOnboardingBody,
   GetUsersMeResponse,
+  PatchUsersMeBody,
 } from '@/types/users';
 
 export const patchUsersOnboarding = async (body: PatchAuthOnboardingBody) => {
@@ -24,5 +25,10 @@ export const postUsersPet = async (body: PostUsersPetBody) => {
 
 export const getUsersMe = async () => {
   const response = await api.get<GetUsersMeResponse>('/users/profile');
+  return response.data;
+};
+
+export const patchUsersme = async (body: PatchUsersMeBody) => {
+  const response = await api.patch('/users/me', body);
   return response.data;
 };

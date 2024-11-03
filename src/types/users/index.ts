@@ -34,3 +34,9 @@ export interface GetPetsResponse {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface PatchUsersMeBody {
+  nickname?: string;
+  phone?: string;
+  bankAccount?: { bank: string; accountNumber: string };
+}
