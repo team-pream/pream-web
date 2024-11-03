@@ -10,16 +10,6 @@ export const wrapper = css`
   overflow-y: auto;
 `;
 
-export const wrap = css`
-  width: 100%;
-  padding: 0 18px;
-`;
-
-export const nowrap = css`
-  width: 100%;
-  padding: 0 0 0 18px;
-`;
-
 export const hr = css`
   width: 100%;
   height: 2px;
@@ -41,6 +31,7 @@ export const textarea = css`
   border-radius: 10px;
   background: ${theme.colors.gray100};
   ${theme.typo.body5};
+  line-height: 1.6;
 
   &::placeholder {
     color: ${theme.colors.gray300};
