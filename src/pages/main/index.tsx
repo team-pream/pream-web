@@ -1,18 +1,15 @@
-import {
-  categoryList,
-  categoryItems,
-  categoryItem,
-  categoryIcon,
-  listWrapper,
-} from './index.styles';
+import { listWrapper } from './index.styles';
 import { useNavigate } from 'react-router-dom';
 import { useGetCategoriesQuery } from '@/queries/categories';
 import { useGetProductsCurationQuery } from '@/queries/products';
 import { FabPlus, Logo, Search } from '@/assets/icons';
-import { AppBar, GNB, Layout, Text, Carousel, FAB } from '@/components';
-import ProductList from './components/product-list';
-import { Category } from '@/types';
+import { AppBar, GNB, Layout, Carousel, FAB } from '@/components';
 import theme from '@/styles/theme';
+
+import ProductList from './components/product-list';
+import ProductListSkeleton from './components/product-list/indexSkeleton';
+import CategoryList from './components/category-list';
+import CategoryListSkeleton from './components/category-list/indexSkeleton';
 
 const CAT_WHEEL = 4;
 const WALKING = 5;
@@ -20,8 +17,8 @@ const EXCLUDED_CATEGORIES = [CAT_WHEEL, WALKING];
 
 export default function Main() {
   const navigate = useNavigate();
-  const { data: categories } = useGetCategoriesQuery();
-  const { data: curation } = useGetProductsCurationQuery();
+  const { data: categories, isLoading: isLoadingCategoryList } = useGetCategoriesQuery();
+  const { data: curation, isLoading: isLoadingProductList } = useGetProductsCurationQuery();
 
   // 섹션
   const listArray = [
@@ -62,33 +59,24 @@ export default function Main() {
           showButtons={false}
           progressBarColor={theme.colors.white}
         />
-        <section css={categoryList}>
-          <div css={categoryItems}>
-            {categories
-              ?.filter((category: Category) => !EXCLUDED_CATEGORIES.includes(category.id))
-              .map((category: Category) => (
-                <div
-                  key={category.id}
-                  css={categoryItem}
-                  onClick={
-                    category.id !== 1
-                      ? () =>
-                          navigate(`/products?category=${category.id}`, {
-                            state: { id: category.id, name: category.name },
-                          })
-                      : () => navigate('/categories')
-                  }
-                >
-                  <img src={category.icon} alt={category.name} css={categoryIcon} />
-                  <Text typo="body3">{category.name}</Text>
-                </div>
-              ))}
-          </div>
-        </section>
+        {isLoadingCategoryList ? (
+          <CategoryListSkeleton />
+        ) : (
+          <CategoryList categories={categories} excludedCategories={EXCLUDED_CATEGORIES} />
+        )}
+
         <section css={listWrapper}>
-          {listArray.map((list) => (
-            <ProductList key={list.title} products={list.data ?? []} title={list.title} />
-          ))}
+          {listArray.map((list) =>
+            isLoadingProductList ? (
+              <ProductListSkeleton
+                key={list.title}
+                products={Array(5).fill({})}
+                title={list.title}
+              />
+            ) : (
+              <ProductList key={list.title} products={list.data ?? []} title={list.title} />
+            )
+          )}
         </section>
       </main>
       <GNB />
