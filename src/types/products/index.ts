@@ -3,6 +3,12 @@ import { Category } from '@/types/categories';
 export type ProductStatus = 'AVAILABLE' | 'RESERVED' | 'SOLD_OUT';
 export type ProductCondition = 'NEW' | 'SLIGHTLY_USED' | 'HEAVILY_USED';
 
+export const PRODUCT_CONDITION = {
+  NEW: 'NEW',
+  SLIGHTLY_USED: 'SLIGHTLY_USED',
+  HEAVILY_USED: 'HEAVILY_USED',
+} as const;
+
 export interface GetProductsParams {
   category?: number;
   status?: number;

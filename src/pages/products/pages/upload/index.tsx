@@ -135,6 +135,11 @@ export default function Upload() {
                     id="price"
                     {...field}
                     errorMessage={errors.price?.message}
+                    onChange={(e) => {
+                      const value = e.target.value.replace(/\D/g, '');
+                      const formatted = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                      e.target.value = formatted;
+                    }}
                   />
                 )}
               />
