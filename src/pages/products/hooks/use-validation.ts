@@ -50,13 +50,13 @@ export function useValidation() {
       bankAccount: {
         required: '계좌번호를 입력해 주세요',
         validate: (value: string) => {
-          if (!/^\d{1,20}$/.test(value)) return '계좌 번호를 확인해 주세요';
+          if (!/^\d{1,20}$/.test(value)) return '숫자만 입력 가능해요';
           return true;
         },
       },
 
       contact: {
-        required: '공개 연락처를 입력해 주세요.',
+        required: '공개 연락처를 입력해 주세요',
       },
     }),
     []

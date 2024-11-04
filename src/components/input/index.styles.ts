@@ -48,6 +48,10 @@ export const input = css`
     -webkit-appearance: none;
     margin: 0;
   }
+
+  &[type='button'] {
+    cursor: pointer;
+  }
 `;
 
 export const infoTextWrapper = css`

@@ -15,7 +15,7 @@ export const BANKS = [
   { label: '수협은행', value: 'SU' },
   { label: '새마을금고', value: 'SM' },
   { label: '우체국', value: 'UC' },
-  { label: '케이뱅크', value: 'KB' },
+  { label: '케이뱅크', value: 'KBB' },
   { label: '카카오뱅크', value: 'KK' },
   { label: '토스뱅크', value: 'TS' },
 ] as const;

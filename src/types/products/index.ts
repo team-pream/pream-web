@@ -4,6 +4,7 @@ import { Category } from '@/types/categories';
 export type ProductStatus = 'AVAILABLE' | 'RESERVED' | 'SOLD_OUT';
 export type ProductCondition = 'NEW' | 'SLIGHTLY_USED' | 'HEAVILY_USED';
 export type BANK = (typeof BANKS)[number]['value'];
+export type BANK_KR = (typeof BANKS)[number]['label'];
 
 export const PRODUCT_CONDITION = {
   NEW: 'NEW',
@@ -62,10 +63,10 @@ export interface GetProductsDetailResponse {
     id: string;
     nickname: string;
     contact: string;
-    bank: {
+    bankAccount: {
       bank: BANK;
       bankAccount: string;
-    } | null;
+    };
   };
 
   likesCount: number;
@@ -87,9 +88,27 @@ export interface PostProductsUploadBody {
   contact: string;
 }
 
+export interface ProductForm {
+  images: File[];
+  condition: ProductCondition;
+  price: number;
+  categoryId: number;
+  title: string;
+  description: string;
+  bankAccount: {
+    bank: BANK_KR;
+    bankAccount: string;
+  };
+  contact: string;
+}
+
 export const convertProductsDetailToProductsUploadBody = (
   data: GetProductsDetailResponse
-): PostProductsUploadBody => {
+): ProductForm => {
+  console.log(
+    data,
+    BANKS.find((bank) => bank.value === data.seller.bankAccount.bank)
+  );
   return {
     images: data.images as unknown as File[],
     condition: data.condition,
@@ -97,12 +116,10 @@ export const convertProductsDetailToProductsUploadBody = (
     categoryId: data.category.id,
     title: data.title,
     description: data.description,
-    bank: data.seller.bank
-      ? {
-          bank: data.seller.bank.bank,
-          bankAccount: data.seller.bank.bankAccount,
-        }
-      : null,
+    bankAccount: {
+      bank: BANKS.find((bank) => bank.value === data.seller.bankAccount.bank)?.label || '국민은행',
+      bankAccount: data.seller.bankAccount.bankAccount,
+    },
     contact: data.seller.contact,
   };
 };

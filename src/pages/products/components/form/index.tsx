@@ -15,8 +15,8 @@ import { useGetCategoriesQuery } from '@/queries/categories';
 import {
   convertProductsDetailToProductsUploadBody,
   GetProductsDetailResponse,
-  PostProductsUploadBody,
   PRODUCT_CONDITION,
+  ProductForm,
 } from '@/types/products';
 import { AppBarBack } from '@/assets/icons';
 import { Category } from '@/types/category';
@@ -36,7 +36,7 @@ const PRODUCT_CONDITION_ITEMS = [
 ];
 
 interface Props {
-  onSubmit: (form: PostProductsUploadBody) => void;
+  onSubmit: (form: ProductForm) => void;
   defaultForm?: GetProductsDetailResponse;
   isSuccess?: boolean;
   onChangeDialog?: () => void;
@@ -51,12 +51,19 @@ export default function Form({ defaultForm, onSubmit, isSuccess, onChangeDialog 
   const { data: categories } = useGetCategoriesQuery();
   const defaultValues = defaultForm && convertProductsDetailToProductsUploadBody(defaultForm);
 
-  const { handleSubmit, control, clearErrors } = useForm<PostProductsUploadBody>();
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+    clearErrors,
+  } = useForm<ProductForm>();
   const validationRules = useValidation();
 
   const onError = () => {
     setIsErrorDialogOpen(true);
   };
+
+  console.log(errors);
 
   return (
     <>
@@ -165,6 +172,7 @@ export default function Form({ defaultForm, onSubmit, isSuccess, onChangeDialog 
                   <Input
                     id="title"
                     placeholder="제목을 입력해 주세요"
+                    defaultValue={defaultValues?.title}
                     spellCheck={false}
                     {...field}
                   />
@@ -177,6 +185,7 @@ export default function Form({ defaultForm, onSubmit, isSuccess, onChangeDialog 
                 name="description"
                 control={control}
                 rules={validationRules.description}
+                defaultValue={defaultValues?.description}
                 render={({ field }) => (
                   <textarea
                     id="description"
@@ -195,15 +204,16 @@ export default function Form({ defaultForm, onSubmit, isSuccess, onChangeDialog 
 
           <Info title="판매 정산 계좌">
             <Controller
-              name="bank.bank"
+              name="bankAccount.bank"
               control={control}
               rules={validationRules.bank}
+              defaultValue={defaultValues?.bankAccount?.bank}
               render={({ field }) => (
                 <Input
-                  id="bank.bank"
+                  id="bankAccount.bank"
                   label="은행"
                   type="button"
-                  defaultValue={defaultValues?.bank?.bank}
+                  defaultValue={defaultValues?.bankAccount?.bank}
                   spellCheck={false}
                   onClick={() => setIsBankActionSheetOpen(true)}
                   {...field}
@@ -212,15 +222,16 @@ export default function Form({ defaultForm, onSubmit, isSuccess, onChangeDialog 
             />
 
             <Controller
-              name="bank.bankAccount"
+              name="bankAccount.bankAccount"
               control={control}
               rules={validationRules.bankAccount}
+              defaultValue={defaultValues?.bankAccount?.bankAccount}
               render={({ field }) => (
                 <Input
-                  id="bank.bankAccount"
+                  id="bank.bankAccount.bankAccount"
                   label="계좌번호"
                   placeholder="계좌번호를 입력해 주세요"
-                  defaultValue={defaultValues?.bank?.bankAccount}
+                  defaultValue={defaultValues?.bankAccount?.bankAccount}
                   spellCheck={false}
                   {...field}
                 />
@@ -235,6 +246,7 @@ export default function Form({ defaultForm, onSubmit, isSuccess, onChangeDialog 
               name="contact"
               control={control}
               rules={validationRules.contact}
+              defaultValue={defaultValues?.contact}
               render={({ field }) => (
                 <Input
                   id="contact"
@@ -258,16 +270,16 @@ export default function Form({ defaultForm, onSubmit, isSuccess, onChangeDialog 
 
       {isBankActionSheetOpen && (
         <Controller
-          name="bank.bank"
+          name="bankAccount.bank"
           control={control}
-          rules={validationRules.condition}
-          defaultValue={defaultValues?.bank?.bank}
+          rules={validationRules.bank}
+          defaultValue={defaultValues?.bankAccount?.bank}
           render={({ field: { onChange } }) => (
             <ActionSheet
-              menus={BANKS}
+              menus={[...BANKS]}
               onClose={() => setIsBankActionSheetOpen(false)}
               onClickItem={(value: string | number) => {
-                onChange(value);
+                onChange(BANKS.find((bank) => bank.value === value)?.label ?? '');
                 setIsBankActionSheetOpen(false);
               }}
             />
@@ -278,8 +290,8 @@ export default function Form({ defaultForm, onSubmit, isSuccess, onChangeDialog 
       {isErrorDialogOpen && (
         <Dialog
           type="error"
-          title="등록 오류"
-          description="필수 입력 항목을 모두 입력해 주세요"
+          title="필수 항목이 누락됐어요"
+          description={Object.values(errors)[0]?.message}
           primaryActionLabel="확인"
           onPrimaryAction={() => {
             clearErrors();

@@ -42,7 +42,7 @@ export default function ProductInfo({ onOptionClick, product }: Props) {
       <section css={infoWrapper}>
         <InfoRow title="판매자" value={product.seller.nickname} /> {/* 판매자 닉네임 출력 */}
         <InfoRow title="상태" value={product.condition} /> {/* 상태 출력 */}
-        <InfoRow title="연락처" value={product.seller.id} /> {/* TODO: 연락처로 변경 */}
+        <InfoRow title="연락처" value={product.seller.contact} />
         <div css={timeInfo}>
           <Text typo="body5" color={theme.colors.gray300}>
             10분전

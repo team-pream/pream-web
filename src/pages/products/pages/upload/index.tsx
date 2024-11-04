@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Dialog } from '@/components';
-import { PostProductsUploadBody } from '@/types';
+import { ProductForm } from '@/types';
 import { Form } from '@/pages/products/components';
 import { usePostProductsUploadMutation } from '@/queries/products';
 
@@ -12,7 +12,7 @@ export default function Upload() {
   const { mutateAsync: uploadProduct, isSuccess: isUploadSuccess } =
     usePostProductsUploadMutation();
 
-  const handleFormSubmit = async (form: PostProductsUploadBody) => {
+  const handleFormSubmit = async (form: ProductForm) => {
     if (!form) return;
 
     const formData = new FormData();
@@ -23,9 +23,21 @@ export default function Upload() {
     formData.append('description', form.description);
     formData.append('contact', form.contact);
     form.images.forEach((image) => formData.append('images', image));
+    if (form.bank) {
+      formData.append(
+        'bankAccount',
+        JSON.stringify({
+          bank: form.bank.bank,
+          bankAccount: form.bank.bankAccount,
+        })
+      );
+    } else {
+      formData.append('bank', JSON.stringify(null));
+    }
 
     try {
       await uploadProduct(formData);
+      navigate(-1);
     } catch (error) {
       console.error(error);
     }

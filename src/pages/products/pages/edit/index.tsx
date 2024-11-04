@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Dialog } from '@/components';
-import { PostProductsUploadBody } from '@/types';
+import { ProductForm } from '@/types';
 import { useGetProductsDetailQuery, usePatchProductsDetailMutation } from '@/queries/products';
 import { Form } from '@/pages/products/components';
+import { BANKS } from '@/constants/bank';
 
 export default function Edit() {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export default function Edit() {
   const { data: product } = useGetProductsDetailQuery(productId!);
   const { mutate: updateProduct, isSuccess } = usePatchProductsDetailMutation(productId!);
 
-  const handleFormSubmit = (form: PostProductsUploadBody) => {
+  const handleFormSubmit = (form: ProductForm) => {
     if (!form) return;
 
     const formData = new FormData();
@@ -25,9 +26,17 @@ export default function Edit() {
     formData.append('description', form.description);
     formData.append('contact', form.contact);
     form.images.forEach((image) => formData.append('images', image));
+    formData.append(
+      'bankAccount',
+      JSON.stringify({
+        bank: BANKS.find((bank) => bank.label === form.bankAccount.bank)?.value,
+        bankAccount: form.bankAccount.bankAccount,
+      })
+    );
 
     try {
       updateProduct({ productId: productId!, body: formData });
+      navigate(-1);
     } catch (error) {
       console.error(error);
     }
