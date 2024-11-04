@@ -5,7 +5,7 @@ export const wrapper = css`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 48px 18px 0 18px;
+  padding: 12% 4% 0 4%;
   gap: 26px;
 `;
 
@@ -15,13 +15,13 @@ export const textBox = css`
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: 0 0 60px 0;
+  margin: 0 0 18% 0;
   gap: 8px;
 `;
 
 export const fixedButtonWrapper = css`
   position: fixed;
-  bottom: 23px;
+  bottom: 2%;
   left: 0;
   width: 100%;
   display: flex;

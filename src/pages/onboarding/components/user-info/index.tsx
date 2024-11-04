@@ -15,8 +15,15 @@ interface UserInfoProps {
 
 export default function UserInfo({ onNext, setFormData, formData }: UserInfoProps) {
   const [nicknameAvailable, setNicknameAvailable] = useState<boolean | null>(null);
+  const [phoneError, setPhoneError] = useState('');
+  const [emailError, setEmailError] = useState(''); // 이메일 오류 상태 추가
   const isUserInfoValid =
-    formData.email && formData.nickname && formData.phone && nicknameAvailable;
+    formData.email &&
+    formData.nickname &&
+    formData.phone &&
+    nicknameAvailable &&
+    !emailError &&
+    !phoneError;
 
   const { mutate: patchUsersOnboarding } = usePatchUsersOnboardingMutation(onNext);
   const checkNicknameMutation = usePostUsersCheckNicknameMutation(() => {
@@ -33,6 +40,34 @@ export default function UserInfo({ onNext, setFormData, formData }: UserInfoProp
       setNicknameAvailable(true);
     } catch {
       setNicknameAvailable(false);
+    }
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+
+    // 유효성 검사
+    const phoneRegex = /^010-\d{4}-\d{4}$/; // 형식 검사를 위한 정규식 (010-XXXX-XXXX 형식)
+
+    setFormData({ ...formData, phone: value });
+
+    if (!phoneRegex.test(value)) {
+      setPhoneError('휴대폰 번호는 010-XXXX-XXXX 형식으로 입력해주세요.');
+    } else {
+      setPhoneError('');
+    }
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const email = e.target.value;
+    setFormData({ ...formData, email });
+
+    // 이메일 유효성 검사
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setEmailError('유효한 이메일 주소를 입력해주세요.');
+    } else {
+      setEmailError('');
     }
   };
 
@@ -61,7 +96,8 @@ export default function UserInfo({ onNext, setFormData, formData }: UserInfoProp
         label="이메일"
         placeholder="이메일을 입력해주세요"
         value={formData.email}
-        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+        onChange={handleEmailChange} // 이메일 변경 핸들러로 수정
+        errorMessage={emailError} // 이메일 오류 메시지 추가
       />
       <Input
         type="text"
@@ -84,8 +120,9 @@ export default function UserInfo({ onNext, setFormData, formData }: UserInfoProp
         type="text"
         label="휴대폰번호"
         placeholder="휴대폰번호를 입력해주세요"
-        value={formData.phone}
-        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+        value={formData.phone} // 변경된 값 저장
+        onChange={handlePhoneChange}
+        errorMessage={phoneError}
       />
 
       <div css={fixedButtonWrapper}>
