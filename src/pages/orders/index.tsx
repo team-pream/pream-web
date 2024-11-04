@@ -11,12 +11,7 @@ import { contentsWrapper } from './index.styles';
 import { useState, useEffect } from 'react';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { useGetUsersMeQuery } from '@/queries/users';
-export const CARD_COMPANIES = [
-  { id: 'KB', name: '국민' },
-  { id: 'shinhan', name: '신한' },
-  { id: 'hana', name: '하나' },
-  { id: 'woori', name: '우리' },
-];
+
 interface Product {
   id: string;
   title: string;
