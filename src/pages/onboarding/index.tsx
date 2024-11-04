@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useUsersPetMutation } from '@/queries/users';
 import { AppBarBack } from '@/assets/icons';
-import { AppBar, Layout } from '@/components';
+import { AppBar, Layout, Text } from '@/components';
 import { Completion, PetName, PetType, UserInfo } from './components';
 import { progressBarContainer, progressBar, skipButton, wrapper } from './index.styles';
 import { UserInfoForm } from './types';
@@ -88,7 +88,7 @@ export default function Onboarding() {
 
         {(step === STEPS.PET_TYPE || step === STEPS.PET_NAME) && (
           <div css={skipButton} onClick={handleSkipButtonClick}>
-            건너뛰기
+            <Text typo="body1">건너뛰기</Text>
           </div>
         )}
       </section>

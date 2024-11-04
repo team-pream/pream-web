@@ -6,6 +6,6 @@ export const textBox = css`
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin-top: 250px;
+  margin-top: 45%;
   gap: 30px;
 `;

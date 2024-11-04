@@ -6,7 +6,7 @@ export const wrapper = css`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 18px;
+  padding: 12% 4% 0 4%;
 `;
 
 export const textBox = css`
@@ -15,7 +15,7 @@ export const textBox = css`
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: 20px 0 44px 0;
+  margin: 0 0 18% 0;
   gap: 8px;
 `;
 
@@ -54,24 +54,9 @@ export const selectBox = (isSelected: boolean) => css`
   }
 `;
 
-export const skipButton = css`
-  position: absolute;
-  bottom: 23px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${theme.colors.white};
-  color: ${theme.colors.gray300};
-  width: 354px;
-  height: 45px;
-  border-radius: 10px;
-  font-weight: 700;
-  font-size: 12px;
-`;
-
 export const fixedButtonWrapper = css`
   position: fixed;
-  bottom: 73px;
+  bottom: 7.5%;
   left: 0;
   width: 100%;
   display: flex;

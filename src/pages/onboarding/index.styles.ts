@@ -26,7 +26,7 @@ export const progressBar = ({ step }: { step: number }) => css`
 
 export const skipButton = css`
   position: absolute;
-  bottom: 23px;
+  bottom: 1%;
   display: flex;
   justify-content: center;
   align-items: center;

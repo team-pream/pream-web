@@ -15,6 +15,7 @@ interface UserInfoProps {
 
 export default function UserInfo({ onNext, setFormData, formData }: UserInfoProps) {
   const [nicknameAvailable, setNicknameAvailable] = useState<boolean | null>(null);
+  const [phoneError, setPhoneError] = useState('');
   const isUserInfoValid =
     formData.email && formData.nickname && formData.phone && nicknameAvailable;
 
@@ -33,6 +34,32 @@ export default function UserInfo({ onNext, setFormData, formData }: UserInfoProp
       setNicknameAvailable(true);
     } catch {
       setNicknameAvailable(false);
+    }
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/[^0-9]/g, ''); // 숫자만 남기기
+    if (value.length > 11) return; // 최대 11자리로 제한
+
+    let formattedValue = '';
+    if (value.length < 4) {
+      formattedValue = value;
+    } else if (value.length < 7) {
+      formattedValue = `010-${value.slice(3)}`;
+    } else if (value.length < 11) {
+      formattedValue = `010-${value.slice(3, 7)}-${value.slice(7)}`;
+    } else {
+      formattedValue = `010-${value.slice(3, 7)}-${value.slice(7, 11)}`;
+    }
+
+    setFormData({ ...formData, phone: formattedValue });
+
+    // 유효성 검사
+    const phoneRegex = /^010-\d{4}-\d{4}$/;
+    if (!phoneRegex.test(formattedValue)) {
+      setPhoneError('휴대폰 번호는 010-XXXX-XXXX 형식으로 입력해주세요.');
+    } else {
+      setPhoneError('');
     }
   };
 
@@ -85,7 +112,8 @@ export default function UserInfo({ onNext, setFormData, formData }: UserInfoProp
         label="휴대폰번호"
         placeholder="휴대폰번호를 입력해주세요"
         value={formData.phone}
-        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+        onChange={handlePhoneChange}
+        errorMessage={phoneError}
       />
 
       <div css={fixedButtonWrapper}>
