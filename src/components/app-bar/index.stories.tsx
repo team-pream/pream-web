@@ -16,13 +16,13 @@ export const Default: Story = {
 
 export const Back: Story = {
   args: {
-    prefix: <AppBarBack height="17px" cursor="pointer" />,
+    prefix: <AppBarBack height="24px" cursor="pointer" />,
   },
 };
 
 export const SearchInput: Story = {
   args: {
-    prefix: <AppBarBack height="17px" cursor="pointer" />,
+    prefix: <AppBarBack height="24px" cursor="pointer" />,
     suffix: <SearchBar />,
   },
 };

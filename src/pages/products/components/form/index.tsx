@@ -27,7 +27,6 @@ import Info from '@/pages/products/components/info';
 import theme from '@/styles/theme';
 import { useState } from 'react';
 import { BANKS } from '@/constants/bank';
-import { DevTool } from '@hookform/devtools';
 
 const PRODUCT_CONDITION_ITEMS = [
   { label: '새상품', value: PRODUCT_CONDITION.NEW },
@@ -77,7 +76,6 @@ export default function Form({ defaultForm, onSubmit, isSuccess, onChangeDialog 
         />
 
         <form css={wrapper} onSubmit={handleSubmit(onSubmit, onError)}>
-          <DevTool control={control} />
           <section css={wrap}>
             <Text typo="title1" color={theme.colors.black}>
               판매
@@ -124,16 +122,16 @@ export default function Form({ defaultForm, onSubmit, isSuccess, onChangeDialog 
                     prefix={<Text typo="body5">₩</Text>}
                     defaultValue={defaultValues?.price}
                     {...field}
-                    onChange={(e) => {
-                      const value = e.target.value.replace(/\D/g, '');
-                      const formatted = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-                      field.onChange(formatted);
-                    }}
                     value={
                       field.value
                         ? field.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                         : ''
                     }
+                    onChange={(e) => {
+                      const value = e.target.value.replace(/\D/g, '');
+                      const formatted = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                      field.onChange(formatted);
+                    }}
                   />
                 )}
               />
