@@ -19,7 +19,7 @@ interface AddressData {
   detailAddress: string;
   jibunAddress: string;
   zonecode: string;
-  buildingName: string;
+  buildingName?: string;
 }
 
 interface AddressFormProps {
@@ -33,7 +33,7 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
   const [zonecode, setZoneCode] = useState(initialData?.zonecode || '');
   const [detailAddress, setDetailAddress] = useState(initialData?.detailAddress || '');
   const [showDetailInput, setShowDetailInput] = useState(!!initialData);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [mapCoordinates, setMapCoordinates] = useState<{
     latitude: number;
     longitude: number;
@@ -80,7 +80,7 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
   const handlePostcodeSearch = () => {
     new window.daum.Postcode({
       oncomplete: (data: AddressData) => {
-        const buildingName = data.buildingName ? ` (${data.buildingName})` : '';
+        const buildingName = data.buildingName;
         setRoadAddress(data.roadAddress + buildingName);
         setJibunAddress(data.jibunAddress);
         setZoneCode(data.zonecode);
@@ -97,7 +97,6 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
       if (status === window.kakao.maps.services.Status.OK && result[0]) {
         const roadAddress = result[0].road_address?.address_name || ''; // 도로명 주소
         const jibunAddress = result[0].address?.address_name || ''; // 지번 주소
-
         setRoadAddress(roadAddress);
         setJibunAddress(jibunAddress);
         setMapCoordinates({ latitude: lat, longitude: lng });
