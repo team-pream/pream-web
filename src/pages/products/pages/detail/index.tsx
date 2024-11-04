@@ -1,27 +1,36 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGetProductQuery } from '@/queries/products';
+import { useDeleteProductsDetailMutation, useGetProductsDetailQuery } from '@/queries/products';
 import { ActionSheet, AppBar, Button, Dim, Layout, Dialog, Carousel } from '@/components';
 import { AppBarBack } from '@/assets/icons';
 import { colors } from '@/styles/colors';
 import { carouselWrapper, statusText, ctaButtonWrapper, wrapper } from './index.style';
 import ProductInfo from './components/product-info';
 
-const ACTION_SHEET_MENUS = [
-  { label: '수정하기', onClick: () => {} },
-  { label: '삭제하기', onClick: () => {} },
-];
-
 export default function Detail() {
   const navigate = useNavigate();
   const { productId } = useParams<{ productId: string }>();
+
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
+
+  const ACTION_SHEET_MENUS = [
+    { label: '수정하기', onClick: () => navigate(`/products/${productId}/edit`) },
+    {
+      label: '삭제하기',
+      onClick: () => {
+        setIsDeleteDialogOpen(true);
+        setIsSheetOpen(false);
+      },
+    },
+  ];
 
   // productId를 숫자 타입으로 변환
   const parsedProductId = parseInt(productId!, 10);
 
   // 항상 컴포넌트 최상단에서 모든 Hook 호출
-  const { data: product, error, isFetching, isSuccess } = useGetProductQuery(productId!);
-  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const { data: product, error, isFetching, isSuccess } = useGetProductsDetailQuery(productId!);
+  const { mutate: deleteProductsDetail } = useDeleteProductsDetailMutation();
 
   const handleOptionClick = () => setIsSheetOpen(true);
   const handleCloseSheet = () => setIsSheetOpen(false);
@@ -86,6 +95,21 @@ export default function Detail() {
         </Layout>
 
         {isSheetOpen && <ActionSheet menus={ACTION_SHEET_MENUS} onClose={handleCloseSheet} />}
+        {isDeleteDialogOpen && (
+          <Dialog
+            type="error"
+            title="상품을 삭제하시겠어요?"
+            description="삭제한 상품은 복구할 수 없어요"
+            primaryActionLabel="삭제할게요"
+            secondaryActionLabel="취소"
+            onPrimaryAction={() => {
+              if (productId) deleteProductsDetail(productId);
+              setIsDeleteDialogOpen(false);
+              navigate('/products');
+            }}
+            onSecondaryAction={() => setIsDeleteDialogOpen(false)}
+          />
+        )}
       </>
     );
   }

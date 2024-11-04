@@ -33,6 +33,7 @@ export const inputWrapper = ({
 
 export const input = css`
   display: flex;
+  text-align: left;
   flex: 1;
   padding: 6px 12px;
 
@@ -46,6 +47,10 @@ export const input = css`
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+  }
+
+  &[type='button'] {
+    cursor: pointer;
   }
 `;
 

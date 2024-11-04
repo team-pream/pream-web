@@ -35,3 +35,13 @@ export const postProductsUpload = async (body: FormData) => {
   const response = await formApi.post('/products/upload', body);
   return response.data;
 };
+
+export const patchProductsDetail = async (productId: string, body: FormData) => {
+  const response = await formApi.patch(`/products/${productId}`, body);
+  return response.data;
+};
+
+export const deleteProductsDetail = async (productId: string) => {
+  const response = await api.delete(`/products/${productId}`);
+  return response.data;
+};

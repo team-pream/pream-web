@@ -43,8 +43,20 @@ export function useValidation() {
         maxLength: { value: 1000, message: '내용은 최대 1,000자까지 입력할 수 있어요' },
       },
 
+      bank: {
+        required: '은행을 선택해 주세요',
+      },
+
+      bankAccount: {
+        required: '계좌번호를 입력해 주세요',
+        validate: (value: string) => {
+          if (!/^\d{1,20}$/.test(value)) return '숫자만 입력 가능해요';
+          return true;
+        },
+      },
+
       contact: {
-        required: '공개 연락처를 입력해 주세요.',
+        required: '공개 연락처를 입력해 주세요',
       },
     }),
     []

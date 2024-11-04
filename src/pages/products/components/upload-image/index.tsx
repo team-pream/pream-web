@@ -10,10 +10,11 @@ import {
 
 interface Props {
   onChange?: (files: File[]) => void;
+  defaultValue?: File[];
 }
 
-export default function UploadImage({ onChange }: Props) {
-  const [files, setFiles] = useState<File[]>([]);
+export default function UploadImage({ onChange, defaultValue }: Props) {
+  const [files, setFiles] = useState<File[]>(defaultValue ?? []);
 
   const handleFileInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;

@@ -8,6 +8,7 @@ export interface ProductDetail {
   seller: {
     id: string;
     nickname: string;
+    contact: string;
   };
   likesCount: number;
   isLiked: boolean;
