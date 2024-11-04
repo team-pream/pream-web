@@ -120,15 +120,15 @@ export default function Form({ defaultForm, onSubmit, isSuccess, onChangeDialog 
                     defaultValue={defaultValues?.price}
                     {...field}
                     onChange={(e) => {
-                      const value = e.target.value.replace(/\D/g, ''); // 숫자만 남김
-                      const formatted = value.replace(/\B(?=(\d{3})+(?!\d))/g, ','); // 천 단위 콤마 추가
-                      field.onChange(formatted); // React Hook Form에 숫자 값 업데이트
+                      const value = e.target.value.replace(/\D/g, '');
+                      const formatted = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                      field.onChange(formatted);
                     }}
                     value={
                       field.value
                         ? field.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                         : ''
-                    } // 표시값에 포맷 적용
+                    }
                   />
                 )}
               />

@@ -1,8 +1,9 @@
+import { BANKS } from '@/constants/bank';
 import { Category } from '@/types/categories';
 
 export type ProductStatus = 'AVAILABLE' | 'RESERVED' | 'SOLD_OUT';
 export type ProductCondition = 'NEW' | 'SLIGHTLY_USED' | 'HEAVILY_USED';
-export type BANK = 'KB' | 'NH' | 'SH' | 'WR';
+export type BANK = (typeof BANKS)[number]['value'];
 
 export const PRODUCT_CONDITION = {
   NEW: 'NEW',

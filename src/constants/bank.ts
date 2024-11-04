@@ -18,4 +18,4 @@ export const BANKS = [
   { label: '케이뱅크', value: 'KB' },
   { label: '카카오뱅크', value: 'KK' },
   { label: '토스뱅크', value: 'TS' },
-];
+] as const;
