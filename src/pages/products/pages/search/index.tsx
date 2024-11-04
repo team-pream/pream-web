@@ -1,10 +1,11 @@
-import { AppBarBack, DropdownUnfold } from '@/assets/icons';
+import { AppBarBack, DropdownUnfold, EmotionalPetIcon } from '@/assets/icons';
 import { ActionSheet, AppBar, Layout, SearchBar, Text } from '@/components';
 import theme from '@/styles/theme';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
   dropdownIcon,
+  iconWrapper,
   image,
   imageBox,
   infoWrapper,
@@ -12,6 +13,7 @@ import {
   itemList,
   listWrapper,
   opacityBox,
+  productsWrapper,
   soldOutOverlayStyle,
   statusWrapper,
   textBox,
@@ -80,68 +82,75 @@ export default function Search() {
           <SearchBar value={keyword} onChange={handleChangeKeyword} onKeyDown={handleKeyDown} />
         }
       />
-      <div css={infoWrapper}>
-        <Text typo="body2" color={theme.colors.gray300}>
-          <Text typo="body2" color={theme.colors.black}>
-            {data?.totalCount ?? 0}개
+      <div css={productsWrapper}>
+        <div css={infoWrapper}>
+          <Text typo="body2" color={theme.colors.gray300}>
+            <Text typo="body2" color={theme.colors.black}>
+              {data?.totalCount ?? 0}개
+            </Text>
+            의 상품
           </Text>
-          의 상품
-        </Text>
-        <div css={statusWrapper} onClick={toggleDropdown}>
-          <Text typo="body2">상태</Text>
-          <DropdownUnfold css={dropdownIcon} />
-          {isOpen && (
-            <ActionSheet
-              onClose={() => setIsOpen(false)}
-              menus={[
-                { label: '구매 가능', onClick: () => handleItemClick(1) },
-                { label: '판매 완료', onClick: () => handleItemClick(2) },
-                { label: '예약 중', onClick: () => handleItemClick(3) },
-              ]}
-            />
+          <div css={statusWrapper} onClick={toggleDropdown}>
+            <Text typo="body2">상태</Text>
+            <DropdownUnfold css={dropdownIcon} />
+            {isOpen && (
+              <ActionSheet
+                onClose={() => setIsOpen(false)}
+                menus={[
+                  { label: '구매 가능', onClick: () => handleItemClick(1) },
+                  { label: '판매 완료', onClick: () => handleItemClick(2) },
+                  { label: '예약 중', onClick: () => handleItemClick(3) },
+                ]}
+              />
+            )}
+          </div>
+        </div>
+        <div css={listWrapper}>
+          <div css={itemList}>
+            {data?.products.map((product: ProductListProduct) => {
+              const isSoldOut = product.status === 'SOLD_OUT';
+              const price = product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); //천 단위 콤마
+              return (
+                <div
+                  key={product.id}
+                  css={item}
+                  onClick={() => navigate(`/products/${product.id}`)}
+                >
+                  <div css={imageBox}>
+                    <div css={opacityBox} />
+                    <img src={product.images[0]} alt="itemImage" css={image} />
+                    {isSoldOut && (
+                      <div css={soldOutOverlayStyle}>
+                        <Text typo="body1" color={theme.colors.white}>
+                          판매완료
+                        </Text>
+                      </div>
+                    )}
+                  </div>
+                  <div css={textBox}>
+                    <Text typo="body2">{product.title}</Text>
+                    <Text typo="subtitle1">{price}원</Text>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          {data?.totalCount == 0 && ( //검색 결과가 없을 때
+            <div css={textWrapper}>
+              <EmotionalPetIcon css={iconWrapper} />
+              <Text typo="body2" color={theme.colors.gray300}>
+                상품 검색 결과가 없습니다
+              </Text>
+            </div>
+          )}
+          {!initialKeyword && ( //main 화면에서 search icon 클릭했을 때
+            <div css={textWrapper}>
+              <Text typo="body2" color={theme.colors.gray300}>
+                검색어를 입력해주세요
+              </Text>
+            </div>
           )}
         </div>
-      </div>
-      <div css={listWrapper}>
-        <div css={itemList}>
-          {data?.products.map((product: ProductListProduct) => {
-            const isSoldOut = product.status === 'SOLD_OUT';
-            const price = product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); //천 단위 콤마
-            return (
-              <div key={product.id} css={item} onClick={() => navigate(`/products/${product.id}`)}>
-                <div css={imageBox}>
-                  <div css={opacityBox} />
-                  <img src={product.images[0]} alt="itemImage" css={image} />
-                  {isSoldOut && (
-                    <div css={soldOutOverlayStyle}>
-                      <Text typo="body1" color={theme.colors.white}>
-                        판매완료
-                      </Text>
-                    </div>
-                  )}
-                </div>
-                <div css={textBox}>
-                  <Text typo="body2">{product.title}</Text>
-                  <Text typo="subtitle1">{price}원</Text>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        {data?.totalCount == 0 && ( //검색 결과가 없을 때
-          <div css={textWrapper}>
-            <Text typo="body2" color={theme.colors.gray300}>
-              상품 검색 결과가 없습니다
-            </Text>
-          </div>
-        )}
-        {!initialKeyword && ( //main 화면에서 search icon 클릭했을 때
-          <div css={textWrapper}>
-            <Text typo="body2" color={theme.colors.gray300}>
-              검색어를 입력해주세요
-            </Text>
-          </div>
-        )}
       </div>
     </Layout>
   );

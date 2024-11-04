@@ -2,6 +2,7 @@ export { default as AppBarBack } from './AppBarBack';
 export { default as Complete } from './Complete';
 export { default as DropdownFold } from './DropdownFold';
 export { default as DropdownUnfold } from './DropdownUnfold';
+export { default as EmotionalPetIcon } from './EmotionalPetIcon';
 export { default as FabPlus } from './FabPlus';
 export { default as GnbCategory } from './GnbCategory';
 export { default as GnbHome } from './GnbHome';
