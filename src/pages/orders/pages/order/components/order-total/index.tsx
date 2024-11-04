@@ -1,7 +1,7 @@
-import { line } from '../../index.styles';
 import { totalOrderWrapper, totalTextStyle, totalTextWrapper } from './index.styles';
 import { Button } from '@/components';
 import { Text } from '@/components';
+import { line } from '../../index.styles';
 
 interface totalPriceProps {
   price: number;
