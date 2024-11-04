@@ -3,6 +3,7 @@ import {
   GetProductsDetailResponse,
   GetProductsResponse,
   GetProductsCurationResponse,
+  GetProductsSearchParam,
 } from '@/types';
 import { api } from '@/api/api';
 
@@ -28,5 +29,10 @@ export const getProductsDetail = async (productId: string) => {
     productData.status = '판매완료';
   }
 
+  return response.data;
+};
+
+export const getProductsSearch = async (params: GetProductsSearchParam) => {
+  const response = await api.get('/products/search', { params });
   return response.data;
 };

@@ -1,4 +1,4 @@
-import { GetProductsParams } from '@/types/products';
+import { GetProductsParams, GetProductsSearchParam } from '@/types/products';
 
 export const QUERY_KEYS = {
   GET_CATEGORIES: ['GET_CATEGORIES'],
@@ -9,4 +9,5 @@ export const QUERY_KEYS = {
   GET_USERS_ME: ['GET_USERS_ME'],
   GET_PRODUCTS_CURATION: ['GET_PRODUCTS_CURATION'],
   GET_PRODUCTS_DETAIL: (productId: string) => ['GET_PRODUCTS_DETAIL', productId],
+  GET_PRODUCTS_SEARCH: (params: GetProductsSearchParam) => ['GET_PRODUCTS_SEARCH', params],
 } as const;

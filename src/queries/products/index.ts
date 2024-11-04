@@ -1,9 +1,15 @@
-import { getProducts, getProductsCuration, getProductsDetail } from '@/api/products';
+import {
+  getProducts,
+  getProductsCuration,
+  getProductsDetail,
+  getProductsSearch,
+} from '@/api/products';
 import {
   GetProductsParams,
   GetProductsDetailResponse,
   GetProductsResponse,
   GetProductsCurationResponse,
+  GetProductsSearchParam,
 } from '@/types/products';
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/queries/query-keys';
@@ -44,5 +50,19 @@ export const useGetProductsCurationQuery = () => {
         throw new Error('상품 목록을 가져오는 데 실패했습니다.');
       }
     },
+  });
+};
+
+export const useGetProductsSearchQuery = (params: GetProductsSearchParam, enabled: boolean) => {
+  return useQuery<GetProductsResponse, Error>({
+    queryKey: QUERY_KEYS.GET_PRODUCTS_SEARCH(params),
+    queryFn: async () => {
+      try {
+        return await getProductsSearch(params);
+      } catch {
+        throw new Error('상품 정보를 가져오는 데 실패했습니다.');
+      }
+    },
+    enabled,
   });
 };

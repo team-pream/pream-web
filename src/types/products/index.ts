@@ -57,3 +57,7 @@ export interface GetProductsDetailResponse {
   likesCount: number;
   isLiked: boolean;
 }
+
+export interface GetProductsSearchParam {
+  keyword: string;
+}
