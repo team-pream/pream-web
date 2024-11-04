@@ -16,8 +16,9 @@ interface UserInfoProps {
 export default function UserInfo({ onNext, setFormData, formData }: UserInfoProps) {
   const [nicknameAvailable, setNicknameAvailable] = useState<boolean | null>(null);
   const [phoneError, setPhoneError] = useState('');
+  const [emailError, setEmailError] = useState(''); // 이메일 오류 상태 추가
   const isUserInfoValid =
-    formData.email && formData.nickname && formData.phone && nicknameAvailable;
+    formData.email && formData.nickname && formData.phone && nicknameAvailable && !emailError;
 
   const { mutate: patchUsersOnboarding } = usePatchUsersOnboardingMutation(onNext);
   const checkNicknameMutation = usePostUsersCheckNicknameMutation(() => {
@@ -63,6 +64,19 @@ export default function UserInfo({ onNext, setFormData, formData }: UserInfoProp
     }
   };
 
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const email = e.target.value;
+    setFormData({ ...formData, email });
+
+    // 이메일 유효성 검사
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setEmailError('유효한 이메일 주소를 입력해주세요.');
+    } else {
+      setEmailError('');
+    }
+  };
+
   const handleNextButtonClick = () => {
     if (isUserInfoValid) {
       patchUsersOnboarding(formData);
@@ -88,7 +102,8 @@ export default function UserInfo({ onNext, setFormData, formData }: UserInfoProp
         label="이메일"
         placeholder="이메일을 입력해주세요"
         value={formData.email}
-        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+        onChange={handleEmailChange} // 이메일 변경 핸들러로 수정
+        errorMessage={emailError} // 이메일 오류 메시지 추가
       />
       <Input
         type="text"
