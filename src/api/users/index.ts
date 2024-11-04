@@ -4,6 +4,7 @@ import {
   PostUsersPetBody,
   PatchAuthOnboardingBody,
   GetUsersMeResponse,
+  PatchUsersAddressBody,
 } from '@/types/users';
 
 export const patchUsersOnboarding = async (body: PatchAuthOnboardingBody) => {
@@ -16,13 +17,18 @@ export const postUsersCheckNickname = async (body: PostUsersCheckNicknameBody) =
   return response.data;
 };
 
-// TODO: User와 Pet 분리
 export const postUsersPet = async (body: PostUsersPetBody) => {
   const response = await api.post('/user/pet', body);
   return response.data;
 };
 
 export const getUsersMe = async () => {
-  const response = await api.get<GetUsersMeResponse>('/user/profile');
+  const response = await api.get<GetUsersMeResponse>('/users/profile');
+  console.log('User Info:', response.data);
+  return response.data;
+};
+
+export const patchUsersAddress = async (body: PatchUsersAddressBody) => {
+  const response = await api.patch('/users/address', body);
   return response.data;
 };

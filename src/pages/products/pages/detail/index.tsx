@@ -19,12 +19,17 @@ export default function Detail() {
   // productId를 숫자 타입으로 변환
   const parsedProductId = parseInt(productId!, 10);
 
-  // 항상 컴포넌트 최상단에서 모든 Hook 호출
+  // useGetProductQuery에 productId를 전달
   const { data: product, error, isFetching, isSuccess } = useGetProductQuery(productId!);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   const handleOptionClick = () => setIsSheetOpen(true);
   const handleCloseSheet = () => setIsSheetOpen(false);
+  const handlePurchaseClick = () => {
+    if (product) {
+      navigate(`/orders/${productId}`, { state: { product } });
+    }
+  };
 
   // 잘못된 ID일 경우 조건부 렌더링
   if (!parsedProductId) {
@@ -51,7 +56,7 @@ export default function Detail() {
       />
     );
 
-  if (isSuccess) {
+  if (isSuccess && product) {
     return (
       <>
         <Layout>
@@ -80,7 +85,9 @@ export default function Detail() {
             <ProductInfo onOptionClick={handleOptionClick} product={product} />
 
             <div css={ctaButtonWrapper}>
-              <Button size="xl">구매하기</Button>
+              <Button size="xl" onClick={handlePurchaseClick}>
+                구매하기
+              </Button>
             </div>
           </section>
         </Layout>
@@ -89,4 +96,6 @@ export default function Detail() {
       </>
     );
   }
+
+  return null;
 }
