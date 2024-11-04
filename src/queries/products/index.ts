@@ -5,12 +5,14 @@ import {
   getProductsDetail,
   patchProductsDetail,
   postProductsUpload,
+  getProductsSearch,
 } from '@/api/products';
 import {
   GetProductsParams,
   GetProductsDetailResponse,
   GetProductsResponse,
   GetProductsCurationResponse,
+  GetProductsSearchParam,
 } from '@/types/products';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/queries/query-keys';
@@ -101,5 +103,19 @@ export const useDeleteProductsDetailMutation = () => {
     onSuccess: () => {
       queryClient.invalidateQueries();
     },
+  });
+};
+
+export const useGetProductsSearchQuery = (params: GetProductsSearchParam, enabled: boolean) => {
+  return useQuery<GetProductsResponse, Error>({
+    queryKey: QUERY_KEYS.GET_PRODUCTS_SEARCH(params),
+    queryFn: async () => {
+      try {
+        return await getProductsSearch(params);
+      } catch {
+        throw new Error('상품 정보를 가져오는 데 실패했습니다.');
+      }
+    },
+    enabled,
   });
 };

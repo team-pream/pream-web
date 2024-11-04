@@ -3,6 +3,7 @@ import {
   GetProductsDetailResponse,
   GetProductsResponse,
   GetProductsCurationResponse,
+  GetProductsSearchParam,
 } from '@/types';
 import { api, formApi } from '@/api/api';
 
@@ -43,5 +44,10 @@ export const patchProductsDetail = async (productId: string, body: FormData) => 
 
 export const deleteProductsDetail = async (productId: string) => {
   const response = await api.delete(`/products/${productId}`);
+  return response.data
+};
+
+export const getProductsSearch = async (params: GetProductsSearchParam) => {
+  const response = await api.get<GetProductsResponse>('/products/search', { params });
   return response.data;
 };
