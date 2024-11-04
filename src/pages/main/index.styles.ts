@@ -55,6 +55,7 @@ export const image = css`
   border-radius: 13px;
   width: 120px;
   height: 120px;
+  object-fit: cover;
 `;
 
 export const opacityBox = css`

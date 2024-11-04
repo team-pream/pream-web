@@ -1,21 +1,21 @@
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
-import { ButtonSize, ButtonStatus, ButtonVariant } from '@/components/button';
+import { ButtonSize, ButtonStatus, ButtonShape } from '@/components/button';
 
 interface WrapperProps {
   size: ButtonSize;
-  variant: ButtonVariant;
+  shape: ButtonShape;
   status: ButtonStatus;
   fullWidth: boolean;
 }
 
-export const wrapper = ({ size, variant, status, fullWidth }: WrapperProps) => css`
+export const wrapper = ({ size, shape, status, fullWidth }: WrapperProps) => css`
   display: flex;
   align-items: center;
   justify-content: center;
 
-  ${variant === 'box' && box({ size, fullWidth })};
-  ${variant === 'capsule' && capsule};
+  ${shape === 'box' && box({ size, fullWidth })};
+  ${shape === 'capsule' && capsule};
 
   ${status === 'active' && active};
   ${status === 'pressed' && pressed};

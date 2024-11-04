@@ -1,41 +1,41 @@
-import { CSSProperties, ReactNode } from 'react';
-import type { SerializedStyles } from '@emotion/react';
-import { input, item, wrapper } from './index.styles';
+import { Text } from '@/components/text';
+import { radio, radioGroup } from './index.styles';
 
 interface RadioGroupProps {
-  name?: string;
-  options: Array<{
-    value: string;
-    node: ReactNode;
-  }>;
-  selectedValue: string;
-  onChange?: (value: string) => void;
-  css?: SerializedStyles;
-  style?: CSSProperties;
+  items: { value: string; label: string }[];
+  onChange: (value: string) => void;
+  defaultValue?: string;
 }
 
-export const RadioGroup = ({
-  name = 'radio-group',
-  options,
-  selectedValue,
-  onChange,
-  style,
-}: RadioGroupProps) => {
+export function RadioGroup({ items, onChange, defaultValue }: RadioGroupProps) {
   return (
-    <div role="radiogroup" css={wrapper} style={style}>
-      {options.map((option) => (
-        <label key={option.value} onClick={() => onChange?.(option.value)} css={item}>
-          <input
-            type="radio"
-            name={name}
-            value={option.value}
-            checked={selectedValue === option.value}
-            onChange={() => onChange?.(option.value)}
-            css={input}
-          />
-          {option.node}
-        </label>
+    <div css={radioGroup}>
+      {items.map((item) => (
+        <Radio
+          key={item.value}
+          value={item.value}
+          label={item.label}
+          onChange={() => onChange(item.value)}
+          defaultValue={defaultValue}
+        />
       ))}
     </div>
   );
-};
+}
+
+interface RadioProps {
+  name?: string;
+  value: string;
+  label: string;
+  onChange?: () => void;
+  defaultValue?: string;
+}
+
+function Radio({ name = 'radio-group', value, label, onChange, defaultValue }: RadioProps) {
+  return (
+    <label css={radio} onChange={onChange}>
+      <input type="radio" name={name} value={value} defaultChecked={defaultValue === value} />
+      <Text typo="body5">{label}</Text>
+    </label>
+  );
+}

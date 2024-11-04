@@ -1,6 +1,6 @@
 import { Global, css } from '@emotion/react';
 import theme from '@/styles/theme';
-import 'normalize.css';
+import './normalize.css';
 import './fonts.css';
 
 const defaultStyles = css`

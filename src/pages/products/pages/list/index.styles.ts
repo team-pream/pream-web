@@ -49,16 +49,16 @@ export const itemList = css`
 export const item = css`
   display: flex;
   flex-direction: column;
-  width: fit-content;
+  width: 100%;
   cursor: pointer;
 `;
 
 export const imageBox = css`
   position: relative;
+  cursor: pointer;
 `;
 
 export const image = css`
-  background-color: lightgray;
   border-radius: 13px;
   width: 100%;
   height: 100%;
