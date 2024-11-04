@@ -12,4 +12,5 @@ export const QUERY_KEYS = {
   POST_PRODUCTS_UPLOAD: ['POST_PRODUCTS_UPLOAD'],
   PATCH_PRODUCTS_DETAIL: (productId: string) => ['PATCH_PRODUCTS_DETAIL', productId],
   DELETE_PRODUCTS_DETAIL: (productId: string) => ['DELETE_PRODUCTS_DETAIL', productId],
+  GET_ADDRESS_ME: ['GET_ADDRESS_ME'],
 } as const;

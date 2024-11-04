@@ -34,6 +34,11 @@ export default function Detail() {
 
   const handleOptionClick = () => setIsSheetOpen(true);
   const handleCloseSheet = () => setIsSheetOpen(false);
+  const handlePurchaseClick = () => {
+    if (product) {
+      navigate(`/orders/${productId}`, { state: { product } });
+    }
+  };
 
   // 잘못된 ID일 경우 조건부 렌더링
   if (!parsedProductId) {
@@ -60,7 +65,7 @@ export default function Detail() {
       />
     );
 
-  if (isSuccess) {
+  if (isSuccess && product) {
     return (
       <>
         <Layout>
@@ -89,7 +94,9 @@ export default function Detail() {
             <ProductInfo onOptionClick={handleOptionClick} product={product} />
 
             <div css={ctaButtonWrapper}>
-              <Button size="xl">구매하기</Button>
+              <Button size="xl" onClick={handlePurchaseClick}>
+                구매하기
+              </Button>
             </div>
           </section>
         </Layout>
@@ -113,4 +120,6 @@ export default function Detail() {
       </>
     );
   }
+
+  return null;
 }

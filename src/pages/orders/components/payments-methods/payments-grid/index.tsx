@@ -1,6 +1,5 @@
 import { buttonWrapper, activeButton, inactiveButton } from './index.styles';
 import { Text } from '@/components';
-
 interface PaymentsMethodProps {
   id: number;
   name: string;

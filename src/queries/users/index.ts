@@ -1,12 +1,19 @@
 import { QUERY_KEYS } from '@/queries/query-keys';
 import { useQuery } from '@tanstack/react-query';
 import { useMutation } from '@tanstack/react-query';
-import { getUsersMe, patchUsersOnboarding, postUsersCheckNickname, postUsersPet } from '@/api';
+import {
+  getUsersMe,
+  patchUsersOnboarding,
+  postUsersCheckNickname,
+  postUsersPet,
+  patchUsersAddress,
+} from '@/api';
 import {
   GetUsersMeResponse,
   PatchAuthOnboardingBody,
   PostUsersCheckNicknameBody,
   PostUsersPetBody,
+  PatchUsersAddressBody,
 } from '@/types';
 
 export const usePostUsersCheckNicknameMutation = (onSuccess: () => void) => {
@@ -59,6 +66,20 @@ export const usePatchUsersOnboardingMutation = (onSuccess: () => void) => {
         return await patchUsersOnboarding(body);
       } catch {
         throw new Error('기본 정보 등록에 실패했습니다.');
+      }
+    },
+    onSuccess,
+  });
+};
+
+export const usePatchUserAddress = (onSuccess: () => void) => {
+  return useMutation({
+    mutationKey: QUERY_KEYS.GET_ADDRESS_ME,
+    mutationFn: async (body: PatchUsersAddressBody) => {
+      try {
+        return await patchUsersAddress(body);
+      } catch {
+        throw new Error('주소등록에 실패했습니다.');
       }
     },
     onSuccess,
