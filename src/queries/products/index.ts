@@ -6,14 +6,18 @@ import {
   patchProductsDetail,
   postProductsUpload,
   getProductsSearch,
+  getProductsSalesList,
 } from '@/api/products';
+
 import {
   GetProductsParams,
   GetProductsDetailResponse,
   GetProductsResponse,
   GetProductsCurationResponse,
   GetProductsSearchParam,
+  GetProductsSalesListResponse,
 } from '@/types/products';
+
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/queries/query-keys';
 
@@ -117,5 +121,18 @@ export const useGetProductsSearchQuery = (params: GetProductsSearchParam, enable
       }
     },
     enabled,
+  });
+};
+
+export const useGetProductsSalesListQuery = () => {
+  return useQuery<GetProductsSalesListResponse, Error>({
+    queryKey: QUERY_KEYS.GET_SALES_LIST,
+    queryFn: async () => {
+      try {
+        return await getProductsSalesList();
+      } catch {
+        throw new Error('판매 내역 정보를 가져오는데 실패했습니다.');
+      }
+    },
   });
 };

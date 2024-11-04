@@ -123,3 +123,14 @@ export interface GetProductsSearchParam {
   keyword: string;
   status?: number;
 }
+
+export interface GetProductsSalesProductResponse {
+  createdAt: string;
+  id: number;
+  title: string;
+  price: number;
+  status: ProductStatus;
+  images: string[];
+}
+
+export type GetProductsSalesListResponse = GetProductsSalesProductResponse[];
