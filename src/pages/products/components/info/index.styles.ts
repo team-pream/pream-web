@@ -9,6 +9,8 @@ export const info = css`
 export const content = css`
   width: 100%;
   display: flex;
+  flex-direction: column;
+  gap: 32px;
 `;
 
 export const wrap = css`

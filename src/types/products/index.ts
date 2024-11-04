@@ -2,6 +2,7 @@ import { Category } from '@/types/categories';
 
 export type ProductStatus = 'AVAILABLE' | 'RESERVED' | 'SOLD_OUT';
 export type ProductCondition = 'NEW' | 'SLIGHTLY_USED' | 'HEAVILY_USED';
+export type BANK = 'KB' | 'NH' | 'SH' | 'WR';
 
 export const PRODUCT_CONDITION = {
   NEW: 'NEW',
@@ -52,17 +53,23 @@ export interface GetProductsDetailResponse {
   title: string;
   price: number;
   status: string;
-  condition: string;
+  condition: ProductCondition;
   images: string[];
   description: string;
-  createdAt: string;
   category: Pick<Category, 'id' | 'name'>;
   seller: {
     id: string;
     nickname: string;
+    contact: string;
+    bank: {
+      bank: BANK;
+      bankAccount: string;
+    } | null;
   };
+
   likesCount: number;
   isLiked: boolean;
+  createdAt: string;
 }
 
 export interface PostProductsUploadBody {
@@ -72,5 +79,29 @@ export interface PostProductsUploadBody {
   categoryId: number;
   title: string;
   description: string;
+  bank: {
+    bank: BANK;
+    bankAccount: string;
+  } | null;
   contact: string;
 }
+
+export const convertProductsDetailToProductsUploadBody = (
+  data: GetProductsDetailResponse
+): PostProductsUploadBody => {
+  return {
+    images: data.images as unknown as File[],
+    condition: data.condition,
+    price: data.price,
+    categoryId: data.category.id,
+    title: data.title,
+    description: data.description,
+    bank: data.seller.bank
+      ? {
+          bank: data.seller.bank.bank,
+          bankAccount: data.seller.bank.bankAccount,
+        }
+      : null,
+    contact: data.seller.contact,
+  };
+};

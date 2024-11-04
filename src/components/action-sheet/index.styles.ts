@@ -20,12 +20,15 @@ export const wrapper = css`
 export const handle = css`
   width: 32px;
   height: 2px;
+  margin: 0 0 8px 0;
   border-radius: 2px;
   background: ${theme.colors.gray100};
 `;
 
 export const menuWrapper = css`
   width: 100%;
+  max-height: 380px;
+  overflow-y: auto;
 `;
 
 export const menu = css`

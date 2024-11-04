@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 interface ChipRadioGroupProps {
   items: { value: string | number; label: string }[];
-  defaultValue?: string;
+  defaultValue?: string | number;
   onChange?: (value: string | number) => void;
   wrap?: boolean;
 }

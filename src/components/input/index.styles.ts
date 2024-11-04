@@ -33,6 +33,7 @@ export const inputWrapper = ({
 
 export const input = css`
   display: flex;
+  text-align: left;
   flex: 1;
   padding: 6px 12px;
 

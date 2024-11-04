@@ -28,7 +28,7 @@ export const useGetProductsQuery = (params: GetProductsParams) => {
   });
 };
 
-export const useGetProductQuery = (productId: string) => {
+export const useGetProductsDetailQuery = (productId: string) => {
   return useQuery<GetProductsDetailResponse, Error>({
     queryKey: QUERY_KEYS.GET_PRODUCTS_DETAIL(productId),
     queryFn: async () => {
@@ -68,6 +68,8 @@ export const usePostProductsUploadMutation = () => {
 };
 
 export const usePatchProductsDetailMutation = (productId: string) => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: QUERY_KEYS.PATCH_PRODUCTS_DETAIL(productId),
     mutationFn: async ({ productId, body }: { productId: string; body: FormData }) => {
@@ -76,6 +78,11 @@ export const usePatchProductsDetailMutation = (productId: string) => {
       } catch {
         throw new Error('상품 수정에 실패했습니다.');
       }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.GET_PRODUCTS_DETAIL(productId),
+      });
     },
   });
 };

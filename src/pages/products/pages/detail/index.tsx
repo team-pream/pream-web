@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDeleteProductsDetailMutation, useGetProductQuery } from '@/queries/products';
+import { useDeleteProductsDetailMutation, useGetProductsDetailQuery } from '@/queries/products';
 import { ActionSheet, AppBar, Button, Dim, Layout, Dialog, Carousel } from '@/components';
 import { AppBarBack } from '@/assets/icons';
 import { colors } from '@/styles/colors';
@@ -29,7 +29,7 @@ export default function Detail() {
   const parsedProductId = parseInt(productId!, 10);
 
   // 항상 컴포넌트 최상단에서 모든 Hook 호출
-  const { data: product, error, isFetching, isSuccess } = useGetProductQuery(productId!);
+  const { data: product, error, isFetching, isSuccess } = useGetProductsDetailQuery(productId!);
   const { mutate: deleteProductsDetail } = useDeleteProductsDetailMutation();
 
   const handleOptionClick = () => setIsSheetOpen(true);
