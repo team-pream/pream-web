@@ -105,10 +105,6 @@ export interface ProductForm {
 export const convertProductsDetailToProductsUploadBody = (
   data: GetProductsDetailResponse
 ): ProductForm => {
-  console.log(
-    data,
-    BANKS.find((bank) => bank.value === data.seller.bankAccount.bank)
-  );
   return {
     images: data.images as unknown as File[],
     condition: data.condition,

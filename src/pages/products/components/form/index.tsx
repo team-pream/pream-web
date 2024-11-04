@@ -63,8 +63,6 @@ export default function Form({ defaultForm, onSubmit, isSuccess, onChangeDialog 
     setIsErrorDialogOpen(true);
   };
 
-  console.log(errors);
-
   return (
     <>
       <Layout>
