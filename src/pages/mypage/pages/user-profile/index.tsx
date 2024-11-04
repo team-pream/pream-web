@@ -55,8 +55,7 @@ export default function UserProfile() {
   const [accountNumberError, setAccountNumberError] = useState('');
 
   const { mutate: patchUsersMe } = usePatchUsersMeMutation(() => {
-    alert('프로필이 성공적으로 수정되었습니다.');
-    navigate('/');
+    navigate('/mypage', { state: { editSuccess: true } });
   });
 
   const { mutate: checkNicknameMutation } = usePostUsersCheckNicknameMutation(() => {
@@ -69,6 +68,7 @@ export default function UserProfile() {
       return;
     }
     setNicknameError('');
+    setIsNicknameAvailable(null); // Reset availability check while checking
     checkNicknameMutation(
       { nickname },
       {
@@ -77,6 +77,11 @@ export default function UserProfile() {
         },
       }
     );
+  };
+
+  const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNickname(e.target.value);
+    setIsNicknameAvailable(null); // Reset on every change
   };
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -160,9 +165,9 @@ export default function UserProfile() {
           placeholder="닉네임을 입력해주세요"
           css={placeholderStyle}
           value={nickname}
-          onChange={(e) => setNickname(e.target.value)}
-          confirmMessage={isNicknameAvailable && '사용 가능한 닉네임입니다'}
-          errorMessage={!isNicknameAvailable && '이미 존재하는 닉네임입니다'}
+          onChange={handleNicknameChange}
+          confirmMessage={isNicknameAvailable === true && '사용 가능한 닉네임입니다'}
+          errorMessage={isNicknameAvailable === false && '이미 존재하는 닉네임입니다'}
           suffix={
             <Button size="xs" onClick={checkNickname}>
               중복확인
