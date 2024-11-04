@@ -22,7 +22,7 @@ export default function Order() {
   const [product, setProduct] = useState<Product | null>(state?.product || null);
   const navigate = useNavigate();
 
-  const { data: user, isLoading: userLoading } = useGetUsersMeQuery();
+  const { data: user } = useGetUsersMeQuery();
 
   useEffect(() => {
     if (!product && productId) {
@@ -39,7 +39,7 @@ export default function Order() {
     }
   }, [product, productId]);
 
-  if (!product || userLoading) return <div>Loading...</div>;
+  if (!product || !user) return <div>Loading...</div>;
 
   return (
     <Layout>
