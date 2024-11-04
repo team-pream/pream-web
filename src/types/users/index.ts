@@ -18,7 +18,7 @@ export interface GetUsersMeResponse {
   username: string;
   nickname: string;
   phone: string;
-  address: string;
+  address: PatchUserAddressResponse;
   email: string;
   contact: string;
   pets: GetPetsResponse[];
@@ -33,4 +33,11 @@ export interface GetPetsResponse {
   petType: 'DOG' | 'CAT';
   createdAt: string;
   updatedAt: string;
+}
+
+export interface PatchUserAddressResponse {
+  roadAddress: string;
+  jibunAddress: string;
+  detailAddress: string;
+  zonecode: string;
 }

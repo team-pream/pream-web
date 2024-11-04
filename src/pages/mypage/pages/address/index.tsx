@@ -3,17 +3,34 @@ import { Layout } from '@/components';
 import { AppBarBack, FabPlus } from '@/assets/icons';
 import { GNB, FAB } from '@/components';
 import AddressList from './components/address-list';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AddressForm from './components/address-form';
+import { useGetUsersMeQuery } from '@/queries/users';
+import { PatchUserAddressResponse } from '@/types';
 
 type PageState = 'list' | 'form';
 
-export default function Address() {
-  const [page, setPage] = useState<PageState>('list'); // 현재 페이지 상태를 관리
-  const address = '주소주소'; //임시주소
+interface AddressData {
+  username: string;
+  phone: string;
+  address: PatchUserAddressResponse;
+}
 
-  // 주소 등록 후 목록 페이지로 이동
+export default function Address() {
+  const [page, setPage] = useState<PageState>('list');
+  const { data, refetch } = useGetUsersMeQuery(); // refetch 추가
+  const [userData, setUserData] = useState<AddressData | null>(null);
+
+  useEffect(() => {
+    if (data) {
+      const { username, phone, address } = data;
+      if (address) setUserData({ username, phone, address });
+      else setUserData(null);
+    }
+  }, [data]);
+
   const handleSaveAddress = () => {
+    refetch(); // userData를 새로고침
     setPage('list');
   };
 
@@ -23,11 +40,13 @@ export default function Address() {
 
       {page === 'list' ? (
         <>
-          <AddressList address={address} />
-          <FAB icon={<FabPlus width="20px" height="20px" />} onClick={() => setPage('form')} />
+          <AddressList userData={userData} onEditClick={() => userData && setPage('form')} />
+          {!userData && (
+            <FAB icon={<FabPlus width="20px" height="20px" />} onClick={() => setPage('form')} />
+          )}
         </>
       ) : (
-        <AddressForm onSave={handleSaveAddress} />
+        <AddressForm onSave={handleSaveAddress} initialData={userData?.address} />
       )}
 
       <GNB />
