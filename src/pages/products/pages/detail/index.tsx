@@ -6,6 +6,8 @@ import { AppBarBack } from '@/assets/icons';
 import { colors } from '@/styles/colors';
 import { carouselWrapper, statusText, ctaButtonWrapper, wrapper } from './index.style';
 import ProductInfo from './components/product-info';
+import Skeleton from 'react-loading-skeleton';
+import ProductInfoSkeleton from './components/product-info/indexSkeleton';
 
 export default function Detail() {
   const navigate = useNavigate();
@@ -56,6 +58,10 @@ export default function Detail() {
       />
     );
 
+  console.log('product: ', product);
+  console.log('isFetching: ', isFetching);
+  console.log('isSuccess: ', isSuccess);
+
   if (!product && !isFetching)
     return (
       <Dialog
@@ -66,7 +72,31 @@ export default function Detail() {
       />
     );
 
-  if (isSuccess && product) {
+  if (isFetching) {
+    return (
+      <>
+        <Layout>
+          <AppBar
+            prefix={<AppBarBack height="24px" cursor="pointer" onClick={() => navigate(-1)} />}
+          />
+
+          <section css={wrapper}>
+            <div css={carouselWrapper}>
+              <Skeleton width={390} height={332} style={{ borderRadius: '0 0 20px 20px' }} />
+            </div>
+
+            <ProductInfoSkeleton />
+
+            <div css={ctaButtonWrapper}>
+              <Button size="xl">구매하기</Button>
+            </div>
+          </section>
+        </Layout>
+      </>
+    );
+  }
+
+  if (isSuccess) {
     return (
       <>
         <Layout>
