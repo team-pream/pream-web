@@ -6,6 +6,7 @@ import {
   textContainer,
   topBox,
   bottomBox,
+  opacityBox,
   image,
   content,
   contentTitle,
@@ -38,6 +39,19 @@ export default function SalesList() {
         {data?.map((listData) => (
           <div css={item} key={listData.id}>
             <div css={content}>
+              <div css={opacityBox(listData.status)}>
+                {listData.status === 'AVAILABLE' ? (
+                  ''
+                ) : listData.status === 'SOLD_OUT' ? (
+                  <Text typo="body1" color="white">
+                    판매완료
+                  </Text>
+                ) : (
+                  <Text typo="body1" color="white">
+                    예약중
+                  </Text>
+                )}
+              </div>
               <img src={listData.images[0]} css={image} />
               <div css={textContainer}>
                 <div css={topBox}>

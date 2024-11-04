@@ -26,6 +26,20 @@ export const content = css`
   width: 100%;
 `;
 
+export const opacityBox = (props: string) => css`
+  display: flex;
+  border-radius: 13px;
+  width: 90px;
+  height: 90px;
+  position: absolute;
+  z-index: 1;
+  background-color: ${props === 'AVAILABLE'
+    ? theme.colors.grayOpacity100
+    : theme.colors.grayOpacity300};
+  justify-content: center;
+  align-items: center;
+`;
+
 export const image = css`
   width: 90px;
   height: 90px;
