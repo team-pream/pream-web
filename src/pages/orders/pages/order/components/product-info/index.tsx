@@ -1,6 +1,6 @@
+import { Text } from '@/components';
 import { line } from '../../index.styles';
 import { productInfoWrapper, innerWrapper, productImg, textWrapperStyle } from './index.styles';
-import { Text } from '@/components';
 
 interface productInfoProps {
   product: {

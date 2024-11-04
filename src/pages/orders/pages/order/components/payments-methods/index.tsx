@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { plusSaleText, paymentsWrapper, otherPaymentsWrapper } from './index.styles';
-import { line } from '../../index.styles';
 import { Text } from '@/components';
 import PaymentButtonGrid from './payments-grid';
 import CardCompanySelector from './cardcompany-selector';
 import { activeButton, inactiveButton } from './payments-grid/index.styles';
+import { line } from '../../index.styles';
 import { CARD_COMPANIES } from '../../types';
 
 const PaymentMethods = () => {
