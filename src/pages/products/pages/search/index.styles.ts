@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 export const productsWrapper = css`
   width: 100%;
   height: fit-content;
-  padding: 0 18px 0;
+  padding: 0 18px ${theme.size.gnbHeight};
   overflow: auto;
 `;
 

@@ -1,5 +1,5 @@
 import { AppBarBack, DropdownUnfold } from '@/assets/icons';
-import { ActionSheet, AppBar, Layout, SearchBar, Text } from '@/components';
+import { ActionSheet, AppBar, GNB, Layout, SearchBar, Text } from '@/components';
 import theme from '@/styles/theme';
 import { useEffect, useState, ChangeEvent, KeyboardEvent } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -149,6 +149,7 @@ export default function Search() {
           )}
         </div>
       </div>
+      <GNB />
     </Layout>
   );
 }
