@@ -82,22 +82,22 @@ export default function UserProfile() {
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const phoneRegex = /^010-\d{4}-\d{4}$/;
-    setPhone(value);
     if (!phoneRegex.test(value)) {
       setPhoneError('휴대폰 번호는 010-XXXX-XXXX 형식으로 입력해주세요.');
     } else {
       setPhoneError('');
+      setPhone(value);
     }
   };
 
   const handleAccountNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const accountNumberRegex = /^[0-9]*$/;
-    setAccountNumber(value);
     if (!accountNumberRegex.test(value)) {
       setAccountNumberError('계좌번호는 숫자만 입력 가능합니다.');
     } else {
       setAccountNumberError('');
+      setAccountNumber(value);
     }
   };
 
@@ -161,8 +161,8 @@ export default function UserProfile() {
           css={placeholderStyle}
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
-          confirmMessage={isNicknameAvailable ? '사용 가능한 닉네임입니다' : false}
-          errorMessage={isNicknameAvailable === false ? '이미 존재하는 닉네임입니다' : false}
+          confirmMessage={isNicknameAvailable && '사용 가능한 닉네임입니다'}
+          errorMessage={!isNicknameAvailable && '이미 존재하는 닉네임입니다'}
           suffix={
             <Button size="xs" onClick={checkNickname}>
               중복확인
