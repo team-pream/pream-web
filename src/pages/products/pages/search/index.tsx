@@ -1,11 +1,10 @@
-import { AppBarBack, DropdownUnfold, EmotionalPetIcon } from '@/assets/icons';
+import { AppBarBack, DropdownUnfold } from '@/assets/icons';
 import { ActionSheet, AppBar, Layout, SearchBar, Text } from '@/components';
 import theme from '@/styles/theme';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
   dropdownIcon,
-  iconWrapper,
   image,
   imageBox,
   infoWrapper,
@@ -17,10 +16,10 @@ import {
   soldOutOverlayStyle,
   statusWrapper,
   textBox,
-  textWrapper,
 } from './index.styles';
 import { useGetProductsSearchQuery } from '@/queries/products';
 import { ProductListProduct } from '@/types';
+import Message from './components/message';
 
 export default function Search() {
   const navigate = useNavigate();
@@ -136,19 +135,10 @@ export default function Search() {
             })}
           </div>
           {data?.totalCount == 0 && ( //검색 결과가 없을 때
-            <div css={textWrapper}>
-              <EmotionalPetIcon css={iconWrapper} />
-              <Text typo="body2" color={theme.colors.gray300}>
-                상품 검색 결과가 없습니다
-              </Text>
-            </div>
+            <Message message="상품 검색 결과가 없습니다" />
           )}
           {!initialKeyword && ( //main 화면에서 search icon 클릭했을 때
-            <div css={textWrapper}>
-              <Text typo="body2" color={theme.colors.gray300}>
-                검색어를 입력해주세요
-              </Text>
-            </div>
+            <Message message="검색어를 입력해주세요" />
           )}
         </div>
       </div>
