@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 
 export const titleContainer = css`
   display: flex;
-  margin: 30px 0 11px 28px;
+  margin: 6% 0 2% 7%;
 `;
 
 export const line = css`
@@ -14,7 +14,7 @@ export const line = css`
 export const fixContainer = css`
   display: flex;
   flex-direction: column;
-  padding: 21px;
+  padding: 5%;
   gap: 32px;
 `;
 
@@ -25,12 +25,12 @@ export const fixBox = css`
 `;
 
 export const fixInfo = css`
-  margin-left: 12px;
+  margin-left: 3%;
 `;
 
 export const fixedButtonWrapper = css`
   position: fixed;
-  bottom: 20px;
+  bottom: 2%;
   left: 0;
   width: 100%;
   display: flex;
@@ -46,6 +46,10 @@ export const placeholderStyle = css`
 export const accountContainer = css`
   display: flex;
   flex-direction: column;
-  padding: 21px;
+  padding: 5%;
   gap: 32px;
+`;
+
+export const actionSheet = css`
+  max-height: 380px; /* 최대 높이를 380px로 설정 */
 `;

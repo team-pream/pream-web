@@ -19,15 +19,26 @@ import {
 } from './index.styles';
 import theme from '@/styles/theme';
 
-const ACTION_SHEET_MENUS = [
-  { label: '카카오뱅크', value: '카카오뱅크' },
-  { label: '토스뱅크', value: '토스뱅크' },
-  { label: '국민은행', value: '국민은행' },
-  { label: '하나은행', value: '하나은행' },
-  { label: '농협은행', value: '농협은행' },
-  { label: '우리은행', value: '우리은행' },
-  { label: '기업은행', value: '기업은행' },
-  { label: '케이뱅크', value: '케이뱅크' },
+const BANKS = [
+  { label: '국민은행', value: 'KB' },
+  { label: '하나은행', value: 'HN' },
+  { label: '신한은행', value: 'SH' },
+  { label: '우리은행', value: 'WR' },
+  { label: '기업은행', value: 'IB' },
+  { label: '농협은행', value: 'NH' },
+  { label: '신협은행', value: 'SHB' },
+  { label: '부산은행', value: 'BS' },
+  { label: '제주은행', value: 'JJ' },
+  { label: '경남은행', value: 'GN' },
+  { label: '전북은행', value: 'JB' },
+  { label: '광주은행', value: 'GJ' },
+  { label: '대구은행', value: 'DG' },
+  { label: '수협은행', value: 'SU' },
+  { label: '새마을금고', value: 'SM' },
+  { label: '우체국', value: 'UC' },
+  { label: '케이뱅크', value: 'KB' },
+  { label: '카카오뱅크', value: 'KK' },
+  { label: '토스뱅크', value: 'TS' },
 ];
 
 export default function UserProfile() {
@@ -90,19 +101,17 @@ export default function UserProfile() {
     }
   };
 
-  const handleCloseSheet = (selectedBank?: string) => {
-    if (selectedBank) {
-      setBank(selectedBank);
-    }
-    setIsSheetOpen(false);
-  };
-
   const handleSubmit = () => {
     if (nicknameError || phoneError || accountNumberError) {
       alert('입력값을 확인해주세요.');
       return;
     }
     patchUsersMe({ nickname, phone, bankAccount: { bank, accountNumber } });
+  };
+
+  const handleBankSelect = (selectedBank: string) => {
+    setBank(selectedBank);
+    setIsSheetOpen(false);
   };
 
   return (
@@ -183,7 +192,6 @@ export default function UserProfile() {
           css={placeholderStyle}
           value={bank}
           onClick={() => setIsSheetOpen(true)}
-          readOnly
         />
         <Input
           type="text"
@@ -200,11 +208,14 @@ export default function UserProfile() {
           수정하기
         </Button>
       </div>
+
       {isSheetOpen && (
         <ActionSheet
-          menus={ACTION_SHEET_MENUS}
-          onClose={handleCloseSheet}
-          onSelect={(menu) => handleCloseSheet(menu.value)}
+          menus={BANKS.map((bank) => ({
+            label: bank.label,
+            onClick: () => handleBankSelect(bank.label),
+          }))}
+          onClose={() => setIsSheetOpen(false)}
         />
       )}
     </Layout>

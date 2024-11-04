@@ -15,6 +15,7 @@ export const wrapper = css`
   border-radius: 10px 10px 0 0;
   background: ${theme.colors.white};
   z-index: ${theme.zIndex.actionSheet};
+  max-height: 380px;
 `;
 
 export const handle = css`
@@ -26,6 +27,7 @@ export const handle = css`
 
 export const menuWrapper = css`
   width: 100%;
+  overflow-y: auto;
 `;
 
 export const menu = css`
