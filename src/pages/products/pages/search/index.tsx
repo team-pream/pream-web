@@ -1,7 +1,7 @@
 import { AppBarBack, DropdownUnfold } from '@/assets/icons';
 import { ActionSheet, AppBar, Layout, SearchBar, Text } from '@/components';
 import theme from '@/styles/theme';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ChangeEvent, KeyboardEvent } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
   dropdownIcon,
@@ -40,12 +40,12 @@ export default function Search() {
     setIsOpen(false); // 선택 후 드롭다운 닫기
   };
 
-  const handleChangeKeyword = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeKeyword = (event: ChangeEvent<HTMLInputElement>) => {
     setKeyword(event.target.value);
   };
 
   // Enter 키 이벤트 핸들러
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       event.preventDefault(); // 기본 동작 방지
       //공백제거 후 빈값이면 동작안함
