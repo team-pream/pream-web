@@ -17,6 +17,18 @@ export const carouselWrapper = css`
   border-radius: 0px 0px 20px 20px;
 `;
 
+export const opacityBox = css`
+  display: flex;
+  border-radius: 0 0 20px 20px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  background-color: ${theme.colors.grayOpacity300};
+  justify-content: center;
+  align-items: center;
+`;
+
 export const statusText = css`
   position: absolute;
   top: 50%;

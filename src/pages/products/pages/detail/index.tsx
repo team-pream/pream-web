@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGetProductQuery } from '@/queries/products';
-import { ActionSheet, AppBar, Button, Dim, Layout, Dialog, Carousel } from '@/components';
+import { ActionSheet, AppBar, Button, Layout, Dialog, Carousel } from '@/components';
 import { AppBarBack } from '@/assets/icons';
 import { colors } from '@/styles/colors';
-import { carouselWrapper, statusText, ctaButtonWrapper, wrapper } from './index.style';
+import { carouselWrapper, opacityBox, statusText, ctaButtonWrapper, wrapper } from './index.style';
 import ProductInfo from './components/product-info';
 
 const ACTION_SHEET_MENUS = [
@@ -61,6 +61,12 @@ export default function Detail() {
 
           <section css={wrapper}>
             <div css={carouselWrapper}>
+              {product.status !== 'AVAILABLE' && (
+                <>
+                  <div css={opacityBox} />
+                  <div css={statusText}>{product.status}</div> {/* 상태 텍스트 */}
+                </>
+              )}
               <Carousel
                 fullWidth={true}
                 height={332}
@@ -69,12 +75,6 @@ export default function Detail() {
                 autoPlay={false}
                 progressBarColor={colors.white}
               />
-              {product.status !== 'AVAILABLE' && (
-                <>
-                  <Dim />
-                  <div css={statusText}>{product.status}</div> {/* 상태 텍스트 */}
-                </>
-              )}
             </div>
 
             <ProductInfo onOptionClick={handleOptionClick} product={product} />
