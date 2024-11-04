@@ -19,8 +19,8 @@ export interface InputProps
   label?: string;
   prefix?: ReactNode;
   suffix?: ReactNode;
-  confirmMessage?: string;
-  errorMessage?: string;
+  confirmMessage?: string | null;
+  errorMessage?: string | null;
 }
 
 export const Input = forwardRef<InputRef, InputProps>(

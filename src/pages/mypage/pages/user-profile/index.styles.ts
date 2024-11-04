@@ -42,3 +42,10 @@ export const placeholderStyle = css`
     color: ${theme.colors.black};
   }
 `;
+
+export const accountContainer = css`
+  display: flex;
+  flex-direction: column;
+  padding: 21px;
+  gap: 32px;
+`;
