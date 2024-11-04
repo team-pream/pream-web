@@ -10,15 +10,20 @@ export const wrapper = css`
   overflow-y: auto;
 `;
 
-export const hr = css`
+export const wrap = css`
   width: 100%;
+  padding: 0 18px;
+`;
+
+export const hr = css`
+  width: calc(100% - 36px);
   height: 2px;
-  margin: 19px auto;
+  margin: 32px auto 19px auto;
 `;
 
 export const productInfo = css`
   width: 100%;
-  padding: 0 0 50px 0;
+  padding: 0 0 18px 0;
   display: flex;
   flex-direction: column;
   gap: 32px;

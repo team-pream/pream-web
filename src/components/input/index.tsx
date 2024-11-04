@@ -65,6 +65,11 @@ export const Input = forwardRef<InputRef, InputProps>(
               setIsFocused(true);
             }
           }}
+          onBlur={(e: React.FocusEvent<HTMLDivElement>) => {
+            if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+              setIsFocused(false);
+            }
+          }}
           css={inputWrapper({ errorMessage, isFocused })}
         >
           {prefix && prefix}

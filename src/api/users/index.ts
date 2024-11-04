@@ -23,6 +23,6 @@ export const postUsersPet = async (body: PostUsersPetBody) => {
 };
 
 export const getUsersMe = async () => {
-  const response = await api.get<GetUsersMeResponse>('/user/profile');
+  const response = await api.get<GetUsersMeResponse>('/users/profile');
   return response.data;
 };

@@ -9,4 +9,16 @@ export const info = css`
 export const content = css`
   width: 100%;
   display: flex;
+  flex-direction: column;
+  gap: 32px;
+`;
+
+export const wrap = css`
+  width: 100%;
+  padding: 0 18px;
+`;
+
+export const nowrap = css`
+  width: 100%;
+  padding: 0 0 0 18px;
 `;
