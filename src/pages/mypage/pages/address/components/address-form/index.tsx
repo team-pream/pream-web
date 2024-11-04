@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import SearchBar from './components/search-bar';
 import KakaoMap from './components/map';
 import axios from 'axios';
+import { Dialog } from '@/components';
 import { Text } from '@/components';
 import {
   containTagWrapper,
@@ -32,6 +33,7 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
   const [zonecode, setZoneCode] = useState(initialData?.zonecode || '');
   const [detailAddress, setDetailAddress] = useState(initialData?.detailAddress || '');
   const [showDetailInput, setShowDetailInput] = useState(!!initialData);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [mapCoordinates, setMapCoordinates] = useState<{
     latitude: number;
     longitude: number;
@@ -102,9 +104,11 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
       }
     });
   };
-
+  const handleSave = () => {
+    setIsDialogOpen(true);
+  };
   // 주소 저장
-  const handleSave = async () => {
+  const handleDialogConfirm = async () => {
     try {
       const addressData = {
         roadAddress,
@@ -114,6 +118,7 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
       };
 
       // API 호출하여 주소 업데이트
+      setIsDialogOpen(false);
       await patchUserAddress(addressData); // 서버에 주소 업데이트
       onSave(); // 성공 시 콜백 호출
     } catch (error) {
@@ -172,6 +177,17 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
           </>
         )}
       </div>
+      {isDialogOpen && (
+        <Dialog
+          type="action"
+          title="등록 완료"
+          description="주소가 입력됐어요"
+          primaryActionLabel="확인"
+          secondaryActionLabel="취소"
+          onPrimaryAction={handleDialogConfirm} // Dialog의 확인 버튼을 클릭 시 동작
+          onSecondaryAction={handleDialogConfirm}
+        />
+      )}
     </div>
   );
 };
