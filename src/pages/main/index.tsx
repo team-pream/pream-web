@@ -48,7 +48,7 @@ export default function Main() {
             width="19"
             height="20"
             style={{ cursor: 'pointer' }}
-            onClick={() => navigate('/search')}
+            onClick={() => navigate('/products/search')}
           />
         }
       />
