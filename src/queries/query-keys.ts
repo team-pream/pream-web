@@ -14,5 +14,8 @@ export const QUERY_KEYS = {
   DELETE_PRODUCTS_DETAIL: (productId: string) => ['DELETE_PRODUCTS_DETAIL', productId],
   GET_PRODUCTS_SEARCH: (params: GetProductsSearchParam) => ['GET_PRODUCTS_SEARCH', params],
   GET_SALES_LIST: ['GET_SALES_LIST'],
+<<<<<<< HEAD
   GET_ADDRESS_ME: ['GET_ADDRESS_ME'],
+=======
+>>>>>>> 3e3b7ae ([PREAM-101] 판매내역 페이지 개발 완료 (#102))
 } as const;
