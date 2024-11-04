@@ -26,6 +26,12 @@ export default function Categories() {
       navigate(`/products/search?keyword=${keyword}`, { state: { keyword } });
     }
   };
+
+  const handleSearchIconClick = () => {
+    if (keyword.trim() === '') return; //공백제거 후 빈값이면 동작안함
+    navigate(`/products/search?keyword=${keyword}`, { state: { keyword } });
+  };
+
   return (
     <Layout>
       <AppBar
@@ -38,7 +44,13 @@ export default function Categories() {
             }}
           />
         }
-        suffix={<SearchBar onChange={handleChangeKeyword} onKeyDown={handleKeyDown} />}
+        suffix={
+          <SearchBar
+            onChange={handleChangeKeyword}
+            onKeyDown={handleKeyDown}
+            onClick={handleSearchIconClick}
+          />
+        }
       />
 
       <div css={menuWrapper}>

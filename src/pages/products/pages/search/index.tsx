@@ -48,15 +48,17 @@ export default function Search() {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       event.preventDefault(); // 기본 동작 방지
-      if (keyword.trim() === '') return; //공백제거 후 빈값이면 리턴
+      //공백제거 후 빈값이면 동작안함
+      if (keyword.trim() === '') return;
       setSearchTerm(keyword);
     }
   };
 
-  // const handleSearchIconClick = () =>{
-  //   if(keyword.trim() === '') return //공백제거 후 빈값이면 리턴
-  //   setSearchTerm(keyword);
-  // }
+  const handleSearchIconClick = () => {
+    //공백제거 후 빈값이면 동작안함
+    if (keyword.trim() === '') return;
+    setSearchTerm(keyword);
+  };
 
   //현재 키워드로 URL을 업데이트하며, 컴포넌트의 전체 재렌더링 없이 navigate를 사용
   useEffect(() => {
@@ -78,7 +80,12 @@ export default function Search() {
           />
         }
         suffix={
-          <SearchBar value={keyword} onChange={handleChangeKeyword} onKeyDown={handleKeyDown} />
+          <SearchBar
+            value={keyword}
+            onChange={handleChangeKeyword}
+            onKeyDown={handleKeyDown}
+            onClick={handleSearchIconClick}
+          />
         }
       />
       <div css={productsWrapper}>
