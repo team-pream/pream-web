@@ -15,6 +15,7 @@ import {
   soldOutOverlayStyle,
   statusWrapper,
   textBox,
+  textWrapper,
 } from './index.styles';
 import { useGetProductsSearchQuery } from '@/queries/products';
 import { ProductListProduct } from '@/types';
@@ -27,7 +28,8 @@ export default function Search() {
   const [searchTerm, setSearchTerm] = useState<string>(initialKeyword); // 실제 검색어 상태
   const [status, setStatus] = useState<number>();
   const [isOpen, setIsOpen] = useState<boolean>(false); // 드롭다운 열림/닫힘 상태
-  const { data } = useGetProductsSearchQuery({ keyword: searchTerm }, !!searchTerm);
+  const { data } = useGetProductsSearchQuery({ keyword: searchTerm, status }, !!searchTerm);
+
   const toggleDropdown = () => {
     setIsOpen(!isOpen); // 클릭 시 드롭다운 토글
   };
@@ -35,7 +37,6 @@ export default function Search() {
   const handleItemClick = (statusId: number) => {
     setStatus(statusId);
     setIsOpen(false); // 선택 후 드롭다운 닫기
-    console.log(status);
   };
 
   const handleChangeKeyword = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,9 +47,15 @@ export default function Search() {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       event.preventDefault(); // 기본 동작 방지
+      if (keyword.trim() === '') return; //공백제거 후 빈값이면 리턴
       setSearchTerm(keyword);
     }
   };
+
+  // const handleSearchIconClick = () =>{
+  //   if(keyword.trim() === '') return //공백제거 후 빈값이면 리턴
+  //   setSearchTerm(keyword);
+  // }
 
   //현재 키워드로 URL을 업데이트하며, 컴포넌트의 전체 재렌더링 없이 navigate를 사용
   useEffect(() => {
@@ -89,6 +96,7 @@ export default function Search() {
               menus={[
                 { label: '구매 가능', onClick: () => handleItemClick(1) },
                 { label: '판매 완료', onClick: () => handleItemClick(2) },
+                { label: '예약 중', onClick: () => handleItemClick(3) },
               ]}
             />
           )}
@@ -121,9 +129,18 @@ export default function Search() {
           })}
         </div>
         {data?.totalCount == 0 && ( //검색 결과가 없을 때
-          <Text typo="subtitle3" color={theme.colors.gray300}>
-            검색결과가 없습니다
-          </Text>
+          <div css={textWrapper}>
+            <Text typo="body2" color={theme.colors.gray300}>
+              상품 검색 결과가 없습니다
+            </Text>
+          </div>
+        )}
+        {!initialKeyword && ( //main 화면에서 search icon 클릭했을 때
+          <div css={textWrapper}>
+            <Text typo="body2" color={theme.colors.gray300}>
+              검색어를 입력해주세요
+            </Text>
+          </div>
         )}
       </div>
     </Layout>

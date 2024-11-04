@@ -60,4 +60,5 @@ export interface GetProductsDetailResponse {
 
 export interface GetProductsSearchParam {
   keyword: string;
+  status?: number;
 }

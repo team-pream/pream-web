@@ -33,6 +33,6 @@ export const getProductsDetail = async (productId: string) => {
 };
 
 export const getProductsSearch = async (params: GetProductsSearchParam) => {
-  const response = await api.get('/products/search', { params });
+  const response = await api.get<GetProductsResponse>('/products/search', { params });
   return response.data;
 };

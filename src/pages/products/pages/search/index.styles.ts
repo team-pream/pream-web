@@ -85,3 +85,12 @@ export const textBox = css`
   padding: 8px 0 0 7px;
   cursor: pointer;
 `;
+
+export const textWrapper = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  width: 100%;
+  margin: 0px auto;
+`;
