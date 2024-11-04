@@ -57,10 +57,6 @@ export default function Detail() {
       />
     );
 
-  console.log('product: ', product);
-  console.log('isFetching: ', isFetching);
-  console.log('isSuccess: ', isSuccess);
-
   if (!product && !isFetching)
     return (
       <Dialog
