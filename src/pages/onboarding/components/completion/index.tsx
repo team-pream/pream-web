@@ -16,12 +16,13 @@ export default function Completion() {
     <div css={textBox}>
       <Complete width="70px" />
       <Text typo="title1" color={theme.colors.green200}>
-        {data.nickname} 님<br />
+        {data?.nickname}{' '}
         <Text typo="title1" color={theme.colors.black}>
+          님<br />
           회원가입이 완료됐어요!
         </Text>
       </Text>
-      <Button size="l" onClick={handleCompleteButtonClick}>
+      <Button size="xl" onClick={handleCompleteButtonClick}>
         시작하기
       </Button>
     </div>
