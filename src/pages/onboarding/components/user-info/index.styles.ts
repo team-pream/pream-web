@@ -1,3 +1,4 @@
+import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 
 export const wrapper = css`
@@ -5,8 +6,17 @@ export const wrapper = css`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 12% 4% 0 4%;
+  width: 100%;
+  height: 100%;
+  padding: 0 18px;
+`;
+
+export const formWrapper = css`
+  width: 100%;
+  height: 100%;
   gap: 26px;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const textBox = css`
@@ -15,15 +25,19 @@ export const textBox = css`
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: 0 0 18% 0;
+  margin: 103px 0;
   gap: 8px;
 `;
 
-export const fixedButtonWrapper = css`
+export const buttonWrapper = css`
   position: fixed;
-  bottom: 2%;
-  left: 0;
+  bottom: 10px;
+  margin: 0 auto;
+  z-index: ${theme.zIndex.gnb};
   width: 100%;
+  max-width: ${theme.size.maxWidth};
+  padding: 0 18px;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
