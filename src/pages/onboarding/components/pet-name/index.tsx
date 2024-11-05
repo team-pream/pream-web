@@ -1,19 +1,24 @@
-import { inputWrapper, textBox, fixedButtonWrapper } from './index.styles';
+import { textBox, buttonWrapper, skipButton, wrapper } from './index.styles';
 import { Text, Input, Button } from '@/components';
 import theme from '@/styles/theme';
 import { UserInfoForm } from '../../types';
+import { ChangeEvent } from 'react';
 
 interface PetNameProps {
   formData: UserInfoForm;
   setFormData: (data: UserInfoForm) => void;
   onComplete: () => void;
+  onSkip: () => void;
 }
 
-export default function PetName({ formData, setFormData, onComplete }: PetNameProps) {
-  const isPetNameValid = formData.petName;
+export default function PetName({ formData, setFormData, onComplete, onSkip }: PetNameProps) {
+  const isPetNameValid = formData.petName.length >= 2 && formData.petName.length <= 20;
+  const handlePetNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, petName: event.target.value });
+  };
 
   return (
-    <div css={inputWrapper}>
+    <div css={wrapper}>
       <div css={textBox}>
         <Text typo="title1" color={theme.colors.green200}>
           반려동물{' '}
@@ -28,19 +33,22 @@ export default function PetName({ formData, setFormData, onComplete }: PetNamePr
       <Input
         type="text"
         label="반려동물 이름"
-        placeholder="1~8자 이내로 작성해주세요"
+        placeholder="반려동물의 이름을 입력해주세요."
         value={formData.petName}
-        onChange={(e) => setFormData({ ...formData, petName: e.target.value })}
+        onChange={handlePetNameChange}
       ></Input>
-      <div css={fixedButtonWrapper}>
+      <div css={buttonWrapper}>
         <Button
-          size="l"
+          size="xl"
           status={isPetNameValid ? 'active' : 'disabled'}
           onClick={onComplete}
           disabled={!isPetNameValid}
         >
           다음
         </Button>
+        <div css={skipButton} onClick={onSkip}>
+          <Text typo="body1">건너뛰기</Text>
+        </div>
       </div>
     </div>
   );
