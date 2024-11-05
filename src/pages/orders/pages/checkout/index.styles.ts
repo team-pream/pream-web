@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { colors } from '@/styles/colors';
 
 export const contentsWrapper = css`
-  padding: 0 5%;
+  padding: 0 18px 18px 18px;
 `;
 
 export const title = css`

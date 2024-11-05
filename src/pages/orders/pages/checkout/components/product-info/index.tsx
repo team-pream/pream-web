@@ -1,14 +1,10 @@
 import { Text } from '@/components';
 import { line } from '../../index.styles';
 import { productInfoWrapper, innerWrapper, productImg, textWrapperStyle } from './index.styles';
+import { GetProductsDetailResponse } from '@/types';
 
 interface productInfoProps {
-  product: {
-    id: string;
-    title: string;
-    price: number;
-    images: string;
-  };
+  product: GetProductsDetailResponse;
 }
 export default function ProductInfo({ product }: productInfoProps) {
   return (
@@ -18,7 +14,7 @@ export default function ProductInfo({ product }: productInfoProps) {
         <Text typo="subtitle1">주문 상품</Text>
         <div css={innerWrapper}>
           <div css={productImg}>
-            <img src={product.images} />
+            <img src={product.images[0]} />
           </div>
           <div css={textWrapperStyle}>
             <Text typo="body4">{product.title}</Text>
