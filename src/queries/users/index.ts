@@ -7,11 +7,10 @@ import {
   patchUsersOnboarding,
   patchUsersPet,
   postUserPet,
-  patchUsersMe,
   postUsersCheckNickname,
-  postUsersPet,
   patchUsersAddress,
   patchUsersMe,
+  postUsersPet,
 } from '@/api';
 import {
   GetUsersMeResponse,
