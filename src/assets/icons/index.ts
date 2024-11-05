@@ -1,4 +1,5 @@
 export { default as AppBarBack } from './AppBarBack';
+export { default as Clear } from './Clear';
 export { default as Complete } from './Complete';
 export { default as DropdownFold } from './DropdownFold';
 export { default as DropdownUnfold } from './DropdownUnfold';

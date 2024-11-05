@@ -7,10 +7,12 @@ import {
   postUsersCheckNickname,
   postUsersPet,
   patchUsersAddress,
+  patchUsersMe,
 } from '@/api';
 import {
   GetUsersMeResponse,
   PatchAuthOnboardingBody,
+  PatchUsersMeBody,
   PostUsersCheckNicknameBody,
   PostUsersPetBody,
   PatchUsersAddressBody,
@@ -81,6 +83,20 @@ export const usePatchUsersAddressMutation = (onSuccess?: () => void) => {
         return await patchUsersAddress(body);
       } catch {
         throw new Error('주소등록에 실패했습니다.');
+      }
+    },
+    onSuccess,
+  });
+};
+
+export const usePatchUsersMeMutation = (onSuccess: () => void) => {
+  return useMutation({
+    mutationKey: QUERY_KEYS.PATCH_USERS_ME,
+    mutationFn: async (body: PatchUsersMeBody) => {
+      try {
+        return await patchUsersMe(body);
+      } catch {
+        throw new Error('사용자 프로필을 수정하는 데 실패했습니다.');
       }
     },
     onSuccess,

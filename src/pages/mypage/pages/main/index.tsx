@@ -16,14 +16,15 @@ import {
   nicknameWrapper,
   logoutStyle,
   plusWrapper,
+  editClear,
 } from './index.styles';
 import theme from '@/styles/theme';
 import Badge from './components/badge';
 import EditButton from './components/edit-button';
 import Menu from './components/menu';
-import { Next, Plus } from '@/assets/icons';
+import { Clear, Next, Plus } from '@/assets/icons';
 import { ROUTE_PATHS } from '@/constants/routes';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useGetUsersMeQuery } from '@/queries/users';
 import { useEffect, useState } from 'react';
 
@@ -62,6 +63,16 @@ export default function Main() {
       navigate(ROUTE_PATHS.LOGIN);
     }
   };
+
+  const location = useLocation();
+  const [showUpdateMessage, setShowUpdateMessage] = useState(location.state?.editSuccess || false);
+
+  useEffect(() => {
+    if (showUpdateMessage) {
+      const timer = setTimeout(() => setShowUpdateMessage(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showUpdateMessage]);
 
   return (
     <Layout>
@@ -164,6 +175,14 @@ export default function Main() {
             </>
           )}
         </div>
+        {showUpdateMessage && (
+          <div css={editClear}>
+            <Clear width="16px" />
+            <Text typo="body4" color={theme.colors.white}>
+              프로필이 수정되었습니다.
+            </Text>
+          </div>
+        )}
       </div>
       <GNB />
     </Layout>

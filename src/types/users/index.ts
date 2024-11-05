@@ -38,3 +38,9 @@ export interface PatchUsersAddressBody {
   roadAddress: string;
   detailAddress: string;
 }
+
+export interface PatchUsersMeBody {
+  nickname?: string;
+  phone?: string;
+  bankAccount?: { bank: string; accountNumber: string };
+}

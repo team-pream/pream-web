@@ -107,3 +107,18 @@ export const hr = css`
 export const menuline = css`
   margin: 0;
 `;
+
+export const editClear = css`
+  display: flex;
+  align-items: center;
+  text-align: center;
+  background-color: ${theme.colors.grayOpacity300};
+  width: 90%;
+  height: 36px;
+  gap: 5px;
+  padding: 10px;
+  border-radius: 6px;
+  position: fixed;
+  bottom: 12%;
+  z-index: 1000;
+`;
