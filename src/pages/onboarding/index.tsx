@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useUsersPetMutation } from '@/queries/users';
 import { AppBarBack } from '@/assets/icons';
-import { AppBar, Layout, Text } from '@/components';
+import { AppBar, Layout } from '@/components';
 import { Completion, PetName, PetType, UserInfo } from './components';
-import { progressBarContainer, progressBar, skipButton, wrapper } from './index.styles';
+import { progressBarContainer, progressBar, wrapper } from './index.styles';
 import { UserInfoForm } from './types';
+import { useNavigate } from 'react-router-dom';
 
 const STEPS = {
   USER_INFO: 1,
@@ -14,7 +15,8 @@ const STEPS = {
 };
 
 export default function Onboarding() {
-  const [step, setStep] = useState(STEPS.USER_INFO);
+  const navigate = useNavigate();
+  const [step, setStep] = useState<number>(STEPS.USER_INFO);
   const [formData, setFormData] = useState<UserInfoForm>({
     email: '',
     nickname: '',
@@ -22,6 +24,24 @@ export default function Onboarding() {
     petType: null,
     petName: '',
   });
+
+  // Handler to navigate based on the step
+  const handleBackNavigation = () => {
+    switch (step) {
+      case STEPS.PET_TYPE:
+        setStep(STEPS.USER_INFO);
+        break;
+      case STEPS.PET_NAME:
+        setStep(STEPS.PET_TYPE);
+        break;
+      case STEPS.COMPLETE:
+        setStep(STEPS.PET_NAME);
+        break;
+      default:
+        navigate(-1);
+        return;
+    }
+  };
 
   const { mutate } = useUsersPetMutation(() => {
     setStep(STEPS.COMPLETE);
@@ -36,11 +56,7 @@ export default function Onboarding() {
   };
 
   const handleSkipButtonClick = () => {
-    if (step === STEPS.PET_TYPE) {
-      setStep(STEPS.PET_NAME);
-    } else if (step === STEPS.PET_NAME) {
-      setStep(STEPS.COMPLETE);
-    }
+    setStep(STEPS.COMPLETE);
   };
 
   const renderStep = () => {
@@ -59,6 +75,7 @@ export default function Onboarding() {
             formData={formData}
             setFormData={(data) => setFormData({ ...formData, ...data })}
             onNext={handleNextButtonClick}
+            onSkip={handleSkipButtonClick}
           />
         );
       case STEPS.PET_NAME:
@@ -67,6 +84,7 @@ export default function Onboarding() {
             formData={formData}
             setFormData={setFormData}
             onComplete={handleNextButtonClick}
+            onSkip={handleSkipButtonClick}
           />
         );
       case STEPS.COMPLETE:
@@ -78,19 +96,15 @@ export default function Onboarding() {
 
   return (
     <Layout>
-      <AppBar prefix={<AppBarBack height="24px" cursor="pointer" />} />
+      <AppBar
+        prefix={<AppBarBack height="24px" cursor="pointer" onClick={handleBackNavigation} />}
+      />
       <section css={wrapper}>
         <div css={progressBarContainer}>
           <div css={progressBar({ step: step === STEPS.COMPLETE ? 3 : step })} />
         </div>
 
         {renderStep()}
-
-        {(step === STEPS.PET_TYPE || step === STEPS.PET_NAME) && (
-          <div css={skipButton} onClick={handleSkipButtonClick}>
-            <Text typo="body1">건너뛰기</Text>
-          </div>
-        )}
       </section>
     </Layout>
   );
