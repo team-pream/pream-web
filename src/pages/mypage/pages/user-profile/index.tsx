@@ -124,7 +124,7 @@ export default function UserProfile() {
       <AppBar
         prefix={
           <AppBarBack
-            height="17px"
+            height="24px"
             cursor="pointer"
             onClick={() => {
               navigate(-1);
