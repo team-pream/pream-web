@@ -1,8 +1,12 @@
-import { line } from '../../index.styles';
 import { totalOrderWrapper, totalTextStyle, totalTextWrapper } from './index.styles';
 import { Button } from '@/components';
 import { Text } from '@/components';
-const OrderTotal = () => {
+import { line } from '../../index.styles';
+
+interface totalPriceProps {
+  price: number;
+}
+const OrderTotal: React.FC<totalPriceProps> = ({ price }) => {
   return (
     <div>
       <div css={line} />
@@ -11,14 +15,14 @@ const OrderTotal = () => {
         <div css={totalTextWrapper}>
           <div css={totalTextStyle}>
             <Text typo="body5">상품 금액</Text>
-            <Text typo="body5">20,000원</Text>
+            <Text typo="body5">{price.toLocaleString()}원</Text>
           </div>
           <div css={totalTextStyle}>
             <Text typo="body5">배송비</Text>
             <Text typo="body5">무료</Text>
           </div>
         </div>
-        <Button size="xl">20,000원 결제하기</Button>
+        <Button size="xl">{price.toLocaleString()}원 결제하기</Button>
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ const SelectBasic = () => {
 
   return (
     <div css={{ display: 'flex', justifyContent: 'space-between' }}>
-      <Text typo="subtitle1">배송주소</Text>
+      <Text typo="subtitle1">배송 주소</Text>
       <div css={radioButtonWrapper} onClick={handleCheckboxChange}>
         <input type="checkbox" style={{ display: 'none' }} checked={isChecked} readOnly />
         <div css={customCheckbox}>
