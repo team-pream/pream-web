@@ -9,6 +9,7 @@ export const menuWrapper = css`
 export const hr = css`
   margin-top: 11px;
   border-color: ${theme.colors.black};
+  height: 2px;
 `;
 
 export const gridWrapper = css`
