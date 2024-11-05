@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useMutation } from '@tanstack/react-query';
 import {
   getUsersMe,
-  patchUsersme,
+  patchUsersMe,
   patchUsersOnboarding,
   postUsersCheckNickname,
   postUsersPet,
@@ -78,7 +78,7 @@ export const usePatchUsersMeMutation = (onSuccess: () => void) => {
     mutationKey: QUERY_KEYS.PATCH_USERS_ME,
     mutationFn: async (body: PatchUsersMeBody) => {
       try {
-        return await patchUsersme(body);
+        return await patchUsersMe(body);
       } catch {
         throw new Error('사용자 프로필을 수정하는 데 실패했습니다.');
       }

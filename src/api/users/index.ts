@@ -28,7 +28,7 @@ export const getUsersMe = async () => {
   return response.data;
 };
 
-export const patchUsersme = async (body: PatchUsersMeBody) => {
+export const patchUsersMe = async (body: PatchUsersMeBody) => {
   const response = await api.patch('/users/me', body);
   return response.data;
 };
