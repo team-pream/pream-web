@@ -77,7 +77,7 @@ export default function Detail() {
 
           <section css={wrapper}>
             <div css={carouselWrapper}>
-              <Skeleton width={390} height={332} style={{ borderRadius: '0 0 20px 20px' }} />
+              <Skeleton height={332} style={{ borderRadius: '0 0 20px 20px' }} />
             </div>
 
             <ProductInfoSkeleton />
