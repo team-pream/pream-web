@@ -119,3 +119,7 @@ export const convertProductsDetailToProductsUploadBody = (
     contact: data.seller.contact,
   };
 };
+export interface GetProductsSearchParam {
+  keyword: string;
+  status?: number;
+}
