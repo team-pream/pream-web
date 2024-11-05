@@ -24,12 +24,7 @@ export default function SalesList() {
     <Layout>
       <AppBar
         prefix={
-          <AppBarBack
-            width="11"
-            height="24"
-            style={{ cursor: 'pointer' }}
-            onClick={() => navigate('/mypage')}
-          />
+          <AppBarBack width="11" height="24" cursor="pointer" onClick={() => navigate('/mypage')} />
         }
       />
       <main css={mainWrapper}>
