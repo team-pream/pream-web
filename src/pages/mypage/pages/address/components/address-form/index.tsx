@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import SearchBar from './components/search-bar';
 import KakaoMap from './components/map';
 import axios from 'axios';
-import { Dialog } from '@/components';
-import { Text } from '@/components';
+import { Dialog, Text, Input, Button } from '@/components';
 import {
   containTagWrapper,
   addressFormWrapper,
@@ -11,9 +10,9 @@ import {
   buttonWrapper,
   formTagStyle,
 } from './insex.styles';
-import { Input, Button } from '@/components';
 import { patchUsersAddress } from '@/api';
 import { useNavigate } from 'react-router-dom';
+
 interface AddressData {
   roadAddress: string;
   detailAddress: string;
@@ -32,9 +31,10 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
   const [jibunAddress, setJibunAddress] = useState(initialData?.jibunAddress || '');
   const [zonecode, setZoneCode] = useState(initialData?.zonecode || '');
   const [detailAddress, setDetailAddress] = useState(initialData?.detailAddress || '');
+  const [errorMessage, setErrorMessage] = useState<string>(''); // errorMessage 상태 추가
   const [showDetailInput, setShowDetailInput] = useState(!!initialData);
-  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-  const [isCancelDialogOpen, setIsCancelDialogOpen] = useState<boolean>(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isCancelDialogOpen, setIsCancelDialogOpen] = useState(false);
   const navigate = useNavigate();
   const [mapCoordinates, setMapCoordinates] = useState<{
     latitude: number;
@@ -52,14 +52,12 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
     };
   }, []);
 
-  // roadAddress 변경 시 좌표를 가져와 지도에 반영
   useEffect(() => {
     if (roadAddress) {
       fetchCoordinates(roadAddress);
     }
   }, [roadAddress]);
 
-  // 주소를 입력받아 좌표로 변환
   const fetchCoordinates = async (address: string) => {
     try {
       const response = await axios.get(
@@ -78,37 +76,54 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
     }
   };
 
-  // 주소 검색 창 열기
   const handlePostcodeSearch = () => {
     new window.daum.Postcode({
       oncomplete: (data: AddressData) => {
-        const buildingName = data.buildingName;
+        const buildingName = data.buildingName || '';
         setRoadAddress(data.roadAddress + buildingName);
         setJibunAddress(data.jibunAddress);
         setZoneCode(data.zonecode);
         setShowDetailInput(true);
-        fetchCoordinates(data.roadAddress); // 검색 결과 좌표 가져오기
+        fetchCoordinates(data.roadAddress);
       },
     }).open();
   };
 
-  // 마커가 드래그된 후 주소 업데이트
   const handleMarkerDragEnd = async (lat: number, lng: number) => {
     const geocoder = new window.kakao.maps.services.Geocoder();
     geocoder.coord2Address(lng, lat, (result, status) => {
       if (status === window.kakao.maps.services.Status.OK && result[0]) {
-        const roadAddress = result[0].road_address?.address_name || ''; // 도로명 주소
-        const jibunAddress = result[0].address?.address_name || ''; // 지번 주소
+        const roadAddress = result[0].road_address?.address_name || '';
+        const jibunAddress = result[0].address?.address_name || '';
         setRoadAddress(roadAddress);
         setJibunAddress(jibunAddress);
         setMapCoordinates({ latitude: lat, longitude: lng });
       }
     });
   };
-  const handleSave = () => {
-    setIsDialogOpen(true);
+
+  const validateDetailAddress = (value: string) => {
+    if (!value) {
+      return '상세 주소를 입력해 주세요.';
+    } else if (value.length > 30) {
+      return '상세 주소는 30자 이하여야 합니다.';
+    } else {
+      return '';
+    }
   };
-  // 주소 저장
+
+  const handleDetailAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setDetailAddress(value);
+    setErrorMessage(validateDetailAddress(value)); // 실시간 유효성 검사
+  };
+
+  const handleSave = () => {
+    if (!errorMessage) {
+      setIsDialogOpen(true);
+    }
+  };
+
   const handleDialogConfirm = async () => {
     try {
       const addressData = {
@@ -118,10 +133,9 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
         zonecode,
       };
 
-      // API 호출하여 주소 업데이트
       setIsDialogOpen(false);
-      await patchUsersAddress(addressData); // 서버에 주소 업데이트
-      onSave(); // 성공 시 콜백 호출
+      await patchUsersAddress(addressData);
+      onSave();
     } catch (error) {
       console.error('Failed to update address:', error);
       alert('주소 수정에 실패했습니다.');
@@ -167,7 +181,10 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
                 type="text"
                 placeholder="상세 주소를 입력하세요"
                 value={detailAddress}
-                onChange={(e) => setDetailAddress(e.target.value)}
+                maxLength={30} // 30자로 입력 제한
+                errorMessage={errorMessage}
+                onChange={handleDetailAddressChange} // 실시간 유효성 검사 핸들러
+                onBlur={() => setErrorMessage(validateDetailAddress(detailAddress))}
               />
             </div>
             <div css={buttonWrapper}>
@@ -185,8 +202,8 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
           description="주소가 입력됐어요"
           primaryActionLabel="확인"
           secondaryActionLabel="취소"
-          onPrimaryAction={handleDialogConfirm} // Dialog의 확인 버튼을 클릭 시 동작
-          onSecondaryAction={handleDialogConfirm}
+          onPrimaryAction={handleDialogConfirm}
+          onSecondaryAction={() => setIsDialogOpen(false)}
         />
       )}
       {isCancelDialogOpen && (
