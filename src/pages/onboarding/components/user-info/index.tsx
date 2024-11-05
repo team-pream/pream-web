@@ -37,7 +37,7 @@ export default function UserInfo({ onNext, setFormData, formData }: UserInfoProp
 
     const nickname = formData.nickname.trim(); //공백 제거
     if (!nickname || nickname.length < 2 || nickname.length > 20) {
-      setNicknameErrorMessage('닉네임은 최소 2자, 최대 20자로 입력해주세요.');
+      setNicknameErrorMessage('닉네임은 2~20자 이내로 입력해주세요.');
       setIsValidNickname(false);
       return;
     }
