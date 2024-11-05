@@ -18,6 +18,7 @@ api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('access');
     if (token) {
+      // accessToken이 있다면
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
@@ -31,11 +32,55 @@ formApi.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('access');
     if (token) {
+      // accessToken이 있다면
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
   (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// 에러코드에 따른 에러처리
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    const originalRequest = error.config; // 현재 요청 객체를 저장하여 재시도 시 사용
+    const errorCode = error.response.data.errorCode;
+
+    // Access 토큰이 유효하지 않거나 만료된 사용자인 경우 (refreshToken을 사용해 accessToken 재발급)
+    if (error.response.status === 401 && errorCode === -825) {
+      try {
+        const refreshToken = localStorage.getItem('refresh');
+        // Refresh Token을 사용하여 새로운 Access Token 요청
+        const response = await api.post('/auth/reissue', { refreshToken: refreshToken });
+
+        const accessToken = response.data;
+        localStorage.setItem('access', accessToken);
+
+        // 새 Access Token을 헤더에 추가하여 요청을 재시도할 수 있도록 설정
+        api.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+        originalRequest.headers = `Bearer ${accessToken}`;
+
+        // 원래의 요청을 재시도
+        return api(originalRequest);
+      } catch (error) {
+        // Refresh 토큰이 만료되었을 경우
+        if (errorCode === -824) {
+          window.location.href = './login'; // 로그인 페이지로 redirect
+        }
+        return Promise.reject(error);
+      }
+    }
+    // Authorization header가 없는 경우
+    else if (errorCode == -954) {
+      alert('로그인이 필요합니다. 로그인 페이지로 이동합니다.');
+      window.location.href = './login';
+    }
+
     return Promise.reject(error);
   }
 );
