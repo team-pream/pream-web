@@ -13,7 +13,7 @@ import {
 } from './insex.styles';
 import { Input, Button } from '@/components';
 import { patchUserAddress } from '@/api';
-
+import { useNavigate } from 'react-router-dom';
 interface AddressData {
   roadAddress: string;
   detailAddress: string;
@@ -34,6 +34,8 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
   const [detailAddress, setDetailAddress] = useState(initialData?.detailAddress || '');
   const [showDetailInput, setShowDetailInput] = useState(!!initialData);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+  const [isCancelDialogOpen, setIsCancelDialogOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
   const [mapCoordinates, setMapCoordinates] = useState<{
     latitude: number;
     longitude: number;
@@ -185,6 +187,17 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
           secondaryActionLabel="취소"
           onPrimaryAction={handleDialogConfirm} // Dialog의 확인 버튼을 클릭 시 동작
           onSecondaryAction={handleDialogConfirm}
+        />
+      )}
+      {isCancelDialogOpen && (
+        <Dialog
+          type="error"
+          title="주소 수정을 취소할까요?"
+          description="페이지를 나가면 작성한 내용은 저장되지 않아요"
+          primaryActionLabel="나가기"
+          secondaryActionLabel="닫기"
+          onPrimaryAction={() => navigate(-1)}
+          onSecondaryAction={() => setIsCancelDialogOpen(false)}
         />
       )}
     </div>

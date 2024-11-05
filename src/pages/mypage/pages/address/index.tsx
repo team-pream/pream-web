@@ -5,21 +5,26 @@ import AddressList from './components/address-list';
 import { useState, useEffect } from 'react';
 import AddressForm from './components/address-form';
 import { useGetUsersMeQuery } from '@/queries/users';
-import { PatchUserAddressResponse } from '@/types';
-
+import { PatchUserAddressBody } from '@/types';
+import { useNavigate } from 'react-router-dom';
 type PageState = 'list' | 'form';
 
 interface AddressData {
   username: string;
   phone: string;
-  address: PatchUserAddressResponse;
+  address: PatchUserAddressBody;
 }
 
-export default function Address() {
+interface FormProps {
+  isSuccess?: boolean;
+  onChangeDialog?: () => void;
+}
+
+export default function Address({ isSuccess, onChangeDialog }: FormProps) {
   const [page, setPage] = useState<PageState>('list');
   const { data, refetch } = useGetUsersMeQuery(); // refetch 추가
   const [userData, setUserData] = useState<AddressData | null>(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (data) {
       const { username, phone, address } = data;
@@ -35,7 +40,15 @@ export default function Address() {
 
   return (
     <Layout>
-      <AppBar prefix={<AppBarBack height="24px" cursor="pointer" />} />
+      <AppBar
+        prefix={
+          <AppBarBack
+            height="24px"
+            cursor="pointer"
+            onClick={() => (isSuccess ? navigate(-1) : onChangeDialog?.())}
+          />
+        }
+      />
 
       {page === 'list' ? (
         <>
@@ -47,7 +60,6 @@ export default function Address() {
       ) : (
         <AddressForm onSave={handleSaveAddress} initialData={userData?.address} />
       )}
-
       <GNB />
     </Layout>
   );
