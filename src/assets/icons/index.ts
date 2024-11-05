@@ -4,6 +4,7 @@ export { default as DropdownFold } from './DropdownFold';
 export { default as DropdownUnfold } from './DropdownUnfold';
 export { default as EmotionalPetIcon } from './EmotionalPetIcon';
 export { default as FabPlus } from './FabPlus';
+export { default as FailureIcon } from './FailureIcon';
 export { default as GnbCategory } from './GnbCategory';
 export { default as GnbHome } from './GnbHome';
 export { default as GnbMy } from './GnbMy';

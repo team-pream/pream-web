@@ -30,7 +30,7 @@ export default function OrderComplete() {
           <Complete css={completeIcon} />
           <Text typo="title1">구매 완료!</Text>
           <Button
-            variant="box"
+            shape="box"
             size="s"
             onClick={() => {
               navigate('/');
