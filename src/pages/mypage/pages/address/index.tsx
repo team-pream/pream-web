@@ -65,7 +65,7 @@ export default function Address() {
         <Dialog
           type="error"
           title="등록을 취소 할까요?"
-          description="페이지를 나가면 작성한 내용은 저장되지 않아요"
+          description={`페이지를 나가면 작성한 내용은 저장되지 않아요`}
           primaryActionLabel="나가기"
           secondaryActionLabel="닫기"
           onPrimaryAction={() => {
