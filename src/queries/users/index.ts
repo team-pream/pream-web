@@ -2,9 +2,12 @@ import { QUERY_KEYS } from '@/queries/query-keys';
 import { useQuery } from '@tanstack/react-query';
 import { useMutation } from '@tanstack/react-query';
 import {
+  deleteUsersPet,
   getUsersMe,
   patchUsersme,
   patchUsersOnboarding,
+  patchUsersPet,
+  postUserPet,
   postUsersCheckNickname,
   postUsersPet,
 } from '@/api';
@@ -12,6 +15,8 @@ import {
   GetUsersMeResponse,
   PatchAuthOnboardingBody,
   PatchUsersMeBody,
+  PatchUsersPetBody,
+  PostUserPetBody,
   PostUsersCheckNicknameBody,
   PostUsersPetBody,
 } from '@/types';
@@ -31,12 +36,12 @@ export const usePostUsersCheckNicknameMutation = (onSuccess: () => void) => {
 };
 
 // TODO: User와 Pet 분리
-export const useUsersPetMutation = (onSuccess: () => void) => {
+export const useUserPetMutation = (onSuccess: () => void) => {
   return useMutation({
     mutationKey: QUERY_KEYS.POST_PETS_PROFILE,
-    mutationFn: async (body: PostUsersPetBody) => {
+    mutationFn: async (body: PostUserPetBody) => {
       try {
-        return await postUsersPet(body);
+        return await postUserPet(body);
       } catch {
         throw new Error('반려동물 정보를 등록하는 데 실패했습니다.');
       }
@@ -81,6 +86,48 @@ export const usePatchUsersMeMutation = (onSuccess: () => void) => {
         return await patchUsersme(body);
       } catch {
         throw new Error('사용자 프로필을 수정하는 데 실패했습니다.');
+      }
+    },
+    onSuccess,
+  });
+};
+
+export const usePatchUsersPetMutation = (onSuccess: () => void) => {
+  return useMutation({
+    mutationKey: QUERY_KEYS.PATCH_USERS_PET,
+    mutationFn: async (body: PatchUsersPetBody) => {
+      try {
+        return await patchUsersPet(body);
+      } catch {
+        throw new Error('사용자 프로필을 수정하는 데 실패했습니다.');
+      }
+    },
+    onSuccess,
+  });
+};
+
+export const useDeleteUsersPetMutation = (onSuccess: () => void) => {
+  return useMutation({
+    mutationKey: QUERY_KEYS.DELETE_USERS_PET,
+    mutationFn: async () => {
+      try {
+        return await deleteUsersPet();
+      } catch {
+        throw new Error('사용자 프로필을 수정하는 데 실패했습니다.');
+      }
+    },
+    onSuccess,
+  });
+};
+
+export const usePostUsersPetMutation = (onSuccess: () => void) => {
+  return useMutation({
+    mutationKey: QUERY_KEYS.POST_USERS_PET,
+    mutationFn: async (body: PostUsersPetBody) => {
+      try {
+        return await postUsersPet(body);
+      } catch {
+        throw new Error('반려동물 정보를 등록하는 데 실패했습니다.');
       }
     },
     onSuccess,
