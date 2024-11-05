@@ -35,7 +35,7 @@ export default function Address() {
 
   return (
     <Layout>
-      <AppBar prefix={<AppBarBack height="17px" cursor="pointer" />} />
+      <AppBar prefix={<AppBarBack height="24px" cursor="pointer" />} />
 
       {page === 'list' ? (
         <>
