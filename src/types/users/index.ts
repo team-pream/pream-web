@@ -41,3 +41,9 @@ export interface PatchUsersAddressBody {
   jibunAddress: string;
   detailAddress: string;
 }
+
+export interface PatchUsersMeBody {
+  nickname?: string;
+  phone?: string;
+  bankAccount?: { bank: string; accountNumber: string };
+}
