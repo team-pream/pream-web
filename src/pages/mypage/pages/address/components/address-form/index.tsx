@@ -12,7 +12,7 @@ import {
   formTagStyle,
 } from './insex.styles';
 import { Input, Button } from '@/components';
-import { patchUserAddress } from '@/api';
+import { patchUsersAddress } from '@/api';
 import { useNavigate } from 'react-router-dom';
 interface AddressData {
   roadAddress: string;
@@ -120,7 +120,7 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
 
       // API 호출하여 주소 업데이트
       setIsDialogOpen(false);
-      await patchUserAddress(addressData); // 서버에 주소 업데이트
+      await patchUsersAddress(addressData); // 서버에 주소 업데이트
       onSave(); // 성공 시 콜백 호출
     } catch (error) {
       console.error('Failed to update address:', error);
