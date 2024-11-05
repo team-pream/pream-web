@@ -4,6 +4,7 @@ import {
   GetProductsResponse,
   GetProductsCurationResponse,
   GetProductsSearchParam,
+  GetProductsSalesListResponse,
 } from '@/types';
 import { api, formApi } from '@/api/api';
 
@@ -28,7 +29,11 @@ export const getProductsDetail = async (productId: string) => {
   if (productData.status === 'SOLD_OUT') {
     productData.status = '판매완료';
   }
+  return response.data;
+};
 
+export const getProductsSalesList = async () => {
+  const response = await api.get<GetProductsSalesListResponse>(`/products/sales-list`);
   return response.data;
 };
 
@@ -44,7 +49,7 @@ export const patchProductsDetail = async (productId: string, body: FormData) => 
 
 export const deleteProductsDetail = async (productId: string) => {
   const response = await api.delete(`/products/${productId}`);
-  return response.data
+  return response.data;
 };
 
 export const getProductsSearch = async (params: GetProductsSearchParam) => {

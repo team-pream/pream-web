@@ -13,4 +13,5 @@ export const QUERY_KEYS = {
   PATCH_PRODUCTS_DETAIL: (productId: string) => ['PATCH_PRODUCTS_DETAIL', productId],
   DELETE_PRODUCTS_DETAIL: (productId: string) => ['DELETE_PRODUCTS_DETAIL', productId],
   GET_PRODUCTS_SEARCH: (params: GetProductsSearchParam) => ['GET_PRODUCTS_SEARCH', params],
+  GET_SALES_LIST: ['GET_SALES_LIST'],
 } as const;
