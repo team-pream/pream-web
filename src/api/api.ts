@@ -18,7 +18,6 @@ api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('access');
     if (token) {
-      // accessToken이 있다면
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
@@ -32,7 +31,6 @@ formApi.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('access');
     if (token) {
-      // accessToken이 있다면
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
@@ -49,28 +47,36 @@ api.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config; // 현재 요청 객체를 저장하여 재시도 시 사용
-    const errorCode = error.response.data.errorCode;
+    const errorCode = error.response.data?.errorCode;
 
-    // Access 토큰이 유효하지 않거나 만료된 사용자인 경우 (refreshToken을 사용해 accessToken 재발급)
+    // Access 토큰이 유효하지 않거나 만료된 사용자인 경우
     if (error.response.status === 401 && errorCode === -825) {
       try {
         const refreshToken = localStorage.getItem('refresh');
+
         // Refresh Token을 사용하여 새로운 Access Token 요청
-        const response = await api.post('/auth/reissue', { refreshToken: refreshToken });
+        const postResponse = await axios.post(
+          `${import.meta.env.VITE_BASE_URL}/auth/reissue`,
+          {},
+          {
+            headers: { Authorization: `Bearer ${refreshToken}` },
+          }
+        );
 
-        const accessToken = response.data;
-        localStorage.setItem('access', accessToken);
+        const NewAccessToken = postResponse.data.accessToken;
+        localStorage.setItem('access', NewAccessToken);
 
-        // 새 Access Token을 헤더에 추가하여 요청을 재시도할 수 있도록 설정
-        api.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-        originalRequest.headers = `Bearer ${accessToken}`;
+        // 새로운 Access Token을 헤더에 추가하여 요청을 재시도할 수 있도록 설정
+        api.defaults.headers.common.Authorization = `Bearer ${NewAccessToken}`;
+        originalRequest.headers = `Bearer ${NewAccessToken}`;
 
         // 원래의 요청을 재시도
         return api(originalRequest);
       } catch (error) {
+        console.log('errorCode:', errorCode);
         // Refresh 토큰이 만료되었을 경우
-        if (errorCode === -824) {
-          window.location.href = './login'; // 로그인 페이지로 redirect
+        if (errorCode === -825) {
+          window.location.href = '../login'; // 로그인 페이지로 redirect
         }
         return Promise.reject(error);
       }
