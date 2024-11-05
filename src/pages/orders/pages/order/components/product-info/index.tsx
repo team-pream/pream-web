@@ -10,7 +10,7 @@ interface productInfoProps {
     images: string;
   };
 }
-const ProductInfo = ({ product }: productInfoProps) => {
+export default function ProductInfo({ product }: productInfoProps) {
   return (
     <div>
       <div css={line} />
@@ -28,5 +28,4 @@ const ProductInfo = ({ product }: productInfoProps) => {
       </div>
     </div>
   );
-};
-export default ProductInfo;
+}

@@ -1,7 +1,7 @@
-import { colors } from '@/styles/colors';
-import { radioButtonWrapper, customCheckbox, customCheckboxInner } from './index.styles';
 import { useState } from 'react';
 import { Text } from '@/components';
+import { colors } from '@/styles/colors';
+import { radioButtonWrapper, customCheckbox, customCheckboxInner, wrapper } from './index.styles';
 
 const SelectBasic = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -11,7 +11,7 @@ const SelectBasic = () => {
   };
 
   return (
-    <div css={{ display: 'flex', justifyContent: 'space-between' }}>
+    <div css={wrapper}>
       <Text typo="subtitle1">배송 주소</Text>
       <div css={radioButtonWrapper} onClick={handleCheckboxChange}>
         <input type="checkbox" style={{ display: 'none' }} checked={isChecked} readOnly />

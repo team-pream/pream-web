@@ -1,6 +1,11 @@
 import { colors } from '@/styles/colors';
 import { css } from '@emotion/react';
 
+export const wrapper = css`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const radioButtonWrapper = css`
   display: flex;
   align-items: center;

@@ -6,6 +6,7 @@ import CardCompanySelector from './cardcompany-selector';
 import { activeButton, inactiveButton } from './payments-grid/index.styles';
 import { line } from '../../index.styles';
 import { CARD_COMPANIES } from '../../types';
+import theme from '@/styles/theme';
 
 const PaymentMethods = () => {
   const [selectedPaymentId, setSelectedPaymentId] = useState<number | null>(null); // 결제 방법 ID 상태
@@ -49,9 +50,15 @@ const PaymentMethods = () => {
         </div>
         <Text typo="body1">
           <div css={plusSaleText}>
-            <div>네이버페이 • 5만원 이상 결제시 2천원 할인</div>
-            <div>카카오페이 • 1천원 캐시백</div>
-            <div>토스페이 • 첫 결제 3천원 캐시백</div>
+            <Text typo="body2" color={theme.colors.gray300}>
+              네이버페이 • 5만원 이상 결제시 2천원 할인
+            </Text>
+            <Text typo="body2" color={theme.colors.gray300}>
+              카카오페이 • 1천원 캐시백
+            </Text>
+            <Text typo="body2" color={theme.colors.gray300}>
+              토스페이 • 첫 결제 3천원 캐시백
+            </Text>
           </div>
         </Text>
       </div>

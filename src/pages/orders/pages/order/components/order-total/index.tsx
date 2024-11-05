@@ -1,12 +1,11 @@
 import { totalOrderWrapper, totalTextStyle, totalTextWrapper } from './index.styles';
-import { Button } from '@/components';
-import { Text } from '@/components';
+import { Button, Text } from '@/components';
 import { line } from '../../index.styles';
 
-interface totalPriceProps {
+interface Props {
   price: number;
 }
-const OrderTotal: React.FC<totalPriceProps> = ({ price }) => {
+export default function OrderTotal({ price }: Props) {
   return (
     <div>
       <div css={line} />
@@ -26,5 +25,4 @@ const OrderTotal: React.FC<totalPriceProps> = ({ price }) => {
       </div>
     </div>
   );
-};
-export default OrderTotal;
+}

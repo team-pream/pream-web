@@ -14,13 +14,12 @@ const paymentsMethods: PaymentsMethodProps[] = [
   { id: 6, name: '토스페이' },
 ];
 
-interface PaymentButtonGridProps {
+interface Props {
   selectedPaymentId: number | null;
   onPaymentChange: (id: number) => void;
 }
 
-// React.FC 대신 Props 타입을 직접 지정
-const PaymentButtonGrid = ({ selectedPaymentId, onPaymentChange }: PaymentButtonGridProps) => {
+export default function PaymentButtonGrid({ selectedPaymentId, onPaymentChange }: Props) {
   return (
     <div css={buttonWrapper}>
       {paymentsMethods.map((method) => (
@@ -34,6 +33,4 @@ const PaymentButtonGrid = ({ selectedPaymentId, onPaymentChange }: PaymentButton
       ))}
     </div>
   );
-};
-
-export default PaymentButtonGrid;
+}

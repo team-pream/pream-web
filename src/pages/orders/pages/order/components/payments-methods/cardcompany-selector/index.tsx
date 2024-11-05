@@ -6,27 +6,27 @@ import {
   optionActive,
   optionDisabled,
 } from './index.styles';
-import { DropdownFold, DropdownUnfold } from '@/assets/icons';
 import { colors } from '@/styles/colors';
 import { Text } from '@/components';
+import { DropdownFold, DropdownUnfold } from '@/assets/icons';
 interface CardCompanys {
   id: string;
   name: string;
 }
 
-interface CardCompanySelectorProps {
+interface Props {
   provider: CardCompanys[];
   seletedCompanyId: string;
   onCompanyChange: (id: string) => void;
   disabled: boolean;
 }
 
-const CardCompanySelector = ({
+export default function CardCompanySelector({
   provider,
   seletedCompanyId,
   onCompanyChange,
   disabled,
-}: CardCompanySelectorProps) => {
+}: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSelectClick = () => {
@@ -72,6 +72,4 @@ const CardCompanySelector = ({
       </div>
     </div>
   );
-};
-
-export default CardCompanySelector;
+}

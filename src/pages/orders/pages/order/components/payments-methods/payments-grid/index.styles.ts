@@ -6,6 +6,7 @@ export const buttonWrapper = css`
   grid-template-columns: repeat(3, 1fr);
   gap: 7px 9px;
 `;
+
 export const miniButton = css`
   border-radius: 10px;
   display: flex;
@@ -19,8 +20,10 @@ export const miniButton = css`
   &:hover {
     border: 1px solid ${colors.black100};
     color: ${colors.black100};
+    transition: all 0.75s ease;
   }
 `;
+
 export const activeButton = css`
   ${miniButton};
   border: 1px solid ${colors.black100};
