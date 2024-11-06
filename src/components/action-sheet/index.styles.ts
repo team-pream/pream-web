@@ -28,6 +28,7 @@ export const handle = css`
 
 export const menuWrapper = css`
   width: 100%;
+  max-height: 380px;
   overflow-y: auto;
 `;
 
