@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useUsersPetMutation } from '@/queries';
+import { usePostUsersPetMutation } from '@/queries/users';
 import { AppBarBack } from '@/assets/icons';
 import { AppBar, Layout } from '@/components';
 import { Completion, PetName, PetType, UserInfo } from './components';
@@ -44,6 +45,7 @@ export default function Onboarding() {
   const isBackButtonDisabled = step === STEPS.PET_TYPE || STEPS.COMPLETE;
 
   const { mutate } = useUsersPetMutation(() => {
+  const { mutate } = usePostUsersPetMutation(() => {
     setStep(STEPS.COMPLETE);
   });
 

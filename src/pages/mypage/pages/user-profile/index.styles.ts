@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 
 export const titleContainer = css`
   display: flex;
-  margin: 6% 0 2% 7%;
+  padding: 6% 0 2% 7%;
 `;
 
 export const line = css`
