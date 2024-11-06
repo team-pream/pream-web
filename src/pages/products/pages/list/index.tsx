@@ -12,6 +12,7 @@ import {
   statusWrapper,
   textBox,
   soldOutOverlayStyle,
+  loader,
 } from './index.styles';
 import { useState } from 'react';
 import { ActionSheet, AppBar, GNB, Layout, Text } from '@/components';
@@ -19,6 +20,7 @@ import { useGetProductsQuery } from '@/queries/products';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ProductListProduct } from '@/types';
 import theme from '@/styles/theme';
+import { MoonLoader } from 'react-spinners';
 
 export default function Products() {
   const location = useLocation();
@@ -26,7 +28,7 @@ export default function Products() {
   const [status, setStatus] = useState<number>();
   const category = id;
 
-  const { data } = useGetProductsQuery({ category, status });
+  const { data, isLoading } = useGetProductsQuery({ category, status });
   const [isOpen, setIsOpen] = useState<boolean>(false); // 드롭다운 열림/닫힘 상태
   const navigate = useNavigate();
 
@@ -68,45 +70,51 @@ export default function Products() {
             )}
           </div>
         </div>
-        <div css={listWrapper}>
-          <div css={itemList}>
-            {data?.products?.map((product: ProductListProduct) => {
-              const isSoldOut = product.status === 'SOLD_OUT';
-              const isReserved = product.status === 'RESERVED';
-              const price = product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); //천 단위 콤마
-              return (
-                <div
-                  key={product.id}
-                  css={item}
-                  onClick={() => navigate(`/products/${product.id}`)}
-                >
-                  <div css={imageBox}>
-                    <div css={opacityBox} />
-                    <img src={product.images[0]} alt="itemImage" css={image} />
-                    {isSoldOut && (
-                      <div css={soldOutOverlayStyle}>
-                        <Text typo="body1" color={theme.colors.white}>
-                          판매완료
-                        </Text>
-                      </div>
-                    )}
-                    {isReserved && (
-                      <div css={soldOutOverlayStyle}>
-                        <Text typo="body1" color={theme.colors.white}>
-                          예약 중
-                        </Text>
-                      </div>
-                    )}
-                  </div>
-                  <div css={textBox}>
-                    <Text typo="body2">{product.title}</Text>
-                    <Text typo="subtitle1">{price}원</Text>
-                  </div>
-                </div>
-              );
-            })}
+        {isLoading ? (
+          <div css={loader}>
+            <MoonLoader size={50} color="#72DACD" speedMultiplier={0.5} />
           </div>
-        </div>
+        ) : (
+          <div css={listWrapper}>
+            <div css={itemList}>
+              {data?.products?.map((product: ProductListProduct) => {
+                const isSoldOut = product.status === 'SOLD_OUT';
+                const isReserved = product.status === 'RESERVED';
+                const price = product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); //천 단위 콤마
+                return (
+                  <div
+                    key={product.id}
+                    css={item}
+                    onClick={() => navigate(`/products/${product.id}`)}
+                  >
+                    <div css={imageBox}>
+                      <div css={opacityBox} />
+                      <img src={product.images[0]} alt="itemImage" css={image} />
+                      {isSoldOut && (
+                        <div css={soldOutOverlayStyle}>
+                          <Text typo="body1" color={theme.colors.white}>
+                            판매완료
+                          </Text>
+                        </div>
+                      )}
+                      {isReserved && (
+                        <div css={soldOutOverlayStyle}>
+                          <Text typo="body1" color={theme.colors.white}>
+                            예약 중
+                          </Text>
+                        </div>
+                      )}
+                    </div>
+                    <div css={textBox}>
+                      <Text typo="body2">{product.title}</Text>
+                      <Text typo="subtitle1">{price}원</Text>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
       <GNB />
     </Layout>
