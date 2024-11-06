@@ -13,6 +13,10 @@ export default function useValidateOrderForm() {
         },
       },
 
+      roadAddress: {
+        required: '주소를 입력해 주세요',
+      },
+
       detailAddress: {
         required: '상세 주소를 입력해 주세요',
         validate: (value: string) => {
@@ -27,10 +31,10 @@ export default function useValidateOrderForm() {
       },
 
       phone: {
-        required: '연락처를 입력해 주세요',
+        required: '휴대폰 번호를 입력해 주세요',
         validate: (value: string) => {
-          if (!value) return '연락처를 입력해 주세요';
-          if (value.length > 30) return '상세 주소는 최대 30자까지 입력 가능해요';
+          if (!value) return '휴대폰 번호를 입력해 주세요';
+          if (!/^010-\d{4}-\d{4}$/.test(value)) return '휴대폰 번호 형식이 올바르지 않아요';
           return true;
         },
       },
