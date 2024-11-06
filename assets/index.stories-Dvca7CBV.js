@@ -1,4 +1,0 @@
-import{j as c}from"./theme-DPbiucBH.js";import{r as i}from"./index-DRjF_FHU.js";import{C as r}from"./index-kAFjU4do.js";import"./jsx-runtime-DR9Q75dM.js";const S={title:"Components/Chip/ChipRadioGroup",component:r,tags:["autodocs"]},t=[{value:"1",label:"전체"},{value:"2",label:"위생용품"},{value:"3",label:"훈련용품"},{value:"4",label:"이동용품"}];function e(){const[l,u]=i.useState(t[0].value);return c(r,{items:t,defaultValue:l,onChange:n=>u(n)})}e.__docgenInfo={description:"",methods:[],displayName:"Default"};var a,o,s;e.parameters={...e.parameters,docs:{...(a=e.parameters)==null?void 0:a.docs,source:{originalSource:`function Default() {
-  const [selected, setSelected] = useState<string>(ITEMS[0].value);
-  return <ChipRadioGroup items={ITEMS} defaultValue={selected} onChange={(value: string) => setSelected(value)} />;
-}`,...(s=(o=e.parameters)==null?void 0:o.docs)==null?void 0:s.source}}};const v=["Default"];export{e as Default,v as __namedExportsOrder,S as default};
