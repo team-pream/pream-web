@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ActionSheet } from '@/components';
+import { PRODUCT_CONDITION } from '@/types';
 
 const meta = {
   title: 'Components/ActionSheet',
@@ -15,16 +16,17 @@ export const Default: Story = {
     menus: [
       {
         label: '새상품',
-        onClick: () => {},
+        value: PRODUCT_CONDITION.NEW,
       },
       {
         label: '사용감 적음',
-        onClick: () => {},
+        value: PRODUCT_CONDITION.SLIGHTLY_USED,
       },
       {
         label: '사용감 많음',
-        onClick: () => {},
+        value: PRODUCT_CONDITION.HEAVILY_USED,
       },
     ],
+    onClose: () => {},
   },
 };

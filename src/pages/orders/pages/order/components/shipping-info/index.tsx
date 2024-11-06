@@ -50,7 +50,7 @@ export default function ShippingInfo({ user }: Props) {
           defaultValue={userAddress.roadAddress}
           onChange={(e) => handleChangeInput(e, 'address')}
           suffix={
-            <Button size="xs" variant="box" onClick={getAddress}>
+            <Button size="xs" shape="box" onClick={getAddress}>
               주소 검색
             </Button>
           }
