@@ -29,8 +29,7 @@ export default function Onboarding() {
   const handleBackNavigation = () => {
     switch (step) {
       case STEPS.PET_TYPE:
-        setStep(STEPS.USER_INFO);
-        break;
+        return;
       case STEPS.PET_NAME:
         setStep(STEPS.PET_TYPE);
         break;
@@ -42,6 +41,8 @@ export default function Onboarding() {
         return;
     }
   };
+  // 버튼의 disabled 상태를 설정하는 조건
+  const isBackButtonDisabled = step === STEPS.PET_TYPE;
 
   const { mutate } = useUsersPetMutation(() => {
     setStep(STEPS.COMPLETE);
@@ -97,7 +98,14 @@ export default function Onboarding() {
   return (
     <Layout>
       <AppBar
-        prefix={<AppBarBack height="24px" cursor="pointer" onClick={handleBackNavigation} />}
+        prefix={
+          <AppBarBack
+            height="24px"
+            cursor={isBackButtonDisabled ? 'not-allowed' : 'pointer'}
+            onClick={handleBackNavigation}
+            disabled={isBackButtonDisabled}
+          />
+        }
       />
       <section css={wrapper}>
         <div css={progressBarContainer}>
