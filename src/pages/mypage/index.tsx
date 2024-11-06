@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
 import { Address, PetProfile, PurchaseList, SalesList, UserProfile } from './pages';
-import NotFound from '../notFound';
 
 export default function MyPage() {
   return (
@@ -10,7 +9,6 @@ export default function MyPage() {
       <Route path="/sales-list" element={<SalesList />} />
       <Route path="/purchase-list" element={<PurchaseList />} />
       <Route path="/address/edit" element={<Address />} />
-      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
