@@ -10,6 +10,5 @@ export interface ProductDetail {
     nickname: string;
     contact: string;
   };
-  likesCount: number;
-  isLiked: boolean;
+  createdAt: string;
 }
