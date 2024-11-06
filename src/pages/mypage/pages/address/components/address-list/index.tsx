@@ -61,7 +61,7 @@ const AddressList = ({ userData, onEditClick }: AddressListProps) => {
       ) : (
         <div css={wrapper}>
           <EmotionalPetIcon width="67px" />
-          <Text typo="body2">등록된 주소가 없습니다.</Text>
+          <Text typo="body2">등록된 주소가 없어요</Text>
         </div>
       )}
     </div>
