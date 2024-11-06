@@ -102,7 +102,6 @@ export default function Onboarding() {
             height="24px"
             cursor={isBackButtonDisabled ? 'not-allowed' : 'pointer'}
             onClick={handleBackNavigation}
-            disabled={isBackButtonDisabled}
           />
         }
       />
