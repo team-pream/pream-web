@@ -18,7 +18,7 @@ export const wrap = css`
 export const hr = css`
   width: calc(100% - 36px);
   height: 2px;
-  margin: 32px auto 19px auto;
+  margin: 19px auto 18px auto;
 `;
 
 export const productInfo = css`
@@ -51,4 +51,48 @@ export const fixedCTAButtonWrapper = css`
   min-width: ${theme.size.minWidth};
   max-width: ${theme.size.maxWidth};
   margin: 0 auto;
+`;
+
+export const amount = css`
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  margin-top: 11px;
+`;
+
+export const toolTip = css`
+  cursor: pointer;
+  position: relative;
+  display: flex;
+
+  &:hover > div {
+    opacity: 1;
+    visibility: visible;
+  }
+`;
+
+export const toolTipInfo = css`
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: absolute;
+  width: 322px;
+  padding: 16px;
+  top: calc(100% + 8px);
+  left: 100px;
+  transform: translateX(-50%);
+  background-color: white;
+  border-radius: 12px;
+  z-index: 2;
+  box-shadow: 0 0 6px rgba(0, 0, 6, 0.1);
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease;
+`;
+
+export const amountPrice = css`
+  display: flex;
+  align-items: center;
 `;

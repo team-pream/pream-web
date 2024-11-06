@@ -18,14 +18,25 @@ import {
   PRODUCT_CONDITION,
   ProductForm,
 } from '@/types/products';
-import { AppBarBack } from '@/assets/icons';
+import { AppBarBack, ToolTip } from '@/assets/icons';
 import { Category } from '@/types/category';
-import { fixedCTAButtonWrapper, hr, productInfo, textarea, wrap, wrapper } from './index.styles';
+import {
+  fixedCTAButtonWrapper,
+  hr,
+  productInfo,
+  textarea,
+  wrap,
+  wrapper,
+  amount,
+  toolTip,
+  toolTipInfo,
+  amountPrice,
+} from './index.styles';
 import { useValidation } from '@/pages/products/hooks/use-validation';
 import UploadImage from '@/pages/products/components/upload-image';
 import Info from '@/pages/products/components/info';
 import theme from '@/styles/theme';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BANKS } from '@/constants/bank';
 
 const PRODUCT_CONDITION_ITEMS = [
@@ -46,6 +57,7 @@ export default function Form({ defaultForm, onSubmit, isSuccess, onChangeDialog 
 
   const [isBankActionSheetOpen, setIsBankActionSheetOpen] = useState<boolean>(false);
   const [isErrorDialogOpen, setIsErrorDialogOpen] = useState<boolean>(false);
+  const [settlementAmount, setSettlementAmount] = useState<number>(0);
 
   const { data: categories } = useGetCategoriesQuery();
   const defaultValues = defaultForm && convertProductsDetailToProductsUploadBody(defaultForm);
@@ -61,6 +73,14 @@ export default function Form({ defaultForm, onSubmit, isSuccess, onChangeDialog 
   const onError = () => {
     setIsErrorDialogOpen(true);
   };
+
+  // 정산 금액 계산
+  useEffect(() => {
+    if (defaultValues?.price) {
+      const price = Number(defaultValues.price.toString().replace(/,/g, ''));
+      setSettlementAmount(Math.floor(price * 0.965)); // 3.5% 수수료
+    }
+  }, [defaultValues?.price]);
 
   return (
     <>
@@ -117,22 +137,44 @@ export default function Form({ defaultForm, onSubmit, isSuccess, onChangeDialog 
                 rules={validationRules.price}
                 defaultValue={defaultValues?.price}
                 render={({ field }) => (
-                  <Input
-                    id="price"
-                    prefix={<Text typo="body5">₩</Text>}
-                    defaultValue={defaultValues?.price}
-                    {...field}
-                    value={
-                      field.value
-                        ? field.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                        : ''
-                    }
-                    onChange={(e) => {
-                      const value = e.target.value.replace(/\D/g, '');
-                      const formatted = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-                      field.onChange(formatted);
-                    }}
-                  />
+                  <div>
+                    <Input
+                      id="price"
+                      prefix={<Text typo="body5">₩</Text>}
+                      defaultValue={defaultValues?.price}
+                      {...field}
+                      value={
+                        field.value
+                          ? field.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                          : ''
+                      }
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/\D/g, '');
+                        const formatted = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                        field.onChange(formatted);
+                        setSettlementAmount(Math.floor(Number(value) * 0.965));
+                      }}
+                    />
+                    <div css={amount}>
+                      <Text typo="body1">예상 정산 금액</Text>
+                      <div css={toolTip}>
+                        <ToolTip width={12} height={12} />
+                        <div css={toolTipInfo}>
+                          <Text typo="body1">판매수수료 안내</Text>
+                          <Text typo="body6">
+                            상품 판매 시, 상품 금액에서 판매 수수료가 제외된 정사 금액이 입금됩니다.
+                            판매 수수료는 판매된 상품 금액의 3.5%이며, 추후 변동될 수 있습니다.
+                          </Text>
+                        </div>
+                      </div>
+                      <div css={amountPrice}>
+                        <Text typo="body1" color={theme.colors.green200}>
+                          {settlementAmount.toLocaleString()}
+                        </Text>
+                        <Text typo="body1">원</Text>
+                      </div>
+                    </div>
+                  </div>
                 )}
               />
             </Info>
