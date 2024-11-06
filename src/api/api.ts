@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { ERROR_CODE } from '@/constants/errorCode';
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
@@ -49,11 +50,13 @@ api.interceptors.response.use(
     const originalRequest = error.config; // 현재 요청 객체를 저장하여 재시도 시 사용
     const errorCode = error.response.data?.errorCode;
 
-    // Access 토큰이 유효하지 않거나 만료된 사용자인 경우
-    if (error.response.status === 401 && errorCode === -825) {
-      try {
-        const refreshToken = localStorage.getItem('refresh');
+    if (
+      error.response.status === ERROR_CODE.UNAUTHORIZED &&
+      errorCode === ERROR_CODE.ACCESS_TOKEN_EXPIRED
+    ) {
+      const refreshToken = localStorage.getItem('refresh');
 
+      try {
         // Refresh Token을 사용하여 새로운 Access Token 요청
         const postResponse = await axios.post(
           `${import.meta.env.VITE_BASE_URL}/auth/reissue`,
@@ -72,21 +75,19 @@ api.interceptors.response.use(
 
         // 원래의 요청을 재시도
         return api(originalRequest);
-      } catch (error) {
-        console.log('errorCode:', errorCode);
-        // Refresh 토큰이 만료되었을 경우
-        if (errorCode === -825) {
+      } catch (e) {
+        console.log('e:', e);
+        console.log('postError:', e.response.data.errorCode);
+
+        if (e.response.data.errorCode === ERROR_CODE.REFRESH_TOKEN_EXPIRED) {
+          alert('로그인 시간이 지났어요. 다시 로그인 해주세요');
           window.location.href = '../login'; // 로그인 페이지로 redirect
         }
-        return Promise.reject(error);
       }
-    }
-    // Authorization header가 없는 경우
-    else if (errorCode == -954) {
-      alert('로그인이 필요합니다. 로그인 페이지로 이동합니다.');
+    } else if (errorCode == ERROR_CODE.AUTHORIZATION_HEADER_MISSING) {
+      alert('로그인 시간이 지났어요. 다시 로그인 해주세요');
       window.location.href = './login';
     }
-
     return Promise.reject(error);
   }
 );
