@@ -174,7 +174,7 @@ export default function UserProfile() {
         <hr css={line} />
         <div css={fixContainer}>
           <div css={fixBox}>
-            <Text typo="subtitle2" color={theme.colors.black}>
+            <Text typo="subtitle3" color={theme.colors.black}>
               이름
             </Text>
             <div css={fixInfo}>
@@ -184,7 +184,7 @@ export default function UserProfile() {
             </div>
           </div>
           <div css={fixBox}>
-            <Text typo="subtitle2" color={theme.colors.black}>
+            <Text typo="subtitle3" color={theme.colors.black}>
               이메일
             </Text>
             <div css={fixInfo}>

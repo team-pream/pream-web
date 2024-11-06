@@ -106,7 +106,8 @@ export const hr = css`
 `;
 
 export const menuline = css`
-  border: 1px solid ${theme.colors.gray100};
+  height: 1px;
+  background-color: ${theme.colors.gray100};
   margin: 0;
 `;
 

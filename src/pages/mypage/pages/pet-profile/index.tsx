@@ -59,7 +59,7 @@ export default function PetProfile() {
 
   const openDialog = () => setIsDialogOpen(true);
   const closeDialog = () => {
-    setIsDialogOpen(false);
+    setTimeout(() => setIsDialogOpen(false), 0);
   };
 
   const handleImageClick = () => {
