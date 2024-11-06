@@ -1,10 +1,12 @@
 import { useState, ChangeEvent } from 'react';
 import { buttonWrapper, formWrapper, textBox, wrapper } from './index.styles';
 import { Button, Input, Text } from '@/components';
-import { usePatchUsersOnboardingMutation } from '@/queries/users';
-import { usePostUsersCheckNicknameMutation } from '@/queries/users';
-import { PatchAuthOnboardingBody } from '@/types/users';
-import { useGetUsersMeQuery } from '@/queries/users';
+import {
+  usePatchUsersOnboardingMutation,
+  useGetUsersMeQuery,
+  usePostUsersCheckNicknameMutation,
+} from '@/queries';
+import { PatchAuthOnboardingBody } from '@/types';
 import theme from '@/styles/theme';
 
 interface UserInfoProps {

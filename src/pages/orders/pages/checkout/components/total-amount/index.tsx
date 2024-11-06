@@ -1,11 +1,10 @@
-import { totalOrderWrapper, totalTextStyle, totalTextWrapper } from './index.styles';
-import { Button, Text } from '@/components';
-import { line } from '../../index.styles';
+import { line, totalOrderWrapper, totalTextStyle, totalTextWrapper } from './index.styles';
+import { Text } from '@/components';
 
 interface Props {
   price: number;
 }
-export default function OrderTotal({ price }: Props) {
+export function TotalAmount({ price }: Props) {
   return (
     <div>
       <div css={line} />
@@ -21,7 +20,6 @@ export default function OrderTotal({ price }: Props) {
             <Text typo="body5">무료</Text>
           </div>
         </div>
-        <Button size="xl">{price.toLocaleString()}원 결제하기</Button>
       </div>
     </div>
   );

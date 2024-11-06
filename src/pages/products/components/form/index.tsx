@@ -11,7 +11,7 @@ import {
   RadioGroup,
   Text,
 } from '@/components';
-import { useGetCategoriesQuery } from '@/queries/categories';
+import { useGetCategoriesQuery } from '@/queries';
 import {
   convertProductsDetailToProductsUploadBody,
   GetProductsDetailResponse,
@@ -19,7 +19,6 @@ import {
   ProductForm,
 } from '@/types/products';
 import { AppBarBack, ToolTip } from '@/assets/icons';
-import { Category } from '@/types/category';
 import {
   fixedCTAButtonWrapper,
   hr,
@@ -32,7 +31,8 @@ import {
   toolTipInfo,
   amountPrice,
 } from './index.styles';
-import { useValidation } from '@/pages/products/hooks/use-validation';
+import { Category } from '@/types';
+import useValidation from '@/pages/products/hooks/use-validation';
 import UploadImage from '@/pages/products/components/upload-image';
 import Info from '@/pages/products/components/info';
 import theme from '@/styles/theme';

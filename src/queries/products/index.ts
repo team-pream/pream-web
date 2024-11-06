@@ -16,7 +16,7 @@ import {
   GetProductsCurationResponse,
   GetProductsSearchParam,
   GetProductsSalesListResponse,
-} from '@/types/products';
+} from '@/types';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/queries/query-keys';
