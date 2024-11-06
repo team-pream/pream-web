@@ -13,6 +13,7 @@ export { default as LikeOff } from './LikeOff';
 export { default as LikeOn } from './LikeOn';
 export { default as Logo } from './Logo';
 export { default as MypageUploadImage } from './MypageUploadImage';
+export { default as NotFound } from './NotFound';
 export { default as ProductsDetailOption } from './ProductsDetailOption';
 export { default as Search } from './Search';
 export { default as SelectCat } from './SelectCat';
