@@ -56,12 +56,14 @@ export const item = css`
 export const imageBox = css`
   position: relative;
   cursor: pointer;
+  height: -webkit-fill-available;
 `;
 
 export const image = css`
   border-radius: 13px;
   width: 100%;
   height: 100%;
+  object-fit: cover;
 `;
 
 export const opacityBox = css`
