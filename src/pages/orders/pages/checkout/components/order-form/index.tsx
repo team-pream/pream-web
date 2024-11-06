@@ -37,7 +37,6 @@ export function OrderForm({ user, product }: Props) {
   } = useForm<PostOdersProductBody>();
 
   const onShippingInfoChange = async (form: PostOdersProductBody) => {
-    console.log(form);
     if (!form.receiverName || !form.shippingAddress.detailAddress || !form.phone) return;
 
     if (isChecked) {
