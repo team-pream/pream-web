@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { ERROR_CODE } from '@/constants/errorCode';
+import { ERROR_CODE } from '@/constants/error-code';
+import { ROUTE_PATHS } from '@/constants/routes';
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
@@ -66,27 +67,24 @@ api.interceptors.response.use(
           }
         );
 
-        const NewAccessToken = postResponse.data.accessToken;
-        localStorage.setItem('access', NewAccessToken);
+        const newAccessToken = postResponse.data.accessToken;
+        localStorage.setItem('access', newAccessToken);
 
         // 새로운 Access Token을 헤더에 추가하여 요청을 재시도할 수 있도록 설정
-        api.defaults.headers.common.Authorization = `Bearer ${NewAccessToken}`;
-        originalRequest.headers = `Bearer ${NewAccessToken}`;
+        api.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
+        originalRequest.headers = `Bearer ${newAccessToken}`;
 
         // 원래의 요청을 재시도
         return api(originalRequest);
       } catch (e) {
-        console.log('e:', e);
-        console.log('postError:', e.response.data.errorCode);
-
         if (e.response.data.errorCode === ERROR_CODE.REFRESH_TOKEN_EXPIRED) {
           alert('로그인 시간이 지났어요. 다시 로그인 해주세요');
-          window.location.href = '../login'; // 로그인 페이지로 redirect
+          window.location.href = ROUTE_PATHS.LOGIN; // 로그인 페이지로 redirect
         }
       }
     } else if (errorCode == ERROR_CODE.AUTHORIZATION_HEADER_MISSING) {
-      alert('로그인 시간이 지났어요. 다시 로그인 해주세요');
-      window.location.href = './login';
+      alert('로그인 시간이 지났어요. 다시 로그인 해주세요.');
+      window.location.href = ROUTE_PATHS.LOGIN;
     }
     return Promise.reject(error);
   }
