@@ -6,6 +6,7 @@ import { AppBarBack } from '@/assets/icons';
 import { colors } from '@/styles/colors';
 import { carouselWrapper, statusText, ctaButtonWrapper, wrapper } from './index.style';
 import ProductInfo from './components/product-info';
+import NotFound from '@/pages/notFound';
 
 export default function Detail() {
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ export default function Detail() {
 
   // 잘못된 ID일 경우 조건부 렌더링
   if (!parsedProductId) {
-    return <div>잘못된 상품 ID입니다.</div>;
+    return <NotFound />;
   }
 
   if (error)
