@@ -56,7 +56,7 @@ export default function UserProfile() {
   const [accountNumberError, setAccountNumberError] = useState('');
 
   const { mutate: patchUsersMe } = usePatchUsersMeMutation(() => {
-    navigate('/mypage', { state: { editSuccess: true } });
+    navigate('/mypage', { state: { editSuccess: 'updated' } });
   });
 
   const { mutate: checkNicknameMutation } = usePostUsersCheckNicknameMutation(() => {

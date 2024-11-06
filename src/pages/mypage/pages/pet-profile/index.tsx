@@ -48,10 +48,6 @@ export default function PetProfile() {
     navigate('/mypage', { state: { editSuccess: true } });
   });
 
-  const handleDeletePetProfile = () => {
-    deletePetProfile(); // Call delete API
-  };
-
   const PET_TYPE_OPTION = [
     { value: 'DOG', label: '강아지' },
     { value: 'CAT', label: '고양이' },
@@ -104,11 +100,21 @@ export default function PetProfile() {
 
     if (!data?.pet) {
       // Registration logic
-      registerPetProfile(petData);
+      registerPetProfile(petData, {
+        onSuccess: () => navigate('/mypage', { state: { editSuccess: 'registered' } }),
+      });
     } else {
       // Update logic
-      updatePetProfile(petData);
+      updatePetProfile(petData, {
+        onSuccess: () => navigate('/mypage', { state: { editSuccess: 'updated' } }),
+      });
     }
+  };
+
+  const handleDeletePetProfile = () => {
+    deletePetProfile(undefined, {
+      onSuccess: () => navigate('/mypage', { state: { editSuccess: 'deleted' } }),
+    });
   };
 
   return (
