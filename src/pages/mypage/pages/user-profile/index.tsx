@@ -13,9 +13,10 @@ import {
   fixInfo,
   line,
   titleContainer,
-  fixedButtonWrapper,
   placeholderStyle,
   accountContainer,
+  mainWrapper,
+  buttonWrapper,
 } from './index.styles';
 import theme from '@/styles/theme';
 
@@ -43,7 +44,7 @@ const BANKS = [
 
 export default function UserProfile() {
   const navigate = useNavigate();
-  const { data } = useGetUsersMeQuery();
+  const { data } = useGetUsersMeQuery(true);
   const [nickname, setNickname] = useState(data?.nickname || '');
   const [phone, setPhone] = useState(data?.phone || '');
   const [bank, setBank] = useState(data?.bankAccount?.bank || '');
@@ -92,29 +93,44 @@ export default function UserProfile() {
     setIsNicknameAvailable(null);
   };
 
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const phoneRegex = /^010-\d{4}-\d{4}$/;
-    setPhone(value);
+  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let value = event.target.value.replace(/[^0-9]/g, ''); // 숫자만 남기기
 
+    // 010-XXXX-XXXX 형식으로 변환
+    if (value.length > 3) {
+      value = value.slice(0, 3) + '-' + value.slice(3);
+    }
+    if (value.length > 8) {
+      value = value.slice(0, 8) + '-' + value.slice(8, 12);
+    }
+
+    // 최대 13자리로 제한 (형식 포함: 010-XXXX-XXXX)
+    if (value.length > 13) {
+      value = value.slice(0, 13);
+    }
+
+    setPhone(value); // 상태 업데이트
+
+    // 유효성 검사
+    const phoneRegex = /^010-\d{4}-\d{4}$/; // 형식 검사를 위한 정규식
     if (!phoneRegex.test(value)) {
       setPhoneError('휴대폰 번호는 010-XXXX-XXXX 형식으로 입력해주세요.');
     } else {
-      setPhoneError('');
+      setPhoneError(''); // 유효성 검사를 통과하면 오류 메시지 초기화
     }
   };
 
   const handleAccountNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+    // 입력 값에서 숫자만 남기기
+    const value = e.target.value.replace(/\D/g, '');
 
-    // 계좌번호는 숫자만 입력 가능하고 최대 20자 제한
-    if (!/^[0-9]*$/.test(value)) {
-      setAccountNumberError('계좌번호는 숫자만 입력 가능해요.');
-    } else if (value.length > 20) {
+    // 유효성 검사
+    if (value.length > 20) {
       setAccountNumberError('계좌번호는 최대 20자까지 입력 가능해요.');
     } else {
       setAccountNumberError('');
     }
+
     setAccountNumber(value.slice(0, 20)); // 20자까지만 허용
   };
 
@@ -149,99 +165,101 @@ export default function UserProfile() {
           />
         }
       />
-      <div css={titleContainer}>
-        <Text typo="title1" color={theme.colors.black}>
-          프로필 수정
-        </Text>
-      </div>
-      <hr css={line} />
-      <div css={fixContainer}>
-        <div css={fixBox}>
-          <Text typo="subtitle2" color={theme.colors.black}>
-            이름
+      <div css={mainWrapper}>
+        <div css={titleContainer}>
+          <Text typo="title1" color={theme.colors.black}>
+            프로필 수정
           </Text>
-          <div css={fixInfo}>
-            <Text typo="subtitle1" color={theme.colors.gray300}>
-              {data?.username}
-            </Text>
-          </div>
         </div>
-        <div css={fixBox}>
-          <Text typo="subtitle2" color={theme.colors.black}>
-            이메일
+        <hr css={line} />
+        <div css={fixContainer}>
+          <div css={fixBox}>
+            <Text typo="subtitle3" color={theme.colors.black}>
+              이름
+            </Text>
+            <div css={fixInfo}>
+              <Text typo="subtitle1" color={theme.colors.gray300}>
+                {data?.username}
+              </Text>
+            </div>
+          </div>
+          <div css={fixBox}>
+            <Text typo="subtitle3" color={theme.colors.black}>
+              이메일
+            </Text>
+            <div css={fixInfo}>
+              <Text typo="subtitle1" color={theme.colors.gray300}>
+                {data?.email}
+              </Text>
+            </div>
+          </div>
+          <Input
+            type="text"
+            label="닉네임"
+            placeholder="닉네임을 입력해주세요"
+            css={placeholderStyle}
+            value={nickname}
+            onChange={handleNicknameChange}
+            confirmMessage={isNicknameAvailable === true ? '사용 가능한 닉네임입니다' : undefined}
+            errorMessage={
+              nicknameError ||
+              (isNicknameAvailable === false ? '이미 존재하는 닉네임입니다' : undefined)
+            }
+            suffix={
+              <Button size="xs" onClick={checkNickname}>
+                중복확인
+              </Button>
+            }
+          />
+          <Input
+            type="text"
+            label="휴대폰번호"
+            placeholder="휴대폰번호를 입력해주세요"
+            css={placeholderStyle}
+            value={phone}
+            onChange={handlePhoneChange}
+            errorMessage={phoneError}
+          />
+        </div>
+        <hr css={line} />
+        <div css={accountContainer}>
+          <Text typo="subtitle1" color={theme.colors.black}>
+            판매 정산 계좌
           </Text>
-          <div css={fixInfo}>
-            <Text typo="subtitle1" color={theme.colors.gray300}>
-              {data?.email}
-            </Text>
-          </div>
+          <Input
+            type="text"
+            label="은행명"
+            placeholder="은행을 선택해주세요"
+            css={placeholderStyle}
+            value={bank}
+            onClick={() => setIsSheetOpen(true)}
+          />
+          <Input
+            type="text"
+            label="계좌번호"
+            placeholder="계좌번호를 입력해주세요"
+            css={placeholderStyle}
+            value={accountNumber}
+            onChange={handleAccountNumberChange}
+            errorMessage={accountNumberError}
+          />
         </div>
-        <Input
-          type="text"
-          label="닉네임"
-          placeholder="닉네임을 입력해주세요"
-          css={placeholderStyle}
-          value={nickname}
-          onChange={handleNicknameChange}
-          confirmMessage={isNicknameAvailable === true && '사용 가능한 닉네임입니다'}
-          errorMessage={
-            nicknameError || (isNicknameAvailable === false && '이미 존재하는 닉네임입니다')
-          }
-          suffix={
-            <Button size="xs" onClick={checkNickname}>
-              중복확인
-            </Button>
-          }
-        />
 
-        <Input
-          type="text"
-          label="휴대폰번호"
-          placeholder="휴대폰번호를 입력해주세요"
-          css={placeholderStyle}
-          value={phone}
-          onChange={handlePhoneChange}
-          errorMessage={phoneError}
-        />
+        {isSheetOpen && (
+          <ActionSheet
+            menus={BANKS.map((bank) => ({
+              label: bank.label,
+              onClick: () => handleBankSelect(bank.label),
+            }))}
+            onClose={() => setIsSheetOpen(false)}
+          />
+        )}
       </div>
-      <hr css={line} />
-      <div css={accountContainer}>
-        <Text typo="subtitle1" color={theme.colors.black}>
-          판매 정산 계좌
-        </Text>
-        <Input
-          type="text"
-          label="은행명"
-          placeholder="은행을 선택해주세요"
-          css={placeholderStyle}
-          value={bank}
-          onClick={() => setIsSheetOpen(true)}
-        />
-        <Input
-          type="text"
-          label="계좌번호"
-          placeholder="계좌번호를 입력해주세요"
-          css={placeholderStyle}
-          value={accountNumber}
-          onChange={handleAccountNumberChange}
-          errorMessage={accountNumberError}
-        />
-      </div>
-      <div css={fixedButtonWrapper}>
-        <Button size="l" onClick={handleSubmit}>
+      <div css={buttonWrapper}>
+        <Button size="xl" onClick={handleSubmit}>
           수정하기
         </Button>
       </div>
-
-      {isSheetOpen && (
-        <ActionSheet
-          menus={BANKS.map((bank) => ({
-            label: bank.label,
-            onClick: () => handleBankSelect(bank.label),
-          }))}
-          onClose={() => setIsSheetOpen(false)}
-        />
-      )}
     </Layout>
   );
 }
