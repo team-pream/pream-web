@@ -2,7 +2,7 @@ import { AppBarBack, DropdownUnfold } from '@/assets/icons';
 import { ActionSheet, AppBar, GNB, Layout, SearchBar, Text } from '@/components';
 import theme from '@/styles/theme';
 import { useEffect, useState, ChangeEvent, KeyboardEvent } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import {
   dropdownIcon,
   image,
@@ -19,15 +19,16 @@ import {
 } from './index.styles';
 import { useGetProductsSearchQuery } from '@/queries/products';
 import { ProductListProduct } from '@/types';
-import Message from './components/message';
+import { Message } from '@/pages/products/components';
 
 export default function Search() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const initialKeyword = new URLSearchParams(location.search).get('keyword') || ''; // URL에서 검색어 가져오기
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialKeyword = searchParams.get('keyword') || '';
+  const initialStatus = searchParams.get('status') ? Number(searchParams.get('status')) : undefined;
   const [keyword, setKeyword] = useState<string>(initialKeyword); // 상태로 관리할 keyword
   const [searchTerm, setSearchTerm] = useState<string>(initialKeyword); // 실제 검색어 상태
-  const [status, setStatus] = useState<number>();
+  const [status, setStatus] = useState<number | undefined>(initialStatus);
   const [isOpen, setIsOpen] = useState<boolean>(false); // 드롭다운 열림/닫힘 상태
   const { data } = useGetProductsSearchQuery({ keyword: searchTerm, status }, !!searchTerm);
 
@@ -49,23 +50,34 @@ export default function Search() {
     if (event.key === 'Enter') {
       event.preventDefault(); // 기본 동작 방지
       //공백제거 후 빈값이면 동작안함
-      if (keyword.trim() === '') return;
+      if (keyword.trim() === '') {
+        return;
+      }
       setSearchTerm(keyword);
+      setStatus(undefined);
     }
   };
 
   const handleSearchIconClick = () => {
     //공백제거 후 빈값이면 동작안함
-    if (keyword.trim() === '') return;
+    if (keyword.trim() === '') {
+      return;
+    }
     setSearchTerm(keyword);
+    setStatus(undefined);
   };
 
-  //현재 키워드로 URL을 업데이트하며, 컴포넌트의 전체 재렌더링 없이 navigate를 사용
+  //현재 키워드, 상태로 URL을 업데이트
   useEffect(() => {
+    const params: Record<string, string> = {}; //쿼리파라미터는 문자열만 처리
     if (searchTerm) {
-      navigate(`/products/search?keyword=${searchTerm}`, { replace: true });
+      params.keyword = searchTerm;
     }
-  }, [searchTerm, navigate]);
+    if (status !== undefined) {
+      params.status = String(status);
+    }
+    setSearchParams(params, { replace: true });
+  }, [searchTerm, status, setSearchParams]);
 
   return (
     <Layout>
@@ -142,7 +154,7 @@ export default function Search() {
             })}
           </div>
           {data?.totalCount == 0 && ( //검색 결과가 없을 때
-            <Message message="상품 검색 결과가 없습니다" />
+            <Message message="상품 검색 결과가 없어요" />
           )}
           {!initialKeyword && ( //main 화면에서 search icon 클릭했을 때
             <Message message="검색어를 입력해주세요" />

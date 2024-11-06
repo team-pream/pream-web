@@ -5,7 +5,7 @@ export const textWrapper = css`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 80vh;
+  height: 60vh;
   width: 100%;
   margin: 0px auto;
   gap: 26px;
