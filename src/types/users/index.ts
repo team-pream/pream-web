@@ -65,3 +65,9 @@ export interface PostUsersPetBody {
   name: string;
   petType: string;
 }
+
+export interface PatchUsersPetBody {
+  image: string;
+  name: string;
+  petType: 'DOG' | 'CAT';
+}
