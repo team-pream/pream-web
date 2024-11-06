@@ -23,7 +23,7 @@ export default function UserInfo({ onNext, setFormData, formData }: UserInfoProp
     setNicknameAvailable(true);
   });
 
-  const { data } = useGetUsersMeQuery();
+  const { data } = useGetUsersMeQuery({ enabled: true });
 
   const handleNicknameCheck = async () => {
     if (!formData.nickname) return;

@@ -25,7 +25,7 @@ import theme from '@/styles/theme';
 export default function PetProfile() {
   const navigate = useNavigate();
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-  const { data } = useGetUsersMeQuery(true);
+  const { data } = useGetUsersMeQuery({ enabled: true });
 
   const initialPetType = data?.pet?.petType || 'DOG';
   const [selectedPetType, setSelectedPetType] = useState<string>(initialPetType);

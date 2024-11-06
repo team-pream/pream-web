@@ -7,7 +7,7 @@ import theme from '@/styles/theme';
 
 export default function Completion() {
   const navigate = useNavigate();
-  const { data } = useGetUsersMeQuery();
+  const { data } = useGetUsersMeQuery({ enabled: true });
   const handleCompleteButtonClick = () => {
     navigate('/', { replace: true });
   };
@@ -16,7 +16,7 @@ export default function Completion() {
     <div css={textBox}>
       <Complete width="70px" />
       <Text typo="title1" color={theme.colors.green200}>
-        {data.nickname} 님<br />
+        {data?.nickname} 님<br />
         <Text typo="title1" color={theme.colors.black}>
           회원가입이 완료됐어요!
         </Text>

@@ -42,7 +42,7 @@ export default function Main() {
     }
   }, []);
 
-  const { data } = useGetUsersMeQuery(isLogin); //로그인 상태(isLogin=true)일때만 실행
+  const { data } = useGetUsersMeQuery({ enabled: isLogin }); //로그인 상태(isLogin=true)일때만 실행
   const petInfo = data?.pet; //대표 펫 정보 하나만 조회
   const profileImage = petInfo?.image || 'images/petprofile.png';
 
@@ -66,7 +66,7 @@ export default function Main() {
 
   const location = useLocation();
   const [showUpdateMessage, setShowUpdateMessage] = useState(location.state?.editSuccess);
-  console.log(showUpdateMessage);
+
   useEffect(() => {
     if (showUpdateMessage) {
       const timer = setTimeout(() => setShowUpdateMessage(null), 3000);

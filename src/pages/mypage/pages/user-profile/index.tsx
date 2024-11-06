@@ -44,7 +44,7 @@ const BANKS = [
 
 export default function UserProfile() {
   const navigate = useNavigate();
-  const { data } = useGetUsersMeQuery(true);
+  const { data } = useGetUsersMeQuery({ enabled: true });
   const [nickname, setNickname] = useState(data?.nickname || '');
   const [phone, setPhone] = useState(data?.phone || '');
   const [bank, setBank] = useState(data?.bankAccount?.bank || '');

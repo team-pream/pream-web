@@ -11,8 +11,6 @@ import {
   patchUsersAddress,
   patchUsersMe,
   postUsersPet,
-  patchUsersAddress,
-  patchUsersMe,
 } from '@/api';
 import {
   GetUsersMeResponse,
@@ -54,7 +52,7 @@ export const useUserPetMutation = (onSuccess: () => void) => {
   });
 };
 
-export const useGetUsersMeQuery = (enabled: boolean) => {
+export const useGetUsersMeQuery = ({ enabled }: { enabled: boolean }) => {
   return useQuery<GetUsersMeResponse, Error>({
     queryKey: QUERY_KEYS.GET_USERS_ME,
     queryFn: async () => {

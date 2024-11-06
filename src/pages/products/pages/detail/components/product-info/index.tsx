@@ -22,7 +22,7 @@ interface Props {
 }
 
 export default function ProductInfo({ onOptionClick, product }: Props) {
-  const { data: user } = useGetUsersMeQuery();
+  const { data: user } = useGetUsersMeQuery({ enabled: true });
 
   return (
     <div css={wrapper}>

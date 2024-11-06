@@ -22,7 +22,7 @@ export default function Order() {
   const [product, setProduct] = useState<Product | null>(state?.product || null);
   const navigate = useNavigate();
 
-  const { data: user } = useGetUsersMeQuery();
+  const { data: user } = useGetUsersMeQuery({ enabled: true });
 
   useEffect(() => {
     if (!product && productId) {
