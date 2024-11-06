@@ -98,3 +98,10 @@ export const textBox = css`
   padding: 8px 0 0 7px;
   cursor: pointer;
 `;
+
+export const loader = css`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+`;

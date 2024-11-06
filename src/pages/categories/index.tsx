@@ -61,20 +61,18 @@ export default function Categories() {
         </Text>
         <hr css={hr} />
 
-        <div css={gridWrapper}>
-          {isLoading ? (
-            <CategoryItemSkeleton />
-          ) : (
-            <>
-              {data?.map((item: Category) => {
-                if (item.id !== ALL_MENU_ID)
-                  return (
-                    <CategoryItem key={item.id} id={item.id} name={item.name} icon={item.icon} />
-                  );
-              })}
-            </>
-          )}
-        </div>
+        {isLoading ? (
+          <CategoryItemSkeleton />
+        ) : (
+          <div css={gridWrapper}>
+            {data?.map((item: Category) => {
+              if (item.id !== ALL_MENU_ID)
+                return (
+                  <CategoryItem key={item.id} id={item.id} name={item.name} icon={item.icon} />
+                );
+            })}
+          </div>
+        )}
       </div>
 
       <GNB />

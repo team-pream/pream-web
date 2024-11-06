@@ -15,6 +15,7 @@ export const gridItem = css`
 export const categoryList = css`
   display: flex;
   justify-content: center;
+  padding: 26px 28px;
 `;
 
 export const categoryItems = css`
