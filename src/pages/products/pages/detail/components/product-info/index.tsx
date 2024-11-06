@@ -20,7 +20,11 @@ interface Props {
   onOptionClick: () => void;
   product: ProductDetail;
 }
-
+const CONDITION_LABELS: { [key: string]: string } = {
+  SLIGHTLY_USED: '사용감 적음',
+  HEAVILY_USED: '사용감 많음',
+  NEW: '새상품',
+};
 export default function ProductInfo({ onOptionClick, product }: Props) {
   const { data: user } = useGetUsersMeQuery();
 
@@ -41,7 +45,7 @@ export default function ProductInfo({ onOptionClick, product }: Props) {
 
       <section css={infoWrapper}>
         <InfoRow title="판매자" value={product.seller.nickname} /> {/* 판매자 닉네임 출력 */}
-        <InfoRow title="상태" value={product.condition} /> {/* 상태 출력 */}
+        <InfoRow title="상태" value={CONDITION_LABELS[product.condition]} /> {/* 상태 출력 */}
         <InfoRow title="연락처" value={product.seller.contact} />
         <div css={timeInfo}>
           <Text typo="body5" color={theme.colors.gray300}>
