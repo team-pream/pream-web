@@ -34,15 +34,14 @@ export default function Onboarding() {
         setStep(STEPS.PET_TYPE);
         break;
       case STEPS.COMPLETE:
-        setStep(STEPS.PET_NAME);
-        break;
+        return;
       default:
         navigate(-1);
         return;
     }
   };
   // 버튼의 disabled 상태를 설정하는 조건
-  const isBackButtonDisabled = step === STEPS.PET_TYPE;
+  const isBackButtonDisabled = step === STEPS.PET_TYPE || STEPS.COMPLETE;
 
   const { mutate } = useUsersPetMutation(() => {
     setStep(STEPS.COMPLETE);
