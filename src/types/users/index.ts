@@ -22,6 +22,7 @@ export interface GetUsersMeResponse {
   email: string;
   contact: string;
   pet: GetPetsResponse;
+  bankAccount?: { bank: string; accountNumber: string };
 }
 
 export interface PatchUsersMeBody {

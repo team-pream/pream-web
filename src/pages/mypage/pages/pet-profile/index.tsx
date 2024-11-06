@@ -1,5 +1,5 @@
 import { AppBarBack, MypageUploadImage } from '@/assets/icons';
-import { AppBar, Button, Dialog, Input, Layout, RadioGroup, Text } from '@/components';
+import { AppBar, Button, ChipRadioGroup, Dialog, Input, Layout, Text } from '@/components';
 import { useNavigate } from 'react-router-dom';
 import {
   useGetUsersMeQuery,
@@ -25,9 +25,9 @@ import theme from '@/styles/theme';
 export default function PetProfile() {
   const navigate = useNavigate();
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-  const { data } = useGetUsersMeQuery();
+  const { data } = useGetUsersMeQuery(true);
 
-  const initialPetType = data?.pet?.type || 'DOG';
+  const initialPetType = data?.pet?.petType || 'DOG';
   const [selectedPetType, setSelectedPetType] = useState<string>(initialPetType);
   const [petName, setPetName] = useState<string>(data?.pet?.name || '');
   const [profileImage, setProfileImage] = useState<string>(
@@ -53,22 +53,8 @@ export default function PetProfile() {
   };
 
   const PET_TYPE_OPTION = [
-    {
-      value: 'DOG',
-      node: (
-        <Button variant="capsule" status={selectedPetType === 'DOG' ? 'active' : 'disabled'}>
-          강아지
-        </Button>
-      ),
-    },
-    {
-      value: 'CAT',
-      node: (
-        <Button variant="capsule" status={selectedPetType === 'CAT' ? 'active' : 'disabled'}>
-          고양이
-        </Button>
-      ),
-    },
+    { value: 'DOG', label: '강아지' },
+    { value: 'CAT', label: '고양이' },
   ];
 
   const openDialog = () => setIsDialogOpen(true);
@@ -98,8 +84,8 @@ export default function PetProfile() {
     }
 
     // 유효성 검사 추가
-    if (value.length < 2) {
-      setNameError('이름은 2자 이상이어야 합니다.');
+    if (value.length < 1) {
+      setNameError('이름은 1자 이상이어야 합니다.');
     } else if (value.length > 20) {
       setNameError('이름은 20자 이하이어야 합니다.');
     } else {
@@ -149,12 +135,11 @@ export default function PetProfile() {
           />
         </div>
         <div css={radioStyle}>
-          <RadioGroup
-            name="petType"
-            options={PET_TYPE_OPTION}
-            selectedValue={selectedPetType}
-            onChange={(value: string) => setSelectedPetType(value)}
-            style={{ gap: '12px' }}
+          <ChipRadioGroup
+            items={PET_TYPE_OPTION}
+            defaultValue={selectedPetType}
+            onChange={(value: string | number) => setSelectedPetType(value.toString())} // number일 경우 string으로 변환
+            wrap={false}
           />
         </div>
         <div css={formStyle}>
