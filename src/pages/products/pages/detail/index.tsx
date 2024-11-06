@@ -34,6 +34,7 @@ export default function Detail() {
 
   const handleOptionClick = () => setIsSheetOpen(true);
   const handleCloseSheet = () => setIsSheetOpen(false);
+
   const handlePurchaseClick = () => {
     if (product) {
       navigate(`/orders/${productId}`, { state: { product } });

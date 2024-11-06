@@ -15,6 +15,7 @@ import { ProductsDetailOption } from '@/assets/icons';
 import { ProductDetail } from '@/pages/products/pages/detail/types';
 import theme from '@/styles/theme';
 import { useGetUsersMeQuery } from '@/queries/users';
+import { formatTimeDifference } from '../../utils';
 
 interface Props {
   onOptionClick: () => void;
@@ -27,7 +28,7 @@ const CONDITION_LABELS: { [key: string]: string } = {
 };
 export default function ProductInfo({ onOptionClick, product }: Props) {
   const { data: user } = useGetUsersMeQuery();
-
+  const timeDifference = formatTimeDifference(product.createdAt);
   return (
     <div css={wrapper}>
       <section css={titleWrapper}>
@@ -49,7 +50,7 @@ export default function ProductInfo({ onOptionClick, product }: Props) {
         <InfoRow title="연락처" value={product.seller.contact} />
         <div css={timeInfo}>
           <Text typo="body5" color={theme.colors.gray300}>
-            10분전
+            {timeDifference}
           </Text>
         </div>
       </section>
