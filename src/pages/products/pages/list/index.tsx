@@ -13,20 +13,25 @@ import {
   textBox,
   soldOutOverlayStyle,
 } from './index.styles';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ActionSheet, AppBar, GNB, Layout, Text } from '@/components';
 import { useGetProductsQuery } from '@/queries/products';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { ProductListProduct } from '@/types';
 import theme from '@/styles/theme';
+import Message from '../../components/message';
 
 export default function Products() {
   const location = useLocation();
-  const { id, name } = location.state || {}; // 전달된 Props 데이터 추출
-  const [status, setStatus] = useState<number>();
-  const category = id;
+  const { id: category, name } = location.state || {}; // 전달된 Props 데이터 추출
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialCategory = searchParams.get('category') || category;
+  const initialStatus = searchParams.get('status') ? Number(searchParams.get('status')) : undefined;
 
-  const { data } = useGetProductsQuery({ category, status });
+  const [status, setStatus] = useState<number | undefined>(initialStatus);
+  const [categoryName] = useState<string>(name);
+
+  const { data } = useGetProductsQuery({ category: initialCategory, status });
   const [isOpen, setIsOpen] = useState<boolean>(false); // 드롭다운 열림/닫힘 상태
   const navigate = useNavigate();
 
@@ -36,15 +41,38 @@ export default function Products() {
 
   const handleItemClick = (statusId: number) => {
     setStatus(statusId);
+    setSearchParams(
+      { category: initialCategory, status: String(statusId), 'category-name': categoryName },
+      { replace: true }
+    );
     setIsOpen(false); // 선택 후 드롭다운 닫기
   };
+
+  useEffect(() => {
+    setSearchParams(
+      (prevParams) => {
+        const params = new URLSearchParams(prevParams);
+        if (initialCategory) {
+          params.set('category', initialCategory);
+        }
+        if (status !== undefined) {
+          params.set('status', String(status));
+        }
+        if (categoryName) {
+          params.set('category-name', categoryName);
+        }
+        return params;
+      },
+      { replace: true }
+    );
+  }, [status, initialCategory, categoryName, setSearchParams]);
 
   return (
     <Layout>
       <AppBar prefix={<AppBarBack height="24px" cursor="pointer" onClick={() => navigate(-1)} />} />
       <div css={productsWrapper}>
         <Text typo="title1" color={theme.colors.black}>
-          {name}
+          {searchParams.get('category-name')}
         </Text>
         <div css={infoWrapper}>
           <Text typo="body2" color={theme.colors.gray300}>
@@ -68,6 +96,7 @@ export default function Products() {
             )}
           </div>
         </div>
+        {data?.totalCount == 0 && <Message message="상품 목록이 없어요" />}
         <div css={listWrapper}>
           <div css={itemList}>
             {data?.products?.map((product: ProductListProduct) => {
