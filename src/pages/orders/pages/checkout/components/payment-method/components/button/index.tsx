@@ -10,12 +10,13 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   setSelected: (method: PAYMENT_METHODS_TYPE | null) => void;
 }
 
-export function MethodButton({ method, selected, setSelected }: Props) {
+export function MethodButton({ method, selected, setSelected, ...props }: Props) {
   return (
     <button
       id={method}
       css={button({ isActive: selected === method })}
       onClick={() => setSelected(method)}
+      {...props}
     >
       <Text typo="body4">{PAYMENT_METHODS_LABEL[method]}</Text>
     </button>

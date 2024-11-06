@@ -7,7 +7,7 @@ export const CARD_COMPANIES = [
 
 export interface AddressForm {
   receiverName: string;
-  roadAddress: string;
   detailAddress: string;
+  paymentMethod: string;
   phone: string;
 }

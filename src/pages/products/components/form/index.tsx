@@ -21,7 +21,7 @@ import {
 import { AppBarBack } from '@/assets/icons';
 import { Category } from '@/types/category';
 import { fixedCTAButtonWrapper, hr, productInfo, textarea, wrap, wrapper } from './index.styles';
-import { useValidation } from '@/pages/products/hooks/use-validation';
+import useValidation from '@/pages/products/hooks/use-validation';
 import UploadImage from '@/pages/products/components/upload-image';
 import Info from '@/pages/products/components/info';
 import theme from '@/styles/theme';

@@ -2,13 +2,14 @@ import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { GetProductsDetailResponse, GetUsersMeResponse } from '@/types';
 import { usePostOrdersProductMutation, usePatchUsersAddressMutation } from '@/queries';
-import { Button, Input } from '@/components';
+import { Button, Dialog, Input } from '@/components';
 import usePayment from '@/pages/orders/pages/checkout/hooks/use-payment';
 import { AddressForm } from '@/pages/orders/pages/checkout/types';
 import useSearchAddress from '@/pages/orders/pages/checkout/hooks/use-search-address';
 import { PaymentMethod, ProductInfo, TotalAmount } from '@/pages/orders/pages/checkout/components';
 import { addressWrapper, shippingInfo, wrapper } from './index.styles';
 import Checkbox from './components/checkbox';
+import useValidateOrderForm from '../../hooks/use-validate-order-form';
 
 interface Props {
   user: GetUsersMeResponse;
@@ -17,7 +18,9 @@ interface Props {
 
 export function OrderForm({ user, product }: Props) {
   const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [isErrorDialogOpen, setIsErrorDialogOpen] = useState<boolean>(false);
 
+  const validationRules = useValidateOrderForm();
   const { getAddressInputPopup, userAddress, address } = useSearchAddress({ user });
   const { selectedPaymentMethod, setSelectedPaymentMethod } = usePayment({
     user: user!,
@@ -27,7 +30,12 @@ export function OrderForm({ user, product }: Props) {
   const { mutateAsync: postOrdersProduct } = usePostOrdersProductMutation(product.id);
   const { mutateAsync: patchUsersAddress } = usePatchUsersAddressMutation();
 
-  const { handleSubmit, control } = useForm<AddressForm>();
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+    clearErrors,
+  } = useForm<AddressForm>();
 
   const onShippingInfoChange = async (form: AddressForm) => {
     if (!form.receiverName || !form.detailAddress || !form.phone) return;
@@ -47,88 +55,129 @@ export function OrderForm({ user, product }: Props) {
         roadAddress: address?.roadAddress ?? userAddress.roadAddress,
         detailAddress: form.detailAddress,
       },
-      phone: form.phone,
+      phone: form.phone.replace(/-/g, ''),
     });
   };
 
+  const onError = () => {
+    setIsErrorDialogOpen(true);
+  };
+
   return (
-    <div>
-      <form css={wrapper} onSubmit={handleSubmit((form) => onShippingInfoChange(form))}>
-        <Checkbox isChecked={isChecked} onChange={() => setIsChecked((prev) => !prev)} />
+    <>
+      <div>
+        <form css={wrapper} onSubmit={handleSubmit((form) => onShippingInfoChange(form), onError)}>
+          <Checkbox isChecked={isChecked} onChange={() => setIsChecked((prev) => !prev)} />
 
-        <div css={shippingInfo}>
-          <Controller
-            name="receiverName"
-            control={control}
-            defaultValue={user.username}
-            render={({ field }) => (
-              <Input
-                label="받는 사람"
-                value={field.value}
-                placeholder="성함을 입력해 주세요"
-                onChange={field.onChange}
-              />
-            )}
-          />
-
-          <div css={addressWrapper}>
-            <Input
-              type="text"
-              label="배송지"
-              placeholder="주소를 입력해 주세요"
-              value={address?.roadAddress}
-              defaultValue={userAddress.roadAddress}
-              onClick={getAddressInputPopup}
-              suffix={
-                <Button size="xs" shape="box" onClick={getAddressInputPopup}>
-                  주소 검색
-                </Button>
-              }
-            />
-
+          <div css={shippingInfo}>
             <Controller
-              name="detailAddress"
+              name="receiverName"
               control={control}
-              defaultValue={userAddress.detailAddress}
+              defaultValue={user.username}
+              rules={validationRules.receiverName}
               render={({ field }) => (
                 <Input
-                  placeholder="상세 주소를 입력해 주세요"
+                  label="받는 사람"
                   value={field.value}
-                  defaultValue={userAddress.detailAddress}
+                  placeholder="성함을 입력해 주세요"
                   onChange={field.onChange}
+                />
+              )}
+            />
+
+            <div css={addressWrapper}>
+              <Input
+                type="text"
+                label="배송지"
+                placeholder="주소를 입력해 주세요"
+                value={address?.roadAddress}
+                defaultValue={userAddress.roadAddress}
+                onClick={getAddressInputPopup}
+                suffix={
+                  <Button size="xs" shape="box" onClick={getAddressInputPopup}>
+                    주소 검색
+                  </Button>
+                }
+              />
+
+              <Controller
+                name="detailAddress"
+                control={control}
+                defaultValue={userAddress.detailAddress}
+                rules={validationRules.detailAddress}
+                render={({ field }) => (
+                  <Input
+                    placeholder="상세 주소를 입력해 주세요"
+                    value={field.value}
+                    defaultValue={userAddress.detailAddress}
+                    onChange={field.onChange}
+                  />
+                )}
+              />
+            </div>
+
+            <Controller
+              name="phone"
+              control={control}
+              defaultValue={user.phone}
+              rules={validationRules.phone}
+              render={({ field }) => (
+                <Input
+                  label="연락처"
+                  placeholder="연락처를 입력해 주세요"
+                  value={field.value}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    const input = e.target.value;
+                    const formattedInput = input
+                      .replace(/[^0-9]/g, '')
+                      .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/, '$1-$2-$3')
+                      .replace(/(-{1,2})$/g, '');
+                    field.onChange(formattedInput);
+                  }}
+                  maxLength={13}
                 />
               )}
             />
           </div>
 
+          <ProductInfo product={product} />
+
           <Controller
-            name="phone"
+            name="paymentMethod"
             control={control}
-            defaultValue={user.phone}
+            rules={validationRules.paymentMethod}
             render={({ field }) => (
-              <Input
-                label="연락처"
-                placeholder="연락처를 입력해 주세요"
-                value={field.value}
-                onChange={field.onChange}
+              <PaymentMethod
+                selectedPaymentMethod={selectedPaymentMethod}
+                setSelectedPaymentMethod={(method) => {
+                  setSelectedPaymentMethod(method);
+                  field.onChange(method);
+                }}
+                {...field}
               />
             )}
           />
-        </div>
 
-        <ProductInfo product={product} />
+          <TotalAmount price={product.price ?? 0} />
 
-        <PaymentMethod
-          selectedPaymentMethod={selectedPaymentMethod}
-          setSelectedPaymentMethod={setSelectedPaymentMethod}
+          <Button size="xl" type="submit">
+            {product.price.toLocaleString()}원 결제하기
+          </Button>
+        </form>
+      </div>
+
+      {isErrorDialogOpen && (
+        <Dialog
+          type="error"
+          title="입력한 항목을 확인해 주세요"
+          description={Object.values(errors)[0]?.message}
+          primaryActionLabel="확인"
+          onPrimaryAction={() => {
+            clearErrors();
+            setIsErrorDialogOpen(false);
+          }}
         />
-
-        <TotalAmount price={product.price ?? 0} />
-
-        <Button size="xl" type="submit">
-          {product.price.toLocaleString()}원 결제하기
-        </Button>
-      </form>
-    </div>
+      )}
+    </>
   );
 }
