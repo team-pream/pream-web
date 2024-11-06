@@ -68,7 +68,7 @@ export default function UserProfile() {
       return;
     }
     setNicknameError('');
-    setIsNicknameAvailable(null); // Reset availability check while checking
+    setIsNicknameAvailable(null); // 중복 확인 상태 초기화
     checkNicknameMutation(
       { nickname },
       {
@@ -80,33 +80,50 @@ export default function UserProfile() {
   };
 
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNickname(e.target.value);
-    setIsNicknameAvailable(null); // Reset on every change
+    const value = e.target.value;
+
+    if (value.length < 2 || value.length > 20) {
+      setNicknameError('닉네임은 2자 이상 20자 이하로 입력해주세요.');
+    } else {
+      setNicknameError('');
+    }
+
+    setNickname(value.slice(0, 20));
+    setIsNicknameAvailable(null);
   };
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const phoneRegex = /^010-\d{4}-\d{4}$/;
+    setPhone(value);
+
     if (!phoneRegex.test(value)) {
       setPhoneError('휴대폰 번호는 010-XXXX-XXXX 형식으로 입력해주세요.');
     } else {
       setPhoneError('');
-      setPhone(value);
     }
   };
 
   const handleAccountNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    const accountNumberRegex = /^[0-9]*$/;
-    if (!accountNumberRegex.test(value)) {
-      setAccountNumberError('계좌번호는 숫자만 입력 가능합니다.');
+
+    // 계좌번호는 숫자만 입력 가능하고 최대 20자 제한
+    if (!/^[0-9]*$/.test(value)) {
+      setAccountNumberError('계좌번호는 숫자만 입력 가능해요.');
+    } else if (value.length > 20) {
+      setAccountNumberError('계좌번호는 최대 20자까지 입력 가능해요.');
     } else {
       setAccountNumberError('');
-      setAccountNumber(value);
     }
+    setAccountNumber(value.slice(0, 20)); // 20자까지만 허용
   };
 
   const handleSubmit = () => {
+    if (isNicknameAvailable === null) {
+      setNicknameError('중복확인을 진행해주세요.');
+      return;
+    }
+
     if (nicknameError || phoneError || accountNumberError) {
       alert('입력값을 확인해주세요.');
       return;
@@ -167,7 +184,9 @@ export default function UserProfile() {
           value={nickname}
           onChange={handleNicknameChange}
           confirmMessage={isNicknameAvailable === true && '사용 가능한 닉네임입니다'}
-          errorMessage={isNicknameAvailable === false && '이미 존재하는 닉네임입니다'}
+          errorMessage={
+            nicknameError || (isNicknameAvailable === false && '이미 존재하는 닉네임입니다')
+          }
           suffix={
             <Button size="xs" onClick={checkNickname}>
               중복확인

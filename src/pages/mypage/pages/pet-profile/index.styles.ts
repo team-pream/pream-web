@@ -17,6 +17,7 @@ export const profileImageWrapper = css`
   justify-content: center;
   position: relative;
   margin: 40px 0 33px 0;
+  cursor: pointer;
 `;
 
 export const imageIcon = css`
@@ -41,7 +42,6 @@ export const uploadIconWrapper = css`
 
 export const uploadIcon = css`
   width: 21px;
-  height: 18px;
 `;
 
 export const formStyle = css`
@@ -56,6 +56,7 @@ export const radioStyle = css`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  cursor: pointer;
 `;
 
 export const hr = css`

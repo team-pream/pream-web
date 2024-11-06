@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useUsersPetMutation } from '@/queries/users';
+import { usePostUsersPetMutation } from '@/queries/users';
 import { AppBarBack } from '@/assets/icons';
 import { AppBar, Layout } from '@/components';
 import { Completion, PetName, PetType, UserInfo } from './components';
@@ -23,7 +23,7 @@ export default function Onboarding() {
     petName: '',
   });
 
-  const { mutate } = useUsersPetMutation(() => {
+  const { mutate } = usePostUsersPetMutation(() => {
     setStep(STEPS.COMPLETE);
   });
 
