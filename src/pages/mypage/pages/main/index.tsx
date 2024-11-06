@@ -101,7 +101,7 @@ export default function Main() {
           <hr color={theme.colors.black} css={hr} />
         </div>
         <div css={myPetWrapper}>
-          {!petInfo || !petInfo?.name ? (
+          {!isLogin || !petInfo || !petInfo?.name ? (
             <>
               <div css={profileAddWrapper}>
                 <div css={plusWrapper}>

@@ -58,7 +58,9 @@ export default function PetProfile() {
   ];
 
   const openDialog = () => setIsDialogOpen(true);
-  const closeDialog = () => setIsDialogOpen(false);
+  const closeDialog = () => {
+    setIsDialogOpen(false);
+  };
 
   const handleImageClick = () => {
     if (fileInputRef.current) fileInputRef.current.click();
@@ -170,10 +172,11 @@ export default function PetProfile() {
               <Dialog
                 title="프로필 삭제"
                 description="프로필을 삭제하시겠습니까?"
-                primaryActionLabel="Delete"
-                secondaryActionLabel="Cancel"
+                primaryActionLabel="삭제"
+                secondaryActionLabel="취소"
                 onPrimaryAction={handleDeletePetProfile}
                 onSecondaryAction={closeDialog}
+                type="error"
               />
             )}
           </div>
