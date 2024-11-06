@@ -2,7 +2,7 @@ import { textBox, buttonWrapper, skipButton, wrapper } from './index.styles';
 import { Text, Input, Button } from '@/components';
 import theme from '@/styles/theme';
 import { UserInfoForm } from '../../types';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 interface PetNameProps {
   formData: UserInfoForm;
@@ -12,9 +12,22 @@ interface PetNameProps {
 }
 
 export default function PetName({ formData, setFormData, onComplete, onSkip }: PetNameProps) {
-  const isPetNameValid = formData.petName.length >= 2 && formData.petName.length <= 20;
+  const [isPetNameValid, setIsPetNameVaild] = useState<boolean>(false);
+  const [nameErrorMessage, setNameErrorMessage] = useState<string>('');
   const handlePetNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, petName: event.target.value });
+    const value = event.target.value;
+    if (value.length > 20) {
+      return;
+    }
+    if (!value || value.length < 1) {
+      setIsPetNameVaild(false);
+      setNameErrorMessage('1~20자 이내로 입력해주세요');
+    } else {
+      setIsPetNameVaild(true);
+      setNameErrorMessage('');
+    }
+    console.log(value);
+    setFormData({ ...formData, petName: value });
   };
 
   return (
@@ -36,6 +49,7 @@ export default function PetName({ formData, setFormData, onComplete, onSkip }: P
         placeholder="반려동물의 이름을 입력해주세요."
         value={formData.petName}
         onChange={handlePetNameChange}
+        errorMessage={nameErrorMessage}
       ></Input>
       <div css={buttonWrapper}>
         <Button
