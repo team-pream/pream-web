@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Dialog } from '@/components';
 import { ProductForm } from '@/types';
 import { Form } from '@/pages/products/components';
-import { usePostProductsUploadMutation } from '@/queries/products';
+import { usePostProductsUploadMutation } from '@/queries';
 
 export default function Upload() {
   const navigate = useNavigate();

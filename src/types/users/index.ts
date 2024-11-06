@@ -24,7 +24,6 @@ export interface GetUsersMeResponse {
   pets: GetPetsResponse[];
 }
 
-// TODO: User와 Pet 분리
 export interface GetPetsResponse {
   id: string;
   userId: string;
@@ -36,8 +35,6 @@ export interface GetPetsResponse {
 }
 
 export interface PatchUsersAddressBody {
-  zonecode: string;
   roadAddress: string;
-  jibunAddress: string;
   detailAddress: string;
 }

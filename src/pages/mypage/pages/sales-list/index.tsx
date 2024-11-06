@@ -14,7 +14,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { AppBar, Layout, Text } from '@/components';
 import theme from '@/styles/theme';
-import { useGetProductsSalesListQuery } from '@/queries/products';
+import { useGetProductsSalesListQuery } from '@/queries';
 
 export default function SalesList() {
   const navigate = useNavigate();

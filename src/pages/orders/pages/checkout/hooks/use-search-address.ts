@@ -3,9 +3,6 @@ import { GetUsersMeResponse, PatchUsersAddressBody } from '@/types';
 
 interface Address {
   roadAddress: string;
-  jibunAddress: string;
-  zonecode: string;
-  buildingName?: string;
 }
 
 interface Props {
@@ -25,13 +22,11 @@ const useSearchAddress = ({ user }: Props) => {
     };
   }, []);
 
-  const getAddress = () => {
+  const getAddressInputPopup = () => {
     new window.daum.Postcode({
       oncomplete: (data: Address) =>
         setAddress({
-          zonecode: data.zonecode,
           roadAddress: data.roadAddress,
-          jibunAddress: data.jibunAddress,
           detailAddress: '',
         }),
     }).open();
@@ -39,15 +34,13 @@ const useSearchAddress = ({ user }: Props) => {
 
   const userAddress: PatchUsersAddressBody = useMemo(
     () => ({
-      zonecode: user.address?.zonecode,
       roadAddress: user.address?.roadAddress,
-      jibunAddress: user.address?.jibunAddress,
       detailAddress: user.address?.detailAddress,
     }),
     [user.address]
   );
 
-  return { address, setAddress, getAddress, userAddress };
+  return { address, setAddress, getAddressInputPopup, userAddress };
 };
 
 export default useSearchAddress;

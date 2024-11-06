@@ -11,17 +11,17 @@ import {
   RadioGroup,
   Text,
 } from '@/components';
-import { useGetCategoriesQuery } from '@/queries/categories';
+import { useGetCategoriesQuery } from '@/queries';
 import {
   convertProductsDetailToProductsUploadBody,
   GetProductsDetailResponse,
   PRODUCT_CONDITION,
   ProductForm,
-} from '@/types/products';
+} from '@/types';
 import { AppBarBack } from '@/assets/icons';
-import { Category } from '@/types/category';
+import { Category } from '@/types';
 import { fixedCTAButtonWrapper, hr, productInfo, textarea, wrap, wrapper } from './index.styles';
-import { useValidation } from '@/pages/products/hooks/use-validation';
+import useValidation from '@/pages/products/hooks/use-validation';
 import UploadImage from '@/pages/products/components/upload-image';
 import Info from '@/pages/products/components/info';
 import theme from '@/styles/theme';
