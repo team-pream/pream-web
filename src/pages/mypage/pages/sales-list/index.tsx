@@ -33,7 +33,7 @@ export default function SalesList() {
         </div>
         {data?.map((listData) => (
           <div css={item} key={listData.id}>
-            <div css={content}>
+            <div css={content} onClick={() => navigate(`/products/${listData.id}`)}>
               <div css={opacityBox(listData.status)}>
                 {listData.status === 'AVAILABLE' ? (
                   ''
@@ -68,7 +68,7 @@ export default function SalesList() {
                   </Text>
                   <Text typo="body1">{listData.createdAt.substring(2, 10).replace(/-/g, '.')}</Text>
                 </div>
-                <div css={bottomBox} onClick={() => navigate(`/products/${listData.id}`)}>
+                <div css={bottomBox}>
                   <Text typo="body2" css={contentTitle}>
                     {listData.title}
                   </Text>

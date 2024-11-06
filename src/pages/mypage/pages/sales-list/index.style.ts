@@ -24,6 +24,7 @@ export const content = css`
   display: flex;
   gap: 20px;
   width: 100%;
+  cursor: pointer;
 `;
 
 export const opacityBox = (props: string) => css`
@@ -68,7 +69,6 @@ export const bottomBox = css`
   display: flex;
   flex-direction: column;
   gap: 7px;
-  cursor: pointer;
 `;
 
 export const salesStatus = css`
