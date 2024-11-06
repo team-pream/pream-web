@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { Search } from '@/assets/icons';
-import { searchBarWrapper } from './index.style';
+import { searchBarWrapper, searchIconStyle } from './index.style';
 
 interface SearchBarProps {
   onSearch: () => void;
@@ -24,13 +24,8 @@ const SearchBar = ({ onSearch, placeholder = '도로명이나 주소를 입력�
       onBlur={() => setIsFocused(false)}
       onClick={handleClick}
     >
-      <input
-        ref={inputRef}
-        placeholder={placeholder}
-        style={{ flex: 1, border: 'none', outline: 'none' }}
-        readOnly
-      />
-      <Search css={{ width: '20px', margin: '10px', cursor: 'pointer' }} />
+      <input ref={inputRef} placeholder={placeholder} readOnly />
+      <Search css={searchIconStyle} />
     </div>
   );
 };

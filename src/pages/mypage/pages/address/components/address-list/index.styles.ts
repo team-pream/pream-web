@@ -17,7 +17,7 @@ export const addressListWrapper = css`
   width: 90%;
   margin: 0 auto;
   border: 1px solid ${colors.gray200};
-  padding: 2% 4%;
+  padding: 2.5% 4%;
   flex-direction: column;
   border-radius: 10px;
 `;
@@ -66,4 +66,8 @@ export const valueWrapper = css`
 export const tagValueWrapper = css`
   display: flex;
   margin: 6px 0 8px;
+`;
+export const totalAddressWrapper = css`
+  display: flex;
+  justify-content: space-between;
 `;

@@ -7,14 +7,15 @@ import {
   modifyButtonStyle,
   valueWrapper,
   tagValueWrapper,
+  totalAddressWrapper,
 } from './index.styles';
 import { Text } from '@/components';
-import { PatchUserAddressBody } from '@/types';
+import { PatchUsersAddressBody } from '@/types';
 import { EmotionalPetIcon } from '@/assets/icons';
 
 interface AddressListProps {
   userData: {
-    address: PatchUserAddressBody;
+    address: PatchUsersAddressBody;
     username: string;
     phone: string;
   } | null;
@@ -41,7 +42,7 @@ const AddressList = ({ userData, onEditClick }: AddressListProps) => {
             <div css={tagStyle}>
               <Text typo="body3">주소</Text>
             </div>
-            <div css={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div css={totalAddressWrapper}>
               <div css={[valueWrapper, { flexDirection: 'column' }]}>
                 <Text typo="body5">{userData.address.roadAddress || '주소 없음'}</Text>
                 <Text typo="body5">{userData.address.detailAddress || '상세 주소 없음'}</Text>

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { loadKakaoMapScript } from '@/libs/kako-map';
-
+import { buttonWrapper, currentLocationButton, innerWrapper } from './index.styles';
 interface KakaoMapProps {
   latitude: number;
   longitude: number;
@@ -63,24 +63,9 @@ const KakaoMap = ({ latitude, longitude, onMarkerDragEnd }: KakaoMapProps) => {
   };
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '200px', margin: '10px 0 15px' }}>
-      <div ref={mapRef} style={{ width: '100%', height: '100%' }} />
-      <button
-        onClick={moveToCurrentLocation}
-        style={{
-          position: 'absolute',
-          right: '10px',
-          bottom: '10px',
-          backgroundColor: 'white',
-          border: '1px solid #ccc',
-          borderRadius: '4px',
-          padding: '5px 10px',
-          cursor: 'pointer',
-          zIndex: 10,
-          fontSize: '12px',
-          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-        }}
-      >
+    <div css={buttonWrapper}>
+      <div ref={mapRef} css={innerWrapper} />
+      <button onClick={moveToCurrentLocation} css={currentLocationButton}>
         현재 위치로 이동
       </button>
     </div>

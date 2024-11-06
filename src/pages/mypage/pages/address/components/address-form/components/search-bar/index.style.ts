@@ -14,4 +14,15 @@ export const searchBarWrapper = (isFocused: boolean) => css`
   input::placeholder {
     font-size: 14px;
   }
+  input {
+    flex: 1;
+    border: none;
+    outline: none;
+  }
+`;
+
+export const searchIconStyle = css`
+  width: 20px;
+  margin: 10px;
+  cursor: pointer;
 `;

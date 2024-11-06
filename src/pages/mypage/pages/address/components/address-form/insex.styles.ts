@@ -40,3 +40,8 @@ export const formTagStyle = css`
   color: #626872;
   margin-right: 6px;
 `;
+export const inputDetailWrapper = css`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;

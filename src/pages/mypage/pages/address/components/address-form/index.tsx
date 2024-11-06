@@ -9,6 +9,7 @@ import {
   defaultWrapper,
   buttonWrapper,
   formTagStyle,
+  inputDetailWrapper,
 } from './insex.styles';
 import { patchUsersAddress } from '@/api';
 
@@ -21,7 +22,7 @@ interface AddressData {
 }
 
 interface AddressFormProps {
-  onSave: () => void;
+  onSave: (newDetailAddress: string) => void;
   initialData?: AddressData;
 }
 
@@ -30,9 +31,11 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
   const [jibunAddress, setJibunAddress] = useState(initialData?.jibunAddress || '');
   const [zonecode, setZoneCode] = useState(initialData?.zonecode || '');
   const [detailAddress, setDetailAddress] = useState(initialData?.detailAddress || '');
-  const [errorMessage, setErrorMessage] = useState<string>(''); // errorMessage 상태 추가
+  const [previousDetailAddress] = useState(initialData?.detailAddress || '');
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const [showDetailInput, setShowDetailInput] = useState(!!initialData);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [errorDialog, setErrorDialog] = useState(false);
   const [mapCoordinates, setMapCoordinates] = useState<{
     latitude: number;
     longitude: number;
@@ -54,6 +57,12 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
       fetchCoordinates(roadAddress);
     }
   }, [roadAddress]);
+
+  useEffect(() => {
+    if (jibunAddress !== initialData?.jibunAddress || detailAddress !== previousDetailAddress) {
+      setErrorMessage('');
+    }
+  }, [jibunAddress, roadAddress, detailAddress, previousDetailAddress]);
 
   const fetchCoordinates = async (address: string) => {
     try {
@@ -90,8 +99,11 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
     const geocoder = new window.kakao.maps.services.Geocoder();
     geocoder.coord2Address(lng, lat, (result, status) => {
       if (status === window.kakao.maps.services.Status.OK && result[0]) {
-        const roadAddress = result[0].road_address?.address_name || '';
+        let roadAddress = result[0].road_address?.address_name || '';
         const jibunAddress = result[0].address?.address_name || '';
+        if (!roadAddress) {
+          roadAddress = jibunAddress;
+        }
         setRoadAddress(roadAddress);
         setJibunAddress(jibunAddress);
         setMapCoordinates({ latitude: lat, longitude: lng });
@@ -99,11 +111,13 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
     });
   };
 
-  const validateDetailAddress = (value: string) => {
-    if (!value) {
+  const validateDetailAddress = (detail: string, jibun: string) => {
+    if (!detail) {
       return '상세 주소를 입력해 주세요.';
-    } else if (value.length > 30) {
+    } else if (detail.length > 30) {
       return '상세 주소는 30자 이하여야 합니다.';
+    } else if (detail === previousDetailAddress && jibun === initialData?.jibunAddress) {
+      return '주소가 이전과 동일해요';
     } else {
       return '';
     }
@@ -111,13 +125,21 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
 
   const handleDetailAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setDetailAddress(value);
-    setErrorMessage(validateDetailAddress(value)); // 실시간 유효성 검사
+
+    if (value.length <= 30) {
+      setDetailAddress(value);
+    }
+
+    const validationMessage = validateDetailAddress(value, jibunAddress);
+    setErrorMessage(validationMessage);
   };
 
-  const handleSave = () => {
-    if (!errorMessage) {
+  const handleSaveClick = () => {
+    const validationMessage = validateDetailAddress(detailAddress, jibunAddress);
+    if (!validationMessage) {
       setIsDialogOpen(true);
+    } else {
+      setErrorMessage(validationMessage);
     }
   };
 
@@ -130,12 +152,12 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
         zonecode,
       };
 
-      setIsDialogOpen(false);
       await patchUsersAddress(addressData);
-      onSave();
+      setIsDialogOpen(false);
+      onSave(detailAddress);
     } catch (error) {
       console.error('Failed to update address:', error);
-      alert('주소 수정에 실패했습니다.');
+      setErrorDialog(true);
     }
   };
 
@@ -160,7 +182,11 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
             <div css={formTagStyle}>
               <Text typo="body3">도로명</Text>
             </div>
-            <Text typo="subtitle2">{roadAddress}</Text>
+            {roadAddress === jibunAddress ? (
+              <Text typo="subtitle2">도로명 주소가 존재하지 않아요</Text>
+            ) : (
+              <Text typo="subtitle2">{roadAddress}</Text>
+            )}
           </div>
         )}
         {jibunAddress && (
@@ -173,19 +199,19 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
         )}
         {showDetailInput && (
           <>
-            <div css={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <div css={inputDetailWrapper}>
               <Input
                 type="text"
                 placeholder="상세 주소를 입력하세요"
                 value={detailAddress}
-                maxLength={30} // 30자로 입력 제한
+                maxLength={30}
                 errorMessage={errorMessage}
-                onChange={handleDetailAddressChange} // 실시간 유효성 검사 핸들러
-                onBlur={() => setErrorMessage(validateDetailAddress(detailAddress))}
+                onChange={handleDetailAddressChange}
+                onBlur={() => setErrorMessage(validateDetailAddress(detailAddress, jibunAddress))}
               />
             </div>
             <div css={buttonWrapper}>
-              <Button size="xl" onClick={handleSave}>
+              <Button size="xl" onClick={handleSaveClick}>
                 이 주소가 확실해요
               </Button>
             </div>
@@ -201,6 +227,15 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
           secondaryActionLabel="취소"
           onPrimaryAction={handleDialogConfirm}
           onSecondaryAction={() => setIsDialogOpen(false)}
+        />
+      )}
+      {errorDialog && (
+        <Dialog
+          type="error"
+          title="주소 수정 실패"
+          description="주소 수정에 실패했습니다. 다시 시도해 주세요."
+          primaryActionLabel="확인"
+          onPrimaryAction={() => setErrorDialog(false)}
         />
       )}
     </div>
