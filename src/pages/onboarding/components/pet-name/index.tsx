@@ -26,7 +26,6 @@ export default function PetName({ formData, setFormData, onComplete, onSkip }: P
       setIsPetNameVaild(true);
       setNameErrorMessage('');
     }
-    console.log(value);
     setFormData({ ...formData, petName: value });
   };
 
