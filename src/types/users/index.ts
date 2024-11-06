@@ -22,6 +22,7 @@ export interface GetUsersMeResponse {
   email: string;
   contact: string;
   pet: GetPetsResponse;
+  bankAccount?: { bank: string; accountNumber: string };
 }
 
 export interface PatchUsersMeBody {
@@ -62,4 +63,10 @@ export interface PostUsersPetBody {
   image: string;
   name: string;
   petType: string;
+}
+
+export interface PatchUsersPetBody {
+  image: string;
+  name: string;
+  petType: 'DOG' | 'CAT';
 }

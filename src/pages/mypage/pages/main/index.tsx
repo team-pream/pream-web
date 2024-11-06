@@ -49,7 +49,7 @@ export default function Main() {
   const logout = () => {
     localStorage.removeItem('access'); // access 키만 삭제
     setIsLogin(false);
-    location.replace(ROUTE_PATHS.MAIN);
+    navigate(ROUTE_PATHS.MAIN, { replace: true });
   };
 
   const handleClickPlus = () => {
@@ -101,7 +101,7 @@ export default function Main() {
           <hr color={theme.colors.black} css={hr} />
         </div>
         <div css={myPetWrapper}>
-          {!petInfo || !petInfo?.name ? (
+          {!isLogin || !petInfo || !petInfo?.name ? (
             <>
               <div css={profileAddWrapper}>
                 <div css={plusWrapper}>

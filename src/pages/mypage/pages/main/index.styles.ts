@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 export const mypageWrapper = css`
   width: 100%;
   height: 100%;
-  padding: 24px 18px;
+  padding: 24px 18px ${theme.size.gnbHeight};
   display: flex;
   flex-direction: column;
 `;
@@ -101,10 +101,13 @@ export const plusIcon = css`
 `;
 
 export const hr = css`
+  border: 2px solid ${theme.colors.black};
   margin: 10px 0 0 0;
 `;
 
 export const menuline = css`
+  height: 1px;
+  background-color: ${theme.colors.gray100};
   margin: 0;
 `;
 
