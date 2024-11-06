@@ -9,7 +9,7 @@ import {
 } from './index.styles';
 import { SelectCat, SelectDog } from '@/assets/icons';
 import { Text, Button } from '@/components';
-import { useGetUsersMeQuery } from '@/queries/users';
+import { useGetUsersMeQuery } from '@/queries';
 import { PET_TYPE, UserInfoForm } from '@/pages/onboarding/types';
 import theme from '@/styles/theme';
 

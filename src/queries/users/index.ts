@@ -72,9 +72,9 @@ export const usePatchUsersOnboardingMutation = (onSuccess: () => void) => {
   });
 };
 
-export const usePatchUserAddress = (onSuccess: () => void) => {
+export const usePatchUsersAddressMutation = (onSuccess?: () => void) => {
   return useMutation({
-    mutationKey: QUERY_KEYS.GET_ADDRESS_ME,
+    mutationKey: QUERY_KEYS.PATCH_USERS_ADDRESS,
     mutationFn: async (body: PatchUsersAddressBody) => {
       try {
         return await patchUsersAddress(body);

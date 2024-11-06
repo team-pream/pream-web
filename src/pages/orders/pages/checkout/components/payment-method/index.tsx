@@ -1,15 +1,15 @@
 import { Text } from '@/components';
 import { PAYMENT_METHODS_TYPE } from '@/types/orders';
 import { PAYMENT_METHODS } from '@/pages/orders/types';
-import { MethodButton } from './components/method-button';
 import { grid, selectBox, wrapper } from './index.styles';
+import { MethodButton } from './components/button';
 
 interface Props {
   selectedPaymentMethod: PAYMENT_METHODS_TYPE | null;
   setSelectedPaymentMethod: (method: PAYMENT_METHODS_TYPE | null) => void;
 }
 
-export function PaymentCheckout({ selectedPaymentMethod, setSelectedPaymentMethod }: Props) {
+export function PaymentMethod({ selectedPaymentMethod, setSelectedPaymentMethod }: Props) {
   return (
     <div css={wrapper}>
       <Text typo="subtitle1">결제 방법</Text>

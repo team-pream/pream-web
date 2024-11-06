@@ -18,3 +18,7 @@ export const totalTextStyle = css`
   justify-content: space-between;
   margin-bottom: 11px;
 `;
+
+export const line = css`
+  border-bottom: 2px solid ${colors.black};
+`;

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDeleteProductsDetailMutation, useGetProductsDetailQuery } from '@/queries/products';
+import { useDeleteProductsDetailMutation, useGetProductsDetailQuery } from '@/queries';
 import { ActionSheet, AppBar, Button, Dim, Layout, Dialog, Carousel } from '@/components';
 import { AppBarBack } from '@/assets/icons';
 import { colors } from '@/styles/colors';

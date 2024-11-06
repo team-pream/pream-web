@@ -17,7 +17,7 @@ import {
   statusWrapper,
   textBox,
 } from './index.styles';
-import { useGetProductsSearchQuery } from '@/queries/products';
+import { useGetProductsSearchQuery } from '@/queries';
 import { ProductListProduct } from '@/types';
 import Message from './components/message';
 

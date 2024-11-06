@@ -15,7 +15,7 @@ import {
 } from './index.styles';
 import { useState } from 'react';
 import { ActionSheet, AppBar, GNB, Layout, Text } from '@/components';
-import { useGetProductsQuery } from '@/queries/products';
+import { useGetProductsQuery } from '@/queries';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ProductListProduct } from '@/types';
 import theme from '@/styles/theme';

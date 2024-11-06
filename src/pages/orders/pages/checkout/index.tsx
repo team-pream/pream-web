@@ -1,8 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { AppBarBack } from '@/assets/icons';
 import { Layout, AppBar, Text } from '@/components';
-import { useGetProductsDetailQuery } from '@/queries/products';
-import { useGetUsersMeQuery } from '@/queries/users';
+import { useGetProductsDetailQuery, useGetUsersMeQuery } from '@/queries';
 import { OrderForm } from './components/order-form';
 import { title, line, contentsWrapper } from './index.styles';
 

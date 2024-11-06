@@ -6,7 +6,7 @@ import { GetProductsDetailResponse } from '@/types';
 interface productInfoProps {
   product: GetProductsDetailResponse;
 }
-export default function ProductInfo({ product }: productInfoProps) {
+export function ProductInfo({ product }: productInfoProps) {
   return (
     <div>
       <div css={line} />

@@ -11,7 +11,7 @@ import {
   RadioGroup,
   Text,
 } from '@/components';
-import { useGetCategoriesQuery } from '@/queries/categories';
+import { useGetCategoriesQuery } from '@/queries';
 import {
   convertProductsDetailToProductsUploadBody,
   GetProductsDetailResponse,

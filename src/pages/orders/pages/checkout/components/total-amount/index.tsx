@@ -1,11 +1,10 @@
-import { totalOrderWrapper, totalTextStyle, totalTextWrapper } from './index.styles';
+import { line, totalOrderWrapper, totalTextStyle, totalTextWrapper } from './index.styles';
 import { Text } from '@/components';
-import { line } from '../../index.styles';
 
 interface Props {
   price: number;
 }
-export default function OrderTotal({ price }: Props) {
+export function TotalAmount({ price }: Props) {
   return (
     <div>
       <div css={line} />
