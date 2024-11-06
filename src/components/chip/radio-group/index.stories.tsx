@@ -18,13 +18,13 @@ const ITEMS = [
 ];
 
 export function Default() {
-  const [selected, setSelected] = useState<string>(ITEMS[0].value);
+  const [selected, setSelected] = useState<string | number>(ITEMS[0].value);
 
   return (
     <ChipRadioGroup
       items={ITEMS}
       defaultValue={selected}
-      onChange={(value: string) => setSelected(value)}
+      onChange={(value) => setSelected(value)}
     />
   );
 }

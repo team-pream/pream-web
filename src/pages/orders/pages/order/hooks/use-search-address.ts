@@ -13,7 +13,7 @@ interface Props {
 }
 
 const useSearchAddress = ({ user }: Props) => {
-  const [address, setAddress] = useState<PatchUsersAddressBody>();
+  const [address, setAddress] = useState<Partial<PatchUsersAddressBody>>();
 
   useEffect(() => {
     const script = document.createElement('script');
