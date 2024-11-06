@@ -1,5 +1,5 @@
 import { Text } from '@/components';
-import { PAYMENT_METHODS_TYPE } from '@/types/orders';
+import { PAYMENT_METHODS_TYPE } from '@/types';
 import { PAYMENT_METHODS } from '@/pages/orders/types';
 import { grid, selectBox, wrapper } from './index.styles';
 import { MethodButton } from './components/button';

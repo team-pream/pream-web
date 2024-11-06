@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { GetProductsDetailResponse, GetUsersMeResponse } from '@/types';
+import { GetProductsDetailResponse, GetUsersMeResponse, PostOdersProductBody } from '@/types';
 import { usePostOrdersProductMutation, usePatchUsersAddressMutation } from '@/queries';
 import { Button, Dialog, Input } from '@/components';
 import usePayment from '@/pages/orders/pages/checkout/hooks/use-payment';
-import { AddressForm } from '@/pages/orders/pages/checkout/types';
 import useSearchAddress from '@/pages/orders/pages/checkout/hooks/use-search-address';
 import { PaymentMethod, ProductInfo, TotalAmount } from '@/pages/orders/pages/checkout/components';
 import { addressWrapper, shippingInfo, wrapper } from './index.styles';
@@ -35,15 +34,16 @@ export function OrderForm({ user, product }: Props) {
     control,
     formState: { errors },
     clearErrors,
-  } = useForm<AddressForm>();
+  } = useForm<PostOdersProductBody>();
 
-  const onShippingInfoChange = async (form: AddressForm) => {
-    if (!form.receiverName || !form.detailAddress || !form.phone) return;
+  const onShippingInfoChange = async (form: PostOdersProductBody) => {
+    console.log(form);
+    if (!form.receiverName || !form.shippingAddress.detailAddress || !form.phone) return;
 
     if (isChecked) {
       await patchUsersAddress({
-        roadAddress: address?.roadAddress ?? userAddress.roadAddress,
-        detailAddress: form.detailAddress,
+        roadAddress: form.shippingAddress.roadAddress ?? address?.roadAddress,
+        detailAddress: form.shippingAddress.detailAddress,
       });
     }
 
@@ -52,8 +52,8 @@ export function OrderForm({ user, product }: Props) {
       paymentAmount: product.price,
       paymentMethod: selectedPaymentMethod!,
       shippingAddress: {
-        roadAddress: address?.roadAddress ?? userAddress.roadAddress,
-        detailAddress: form.detailAddress,
+        roadAddress: form.shippingAddress.roadAddress ?? address?.roadAddress,
+        detailAddress: form.shippingAddress.detailAddress,
       },
       phone: form.phone.replace(/-/g, ''),
     });
@@ -86,22 +86,31 @@ export function OrderForm({ user, product }: Props) {
             />
 
             <div css={addressWrapper}>
-              <Input
-                type="text"
-                label="배송지"
-                placeholder="주소를 입력해 주세요"
-                value={address?.roadAddress}
-                defaultValue={userAddress.roadAddress}
-                onClick={getAddressInputPopup}
-                suffix={
-                  <Button size="xs" shape="box" onClick={getAddressInputPopup}>
-                    주소 검색
-                  </Button>
-                }
+              <Controller
+                name="shippingAddress.detailAddress"
+                control={control}
+                defaultValue={userAddress.detailAddress}
+                rules={validationRules.detailAddress}
+                render={({ field }) => (
+                  <Input
+                    type="text"
+                    label="배송지"
+                    placeholder="주소를 입력해 주세요"
+                    value={address?.roadAddress}
+                    defaultValue={userAddress.roadAddress}
+                    onClick={getAddressInputPopup}
+                    onChange={() => field.onChange(address?.roadAddress)}
+                    suffix={
+                      <Button type="button" size="xs" shape="box" onClick={getAddressInputPopup}>
+                        주소 검색
+                      </Button>
+                    }
+                  />
+                )}
               />
 
               <Controller
-                name="detailAddress"
+                name="shippingAddress.detailAddress"
                 control={control}
                 defaultValue={userAddress.detailAddress}
                 rules={validationRules.detailAddress}

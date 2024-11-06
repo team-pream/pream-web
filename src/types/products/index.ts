@@ -1,5 +1,5 @@
 import { BANKS } from '@/constants/bank';
-import { Category } from '@/types/categories';
+import { Category } from '@/types';
 
 export type ProductStatus = 'AVAILABLE' | 'RESERVED' | 'SOLD_OUT';
 export type ProductCondition = 'NEW' | 'SLIGHTLY_USED' | 'HEAVILY_USED';

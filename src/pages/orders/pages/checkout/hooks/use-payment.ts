@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import { GetProductsDetailResponse, GetUsersMeResponse } from '@/types';
+import { GetProductsDetailResponse, GetUsersMeResponse, PAYMENT_METHODS_TYPE } from '@/types';
 import { loadTossPayments, TossPaymentsPayment } from '@tosspayments/tosspayments-sdk';
 import { PAYMENT_METHODS } from '@/pages/orders/types';
-import { PAYMENT_METHODS_TYPE } from '@/types/orders';
 
 // TODO 변경
 const order = {

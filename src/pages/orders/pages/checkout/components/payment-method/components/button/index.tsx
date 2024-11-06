@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes } from 'react';
 import { Text } from '@/components';
+import { PAYMENT_METHODS_TYPE } from '@/types';
 import { PAYMENT_METHODS_LABEL } from '@/pages/orders/types';
-import { PAYMENT_METHODS_TYPE } from '@/types/orders';
 import { button } from './index.styles';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {

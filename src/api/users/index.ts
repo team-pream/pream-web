@@ -5,7 +5,7 @@ import {
   PatchAuthOnboardingBody,
   GetUsersMeResponse,
   PatchUsersAddressBody,
-} from '@/types/users';
+} from '@/types';
 
 export const patchUsersOnboarding = async (body: PatchAuthOnboardingBody) => {
   const response = await api.patch('/user/onboarding', body);

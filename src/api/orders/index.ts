@@ -1,4 +1,4 @@
-import { PostOdersProductBody } from '@/types/orders';
+import { PostOdersProductBody } from '@/types';
 import { api } from '../api';
 
 export const postOrdersProduct = async ({

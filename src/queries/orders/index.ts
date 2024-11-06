@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { postOrdersProduct } from '@/api/orders';
-import { PostOdersProductBody } from '@/types/orders';
+import { PostOdersProductBody } from '@/types';
 import { QUERY_KEYS } from '../query-keys';
 
 export const usePostOrdersProductMutation = (productId: number) => {

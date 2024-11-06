@@ -6,7 +6,7 @@ import {
   useGetUsersMeQuery,
   usePostUsersCheckNicknameMutation,
 } from '@/queries';
-import { PatchAuthOnboardingBody } from '@/types/users';
+import { PatchAuthOnboardingBody } from '@/types';
 import theme from '@/styles/theme';
 
 interface UserInfoProps {
