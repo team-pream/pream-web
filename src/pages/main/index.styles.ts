@@ -44,6 +44,7 @@ export const itemList = css`
 export const item = css`
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 `;
 
 export const imageBox = css`
@@ -73,7 +74,6 @@ export const textBox = css`
   flex-direction: column;
   gap: 6px;
   padding: 8px 0 0 7px;
-  cursor: pointer;
 `;
 
 export const itemTitle = css`
