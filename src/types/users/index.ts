@@ -26,7 +26,6 @@ export interface PatchUsersMeBody {
   bankAccount?: { bank: string; accountNumber: string };
 }
 
-// TODO: User와 Pet 분리
 export interface GetPetsResponse {
   id: string;
   userId: string;
