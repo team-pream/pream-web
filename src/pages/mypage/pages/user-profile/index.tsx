@@ -135,6 +135,17 @@ export default function UserProfile() {
   };
 
   const handleSubmit = () => {
+    // 닉네임이 변경되지 않았으면 중복 검사 없이 바로 저장
+    if (nickname === data?.nickname) {
+      patchUsersMe({
+        nickname,
+        phone: phone.replace(/-/g, ''),
+        bankAccount: { bank, accountNumber },
+      });
+      return;
+    }
+
+    // 닉네임 중복확인 체크 여부 확인
     if (isNicknameAvailable === null) {
       setNicknameError('중복확인을 진행해주세요.');
       return;
@@ -144,7 +155,13 @@ export default function UserProfile() {
       alert('입력값을 확인해주세요.');
       return;
     }
-    patchUsersMe({ nickname, phone, bankAccount: { bank, accountNumber } });
+
+    const sanitizedPhone = phone.replace(/-/g, '');
+    patchUsersMe({
+      nickname,
+      phone: sanitizedPhone,
+      bankAccount: { bank, accountNumber },
+    });
   };
 
   const handleBankSelect = (selectedBank: string) => {
