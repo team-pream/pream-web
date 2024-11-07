@@ -13,6 +13,15 @@ export type PAYMENT_STATUS =
   | 'ABORTED'
   | 'EXPIRED';
 
+export interface PostOdersProductForm {
+  paymentAmount: number;
+  paymentMethod: PAYMENT_METHODS_TYPE;
+  receiverName: string;
+  roadAddress: string;
+  detailAddress: string;
+  phone: string;
+}
+
 export interface PostOdersProductBody {
   paymentAmount: number;
   paymentMethod: PAYMENT_METHODS_TYPE;
