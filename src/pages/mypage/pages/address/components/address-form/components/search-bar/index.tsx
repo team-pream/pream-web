@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { Search } from '@/assets/icons';
-import { searchBarWrapper, searchIconStyle } from './index.style';
+import { searchBarWrapper, searchIconStyle } from './index.styles';
 
 interface SearchBarProps {
   onSearch: () => void;
