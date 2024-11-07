@@ -31,45 +31,43 @@ import { useEffect, useState } from 'react';
 export default function Main() {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState<boolean>(false);
+
   useEffect(() => {
     const accessToken = localStorage.getItem('access');
     if (accessToken) {
-      //access token이 있으면 로그인 상태
       setIsLogin(true);
     } else {
-      // 없으면 로그인 상태 아님
       setIsLogin(false);
     }
   }, []);
 
-  const { data } = useGetUsersMeQuery({ enabled: isLogin }); //로그인 상태(isLogin=true)일때만 실행
-  const petInfo = data?.pet; //대표 펫 정보 하나만 조회
+  const { data } = useGetUsersMeQuery({ enabled: isLogin });
+  const petInfo = data?.pet;
   const profileImage = petInfo?.image || 'images/petprofile.png';
 
   const logout = () => {
-    localStorage.removeItem('access'); // access 키만 삭제
+    localStorage.removeItem('access');
     setIsLogin(false);
     navigate(ROUTE_PATHS.MAIN, { replace: true });
   };
 
   const handleClickPlus = () => {
-    //댕냥이 등록 플러스 버튼 이벤트
-
     if (isLogin) {
-      //로그인이 되어있으면 펫 정보 수정 페이지로 이동
       navigate('pets/edit');
     } else {
-      //로그인이 되어있지 않으면 로그인 화면으로 이동
       navigate(ROUTE_PATHS.LOGIN);
     }
   };
 
   const location = useLocation();
-  const [showUpdateMessage, setShowUpdateMessage] = useState(location.state?.editSuccess);
+  const [showUpdateMessage, setShowUpdateMessage] = useState(location.state?.editSuccess || false);
 
   useEffect(() => {
     if (showUpdateMessage) {
-      const timer = setTimeout(() => setShowUpdateMessage(null), 3000);
+      const timer = setTimeout(() => {
+        setShowUpdateMessage(false); // 메시지 표시 후 false로 변경
+      }, 3000);
+
       return () => clearTimeout(timer);
     }
   }, [showUpdateMessage]);

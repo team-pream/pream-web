@@ -117,13 +117,15 @@ export const editClear = css`
   align-items: center;
   text-align: center;
   background-color: ${theme.colors.grayOpacity300};
-  width: 100%;
+  width: 90%;
+  max-width: ${theme.size.maxWidth};
   height: 36px;
   gap: 5px;
   padding: 0 10px;
   border-radius: 6px;
   position: fixed;
   bottom: 12%;
-  max-width: ${theme.size.maxWidth};
   z-index: ${theme.zIndex.gnb};
+  left: 50%;
+  transform: translateX(-50%);
 `;

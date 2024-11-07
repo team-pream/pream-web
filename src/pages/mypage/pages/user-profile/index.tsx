@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AppBar, Layout, Text, Input, Button, ActionSheet } from '@/components';
 import { AppBarBack } from '@/assets/icons';
 import { useNavigate } from 'react-router-dom';
@@ -42,11 +42,23 @@ const BANKS = [
   { label: '토스뱅크', value: 'TS' },
 ];
 
+function formatPhone(phone: string) {
+  // 010-XXXX-XXXX 형식으로 변환
+  let formattedPhone = phone.replace(/[^0-9]/g, '');
+  if (formattedPhone.length > 3) {
+    formattedPhone = formattedPhone.slice(0, 3) + '-' + formattedPhone.slice(3);
+  }
+  if (formattedPhone.length > 8) {
+    formattedPhone = formattedPhone.slice(0, 8) + '-' + formattedPhone.slice(8, 12);
+  }
+  return formattedPhone;
+}
+
 export default function UserProfile() {
   const navigate = useNavigate();
   const { data } = useGetUsersMeQuery({ enabled: true });
   const [nickname, setNickname] = useState(data?.nickname || '');
-  const [phone, setPhone] = useState(data?.phone || '');
+  const [phone, setPhone] = useState(formatPhone(data?.phone || '')); // 여기서 하이픈 포함된 상태로 초기화
   const [bank, setBank] = useState(data?.bankAccount?.bank || '');
   const [accountNumber, setAccountNumber] = useState(data?.bankAccount?.accountNumber || '');
   const [isNicknameAvailable, setIsNicknameAvailable] = useState<boolean | null>(null);
@@ -54,6 +66,12 @@ export default function UserProfile() {
   const [nicknameError, setNicknameError] = useState('');
   const [phoneError, setPhoneError] = useState('');
   const [accountNumberError, setAccountNumberError] = useState('');
+
+  useEffect(() => {
+    if (data?.phone) {
+      setPhone(formatPhone(data.phone)); // data가 업데이트될 때마다 phone 상태 업데이트
+    }
+  }, [data]);
 
   const { mutate: patchUsersMe } = usePatchUsersMeMutation(() => {
     navigate('/mypage', { state: { editSuccess: 'updated' } });
@@ -120,21 +138,18 @@ export default function UserProfile() {
   };
 
   const handleAccountNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // 입력 값에서 숫자만 남기기
     const value = e.target.value.replace(/\D/g, '');
 
-    // 유효성 검사
     if (value.length > 20) {
       setAccountNumberError('계좌번호는 최대 20자까지 입력 가능해요.');
     } else {
       setAccountNumberError('');
     }
 
-    setAccountNumber(value.slice(0, 20)); // 20자까지만 허용
+    setAccountNumber(value.slice(0, 20));
   };
 
   const handleSubmit = () => {
-    // 닉네임이 변경되지 않았으면 중복 검사 없이 바로 저장
     if (nickname === data?.nickname) {
       patchUsersMe({
         nickname,
@@ -144,7 +159,6 @@ export default function UserProfile() {
       return;
     }
 
-    // 닉네임 중복확인 체크 여부 확인
     if (isNicknameAvailable === null) {
       setNicknameError('중복확인을 진행해주세요.');
       return;
@@ -248,6 +262,7 @@ export default function UserProfile() {
             placeholder="은행을 선택해주세요"
             css={placeholderStyle}
             value={bank}
+            readOnly
             onClick={() => setIsSheetOpen(true)}
           />
           <Input
