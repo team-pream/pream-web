@@ -22,4 +22,7 @@ export const QUERY_KEYS = {
   PATCH_USERS_PET: ['PATCH_USERS_PET'],
   DELETE_USERS_PET: ['DELETE_USERS_PET'],
   POST_USERS_PET: ['POST_USERS_PET'],
+  GET_ORDERS: ['GET_ORDERS'],
+  POST_ORDERS_CONFIRM: (orderId: string) => ['POST_ORDERS_CONFIRM', orderId],
+  POST_PAYMENTS_CANCEL: (orderId: string) => ['POST_PAYMENTS_CANCEL', orderId],
 } as const;

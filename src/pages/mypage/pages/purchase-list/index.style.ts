@@ -12,6 +12,7 @@ export const mainTitleBox = css`
 `;
 
 export const itemWrapper = css`
+  width: 100%;
   padding: 18px 0;
   border-bottom: 1px solid ${theme.colors.gray100};
 `;
@@ -19,6 +20,7 @@ export const itemWrapper = css`
 export const item = css`
   display: flex;
   gap: 20px;
+  width: 100%;
 `;
 
 export const content = css`
@@ -28,18 +30,30 @@ export const content = css`
 export const topBox = css`
   display: flex;
   justify-content: space-between;
+  width: 100%;
 `;
 
 export const image = css`
   width: 90px;
   height: 90px;
+  border-radius: 13px;
 `;
 
 export const textBox = css`
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding-top: 6px;
   cursor: pointer;
+`;
+
+export const title = css`
+  width: 100%;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  overflow: hidden;
 `;
 
 export const price = css`
@@ -49,6 +63,7 @@ export const price = css`
 export const buttonContainer = css`
   display: flex;
   gap: 6px;
+  width: 100%;
 `;
 
 export const button = css`
@@ -104,7 +119,7 @@ export const hiddenBlock = ({ isOpen }: { isOpen: boolean }) => ({
 });
 
 export const shipBlock = css`
-  width: 340px;
+  width: 100%;
   border-bottom: 2px solid;
   padding: 24px 0 33px 0;
 `;

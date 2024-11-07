@@ -8,6 +8,7 @@ import {
   topBox,
   image,
   textBox,
+  title,
   price,
   purchaseInfoButton,
   purchaseButton,
@@ -25,25 +26,22 @@ import {
 import { AppBarBack } from '@/assets/icons';
 import { useNavigate } from 'react-router-dom';
 import { AppBar, Layout, Text } from '@/components';
+import { useGetOrdersQuery } from '@/queries';
 
 export default function PurchaseList() {
   // 각 아이템의 열림 상태를 배열로 관리
   const [isOpen, setIsOpen] = useState<boolean[]>([]);
+  const { data } = useGetOrdersQuery();
+  // const { mutate: postOrdersConfirm } = usePostOrdersConfirmMutation(data.);
+  // const { mutateAsync: postPaymentsCancel } = usePostPaymentsCancelMutation(orderId);
 
-  const handleArrowToggle = (index: number) => {
+  const handleArrowToggle = (id: number) => {
     setIsOpen((prev) => {
       const newIsOpen = [...prev];
-      newIsOpen[index] = !newIsOpen[index];
+      newIsOpen[id] = !newIsOpen[id];
       return newIsOpen;
     });
   };
-
-  // 더미데이터
-  const items = Array.from({ length: 6 }, () => ({
-    title: '아이캣유 제품',
-    price: '620,000원',
-    date: '24.10.24',
-  }));
 
   const navigate = useNavigate();
 
@@ -63,20 +61,22 @@ export default function PurchaseList() {
         <div css={mainTitleBox}>
           <Text typo="title1">구매내역</Text>
         </div>
-        {items.map((data, index) => (
-          <div css={itemWrapper} key={index}>
+        {data?.map((listData) => (
+          <div css={itemWrapper} key={listData.id}>
             <div css={item}>
-              <img src="/images/sampleImage2.png" css={image} />
+              <img src={listData.product.images} css={image} />
               <div css={content}>
                 <div css={topBox}>
-                  <div css={textBox} onClick={() => navigate('/products/:productId')}>
-                    <Text typo="body2">{data.title}</Text>
+                  <div css={textBox} onClick={() => navigate(`/products/${listData.product.id}`)}>
+                    <Text typo="body2" css={title}>
+                      {listData.product.title}
+                    </Text>
                     <Text typo="subtitle1" css={price}>
-                      {data.price}
+                      {listData.paymentAmount.toLocaleString()}원
                     </Text>
                   </div>
                   <Text typo="body1" css={date}>
-                    {data.date}
+                    {listData.createdAt.substring(2, 10).replace(/-/g, '.')}
                   </Text>
                 </div>
                 <div css={buttonContainer}>
@@ -84,7 +84,7 @@ export default function PurchaseList() {
                     <Text
                       typo="body3"
                       css={purchaseInfoButton}
-                      onClick={() => handleArrowToggle(index)}
+                      onClick={() => handleArrowToggle(listData.product.id)}
                     >
                       주문 정보 보기
                     </Text>
@@ -102,7 +102,7 @@ export default function PurchaseList() {
                 </div>
               </div>
             </div>
-            <div css={hiddenBlock({ isOpen: isOpen[index] || false })}>
+            <div css={hiddenBlock({ isOpen: isOpen[listData.product.id] || false })}>
               <section css={shipBlock}>
                 <Text typo="subtitle1" css={blockTitle}>
                   배송 정보
@@ -114,9 +114,12 @@ export default function PurchaseList() {
                     <Text typo="subtitle2">휴대폰번호</Text>
                   </div>
                   <div css={infoContent}>
-                    <Text typo="body4">고윤정</Text>
-                    <Text typo="body4">서울 강남구 선릉로 428 멀티캠퍼스</Text>
-                    <Text typo="body4">010-0000-0000</Text>
+                    <Text typo="body4">{listData.receiverName}</Text>
+                    <Text typo="body4">
+                      {listData.shippingAddress.roadAddress}
+                      {` ${listData.shippingAddress.detailAddress}`}
+                    </Text>
+                    <Text typo="body4">{listData.phone}</Text>
                   </div>
                 </div>
               </section>
@@ -130,8 +133,8 @@ export default function PurchaseList() {
                     <Text typo="subtitle2">결제 금액</Text>
                   </div>
                   <div css={infoContent}>
-                    <Text typo="body4">토스페이먼츠</Text>
-                    <Text typo="body4">20,000원</Text>
+                    <Text typo="body4">{listData.paymentMethod}</Text>
+                    <Text typo="body4">{listData.paymentAmount.toLocaleString()}원</Text>
                   </div>
                 </div>
               </section>

@@ -33,3 +33,13 @@ interface Product {
   status: string;
   images: string[];
 }
+
+export interface PostPaymentsCancelBody {
+  cancelReason: string;
+}
+
+export interface PostPaymentsCancelResponse {
+  errorCode: number;
+  title: string;
+  description: string;
+}
