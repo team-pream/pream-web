@@ -55,3 +55,29 @@ export interface PostOrdersProductResponse {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface GetOrdersResponse {
+  id: string;
+  receiverName: string;
+  paymentAmount: string;
+  status: string;
+  paymentStatus: string;
+  paymentMethod: string;
+  shippingAddress: {
+    roadAddress: string;
+    detailAddress: string;
+  };
+  phone: string;
+  product: {
+    id: number;
+    title: string;
+    description: string;
+    images: string;
+  };
+  isCancelable: boolean;
+  isConfirmed: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type GetOrdersListResponse = GetOrdersResponse[];
