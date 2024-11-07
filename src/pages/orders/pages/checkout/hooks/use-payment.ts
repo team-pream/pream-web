@@ -1,22 +1,21 @@
-import { useEffect, useMemo, useState } from 'react';
-import { GetProductsDetailResponse, GetUsersMeResponse, PAYMENT_METHODS_TYPE } from '@/types';
+import { useEffect, useState } from 'react';
+import {
+  GetProductsDetailResponse,
+  GetUsersMeResponse,
+  PAYMENT_METHODS_TYPE,
+  PostOrdersProductResponse,
+} from '@/types';
 import { loadTossPayments, TossPaymentsPayment } from '@tosspayments/tosspayments-sdk';
 import { PAYMENT_METHODS } from '@/pages/orders/types';
-
-// TODO 변경
-const order = {
-  id: 'wegis446mdsojp',
-};
+import { ROUTE_PATHS } from '@/constants/routes';
 
 interface Props {
   user: GetUsersMeResponse;
-  product: GetProductsDetailResponse;
-  //   order: any;
 }
 
 const CLIENT_KEY = import.meta.env.VITE_TOSS_CLIENT_KEY;
 
-const usePayment = ({ user, product }: Props) => {
+const usePayment = ({ user }: Props) => {
   const [payment, setPayment] = useState<TossPaymentsPayment>();
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<PAYMENT_METHODS_TYPE | null>(
     null
@@ -43,32 +42,30 @@ const usePayment = ({ user, product }: Props) => {
     fetchPayment();
   }, [customerKey]);
 
-  const basicPaymentRequest = useMemo(
-    () => ({
+  const requestPayment = async ({
+    product,
+    user,
+    order,
+  }: {
+    product: GetProductsDetailResponse;
+    user: GetUsersMeResponse;
+    order: PostOrdersProductResponse;
+  }) => {
+    if (!payment || !selectedPaymentMethod || !product || !user || !order) return;
+
+    const basicPaymentRequest = {
       amount: {
         currency: 'KRW',
         value: product.price,
       },
       orderId: order.id,
       orderName: product.title,
-      successUrl: window.location.origin + '/order/complete',
-      failUrl: window.location.origin + '/order/failure',
-      customerEmail: user.id,
+      successUrl: window.location.origin + ROUTE_PATHS.ORDER_COMPLETE,
+      failUrl: window.location.origin + ROUTE_PATHS.ORDER_FAILURE,
+      customerEmail: user.email,
       customerName: user.username,
-      customerMobilePhone: '01000000000',
-    }),
-    [product, user]
-  );
-
-  const requestPayment = async ({
-    product,
-    user,
-  }: {
-    orderId: string;
-    product: GetProductsDetailResponse;
-    user: GetUsersMeResponse;
-  }) => {
-    if (!payment || !selectedPaymentMethod || !product || !user) return;
+      customerMobilePhone: user.phone.replace(/-/g, ''),
+    };
 
     switch (selectedPaymentMethod) {
       case PAYMENT_METHODS.CARD:

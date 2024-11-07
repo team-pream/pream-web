@@ -27,7 +27,8 @@ export const completeIcon = css`
 `;
 
 export const hr = css`
-  border: 4px solid ${theme.colors.gray100};
+  height: 4px;
+  background: ${theme.colors.gray100};
   margin: 0;
 `;
 
@@ -45,13 +46,14 @@ export const productImg = css`
   width: 60px;
   height: 60px;
   border-radius: 8px;
-  background-color: ${theme.colors.gray200};
   margin-right: 16px;
   position: relative;
   img {
     width: 100%;
     height: 100%;
     position: absolute;
+    border-radius: 8px;
+    object-fit: cover;
   }
 `;
 
