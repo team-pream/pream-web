@@ -51,8 +51,7 @@ export const selectBox = (isSelected: boolean) => css`
   gap: 17px;
   background-color: ${isSelected ? theme.colors.green100 : theme.colors.gray100};
   border: 1px solid ${isSelected ? theme.colors.green200 : theme.colors.gray200};
-  color: ${theme.colors.gray300};
-
+  color: ${isSelected ? theme.colors.green200 : theme.colors.gray300};
   &:hover {
     background-color: ${theme.colors.green100};
     color: ${theme.colors.green200};
