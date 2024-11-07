@@ -91,3 +91,49 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+formApi.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    const originalRequest = error.config;
+    const errorCode = error.response.data?.errorCode;
+
+    if (
+      error.response.status === ERROR_CODE.UNAUTHORIZED &&
+      errorCode === ERROR_CODE.ACCESS_TOKEN_EXPIRED
+    ) {
+      const refreshToken = localStorage.getItem('refresh');
+
+      try {
+        const postResponse = await axios.post(
+          `${import.meta.env.VITE_BASE_URL}/auth/reissue`,
+          {},
+          {
+            headers: { Authorization: `Bearer ${refreshToken}` },
+          }
+        );
+
+        const newAccessToken = postResponse.data.accessToken;
+        localStorage.setItem('access', newAccessToken);
+
+        api.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
+        originalRequest.headers = `Bearer ${newAccessToken}`;
+
+        return api(originalRequest);
+      } catch (e) {
+        if (e.response.data.errorCode === ERROR_CODE.REFRESH_TOKEN_EXPIRED) {
+          alert('로그인 시간이 지났어요. 다시 로그인 해주세요');
+          window.location.href = ROUTE_PATHS.LOGIN;
+          localStorage.clear();
+        }
+      }
+    } else if (errorCode == ERROR_CODE.AUTHORIZATION_HEADER_MISSING) {
+      alert('로그인 시간이 지났어요. 다시 로그인 해주세요.');
+      window.location.href = ROUTE_PATHS.LOGIN;
+      localStorage.clear();
+    }
+    return Promise.reject(error);
+  }
+);
