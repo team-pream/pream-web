@@ -6,4 +6,4 @@ export { default as MyPage } from './mypage';
 export { default as Onboarding } from './onboarding';
 export { default as Orders } from './orders';
 export { default as Products } from './products';
-export { default as NotFound } from './notFound';
+export { default as NotFound } from './not-found';
