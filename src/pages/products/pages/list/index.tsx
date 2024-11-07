@@ -29,7 +29,7 @@ export default function Products() {
   const initialStatus = searchParams.get('status') ? Number(searchParams.get('status')) : undefined;
 
   const [status, setStatus] = useState<number | undefined>(initialStatus);
-  const [categoryName] = useState<string>(name);
+  const [categoryName] = useState<string>(name || searchParams.get('category-name'));
 
   const { data } = useGetProductsQuery({ category: initialCategory, status });
   const [isOpen, setIsOpen] = useState<boolean>(false); // 드롭다운 열림/닫힘 상태
