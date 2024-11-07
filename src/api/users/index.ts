@@ -8,12 +8,12 @@ import {
 } from '@/types/users';
 
 export const patchUsersOnboarding = async (body: PatchAuthOnboardingBody) => {
-  const response = await api.patch('/user/onboarding', body);
+  const response = await api.patch('/users/onboarding', body);
   return response.data;
 };
 
 export const postUsersCheckNickname = async (body: PostUsersCheckNicknameBody) => {
-  const response = await api.post('/user/check-nickname', body);
+  const response = await api.post('/users/check-nickname', body);
   return response.data;
 };
 
