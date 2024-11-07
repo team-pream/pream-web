@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDeleteProductsDetailMutation, useGetProductsDetailQuery } from '@/queries/products';
+import { useDeleteProductsDetailMutation, useGetProductsDetailQuery } from '@/queries';
 import { ActionSheet, AppBar, Button, Dim, Layout, Dialog, Carousel } from '@/components';
 import { AppBarBack } from '@/assets/icons';
 import { colors } from '@/styles/colors';
@@ -95,7 +95,12 @@ export default function Detail() {
             <ProductInfo onOptionClick={handleOptionClick} product={product} />
 
             <div css={ctaButtonWrapper}>
-              <Button size="xl" onClick={handlePurchaseClick}>
+              <Button
+                size="xl"
+                onClick={handlePurchaseClick}
+                status={product.status === 'AVAILABLE' ? 'active' : 'disabled'}
+                disabled={product.status !== 'AVAILABLE'}
+              >
                 구매하기
               </Button>
             </div>

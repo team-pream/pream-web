@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/queries/query-keys';
+import { GetCategoriesResponse } from '@/types';
 import { getCategories } from '@/api';
-import { GetCategoriesResponse } from '@/types/categories';
 
 export const useGetCategoriesQuery = () => {
   return useQuery<GetCategoriesResponse, Error>({

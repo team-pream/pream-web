@@ -2,7 +2,7 @@ import { textBox } from './index.styles';
 import { Complete } from '@/assets/icons';
 import { useNavigate } from 'react-router-dom';
 import { Text, Button } from '@/components';
-import { useGetUsersMeQuery } from '@/queries/users';
+import { useGetUsersMeQuery } from '@/queries';
 import theme from '@/styles/theme';
 
 export default function Completion() {

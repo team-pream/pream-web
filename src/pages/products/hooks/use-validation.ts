@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-export function useValidation() {
+export default function useValidation() {
   return useMemo(
     () => ({
       images: {

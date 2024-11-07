@@ -6,13 +6,12 @@ import {
   listWrapper,
 } from './index.styles';
 import { useNavigate } from 'react-router-dom';
-import { useGetCategoriesQuery } from '@/queries/categories';
-import { useGetProductsCurationQuery } from '@/queries/products';
+import { useGetCategoriesQuery, useGetProductsCurationQuery } from '@/queries';
 import { FabPlus, Logo, Search } from '@/assets/icons';
 import { AppBar, GNB, Layout, Text, Carousel, FAB } from '@/components';
-import ProductList from './components/product-list';
 import { Category } from '@/types';
 import theme from '@/styles/theme';
+import ProductList from './components/product-list';
 
 const CAT_WHEEL = 4;
 const WALKING = 5;

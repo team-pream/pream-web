@@ -1,8 +1,8 @@
 import { BANKS } from '@/constants/bank';
-import { Category } from '@/types/categories';
+import { Category } from '@/types';
 
-export type ProductStatus = 'AVAILABLE' | 'RESERVED' | 'SOLD_OUT';
-export type ProductCondition = 'NEW' | 'SLIGHTLY_USED' | 'HEAVILY_USED';
+export type PRODUCT_STATUS = 'AVAILABLE' | 'RESERVED' | 'SOLD_OUT';
+export type PRODUCT_CONDITION = 'NEW' | 'SLIGHTLY_USED' | 'HEAVILY_USED';
 export type BANK = (typeof BANKS)[number]['value'];
 export type BANK_KR = (typeof BANKS)[number]['label'];
 
@@ -45,7 +45,7 @@ export interface ProductsCurationProduct {
   id: number;
   title: string;
   price: number;
-  status: ProductStatus;
+  status: PRODUCT_STATUS;
   images: string[];
   categoryId: number;
 }
@@ -55,7 +55,7 @@ export interface GetProductsDetailResponse {
   title: string;
   price: number;
   status: string;
-  condition: ProductCondition;
+  condition: PRODUCT_CONDITION;
   images: string[];
   description: string;
   category: Pick<Category, 'id' | 'name'>;
@@ -76,7 +76,7 @@ export interface GetProductsDetailResponse {
 
 export interface PostProductsUploadBody {
   images: File[];
-  condition: ProductCondition;
+  condition: PRODUCT_CONDITION;
   price: number;
   categoryId: number;
   title: string;
@@ -90,7 +90,7 @@ export interface PostProductsUploadBody {
 
 export interface ProductForm {
   images: File[];
-  condition: ProductCondition;
+  condition: PRODUCT_CONDITION;
   price: number;
   categoryId: number;
   title: string;
@@ -129,7 +129,7 @@ export interface GetProductsSalesProductResponse {
   id: number;
   title: string;
   price: number;
-  status: ProductStatus;
+  status: PRODUCT_STATUS;
   images: string[];
 }
 

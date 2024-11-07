@@ -1,4 +1,4 @@
-import { useGetCategoriesQuery } from '@/queries/categories';
+import { useGetCategoriesQuery } from '@/queries';
 import { gridWrapper, menuWrapper, hr } from './index.styles';
 import { AppBar, GNB, Layout, SearchBar, Text } from '@/components';
 import { AppBarBack } from '@/assets/icons';

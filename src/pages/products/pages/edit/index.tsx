@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Dialog } from '@/components';
 import { ProductForm } from '@/types';
-import { useGetProductsDetailQuery, usePatchProductsDetailMutation } from '@/queries/products';
+import { useGetProductsDetailQuery, usePatchProductsDetailMutation } from '@/queries';
 import { Form } from '@/pages/products/components';
 import { BANKS } from '@/constants/bank';
 

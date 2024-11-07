@@ -11,8 +11,9 @@ export const ROUTE_PATHS = {
   PRODUCTS_UPLOAD: '/products/upload',
 
   ORDER: (orderId: number) => `/orders/${orderId}`,
-  ORDER_PAYMENT: (orderId: number) => `/orders/${orderId}/payment`,
-  ORDER_COMPLETE: (orderId: number) => `/orders/${orderId}/complete`,
+  ORDER_PAYMENT: '/orders/payment',
+  ORDER_COMPLETE: '/orders/complete',
+  ORDER_FAILURE: '/orders/failure',
 
   MYPAGE: '/mypage',
   MYPAGE_INFO: '/mypage/user/edit',

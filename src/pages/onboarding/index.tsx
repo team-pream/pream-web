@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useUsersPetMutation } from '@/queries/users';
+import { useUsersPetMutation } from '@/queries';
 import { AppBarBack } from '@/assets/icons';
 import { AppBar, Layout } from '@/components';
 import { Completion, PetName, PetType, UserInfo } from './components';
