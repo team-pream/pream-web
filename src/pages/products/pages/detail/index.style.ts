@@ -15,6 +15,7 @@ export const carouselWrapper = css`
   width: 100%;
   background-color: ${colors.grayOpacity200};
   border-radius: 0px 0px 20px 20px;
+  overflow: hidden;
 `;
 
 export const statusText = css`

@@ -1,4 +1,5 @@
-import { AppBarBack, Complete } from '@/assets/icons';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Complete } from '@/assets/icons';
 import { AppBar, Button, Layout, Text } from '@/components';
 import {
   blockTitle,
@@ -18,13 +19,43 @@ import {
   textWrapperStyle,
   wrapper,
 } from './index.styles';
-import { useNavigate } from 'react-router-dom';
+import { ROUTE_PATHS } from '@/constants/routes';
+import { useEffect, useState } from 'react';
+import { usePostPaymentsTossMutation } from '@/queries';
+import { PostPaymentsTossResponse } from '@/types';
+import { formatPhoneNumber } from '@/utils/format';
 
 export default function OrderComplete() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const [order, setOrder] = useState<PostPaymentsTossResponse>();
+
+  const { mutateAsync: postPaymentsToss } = usePostPaymentsTossMutation();
+
+  useEffect(() => {
+    async function fetchProductData() {
+      const paymentKey = searchParams.get('paymentKey');
+      const orderId = searchParams.get('orderId');
+      const amount = searchParams.get('amount');
+
+      if (paymentKey && orderId && amount) {
+        const response: PostPaymentsTossResponse = await postPaymentsToss({
+          paymentKey,
+          orderId,
+          amount: parseInt(amount),
+        });
+        setOrder(response);
+      }
+    }
+
+    fetchProductData();
+  }, [postPaymentsToss, searchParams]);
+
+  if (!order) return <div>Loading</div>;
+
   return (
     <Layout>
-      <AppBar prefix={<AppBarBack height="24px" cursor="pointer" />} />
+      <AppBar />
       <div css={wrapper}>
         <div css={confirmWrapper}>
           <Complete css={completeIcon} />
@@ -32,9 +63,7 @@ export default function OrderComplete() {
           <Button
             shape="box"
             size="s"
-            onClick={() => {
-              navigate('/');
-            }}
+            onClick={() => navigate(ROUTE_PATHS.MAIN, { replace: true })}
           >
             메인으로
           </Button>
@@ -45,11 +74,11 @@ export default function OrderComplete() {
             <Text typo="subtitle1">주문 상품 정보</Text>
             <div css={InnerWrapper}>
               <div css={productImg}>
-                <img alt="상품사진" />
+                <img src={order.product.images?.[0]} alt="상품사진" />
               </div>
               <div css={textWrapperStyle}>
-                <Text typo="body4">판매명</Text>
-                <Text typo="subtitle1">22,800원</Text>
+                <Text typo="body4">{order.product.title}</Text>
+                <Text typo="subtitle1">{`${order.paymentAmount.toLocaleString()}원`}</Text>
               </div>
             </div>
           </div>
@@ -64,9 +93,11 @@ export default function OrderComplete() {
                 <Text typo="subtitle2">휴대폰번호</Text>
               </div>
               <div css={infoContent}>
-                <Text typo="body4">고윤정</Text>
-                <Text typo="body4">서울 강남구 선릉로 428 멀티캠퍼스</Text>
-                <Text typo="body4">010-0000-0000</Text>
+                <Text typo="body4">{order.receiverName}</Text>
+                <Text typo="body4">
+                  {order.shippingAddress.roadAddress} {order.shippingAddress.detailAddress}
+                </Text>
+                <Text typo="body4">{formatPhoneNumber(order.phone) ?? ''}</Text>
               </div>
             </div>
           </div>
@@ -80,8 +111,8 @@ export default function OrderComplete() {
                 <Text typo="subtitle2">결제 금액</Text>
               </div>
               <div css={infoContent}>
-                <Text typo="body4">토스페이</Text>
-                <Text typo="body4">20,000원</Text>
+                <Text typo="body4">{order.paymentMethod}</Text>
+                <Text typo="body4">{`${order.paymentAmount.toLocaleString()}원`}</Text>
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { postOrdersProduct } from '@/api/orders';
+import { postOrdersProduct } from '@/api';
 import { PostOdersProductBody } from '@/types';
 import { QUERY_KEYS } from '../query-keys';
 

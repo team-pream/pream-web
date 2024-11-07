@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { GetProductsDetailResponse, GetUsersMeResponse, PostOdersProductBody } from '@/types';
+import {
+  GetProductsDetailResponse,
+  GetUsersMeResponse,
+  PostOdersProductBody,
+  PostOrdersProductResponse,
+} from '@/types';
 import { usePostOrdersProductMutation, usePatchUsersAddressMutation } from '@/queries';
 import { Button, Dialog, Input } from '@/components';
 import usePayment from '@/pages/orders/pages/checkout/hooks/use-payment';
@@ -21,9 +26,8 @@ export function OrderForm({ user, product }: Props) {
 
   const validationRules = useValidateOrderForm();
   const { getAddressInputPopup, userAddress, address } = useSearchAddress({ user });
-  const { selectedPaymentMethod, setSelectedPaymentMethod } = usePayment({
+  const { selectedPaymentMethod, setSelectedPaymentMethod, requestPayment } = usePayment({
     user: user!,
-    product: product!,
   });
 
   const { mutateAsync: postOrdersProduct } = usePostOrdersProductMutation(product.id);
@@ -46,7 +50,7 @@ export function OrderForm({ user, product }: Props) {
       });
     }
 
-    await postOrdersProduct({
+    const orderSheet: PostOrdersProductResponse = await postOrdersProduct({
       receiverName: form.receiverName,
       paymentAmount: product.price,
       paymentMethod: selectedPaymentMethod!,
@@ -56,6 +60,8 @@ export function OrderForm({ user, product }: Props) {
       },
       phone: form.phone.replace(/-/g, ''),
     });
+
+    await requestPayment({ product, user, order: orderSheet });
   };
 
   const onError = () => {
@@ -95,6 +101,7 @@ export function OrderForm({ user, product }: Props) {
                     type="text"
                     label="배송지"
                     placeholder="주소를 입력해 주세요"
+                    {...field}
                     value={address?.roadAddress}
                     defaultValue={userAddress.roadAddress}
                     onClick={getAddressInputPopup}

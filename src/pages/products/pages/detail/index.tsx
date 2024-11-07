@@ -95,7 +95,12 @@ export default function Detail() {
             <ProductInfo onOptionClick={handleOptionClick} product={product} />
 
             <div css={ctaButtonWrapper}>
-              <Button size="xl" onClick={handlePurchaseClick}>
+              <Button
+                size="xl"
+                onClick={handlePurchaseClick}
+                status={product.status === 'AVAILABLE' ? 'active' : 'disabled'}
+                disabled={product.status !== 'AVAILABLE'}
+              >
                 구매하기
               </Button>
             </div>
