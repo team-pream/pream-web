@@ -127,6 +127,7 @@ export default function Search() {
           <div css={itemList}>
             {data?.products.map((product: ProductListProduct) => {
               const isSoldOut = product.status === 'SOLD_OUT';
+              const isReserved = product.status === 'RESERVED';
               const price = product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); //천 단위 콤마
               return (
                 <div
@@ -141,6 +142,13 @@ export default function Search() {
                       <div css={soldOutOverlayStyle}>
                         <Text typo="body1" color={theme.colors.white}>
                           판매완료
+                        </Text>
+                      </div>
+                    )}
+                    {isReserved && (
+                      <div css={soldOutOverlayStyle}>
+                        <Text typo="body1" color={theme.colors.white}>
+                          예약 중
                         </Text>
                       </div>
                     )}
