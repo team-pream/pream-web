@@ -2,7 +2,7 @@ import { AppBarBack, MypageUploadImage } from '@/assets/icons';
 import { AppBar, Button, ChipRadioGroup, Dialog, Input, Layout, Text } from '@/components';
 import { useNavigate } from 'react-router-dom';
 import {
-  useGetUsersMeQuery,
+  useGetUsersProfileQuery,
   usePostUsersPetMutation,
   usePatchUsersPetMutation,
   useDeleteUsersPetMutation,
@@ -25,7 +25,7 @@ import theme from '@/styles/theme';
 export default function PetProfile() {
   const navigate = useNavigate();
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-  const { data } = useGetUsersMeQuery({ enabled: true });
+  const { data } = useGetUsersProfileQuery();
 
   const initialPetType = data?.pet?.petType || 'DOG';
   const [selectedPetType, setSelectedPetType] = useState<string>(initialPetType);

@@ -2,12 +2,12 @@ import { textBox } from './index.styles';
 import { Complete } from '@/assets/icons';
 import { useNavigate } from 'react-router-dom';
 import { Text, Button } from '@/components';
-import { useGetUsersMeQuery } from '@/queries';
+import { useGetUsersProfileQuery } from '@/queries';
 import theme from '@/styles/theme';
 
 export default function Completion() {
   const navigate = useNavigate();
-  const { data } = useGetUsersMeQuery({ enabled: true });
+  const { data } = useGetUsersProfileQuery();
   const handleCompleteButtonClick = () => {
     navigate('/', { replace: true });
   };

@@ -3,10 +3,9 @@ import { useQuery } from '@tanstack/react-query';
 import { useMutation } from '@tanstack/react-query';
 import {
   deleteUsersPet,
-  getUsersMe,
+  getUsersProfile,
   patchUsersOnboarding,
   patchUsersPet,
-  postUserPet,
   postUsersCheckNickname,
   patchUsersAddress,
   patchUsersMe,
@@ -16,7 +15,6 @@ import {
   GetUsersMeResponse,
   PatchAuthOnboardingBody,
   PatchUsersMeBody,
-  PostUserPetBody,
   PostUsersCheckNicknameBody,
   PatchUsersAddressBody,
 } from '@/types';
@@ -35,32 +33,16 @@ export const usePostUsersCheckNicknameMutation = (onSuccess: () => void) => {
   });
 };
 
-// TODO: User와 Pet 분리
-export const useUserPetMutation = (onSuccess: () => void) => {
-  return useMutation({
-    mutationKey: QUERY_KEYS.POST_PETS_PROFILE,
-    mutationFn: async (body: PostUserPetBody) => {
-      try {
-        return await postUserPet(body);
-      } catch {
-        throw new Error('반려동물 정보를 등록하는 데 실패했습니다.');
-      }
-    },
-    onSuccess,
-  });
-};
-
-export const useGetUsersMeQuery = ({ enabled }: { enabled: boolean }) => {
+export const useGetUsersProfileQuery = () => {
   return useQuery<GetUsersMeResponse, Error>({
     queryKey: QUERY_KEYS.GET_USERS_ME,
     queryFn: async () => {
       try {
-        return await getUsersMe();
+        return await getUsersProfile();
       } catch {
         throw new Error('유저 정보를 가져오는 데 실패했습니다.');
       }
     },
-    enabled,
   });
 };
 

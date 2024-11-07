@@ -14,7 +14,7 @@ import { Text } from '@/components';
 import { ProductsDetailOption } from '@/assets/icons';
 import { ProductDetail } from '@/pages/products/pages/detail/types';
 import theme from '@/styles/theme';
-import { useGetUsersMeQuery } from '@/queries/users';
+import { useGetUsersProfileQuery } from '@/queries/users';
 import { formatTimeDifference } from '../../utils';
 
 interface Props {
@@ -28,7 +28,7 @@ const CONDITION_LABELS: { [key: string]: string } = {
 };
 export default function ProductInfo({ onOptionClick, product }: Props) {
   const timeDifference = formatTimeDifference(product.createdAt);
-  const { data: user } = useGetUsersMeQuery({ enabled: true });
+  const { data: user } = useGetUsersProfileQuery();
 
   return (
     <div css={wrapper}>

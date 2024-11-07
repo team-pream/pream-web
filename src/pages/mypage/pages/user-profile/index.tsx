@@ -3,7 +3,7 @@ import { AppBar, Layout, Text, Input, Button, ActionSheet } from '@/components';
 import { AppBarBack } from '@/assets/icons';
 import { useNavigate } from 'react-router-dom';
 import {
-  useGetUsersMeQuery,
+  useGetUsersProfileQuery,
   usePatchUsersMeMutation,
   usePostUsersCheckNicknameMutation,
 } from '@/queries/users';
@@ -56,7 +56,7 @@ function formatPhone(phone: string) {
 
 export default function UserProfile() {
   const navigate = useNavigate();
-  const { data } = useGetUsersMeQuery({ enabled: true });
+  const { data } = useGetUsersProfileQuery();
   const [nickname, setNickname] = useState(data?.nickname || '');
   const [phone, setPhone] = useState(formatPhone(data?.phone || '')); // 여기서 하이픈 포함된 상태로 초기화
   const [bank, setBank] = useState(data?.bankAccount?.bank || '');

@@ -8,11 +8,6 @@ export interface PostUsersCheckNicknameBody {
   nickname: string;
 }
 
-export interface PostUserPetBody {
-  name: string;
-  petType: string;
-}
-
 export interface GetUsersMeResponse {
   id: string;
   username: string;
