@@ -79,12 +79,14 @@ api.interceptors.response.use(
       } catch (e) {
         if (e.response.data.errorCode === ERROR_CODE.REFRESH_TOKEN_EXPIRED) {
           alert('로그인 시간이 지났어요. 다시 로그인 해주세요');
-          window.location.href = ROUTE_PATHS.LOGIN; // 로그인 페이지로 redirect
+          window.location.href = ROUTE_PATHS.LOGIN;
+          localStorage.clear();
         }
       }
     } else if (errorCode == ERROR_CODE.AUTHORIZATION_HEADER_MISSING) {
       alert('로그인 시간이 지났어요. 다시 로그인 해주세요.');
       window.location.href = ROUTE_PATHS.LOGIN;
+      localStorage.clear();
     }
     return Promise.reject(error);
   }
