@@ -97,6 +97,7 @@ export default function Search() {
             onChange={handleChangeKeyword}
             onKeyDown={handleKeyDown}
             onClick={handleSearchIconClick}
+            autoFocus
           />
         }
       />

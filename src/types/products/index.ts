@@ -65,7 +65,7 @@ export interface GetProductsDetailResponse {
     contact: string;
     bankAccount: {
       bank: BANK;
-      bankAccount: string;
+      accountNumber: string;
     };
   };
 
@@ -95,10 +95,8 @@ export interface ProductForm {
   categoryId: number;
   title: string;
   description: string;
-  bankAccount: {
-    bank: BANK_KR;
-    bankAccount: string;
-  };
+  bank: BANK_KR;
+  accountNumber: string;
   contact: string;
 }
 
@@ -112,10 +110,8 @@ export const convertProductsDetailToProductsUploadBody = (
     categoryId: data.category.id,
     title: data.title,
     description: data.description,
-    bankAccount: {
-      bank: BANKS.find((bank) => bank.value === data.seller.bankAccount.bank)?.label || '국민은행',
-      bankAccount: data.seller.bankAccount.bankAccount,
-    },
+    bank: BANKS.find((bank) => bank.value === data.seller.bankAccount.bank)?.label || '국민은행',
+    accountNumber: data.seller.bankAccount.accountNumber,
     contact: data.seller.contact,
   };
 };

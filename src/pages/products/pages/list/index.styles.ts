@@ -56,7 +56,6 @@ export const item = css`
 export const imageBox = css`
   position: relative;
   cursor: pointer;
-  aspect-ratio: 1;
 `;
 
 export const image = css`
@@ -64,6 +63,7 @@ export const image = css`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  aspect-ratio: 1/1;
 `;
 
 export const opacityBox = css`

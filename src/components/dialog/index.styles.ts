@@ -24,6 +24,8 @@ export const text = css`
   align-items: center;
   justify-content: center;
   gap: 17px;
+  white-space: pre-line;
+  text-align: center;
 `;
 
 export const buttonWrapper = css`

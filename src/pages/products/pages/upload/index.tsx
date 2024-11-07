@@ -23,12 +23,12 @@ export default function Upload() {
     formData.append('description', form.description);
     formData.append('contact', form.contact);
     form.images.forEach((image) => formData.append('images', image));
-    if (form.bankAccount) {
+    if (form.accountNumber) {
       formData.append(
         'bankAccount',
         JSON.stringify({
-          bank: form.bankAccount.bank,
-          bankAccount: form.bankAccount.bankAccount,
+          bank: form.bank,
+          bankAccount: form.accountNumber,
         })
       );
     } else {

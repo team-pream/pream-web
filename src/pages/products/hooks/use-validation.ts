@@ -47,10 +47,11 @@ export default function useValidation() {
         required: '은행을 선택해 주세요',
       },
 
-      bankAccount: {
+      accountNumber: {
         required: '계좌번호를 입력해 주세요',
         validate: (value: string) => {
-          if (!/^\d{1,20}$/.test(value)) return '숫자만 입력 가능해요';
+          if (value?.length > 20) return '계좌번호는 최대 20자까지 입력 가능해요';
+          if (!/^\d{1,20}$/.test(value)) return '계좌번호는 숫자만 입력 가능해요';
           return true;
         },
       },

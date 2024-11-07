@@ -16,7 +16,7 @@ export const ROUTE_PATHS = {
   ORDER_FAILURE: '/orders/failure',
 
   MYPAGE: '/mypage',
-  MYPAGE_INFO: '/mypage/user/edit',
+  MYPAGE_INFO: '/mypage/users/edit',
   MYPAGE_ADDRESS: '/mypage/address/edit',
   MYPAGE_SALES_HISTORY: '/mypage/sales-list',
   MYPAGE_PURCHASE_HISTORY: '/mypage/purchase-list',
