@@ -23,7 +23,7 @@ export const Back: Story = {
 export const SearchInput: Story = {
   args: {
     prefix: <AppBarBack height="24px" cursor="pointer" />,
-    suffix: <SearchBar />,
+    suffix: <SearchBar autoFocus />,
   },
 };
 

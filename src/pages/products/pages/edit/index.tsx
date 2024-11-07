@@ -29,8 +29,8 @@ export default function Edit() {
     formData.append(
       'bankAccount',
       JSON.stringify({
-        bank: BANKS.find((bank) => bank.label === form.bankAccount.bank)?.value,
-        bankAccount: form.bankAccount.bankAccount,
+        bank: BANKS.find((bank) => bank.label === form.bank)?.value,
+        accountNumber: form.accountNumber,
       })
     );
 

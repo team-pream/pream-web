@@ -46,6 +46,7 @@ export const image = css`
   height: 90px;
   background-color: gray;
   border-radius: 13px;
+  object-fit: cover;
 `;
 
 export const textContainer = css`

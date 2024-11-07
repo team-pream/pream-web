@@ -4,7 +4,7 @@ import { GNB, FAB } from '@/components';
 import AddressList from './components/address-list';
 import { useState, useEffect } from 'react';
 import AddressForm from './components/address-form';
-import { useGetUsersMeQuery } from '@/queries/users';
+import { useGetUsersProfileQuery } from '@/queries';
 import { PatchUsersAddressBody } from '@/types';
 import { useNavigate } from 'react-router-dom';
 import { Dialog } from '@/components';
@@ -19,7 +19,7 @@ interface AddressData {
 
 export default function Address() {
   const [page, setPage] = useState<PageState>('list');
-  const { data, refetch } = useGetUsersMeQuery(); // refetch 추가
+  const { data, refetch } = useGetUsersProfileQuery(); // refetch 추가
   const [userData, setUserData] = useState<AddressData | null>(null);
   const [isCancelDialogOpen, setIsCancelDialogOpen] = useState<boolean>(false); // 추가
   const navigate = useNavigate();

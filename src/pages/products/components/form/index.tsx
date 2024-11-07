@@ -61,7 +61,7 @@ export default function Form({ defaultForm, onSubmit, isSuccess, onChangeDialog 
 
   const { data: categories } = useGetCategoriesQuery();
   const defaultValues = defaultForm && convertProductsDetailToProductsUploadBody(defaultForm);
-
+  console.log(defaultValues);
   const {
     handleSubmit,
     control,
@@ -242,16 +242,16 @@ export default function Form({ defaultForm, onSubmit, isSuccess, onChangeDialog 
 
           <Info title="판매 정산 계좌">
             <Controller
-              name="bankAccount.bank"
+              name="bank"
               control={control}
               rules={validationRules.bank}
-              defaultValue={defaultValues?.bankAccount?.bank}
+              defaultValue={defaultValues?.bank}
               render={({ field }) => (
                 <Input
-                  id="bankAccount.bank"
+                  id="bank"
                   label="은행"
                   type="button"
-                  defaultValue={defaultValues?.bankAccount?.bank}
+                  defaultValue={defaultValues?.bank}
                   spellCheck={false}
                   onClick={() => setIsBankActionSheetOpen(true)}
                   {...field}
@@ -260,17 +260,18 @@ export default function Form({ defaultForm, onSubmit, isSuccess, onChangeDialog 
             />
 
             <Controller
-              name="bankAccount.bankAccount"
+              name="accountNumber"
               control={control}
-              rules={validationRules.bankAccount}
-              defaultValue={defaultValues?.bankAccount?.bankAccount}
+              rules={validationRules.accountNumber}
+              defaultValue={defaultValues?.accountNumber}
               render={({ field }) => (
                 <Input
-                  id="bank.bankAccount.bankAccount"
+                  id="bankAccount"
                   label="계좌번호"
                   placeholder="계좌번호를 입력해 주세요"
-                  defaultValue={defaultValues?.bankAccount?.bankAccount}
+                  defaultValue={defaultValues?.accountNumber}
                   spellCheck={false}
+                  maxLength={20}
                   {...field}
                 />
               )}
@@ -292,6 +293,7 @@ export default function Form({ defaultForm, onSubmit, isSuccess, onChangeDialog 
                   placeholder="원하는 연락 수단을 입력해 주세요"
                   defaultValue={defaultValues?.contact}
                   spellCheck={false}
+                  maxLength={20}
                   {...field}
                 />
               )}
@@ -308,10 +310,10 @@ export default function Form({ defaultForm, onSubmit, isSuccess, onChangeDialog 
 
       {isBankActionSheetOpen && (
         <Controller
-          name="bankAccount.bank"
+          name="bank"
           control={control}
           rules={validationRules.bank}
-          defaultValue={defaultValues?.bankAccount?.bank}
+          defaultValue={defaultValues?.bank}
           render={({ field: { onChange } }) => (
             <ActionSheet
               menus={[...BANKS]}

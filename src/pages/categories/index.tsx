@@ -49,6 +49,7 @@ export default function Categories() {
             onChange={handleChangeKeyword}
             onKeyDown={handleKeyDown}
             onClick={handleSearchIconClick}
+            autoFocus
           />
         }
       />
