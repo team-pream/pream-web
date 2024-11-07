@@ -18,6 +18,7 @@ export const addressFormWrapper = css`
 export const defaultWrapper = css`
   width: 90%;
   margin: 0 auto;
+  padding: 20px 0 0 0;
 `;
 
 export const buttonWrapper = css`

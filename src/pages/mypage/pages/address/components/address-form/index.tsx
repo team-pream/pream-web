@@ -11,7 +11,7 @@ import {
   formTagStyle,
   inputDetailWrapper,
 } from './insex.styles';
-import { patchUsersAddress } from '@/api';
+import { usePatchUsersAddressMutation } from '@/queries';
 
 interface AddressData {
   roadAddress: string;
@@ -29,7 +29,6 @@ interface AddressFormProps {
 const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
   const [roadAddress, setRoadAddress] = useState(initialData?.roadAddress || '');
   const [jibunAddress, setJibunAddress] = useState(initialData?.jibunAddress || '');
-  const [zonecode, setZoneCode] = useState(initialData?.zonecode || '');
   const [detailAddress, setDetailAddress] = useState(initialData?.detailAddress || '');
   const [previousDetailAddress] = useState(initialData?.detailAddress || '');
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -40,6 +39,8 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
     latitude: number;
     longitude: number;
   } | null>(null);
+
+  const { mutateAsync: patchUsersAddress, isError } = usePatchUsersAddressMutation();
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -62,7 +63,7 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
     if (jibunAddress !== initialData?.jibunAddress || detailAddress !== previousDetailAddress) {
       setErrorMessage('');
     }
-  }, [jibunAddress, roadAddress, detailAddress, previousDetailAddress]);
+  }, [jibunAddress, roadAddress, detailAddress, previousDetailAddress, initialData?.jibunAddress]);
 
   const fetchCoordinates = async (address: string) => {
     try {
@@ -88,7 +89,6 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
         const buildingName = data.buildingName || '';
         setRoadAddress(data.roadAddress + buildingName);
         setJibunAddress(data.jibunAddress);
-        setZoneCode(data.zonecode);
         setShowDetailInput(true);
         fetchCoordinates(data.roadAddress);
       },
@@ -145,18 +145,13 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
 
   const handleDialogConfirm = async () => {
     try {
-      const addressData = {
+      await patchUsersAddress({
         roadAddress,
         detailAddress,
-        jibunAddress,
-        zonecode,
-      };
-
-      await patchUsersAddress(addressData);
+      });
       setIsDialogOpen(false);
       onSave(detailAddress);
-    } catch (error) {
-      console.error('Failed to update address:', error);
+    } catch {
       setErrorDialog(true);
     }
   };
@@ -229,7 +224,7 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
           onSecondaryAction={() => setIsDialogOpen(false)}
         />
       )}
-      {errorDialog && (
+      {errorDialog && isError && (
         <Dialog
           type="error"
           title="주소 수정 실패"

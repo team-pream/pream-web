@@ -39,7 +39,7 @@ export const defaultAddressTag = css`
 export const tagStyle = css`
   display: flexbox;
   width: 40px;
-  height: 15px;
+  height: 20px;
   background-color: ${colors.gray100};
   color: #626872;
   border-radius: 3px;
@@ -59,10 +59,11 @@ export const modifyButtonStyle = css`
 `;
 
 export const valueWrapper = css`
-  width: 315px;
   display: flex;
+  align-items: center;
   gap: 2px;
 `;
+
 export const tagValueWrapper = css`
   display: flex;
   margin: 6px 0 8px;

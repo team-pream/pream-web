@@ -12,6 +12,7 @@ import {
 import { Text } from '@/components';
 import { PatchUsersAddressBody } from '@/types';
 import { EmotionalPetIcon } from '@/assets/icons';
+import { formatPhoneNumber } from '@/utils/format';
 
 interface AddressListProps {
   userData: {
@@ -43,7 +44,7 @@ const AddressList = ({ userData, onEditClick }: AddressListProps) => {
               <Text typo="body3">주소</Text>
             </div>
             <div css={totalAddressWrapper}>
-              <div css={[valueWrapper, { flexDirection: 'column' }]}>
+              <div css={valueWrapper}>
                 <Text typo="body5">{userData.address.roadAddress || '주소 없음'}</Text>
                 <Text typo="body5">{userData.address.detailAddress || '상세 주소 없음'}</Text>
               </div>
@@ -54,7 +55,7 @@ const AddressList = ({ userData, onEditClick }: AddressListProps) => {
               <Text typo="body3">휴대폰</Text>
             </div>
             <div css={valueWrapper}>
-              <Text typo="body5">{userData.phone || '연락처 없음'}</Text>
+              <Text typo="body5">{formatPhoneNumber(userData.phone) || '연락처 없음'}</Text>
             </div>
           </div>
         </div>
