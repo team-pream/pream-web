@@ -12,10 +12,10 @@ export const usePostPaymentsTossMutation = () => {
   });
 };
 
-export const usePostPaymentsCancelMutation = (orderId: string) => {
+export const usePostPaymentsCancelMutation = () => {
   return useMutation({
-    mutationKey: QUERY_KEYS.POST_PAYMENTS_CANCEL(orderId),
-    mutationFn: async (body: PostPaymentsCancelBody) => {
+    mutationKey: QUERY_KEYS.POST_PAYMENTS_CANCEL,
+    mutationFn: async ({ orderId, body }: { orderId: string; body: PostPaymentsCancelBody }) => {
       return await postPaymentsCancel({ orderId, body });
     },
   });

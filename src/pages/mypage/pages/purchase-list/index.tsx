@@ -26,14 +26,14 @@ import {
 import { AppBarBack } from '@/assets/icons';
 import { useNavigate } from 'react-router-dom';
 import { AppBar, Layout, Text } from '@/components';
-import { useGetOrdersQuery } from '@/queries';
+import { useGetOrdersQuery, usePostPaymentsCancelMutation } from '@/queries';
 
 export default function PurchaseList() {
   // 각 아이템의 열림 상태를 배열로 관리
   const [isOpen, setIsOpen] = useState<boolean[]>([]);
-  const { data } = useGetOrdersQuery();
-  // const { mutate: postOrdersConfirm } = usePostOrdersConfirmMutation(data.);
-  // const { mutateAsync: postPaymentsCancel } = usePostPaymentsCancelMutation(orderId);
+  const { data: orders } = useGetOrdersQuery();
+
+  const { mutate: postPaymentsCancel } = usePostPaymentsCancelMutation();
 
   const handleArrowToggle = (id: number) => {
     setIsOpen((prev) => {
@@ -44,6 +44,10 @@ export default function PurchaseList() {
   };
 
   const navigate = useNavigate();
+
+  const handleOrderCancel = (orderId: string) => {
+    postPaymentsCancel({ orderId, body: {} });
+  };
 
   return (
     <Layout>
@@ -61,22 +65,22 @@ export default function PurchaseList() {
         <div css={mainTitleBox}>
           <Text typo="title1">구매내역</Text>
         </div>
-        {data?.map((listData) => (
-          <div css={itemWrapper} key={listData.id}>
+        {orders?.map((order) => (
+          <div css={itemWrapper} key={order.id}>
             <div css={item}>
-              <img src={listData.product.images} css={image} />
+              <img src={order.product.images} css={image} />
               <div css={content}>
                 <div css={topBox}>
-                  <div css={textBox} onClick={() => navigate(`/products/${listData.product.id}`)}>
+                  <div css={textBox} onClick={() => navigate(`/products/${order.product.id}`)}>
                     <Text typo="body2" css={title}>
-                      {listData.product.title}
+                      {order.product.title}
                     </Text>
                     <Text typo="subtitle1" css={price}>
-                      {listData.paymentAmount.toLocaleString()}원
+                      {order.paymentAmount.toLocaleString()}원
                     </Text>
                   </div>
                   <Text typo="body1" css={date}>
-                    {listData.createdAt.substring(2, 10).replace(/-/g, '.')}
+                    {order.createdAt.substring(2, 10).replace(/-/g, '.')}
                   </Text>
                 </div>
                 <div css={buttonContainer}>
@@ -84,12 +88,12 @@ export default function PurchaseList() {
                     <Text
                       typo="body3"
                       css={purchaseInfoButton}
-                      onClick={() => handleArrowToggle(listData.product.id)}
+                      onClick={() => handleArrowToggle(order.product.id)}
                     >
                       주문 정보 보기
                     </Text>
                   </button>
-                  <button css={button}>
+                  <button css={button} onClick={() => handleOrderCancel(order.id)}>
                     <Text typo="body3" css={purchaseButton}>
                       주문 취소
                     </Text>
@@ -102,7 +106,7 @@ export default function PurchaseList() {
                 </div>
               </div>
             </div>
-            <div css={hiddenBlock({ isOpen: isOpen[listData.product.id] || false })}>
+            <div css={hiddenBlock({ isOpen: isOpen[order.product.id] || false })}>
               <section css={shipBlock}>
                 <Text typo="subtitle1" css={blockTitle}>
                   배송 정보
@@ -114,12 +118,12 @@ export default function PurchaseList() {
                     <Text typo="subtitle2">휴대폰번호</Text>
                   </div>
                   <div css={infoContent}>
-                    <Text typo="body4">{listData.receiverName}</Text>
+                    <Text typo="body4">{order.receiverName}</Text>
                     <Text typo="body4">
-                      {listData.shippingAddress.roadAddress}
-                      {` ${listData.shippingAddress.detailAddress}`}
+                      {order.shippingAddress.roadAddress}
+                      {` ${order.shippingAddress.detailAddress}`}
                     </Text>
-                    <Text typo="body4">{listData.phone}</Text>
+                    <Text typo="body4">{order.phone}</Text>
                   </div>
                 </div>
               </section>
@@ -133,8 +137,8 @@ export default function PurchaseList() {
                     <Text typo="subtitle2">결제 금액</Text>
                   </div>
                   <div css={infoContent}>
-                    <Text typo="body4">{listData.paymentMethod}</Text>
-                    <Text typo="body4">{listData.paymentAmount.toLocaleString()}원</Text>
+                    <Text typo="body4">{order.paymentMethod}</Text>
+                    <Text typo="body4">{order.paymentAmount.toLocaleString()}원</Text>
                   </div>
                 </div>
               </section>

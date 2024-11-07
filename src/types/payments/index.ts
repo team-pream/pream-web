@@ -35,7 +35,7 @@ interface Product {
 }
 
 export interface PostPaymentsCancelBody {
-  cancelReason: string;
+  cancelReason?: string;
 }
 
 export interface PostPaymentsCancelResponse {
