@@ -23,7 +23,7 @@ export default function ProductList({ products, title }: Props) {
     <>
       <Text typo="subtitle1">{title}</Text>
       <div css={itemList}>
-        {products.map((product) => (
+        {products?.map((product) => (
           <div key={product.id} css={item} onClick={() => navigate(`/products/${product.id}`)}>
             <div css={imageBox}>
               <div css={opacityBox} />
