@@ -16,8 +16,6 @@ import { usePatchUsersAddressMutation } from '@/queries';
 interface AddressData {
   roadAddress: string;
   detailAddress: string;
-  jibunAddress: string;
-  zonecode: string;
   buildingName?: string;
 }
 
@@ -28,7 +26,6 @@ interface AddressFormProps {
 
 const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
   const [roadAddress, setRoadAddress] = useState(initialData?.roadAddress || '');
-  const [jibunAddress, setJibunAddress] = useState(initialData?.jibunAddress || '');
   const [detailAddress, setDetailAddress] = useState(initialData?.detailAddress || '');
   const [previousDetailAddress] = useState(initialData?.detailAddress || '');
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -60,10 +57,10 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
   }, [roadAddress]);
 
   useEffect(() => {
-    if (jibunAddress !== initialData?.jibunAddress || detailAddress !== previousDetailAddress) {
+    if (detailAddress !== previousDetailAddress) {
       setErrorMessage('');
     }
-  }, [jibunAddress, roadAddress, detailAddress, previousDetailAddress, initialData?.jibunAddress]);
+  }, [roadAddress, detailAddress, previousDetailAddress]);
 
   const fetchCoordinates = async (address: string) => {
     try {
@@ -88,7 +85,6 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
       oncomplete: (data: AddressData) => {
         const buildingName = data.buildingName || '';
         setRoadAddress(data.roadAddress + buildingName);
-        setJibunAddress(data.jibunAddress);
         setShowDetailInput(true);
         fetchCoordinates(data.roadAddress);
       },
@@ -105,18 +101,17 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
           roadAddress = jibunAddress;
         }
         setRoadAddress(roadAddress);
-        setJibunAddress(jibunAddress);
         setMapCoordinates({ latitude: lat, longitude: lng });
       }
     });
   };
 
-  const validateDetailAddress = (detail: string, jibun: string) => {
+  const validateDetailAddress = (detail: string, road: string) => {
     if (!detail) {
       return '상세 주소를 입력해 주세요.';
     } else if (detail.length > 30) {
       return '상세 주소는 30자 이하여야 합니다.';
-    } else if (detail === previousDetailAddress && jibun === initialData?.jibunAddress) {
+    } else if (detail === previousDetailAddress && road === initialData?.roadAddress) {
       return '주소가 이전과 동일해요';
     } else {
       return '';
@@ -130,12 +125,12 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
       setDetailAddress(value);
     }
 
-    const validationMessage = validateDetailAddress(value, jibunAddress);
+    const validationMessage = validateDetailAddress(value, roadAddress);
     setErrorMessage(validationMessage);
   };
 
   const handleSaveClick = () => {
-    const validationMessage = validateDetailAddress(detailAddress, jibunAddress);
+    const validationMessage = validateDetailAddress(detailAddress, roadAddress);
     if (!validationMessage) {
       setIsDialogOpen(true);
     } else {
@@ -177,19 +172,7 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
             <div css={formTagStyle}>
               <Text typo="body3">도로명</Text>
             </div>
-            {roadAddress === jibunAddress ? (
-              <Text typo="subtitle2">도로명 주소가 존재하지 않아요</Text>
-            ) : (
-              <Text typo="subtitle2">{roadAddress}</Text>
-            )}
-          </div>
-        )}
-        {jibunAddress && (
-          <div css={containTagWrapper}>
-            <div css={formTagStyle}>
-              <Text typo="body3">지번</Text>
-            </div>
-            <Text typo="body4">{jibunAddress}</Text>
+            <Text typo="subtitle2">{roadAddress}</Text>
           </div>
         )}
         {showDetailInput && (
@@ -202,7 +185,7 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
                 maxLength={30}
                 errorMessage={errorMessage}
                 onChange={handleDetailAddressChange}
-                onBlur={() => setErrorMessage(validateDetailAddress(detailAddress, jibunAddress))}
+                onBlur={() => setErrorMessage(validateDetailAddress(detailAddress, roadAddress))}
               />
             </div>
             <div css={buttonWrapper}>
