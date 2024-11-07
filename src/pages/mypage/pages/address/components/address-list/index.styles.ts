@@ -1,39 +1,46 @@
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
-
-export const addressListWrapper = css`
+import { colors } from '@/styles/colors';
+export const wrapper = css`
   width: 90%;
   margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  color: ${colors.gray300};
+  gap: 26px;
   height: calc(100vh - ${theme.size.appBarHeight} - ${theme.size.gnbHeight});
 `;
 
-export const addressWrapper = css`
+export const addressListWrapper = css`
   width: 90%;
   margin: 0 auto;
-  border: 1px solid ${theme.colors.gray200};
-  padding: 4%;
+  border: 1px solid ${colors.gray200};
+  padding: 2.5% 4%;
   flex-direction: column;
   border-radius: 10px;
 `;
 
+export const addressHeaderWrapper = css`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const defaultAddressTag = css`
-  /* width: 70px; */
   padding: 2px 6px;
   text-align: center;
-  background-color: ${theme.colors.green100};
+  background-color: ${colors.green100};
   color: ${theme.colors.green200};
   border-radius: 3px;
   display: flex;
-  margin-bottom: 6px;
+  margin-left: 10px;
 `;
 export const tagStyle = css`
   display: flexbox;
-  width: 45px;
-  height: 15px;
-  background-color: ${theme.colors.gray100};
+  width: 40px;
+  height: 20px;
+  background-color: ${colors.gray100};
   color: #626872;
   border-radius: 3px;
   display: flex;
@@ -41,4 +48,27 @@ export const tagStyle = css`
   align-items: center;
   justify-content: center;
   margin-right: 10px;
+`;
+export const modifyButtonStyle = css`
+  cursor: pointer;
+  display: flex;
+  color: ${colors.green200};
+  :hover {
+    color: ${colors.green300};
+  }
+`;
+
+export const valueWrapper = css`
+  display: flex;
+  align-items: center;
+  gap: 2px;
+`;
+
+export const tagValueWrapper = css`
+  display: flex;
+  margin: 6px 0 8px;
+`;
+export const totalAddressWrapper = css`
+  display: flex;
+  justify-content: space-between;
 `;

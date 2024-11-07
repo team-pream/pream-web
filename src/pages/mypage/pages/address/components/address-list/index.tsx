@@ -1,61 +1,72 @@
-import { addressListWrapper, addressWrapper, defaultAddressTag, tagStyle } from './index.styles';
+import {
+  addressListWrapper,
+  wrapper,
+  addressHeaderWrapper,
+  defaultAddressTag,
+  tagStyle,
+  modifyButtonStyle,
+  valueWrapper,
+  tagValueWrapper,
+  totalAddressWrapper,
+} from './index.styles';
 import { Text } from '@/components';
-import { colors } from '@/styles/colors';
+import { PatchUsersAddressBody } from '@/types';
+import { EmotionalPetIcon } from '@/assets/icons';
+import { formatPhoneNumber } from '@/utils/format';
 
-interface addressListProps {
-  address: string;
-  // onEditClick: () => void;
+interface AddressListProps {
+  userData: {
+    address: PatchUsersAddressBody;
+    username: string;
+    phone: string;
+  } | null;
+  onEditClick: () => void;
 }
-const AddressList = ({ address }: addressListProps) => {
+
+const AddressList = ({ userData, onEditClick }: AddressListProps) => {
   return (
     <div>
-      {address.length === 0 ? (
+      {userData ? (
         <div css={addressListWrapper}>
-          <div>등록된 주소가 없습니다.</div>
-        </div>
-      ) : (
-        <div css={addressWrapper}>
-          <div css={{ display: 'flex', justifyContent: 'space-between' }}>
-            <div css={{ display: 'flex', gap: '9px' }}>
-              <Text typo="subtitle2">홍길동</Text>
+          <div css={addressHeaderWrapper}>
+            <div css={tagValueWrapper}>
+              <Text typo="subtitle2">{userData.username}</Text>
               <div css={defaultAddressTag}>
                 <Text typo="body3">기본 배송지</Text>
               </div>
             </div>
-            <div
-              css={{
-                cursor: 'pointer',
-                display: 'flex',
-                color: `${colors.green300}`,
-              }}
-            >
+            <div css={modifyButtonStyle} onClick={onEditClick}>
               <Text typo="body3">변경</Text>
             </div>
           </div>
-
-          <div css={{ display: 'flex', margin: '6px 0 8px' }}>
+          <div css={tagValueWrapper}>
             <div css={tagStyle}>
               <Text typo="body3">주소</Text>
             </div>
-            <div css={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div css={{ display: 'flex', flexDirection: 'column', gap: '2px', width: '315px' }}>
-                <Text typo="body5">서울특별시 강남구 선릉로 428 멀티캠퍼스</Text>
-                <Text typo="body5">4층 402호</Text>
+            <div css={totalAddressWrapper}>
+              <div css={valueWrapper}>
+                <Text typo="body5">{userData.address.roadAddress || '주소 없음'}</Text>
+                <Text typo="body5">{userData.address.detailAddress || '상세 주소 없음'}</Text>
               </div>
             </div>
           </div>
-          <div css={{ display: 'flex' }}>
+          <div css={tagValueWrapper}>
             <div css={tagStyle}>
               <Text typo="body3">휴대폰</Text>
             </div>
-
-            <div css={{ display: 'flex', flexDirection: 'column', width: '100%', gap: '2px' }}>
-              <Text typo="body5">01012345678</Text>
+            <div css={valueWrapper}>
+              <Text typo="body5">{formatPhoneNumber(userData.phone) || '연락처 없음'}</Text>
             </div>
           </div>
+        </div>
+      ) : (
+        <div css={wrapper}>
+          <EmotionalPetIcon width="67px" />
+          <Text typo="body2">등록된 주소가 없어요</Text>
         </div>
       )}
     </div>
   );
 };
+
 export default AddressList;
