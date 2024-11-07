@@ -83,8 +83,7 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
   const handlePostcodeSearch = () => {
     new window.daum.Postcode({
       oncomplete: (data: AddressData) => {
-        const buildingName = data.buildingName || '';
-        setRoadAddress(data.roadAddress + buildingName);
+        setRoadAddress(data.roadAddress + ' ');
         setShowDetailInput(true);
         fetchCoordinates(data.roadAddress);
       },

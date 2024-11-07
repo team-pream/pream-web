@@ -45,7 +45,7 @@ const AddressList = ({ userData, onEditClick }: AddressListProps) => {
             </div>
             <div css={totalAddressWrapper}>
               <div css={valueWrapper}>
-                <Text typo="body5">{userData.address.roadAddress || '주소 없음'}</Text>
+                <Text typo="body5">{userData.address.roadAddress || '주소 없음'}</Text>{' '}
                 <Text typo="body5">{userData.address.detailAddress || '상세 주소 없음'}</Text>
               </div>
             </div>
