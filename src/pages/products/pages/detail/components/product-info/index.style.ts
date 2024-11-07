@@ -31,6 +31,17 @@ export const infoWrapper = css`
   gap: 8px;
 `;
 
+export const infoContentWrapper = css`
+  display: flex;
+  gap: 20px;
+`;
+
+export const infoContent = css`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
 export const infoRow = css`
   display: flex;
 `;
