@@ -15,12 +15,8 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { AppBar, Layout, Text } from '@/components';
 import theme from '@/styles/theme';
-<<<<<<< HEAD
-import { useGetProductsSalesListQuery } from '@/queries';
-=======
 import { useGetProductsSalesListQuery } from '@/queries/products';
 import { MoonLoader } from 'react-spinners';
->>>>>>> 81be93e (feat: 상품 목록, 판매내역 페이지 로더 적용)
 
 export default function SalesList() {
   const navigate = useNavigate();
