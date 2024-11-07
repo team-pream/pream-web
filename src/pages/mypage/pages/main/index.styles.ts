@@ -93,6 +93,7 @@ export const plusWrapper = css`
   border-radius: 50%;
   background-color: ${theme.colors.gray100};
   margin: 25px 0 14px 0;
+  cursor: pointer;
 `;
 
 export const plusIcon = css`
@@ -116,12 +117,13 @@ export const editClear = css`
   align-items: center;
   text-align: center;
   background-color: ${theme.colors.grayOpacity300};
-  width: 90%;
+  width: 100%;
   height: 36px;
   gap: 5px;
-  padding: 10px;
+  padding: 0 10px;
   border-radius: 6px;
   position: fixed;
   bottom: 12%;
-  z-index: 1000;
+  max-width: ${theme.size.maxWidth};
+  z-index: ${theme.zIndex.gnb};
 `;
