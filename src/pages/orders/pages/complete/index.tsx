@@ -24,6 +24,7 @@ import { useEffect, useState } from 'react';
 import { usePostPaymentsTossMutation } from '@/queries';
 import { PostPaymentsTossResponse } from '@/types';
 import { formatPhoneNumber } from '@/utils/format';
+import { PAYMENT_METHODS } from '@/constants/payments';
 
 export default function OrderComplete() {
   const navigate = useNavigate();
@@ -111,7 +112,10 @@ export default function OrderComplete() {
                 <Text typo="subtitle2">결제 금액</Text>
               </div>
               <div css={infoContent}>
-                <Text typo="body4">{order.paymentMethod}</Text>
+                <Text typo="body4">
+                  {order.detailPaymentMethod ??
+                    PAYMENT_METHODS[order.paymentMethod as keyof typeof PAYMENT_METHODS]}
+                </Text>
                 <Text typo="body4">{`${order.paymentAmount.toLocaleString()}원`}</Text>
               </div>
             </div>

@@ -12,6 +12,7 @@ export interface PostPaymentsTossResponse {
   status: string;
   paymentStatus: string;
   paymentMethod: string;
+  detailPaymentMethod: string;
   shippingAddress: ShippingAddress;
   phone: string;
   productId: number;
