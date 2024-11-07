@@ -24,6 +24,7 @@ export const imageIcon = css`
   width: 200px;
   height: 200px;
   border-radius: 50%;
+  object-fit: cover;
 `;
 
 export const uploadIconWrapper = css`
@@ -62,7 +63,7 @@ export const radioStyle = css`
 export const hr = css`
   margin-top: 19px;
   margin-bottom: 0;
-  border-color: ${theme.colors.black};
+  border: 2px solid ${theme.colors.black};
 `;
 
 export const fixedButtonWrapper = css`

@@ -42,7 +42,7 @@ export default function Main() {
     }
   }, []);
 
-  const { data } = useGetUsersMeQuery(isLogin); //로그인 상태(isLogin=true)일때만 실행
+  const { data } = useGetUsersMeQuery({ enabled: isLogin }); //로그인 상태(isLogin=true)일때만 실행
   const petInfo = data?.pet; //대표 펫 정보 하나만 조회
   const profileImage = petInfo?.image || 'images/petprofile.png';
 
@@ -65,14 +65,27 @@ export default function Main() {
   };
 
   const location = useLocation();
-  const [showUpdateMessage, setShowUpdateMessage] = useState(location.state?.editSuccess || false);
+  const [showUpdateMessage, setShowUpdateMessage] = useState(location.state?.editSuccess);
 
   useEffect(() => {
     if (showUpdateMessage) {
-      const timer = setTimeout(() => setShowUpdateMessage(false), 3000);
+      const timer = setTimeout(() => setShowUpdateMessage(null), 3000);
       return () => clearTimeout(timer);
     }
   }, [showUpdateMessage]);
+
+  const getMessage = () => {
+    switch (showUpdateMessage) {
+      case 'registered':
+        return '프로필이 등록되었습니다.';
+      case 'updated':
+        return '프로필이 수정되었습니다.';
+      case 'deleted':
+        return '프로필이 삭제되었습니다.';
+      default:
+        return '';
+    }
+  };
 
   return (
     <Layout>
@@ -179,7 +192,7 @@ export default function Main() {
           <div css={editClear}>
             <Clear width="16px" />
             <Text typo="body4" color={theme.colors.white}>
-              프로필이 수정되었습니다.
+              {getMessage()}
             </Text>
           </div>
         )}

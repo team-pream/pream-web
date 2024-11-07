@@ -44,7 +44,7 @@ const BANKS = [
 
 export default function UserProfile() {
   const navigate = useNavigate();
-  const { data } = useGetUsersMeQuery(true);
+  const { data } = useGetUsersMeQuery({ enabled: true });
   const [nickname, setNickname] = useState(data?.nickname || '');
   const [phone, setPhone] = useState(data?.phone || '');
   const [bank, setBank] = useState(data?.bankAccount?.bank || '');
@@ -56,7 +56,7 @@ export default function UserProfile() {
   const [accountNumberError, setAccountNumberError] = useState('');
 
   const { mutate: patchUsersMe } = usePatchUsersMeMutation(() => {
-    navigate('/mypage', { state: { editSuccess: true } });
+    navigate('/mypage', { state: { editSuccess: 'updated' } });
   });
 
   const { mutate: checkNicknameMutation } = usePostUsersCheckNicknameMutation(() => {
@@ -108,7 +108,6 @@ export default function UserProfile() {
     if (value.length > 13) {
       value = value.slice(0, 13);
     }
-
     setPhone(value); // 상태 업데이트
 
     // 유효성 검사
@@ -135,6 +134,17 @@ export default function UserProfile() {
   };
 
   const handleSubmit = () => {
+    // 닉네임이 변경되지 않았으면 중복 검사 없이 바로 저장
+    if (nickname === data?.nickname) {
+      patchUsersMe({
+        nickname,
+        phone: phone.replace(/-/g, ''),
+        bankAccount: { bank, accountNumber },
+      });
+      return;
+    }
+
+    // 닉네임 중복확인 체크 여부 확인
     if (isNicknameAvailable === null) {
       setNicknameError('중복확인을 진행해주세요.');
       return;
@@ -144,7 +154,13 @@ export default function UserProfile() {
       alert('입력값을 확인해주세요.');
       return;
     }
-    patchUsersMe({ nickname, phone, bankAccount: { bank, accountNumber } });
+
+    const sanitizedPhone = phone.replace(/-/g, '');
+    patchUsersMe({
+      nickname,
+      phone: sanitizedPhone,
+      bankAccount: { bank, accountNumber },
+    });
   };
 
   const handleBankSelect = (selectedBank: string) => {

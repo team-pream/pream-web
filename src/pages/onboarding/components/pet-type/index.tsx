@@ -21,7 +21,7 @@ interface PetTypeProps {
 }
 
 export default function PetType({ formData, setFormData, onNext, onSkip }: PetTypeProps) {
-  const { data } = useGetUsersMeQuery();
+  const { data } = useGetUsersMeQuery({ enabled: true });
   const isPetTypeValid = formData.petType !== null;
 
   return (

@@ -27,8 +27,9 @@ const CONDITION_LABELS: { [key: string]: string } = {
   NEW: '새상품',
 };
 export default function ProductInfo({ onOptionClick, product }: Props) {
-  const { data: user } = useGetUsersMeQuery();
   const timeDifference = formatTimeDifference(product.createdAt);
+  const { data: user } = useGetUsersMeQuery({ enabled: true });
+
   return (
     <div css={wrapper}>
       <section css={titleWrapper}>

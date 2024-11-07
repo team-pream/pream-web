@@ -7,7 +7,7 @@ import theme from '@/styles/theme';
 
 export default function Completion() {
   const navigate = useNavigate();
-  const { data } = useGetUsersMeQuery();
+  const { data } = useGetUsersMeQuery({ enabled: true });
   const handleCompleteButtonClick = () => {
     navigate('/', { replace: true });
   };

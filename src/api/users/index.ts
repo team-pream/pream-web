@@ -1,12 +1,10 @@
-import { api } from '@/api/api';
+import { api, formApi } from '@/api/api';
 import {
   PostUsersCheckNicknameBody,
-  PostUsersPetBody,
   PatchAuthOnboardingBody,
   GetUsersMeResponse,
   PatchUsersAddressBody,
   PatchUsersMeBody,
-  PatchUsersPetBody,
   PostUserPetBody,
 } from '@/types/users';
 
@@ -41,8 +39,8 @@ export const postUserPet = async (body: PostUserPetBody) => {
   return response.data;
 };
 
-export const patchUsersPet = async (body: PatchUsersPetBody) => {
-  const response = await api.patch('/users/pet', body);
+export const patchUsersPet = async (body: FormData) => {
+  const response = await formApi.patch('/users/pet', body);
   return response.data;
 };
 
@@ -51,7 +49,7 @@ export const deleteUsersPet = async () => {
   return response.data;
 };
 
-export const postUsersPet = async (body: PostUsersPetBody) => {
-  const response = await api.post('/users/pet', body);
+export const postUsersPet = async (body: FormData) => {
+  const response = await formApi.post('/users/pet', body);
   return response.data;
 };
