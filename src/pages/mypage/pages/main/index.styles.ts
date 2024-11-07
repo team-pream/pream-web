@@ -103,7 +103,7 @@ export const plusIcon = css`
 `;
 
 export const hr = css`
-  border: 2px solid ${theme.colors.black};
+  border: 1px solid ${theme.colors.black};
   margin: 10px 0 0 0;
 `;
 
