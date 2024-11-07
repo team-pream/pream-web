@@ -47,7 +47,7 @@ const handleResponseError = async (error, showDialog, originalRequest) => {
   ) {
     const refreshToken = localStorage.getItem('refresh');
     if (!refreshToken) {
-      showDialog('세션 만료', '로그인 시간이 지났어요.\n다시 로그인 해주세요.');
+      showDialog(null, '로그인이 필요한 페이지예요.');
       localStorage.clear();
       // window.location.href = ROUTE_PATHS.LOGIN;
       return Promise.reject(error);
@@ -75,7 +75,7 @@ const handleResponseError = async (error, showDialog, originalRequest) => {
       }
     }
   } else if (errorCode === ERROR_CODE.AUTHORIZATION_HEADER_MISSING) {
-    showDialog('세션 만료', '로그인 시간이 지났어요.\n다시 로그인 해주세요.');
+    showDialog(null, '로그인이 필요한 페이지예요.');
     localStorage.clear();
     // window.location.href = ROUTE_PATHS.LOGIN;
   }
