@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { Detail, Edit, Products, Upload, Search } from './pages';
 
-
 export default function MyPage() {
   return (
     <Routes>
