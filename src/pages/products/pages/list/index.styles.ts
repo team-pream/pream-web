@@ -56,7 +56,7 @@ export const item = css`
 export const imageBox = css`
   position: relative;
   cursor: pointer;
-  height: -webkit-fill-available;
+  aspect-ratio: 1;
 `;
 
 export const image = css`
