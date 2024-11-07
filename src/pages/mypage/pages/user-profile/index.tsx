@@ -108,7 +108,6 @@ export default function UserProfile() {
     if (value.length > 13) {
       value = value.slice(0, 13);
     }
-
     setPhone(value); // 상태 업데이트
 
     // 유효성 검사
