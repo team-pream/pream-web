@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import {
   GetProductsDetailResponse,
   GetUsersMeResponse,
-  PostOdersProductBody,
+  PostOdersProductForm,
   PostOrdersProductResponse,
 } from '@/types';
 import { usePostOrdersProductMutation, usePatchUsersAddressMutation } from '@/queries';
@@ -38,15 +38,16 @@ export function OrderForm({ user, product }: Props) {
     control,
     formState: { errors },
     clearErrors,
-  } = useForm<PostOdersProductBody>();
+    setValue,
+  } = useForm<PostOdersProductForm>();
 
-  const onShippingInfoChange = async (form: PostOdersProductBody) => {
-    if (!form.receiverName || !form.shippingAddress.detailAddress || !form.phone) return;
+  const onShippingInfoChange = async (form: PostOdersProductForm) => {
+    if (!form.receiverName || !form.detailAddress || !form.roadAddress || !form.phone) return;
 
     if (isChecked) {
       await patchUsersAddress({
-        roadAddress: form.shippingAddress.roadAddress ?? address?.roadAddress,
-        detailAddress: form.shippingAddress.detailAddress,
+        roadAddress: form.roadAddress ?? address?.roadAddress,
+        detailAddress: form.detailAddress,
       });
     }
 
@@ -55,8 +56,8 @@ export function OrderForm({ user, product }: Props) {
       paymentAmount: product.price,
       paymentMethod: selectedPaymentMethod!,
       shippingAddress: {
-        roadAddress: form.shippingAddress.roadAddress ?? address?.roadAddress,
-        detailAddress: form.shippingAddress.detailAddress,
+        roadAddress: form.roadAddress ?? address?.roadAddress,
+        detailAddress: form.detailAddress,
       },
       phone: form.phone.replace(/-/g, ''),
     });
@@ -67,6 +68,12 @@ export function OrderForm({ user, product }: Props) {
   const onError = () => {
     setIsErrorDialogOpen(true);
   };
+
+  useEffect(() => {
+    if (address?.roadAddress) {
+      setValue('roadAddress', address.roadAddress);
+    }
+  }, [address?.roadAddress, control, setValue]);
 
   return (
     <>
@@ -92,9 +99,9 @@ export function OrderForm({ user, product }: Props) {
 
             <div css={addressWrapper}>
               <Controller
-                name="shippingAddress.roadAddress"
+                name="roadAddress"
                 control={control}
-                defaultValue={userAddress.roadAddress}
+                defaultValue={userAddress.roadAddress ?? ''}
                 rules={validationRules.roadAddress}
                 render={({ field }) => (
                   <Input
@@ -105,7 +112,7 @@ export function OrderForm({ user, product }: Props) {
                     value={address?.roadAddress}
                     defaultValue={userAddress.roadAddress}
                     onClick={getAddressInputPopup}
-                    onChange={() => field.onChange(address?.roadAddress)}
+                    onChange={(e) => field.onChange(e.target.value)}
                     suffix={
                       <Button type="button" size="xs" shape="box" onClick={getAddressInputPopup}>
                         주소 검색
@@ -116,7 +123,7 @@ export function OrderForm({ user, product }: Props) {
               />
 
               <Controller
-                name="shippingAddress.detailAddress"
+                name="detailAddress"
                 control={control}
                 defaultValue={userAddress.detailAddress}
                 rules={validationRules.detailAddress}

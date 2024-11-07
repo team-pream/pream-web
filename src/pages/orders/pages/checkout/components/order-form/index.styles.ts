@@ -1,10 +1,8 @@
 import { css } from '@emotion/react';
-import theme from '@/styles/theme';
 
 export const wrapper = css`
   width: 100%;
   padding: 18px 0 36px 0;
-  border-top: 2px solid ${theme.colors.black};
 `;
 
 export const shippingInfo = css`

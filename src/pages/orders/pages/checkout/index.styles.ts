@@ -7,7 +7,7 @@ export const contentsWrapper = css`
 
 export const title = css`
   color: ${colors.black};
-  padding: 11px 10px;
+  padding: 11px 0;
 `;
 
 export const line = css`
