@@ -175,6 +175,8 @@ import{c as o,a as e,b as s,j as t,F as $}from"./theme-BvZHPoXC.js";import{r as 
   align-items: center;
   justify-content: center;
   gap: 17px;
+  white-space: pre-line;
+  text-align: center;
 `,K=o`
   width: 100%;
   display: flex;
@@ -234,7 +236,7 @@ import{c as o,a as e,b as s,j as t,F as $}from"./theme-BvZHPoXC.js";import{r as 
     width: 68px;
     height: 68px;
   `}
-`;function ae({size:r="s",icon:a,...i}){return t("div",{css:te,children:t("button",{css:oe({size:r}),...i,children:a})})}ae.__docgenInfo={description:"",methods:[],displayName:"FAB",props:{size:{required:!1,tsType:{name:"union",raw:"'s' | 'm'",elements:[{name:"literal",value:"'s'"},{name:"literal",value:"'m'"}]},description:"",defaultValue:{value:"'s'",computed:!1}},icon:{required:!0,tsType:{name:"ReactNode"},description:""}},composes:["ButtonHTMLAttributes"]};const f={LOGIN:"/login",ONBOARDING:"/onboarding",MAIN:"/",CATEGORIES:"/categories",PRODUCTS:"/products",PRODUCTS_DETAIL:r=>`/products/${r}`,PRODUCTS_UPLOAD:"/products/upload",ORDER:r=>`/orders/${r}`,ORDER_PAYMENT:"/orders/payment",ORDER_COMPLETE:"/orders/complete",ORDER_FAILURE:"/orders/failure",MYPAGE:"/mypage",MYPAGE_INFO:"/mypage/user/edit",MYPAGE_ADDRESS:"/mypage/address/edit",MYPAGE_SALES_HISTORY:"/mypage/sales-list",MYPAGE_PURCHASE_HISTORY:"/mypage/purchase-list"},ie=o`
+`;function ae({size:r="s",icon:a,...i}){return t("div",{css:te,children:t("button",{css:oe({size:r}),...i,children:a})})}ae.__docgenInfo={description:"",methods:[],displayName:"FAB",props:{size:{required:!1,tsType:{name:"union",raw:"'s' | 'm'",elements:[{name:"literal",value:"'s'"},{name:"literal",value:"'m'"}]},description:"",defaultValue:{value:"'s'",computed:!1}},icon:{required:!0,tsType:{name:"ReactNode"},description:""}},composes:["ButtonHTMLAttributes"]};const f={LOGIN:"/login",ONBOARDING:"/onboarding",MAIN:"/",CATEGORIES:"/categories",PRODUCTS:"/products",PRODUCTS_DETAIL:r=>`/products/${r}`,PRODUCTS_UPLOAD:"/products/upload",ORDER:r=>`/orders/${r}`,ORDER_PAYMENT:"/orders/payment",ORDER_COMPLETE:"/orders/complete",ORDER_FAILURE:"/orders/failure",MYPAGE:"/mypage",MYPAGE_INFO:"/mypage/users/edit",MYPAGE_ADDRESS:"/mypage/address/edit",MYPAGE_SALES_HISTORY:"/mypage/sales-list",MYPAGE_PURCHASE_HISTORY:"/mypage/purchase-list"},ie=o`
   position: fixed;
   bottom: 0;
   margin: 0 auto;

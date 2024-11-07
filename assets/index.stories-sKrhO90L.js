@@ -1,4 +1,4 @@
-import{B as d}from"./index-DSv2aEx9.js";import"./index-CTjT7uj6.js";import"./index-D5nyNoYp.js";import"./theme-BvZHPoXC.js";import"./extends-CKwpSh1k.js";import"./index-BZqGpNeu.js";const b={title:"Components/Button",component:d,tags:["autodocs"]},r={args:{shape:"box",size:"m",children:"Button"}},e={args:{shape:"capsule",size:"m",children:"Button"}},s={args:{shape:"box",status:"error",size:"m",children:"Button"}};var o,t,a;r.parameters={...r.parameters,docs:{...(o=r.parameters)==null?void 0:o.docs,source:{originalSource:`{
+import{B as d}from"./index-bRBvw1Tc.js";import"./index-CTjT7uj6.js";import"./index-D5nyNoYp.js";import"./theme-BvZHPoXC.js";import"./extends-CKwpSh1k.js";import"./index-BZqGpNeu.js";const b={title:"Components/Button",component:d,tags:["autodocs"]},r={args:{shape:"box",size:"m",children:"Button"}},e={args:{shape:"capsule",size:"m",children:"Button"}},s={args:{shape:"box",status:"error",size:"m",children:"Button"}};var o,t,a;r.parameters={...r.parameters,docs:{...(o=r.parameters)==null?void 0:o.docs,source:{originalSource:`{
   args: {
     shape: 'box',
     size: 'm',
