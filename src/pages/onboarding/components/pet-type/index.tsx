@@ -9,7 +9,7 @@ import {
 } from './index.styles';
 import { SelectCat, SelectDog } from '@/assets/icons';
 import { Text, Button } from '@/components';
-import { useGetUsersMeQuery } from '@/queries';
+import { useGetUsersProfileQuery } from '@/queries';
 import { PET_TYPE, UserInfoForm } from '@/pages/onboarding/types';
 import theme from '@/styles/theme';
 
@@ -21,7 +21,7 @@ interface PetTypeProps {
 }
 
 export default function PetType({ formData, setFormData, onNext, onSkip }: PetTypeProps) {
-  const { data } = useGetUsersMeQuery();
+  const { data } = useGetUsersProfileQuery();
   const isPetTypeValid = formData.petType !== null;
 
   return (

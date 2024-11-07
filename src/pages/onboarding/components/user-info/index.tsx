@@ -3,7 +3,7 @@ import { buttonWrapper, formWrapper, textBox, wrapper } from './index.styles';
 import { Button, Input, Text } from '@/components';
 import {
   usePatchUsersOnboardingMutation,
-  useGetUsersMeQuery,
+  useGetUsersProfileQuery,
   usePostUsersCheckNicknameMutation,
 } from '@/queries';
 import { PatchAuthOnboardingBody } from '@/types';
@@ -32,7 +32,7 @@ export default function UserInfo({ onNext, setFormData, formData }: UserInfoProp
     setIsValidNickname(true);
   });
 
-  const { data } = useGetUsersMeQuery();
+  const { data } = useGetUsersProfileQuery();
 
   const handleNicknameCheck = async () => {
     if (!formData.nickname) return;

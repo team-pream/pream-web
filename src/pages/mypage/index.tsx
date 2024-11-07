@@ -1,9 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
-import { Address, PetProfile, PurchaseList, SalesList, UserProfile } from './pages';
+import { Address, PetProfile, PurchaseList, SalesList, UserProfile, Main } from './pages';
 
 export default function MyPage() {
   return (
     <Routes>
+      <Route path="/" element={<Main />} />
       <Route path="/users/edit" element={<UserProfile />} />
       <Route path="/pets/edit" element={<PetProfile />} />
       <Route path="/sales-list" element={<SalesList />} />

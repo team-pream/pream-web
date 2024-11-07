@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { AppBarBack } from '@/assets/icons';
 import { Layout, AppBar, Text } from '@/components';
-import { useGetProductsDetailQuery, useGetUsersMeQuery } from '@/queries';
+import { useGetProductsDetailQuery, useGetUsersProfileQuery } from '@/queries';
 import { OrderForm } from './components/order-form';
 import { title, line, contentsWrapper } from './index.styles';
 
@@ -9,7 +9,7 @@ export default function Order() {
   const navigate = useNavigate();
   const { productId } = useParams<{ productId: string }>();
 
-  const { data: user } = useGetUsersMeQuery();
+  const { data: user } = useGetUsersProfileQuery();
   const { data: product } = useGetProductsDetailQuery(productId!);
 
   if (!product || !user) return <div>Loading...</div>;

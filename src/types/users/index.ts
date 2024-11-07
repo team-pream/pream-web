@@ -8,11 +8,6 @@ export interface PostUsersCheckNicknameBody {
   nickname: string;
 }
 
-export interface PostUsersPetBody {
-  name: string;
-  petType: string;
-}
-
 export interface GetUsersMeResponse {
   id: string;
   username: string;
@@ -21,9 +16,17 @@ export interface GetUsersMeResponse {
   address: PatchUsersAddressBody;
   email: string;
   contact: string;
-  pets: GetPetsResponse[];
+  pet: GetPetsResponse;
+  bankAccount?: { bank: string; accountNumber: string };
 }
 
+export interface PatchUsersMeBody {
+  nickname?: string;
+  phone?: string;
+  bankAccount?: { bank: string; accountNumber: string };
+}
+
+// TODO: User와 Pet 분리
 export interface GetPetsResponse {
   id: string;
   userId: string;
@@ -37,4 +40,28 @@ export interface GetPetsResponse {
 export interface PatchUsersAddressBody {
   roadAddress: string;
   detailAddress: string;
+}
+
+export interface PatchUsersMeBody {
+  nickname?: string;
+  phone?: string;
+  bankAccount?: { bank: string; accountNumber: string };
+}
+
+export interface PatchUsersPetBody {
+  image: string;
+  name: string;
+  petType: 'DOG' | 'CAT';
+}
+
+export interface PostUsersPetBody {
+  image: string;
+  name: string;
+  petType: string;
+}
+
+export interface PatchUsersPetBody {
+  image: string;
+  name: string;
+  petType: 'DOG' | 'CAT';
 }
