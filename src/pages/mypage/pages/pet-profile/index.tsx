@@ -92,20 +92,25 @@ export default function PetProfile() {
   };
 
   const handleSubmit = () => {
-    const petData = {
-      image: profileImage,
-      name: petName,
-      petType: selectedPetType as 'DOG' | 'CAT',
-    };
+    // Create FormData and append petData fields
+    const formData = new FormData();
+    formData.append('name', petName);
+    formData.append('petType', selectedPetType as 'DOG' | 'CAT');
+
+    // Only append the image file if it's new or changed
+    if (profileImage && profileImage !== data?.pet?.image) {
+      const fileInput = fileInputRef.current?.files?.[0];
+      if (fileInput) formData.append('image', fileInput);
+    }
 
     if (!data?.pet) {
       // Registration logic
-      registerPetProfile(petData, {
+      registerPetProfile(formData, {
         onSuccess: () => navigate('/mypage', { state: { editSuccess: 'registered' } }),
       });
     } else {
       // Update logic
-      updatePetProfile(petData, {
+      updatePetProfile(formData, {
         onSuccess: () => navigate('/mypage', { state: { editSuccess: 'updated' } }),
       });
     }

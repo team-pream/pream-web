@@ -16,10 +16,8 @@ import {
   GetUsersMeResponse,
   PatchAuthOnboardingBody,
   PatchUsersMeBody,
-  PatchUsersPetBody,
   PostUserPetBody,
   PostUsersCheckNicknameBody,
-  PostUsersPetBody,
   PatchUsersAddressBody,
 } from '@/types';
 
@@ -111,7 +109,7 @@ export const usePatchUsersMeMutation = (onSuccess: () => void) => {
 export const usePatchUsersPetMutation = (onSuccess: () => void) => {
   return useMutation({
     mutationKey: QUERY_KEYS.PATCH_USERS_PET,
-    mutationFn: async (body: PatchUsersPetBody) => {
+    mutationFn: async (body: FormData) => {
       try {
         return await patchUsersPet(body);
       } catch {
@@ -139,7 +137,7 @@ export const useDeleteUsersPetMutation = (onSuccess: () => void) => {
 export const usePostUsersPetMutation = (onSuccess: () => void) => {
   return useMutation({
     mutationKey: QUERY_KEYS.POST_USERS_PET,
-    mutationFn: async (body: PostUsersPetBody) => {
+    mutationFn: async (body: FormData) => {
       try {
         return await postUsersPet(body);
       } catch {
