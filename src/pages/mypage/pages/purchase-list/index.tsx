@@ -91,6 +91,11 @@ export default function PurchaseList() {
                   </button>
                   <button css={button}>
                     <Text typo="body3" css={purchaseButton}>
+                      주문 취소
+                    </Text>
+                  </button>
+                  <button css={button}>
+                    <Text typo="body3" css={purchaseButton}>
                       구매 확정
                     </Text>
                   </button>
