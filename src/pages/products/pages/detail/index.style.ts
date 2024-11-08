@@ -13,7 +13,6 @@ export const wrapper = css`
 export const carouselWrapper = css`
   position: relative;
   width: 100%;
-  background-color: ${colors.grayOpacity200};
   border-radius: 0px 0px 20px 20px;
   overflow: hidden;
 `;

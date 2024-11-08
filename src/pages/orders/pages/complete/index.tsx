@@ -18,6 +18,7 @@ import {
   shipBlock,
   textWrapperStyle,
   wrapper,
+  loader,
 } from './index.styles';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { useEffect, useState } from 'react';
@@ -25,6 +26,7 @@ import { usePostPaymentsTossMutation } from '@/queries';
 import { PostPaymentsTossResponse } from '@/types';
 import { formatPhoneNumber } from '@/utils/format';
 import { PAYMENT_METHODS } from '@/constants/payments';
+import { MoonLoader } from 'react-spinners';
 
 export default function OrderComplete() {
   const navigate = useNavigate();
@@ -52,7 +54,12 @@ export default function OrderComplete() {
     fetchProductData();
   }, [postPaymentsToss, searchParams]);
 
-  if (!order) return <div>Loading</div>;
+  if (!order)
+    return (
+      <div css={loader}>
+        <MoonLoader size={40} color="#72DACD" speedMultiplier={0.5} />
+      </div>
+    );
 
   return (
     <Layout>
