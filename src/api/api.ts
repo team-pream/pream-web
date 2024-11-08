@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { AxiosError } from 'axios';
 import { ERROR_CODE } from '@/constants/error-code';
 import { ROUTE_PATHS } from '@/constants/routes';
 
@@ -76,11 +77,14 @@ api.interceptors.response.use(
 
         // 원래의 요청을 재시도
         return api(originalRequest);
-      } catch (e) {
-        if (e.response.data.errorCode === ERROR_CODE.REFRESH_TOKEN_EXPIRED) {
-          alert('로그인 시간이 지났어요. 다시 로그인 해주세요');
-          window.location.href = ROUTE_PATHS.LOGIN;
-          localStorage.clear();
+      } catch (e: unknown) {
+        if (e instanceof AxiosError) {
+          // AxiosError인지 확인
+          if (e.response?.data?.errorCode === ERROR_CODE.REFRESH_TOKEN_EXPIRED) {
+            alert('로그인 시간이 지났어요. 다시 로그인 해주세요');
+            window.location.href = ROUTE_PATHS.LOGIN;
+            localStorage.clear();
+          }
         }
       }
     }
@@ -118,11 +122,14 @@ formApi.interceptors.response.use(
         originalRequest.headers = `Bearer ${newAccessToken}`;
 
         return api(originalRequest);
-      } catch (e) {
-        if (e.response.data.errorCode === ERROR_CODE.REFRESH_TOKEN_EXPIRED) {
-          alert('로그인 시간이 지났어요. 다시 로그인 해주세요');
-          window.location.href = ROUTE_PATHS.LOGIN;
-          localStorage.clear();
+      } catch (e: unknown) {
+        if (e instanceof AxiosError) {
+          // AxiosError인지 확인
+          if (e.response?.data?.errorCode === ERROR_CODE.REFRESH_TOKEN_EXPIRED) {
+            alert('로그인 시간이 지났어요. 다시 로그인 해주세요');
+            window.location.href = ROUTE_PATHS.LOGIN;
+            localStorage.clear();
+          }
         }
       }
     } else if (errorCode == ERROR_CODE.AUTHORIZATION_HEADER_MISSING) {

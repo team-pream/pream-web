@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import SearchBar from '../search-bar';
 import KakaoMap from '../map';
 import axios from 'axios';
