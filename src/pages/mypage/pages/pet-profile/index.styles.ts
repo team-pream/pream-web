@@ -63,7 +63,7 @@ export const radioStyle = css`
 export const hr = css`
   margin-top: 19px;
   margin-bottom: 0;
-  border: 2px solid ${theme.colors.black};
+  border-bottom: 2px solid ${theme.colors.black};
 `;
 
 export const fixedButtonWrapper = css`

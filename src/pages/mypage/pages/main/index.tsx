@@ -37,7 +37,7 @@ export default function Main() {
 
   const logout = () => {
     localStorage.removeItem('access');
-    navigate(ROUTE_PATHS.MAIN, { replace: true });
+    window.location.replace(ROUTE_PATHS.MAIN);
   };
 
   const location = useLocation();

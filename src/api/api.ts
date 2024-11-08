@@ -83,10 +83,6 @@ api.interceptors.response.use(
           localStorage.clear();
         }
       }
-    } else if (errorCode == ERROR_CODE.AUTHORIZATION_HEADER_MISSING) {
-      alert('로그인 시간이 지났어요. 다시 로그인 해주세요.');
-      window.location.href = ROUTE_PATHS.LOGIN;
-      localStorage.clear();
     }
     return Promise.reject(error);
   }
