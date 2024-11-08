@@ -49,7 +49,7 @@ export const textBox = css`
 
 export const title = css`
   width: 100%;
-
+  max-width: 280px;
   white-space: nowrap;
   text-overflow: ellipsis;
   word-break: break-all;
