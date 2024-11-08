@@ -16,6 +16,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Dialog } from './components';
 import { configureApiInterceptors } from './api/api';
 import { ROUTE_PATHS } from './constants/routes';
+import ScrollToTop from './pages/scroll';
 export default function App() {
   const [dialogState, setDialogState] = useState({
     open: false,
@@ -53,6 +54,7 @@ export default function App() {
       <QueryProvider>
         <GlobalStyle />
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/auth/*" element={<Auth />} />
