@@ -77,7 +77,10 @@ api.interceptors.response.use(
         // 원래의 요청을 재시도
         return api(originalRequest);
       } catch (e) {
-        if (e.response.data.errorCode === ERROR_CODE.REFRESH_TOKEN_EXPIRED) {
+        if (
+          axios.isAxiosError(e) &&
+          e.response?.data.errorCode === ERROR_CODE.REFRESH_TOKEN_EXPIRED
+        ) {
           alert('로그인 시간이 지났어요. 다시 로그인 해주세요');
           window.location.href = ROUTE_PATHS.LOGIN;
           localStorage.clear();
@@ -119,7 +122,10 @@ formApi.interceptors.response.use(
 
         return api(originalRequest);
       } catch (e) {
-        if (e.response.data.errorCode === ERROR_CODE.REFRESH_TOKEN_EXPIRED) {
+        if (
+          axios.isAxiosError(e) &&
+          e.response?.data.errorCode === ERROR_CODE.REFRESH_TOKEN_EXPIRED
+        ) {
           alert('로그인 시간이 지났어요. 다시 로그인 해주세요');
           window.location.href = ROUTE_PATHS.LOGIN;
           localStorage.clear();

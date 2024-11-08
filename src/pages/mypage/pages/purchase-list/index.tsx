@@ -128,7 +128,7 @@ export default function PurchaseList() {
                   <button
                     css={button}
                     onClick={() => handleOrderCancelClick(order.id)}
-                    disabled={disabledOrders.includes(order.id)} // 주문 취소된 경우 버튼 비활성화
+                    disabled={!order.isCancelable} // 주문 취소된 경우 버튼 비활성화
                   >
                     <Text typo="body3" css={purchaseButton}>
                       주문 취소
