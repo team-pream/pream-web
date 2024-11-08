@@ -51,13 +51,15 @@ export const item = css`
 
 export const imageBox = css`
   position: relative;
+  cursor: pointer;
 `;
 
 export const image = css`
-  background-color: lightgray;
   border-radius: 13px;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  aspect-ratio: 1/1;
 `;
 
 export const opacityBox = css`
