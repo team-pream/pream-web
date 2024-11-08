@@ -4,6 +4,7 @@ import { loadKakaoMapScript } from '@/libs/kako-map';
 interface KakaoMapProps {
   latitude: number;
   longitude: number;
+  onMarkerDragEnd?: (lat: number, lng: number) => void;
 }
 
 const KakaoMap: React.FC<KakaoMapProps> = ({ latitude, longitude }) => {
