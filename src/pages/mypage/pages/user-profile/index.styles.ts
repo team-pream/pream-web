@@ -19,7 +19,7 @@ export const titleContainer = css`
 
 export const line = css`
   width: 100%;
-  border: solid 2px ${theme.colors.black};
+  border-bottom: solid 2px ${theme.colors.black};
 `;
 
 export const fixContainer = css`
