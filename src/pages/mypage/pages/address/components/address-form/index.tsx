@@ -90,20 +90,20 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
     }).open();
   };
 
-  const handleMarkerDragEnd = async (lat: number, lng: number) => {
-    const geocoder = new window.kakao.maps.services.Geocoder();
-    geocoder.coord2Address(lng, lat, (result, status) => {
-      if (status === window.kakao.maps.services.Status.OK && result[0]) {
-        let roadAddress = result[0].road_address?.address_name || '';
-        const jibunAddress = result[0].address?.address_name || '';
-        if (!roadAddress) {
-          roadAddress = jibunAddress;
-        }
-        setRoadAddress(roadAddress);
-        setMapCoordinates({ latitude: lat, longitude: lng });
-      }
-    });
-  };
+  // const handleMarkerDragEnd = async (lat: number, lng: number) => {
+  //   const geocoder = new window.kakao.maps.services.Geocoder();
+  //   geocoder.coord2Address(lng, lat, (result, status) => {
+  //     if (status === window.kakao.maps.services.Status.OK && result[0]) {
+  //       let roadAddress = result[0].road_address?.address_name || '';
+  //       const jibunAddress = result[0].address?.address_name || '';
+  //       if (!roadAddress) {
+  //         roadAddress = jibunAddress;
+  //       }
+  //       setRoadAddress(roadAddress);
+  //       setMapCoordinates({ latitude: lat, longitude: lng });
+  //     }
+  //   });
+  // };
 
   const validateDetailAddress = (detail: string, road: string) => {
     if (!detail) {
@@ -162,7 +162,7 @@ const AddressForm = ({ onSave, initialData }: AddressFormProps) => {
         <KakaoMap
           latitude={mapCoordinates.latitude}
           longitude={mapCoordinates.longitude}
-          onMarkerDragEnd={handleMarkerDragEnd}
+          // onMarkerDragEnd={handleMarkerDragEnd}
         />
       )}
       <div css={defaultWrapper}>

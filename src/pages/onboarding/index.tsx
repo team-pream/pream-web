@@ -49,7 +49,12 @@ export default function Onboarding() {
 
   const handleNextButtonClick = () => {
     if (step === STEPS.PET_NAME && formData.petType) {
-      mutate({ name: formData.petName, petType: formData.petType });
+      const form = new FormData();
+
+      form.append('petName', formData.petName);
+      form.append('petType', formData.petType);
+
+      mutate(form);
     } else {
       setStep(step + 1);
     }
