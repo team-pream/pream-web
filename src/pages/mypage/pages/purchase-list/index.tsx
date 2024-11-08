@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   mainWrapper,
   mainTitleBox,
@@ -25,15 +25,53 @@ import {
 } from './index.style';
 import { AppBarBack } from '@/assets/icons';
 import { useNavigate } from 'react-router-dom';
-import { AppBar, Layout, Text } from '@/components';
+import { AppBar, Layout, Text, Dialog } from '@/components';
 import { useGetOrdersQuery, usePostPaymentsCancelMutation } from '@/queries';
 
 export default function PurchaseList() {
-  // 각 아이템의 열림 상태를 배열로 관리
   const [isOpen, setIsOpen] = useState<boolean[]>([]);
-  const { data: orders } = useGetOrdersQuery();
+  const [isDialogOpen, setIsDialogOpen] = useState(false); // Dialog 열림 상태 관리
+  const [selectedOrderId, setSelectedOrderId] = useState<string | null>(null); // 취소할 주문 ID
+  const [disabledOrders, setDisabledOrders] = useState<string[]>([]); // 취소된 주문 ID 목록
 
+  const { data: orders } = useGetOrdersQuery();
   const { mutate: postPaymentsCancel } = usePostPaymentsCancelMutation();
+  const navigate = useNavigate();
+
+  // 페이지 로드 시 저장된 취소된 주문 상태 불러오기
+  useEffect(() => {
+    const cancelledOrders = JSON.parse(localStorage.getItem('cancelledOrders') || '[]');
+    setDisabledOrders(cancelledOrders);
+  }, []);
+
+  // 주문 취소 버튼 클릭 시 Dialog 열기
+  const handleOrderCancelClick = (orderId: string) => {
+    setSelectedOrderId(orderId); // 취소할 주문 ID 설정
+    setIsDialogOpen(true); // Dialog 열기
+  };
+
+  // Dialog의 '예' 버튼 클릭 시 주문 취소
+  const handleDialogConfirm = () => {
+    if (selectedOrderId) {
+      postPaymentsCancel(
+        { orderId: selectedOrderId, body: {} },
+        {
+          onSuccess: () => {
+            // 주문 취소 후 로컬 스토리지에 취소된 주문 ID 추가
+            const updatedDisabledOrders = [...disabledOrders, selectedOrderId];
+            setDisabledOrders(updatedDisabledOrders);
+            localStorage.setItem('cancelledOrders', JSON.stringify(updatedDisabledOrders));
+          },
+        }
+      );
+    }
+    setIsDialogOpen(false); // Dialog 닫기
+  };
+
+  // Dialog의 '아니오' 버튼 클릭 시 Dialog 닫기
+  const handleDialogCancel = () => {
+    setIsDialogOpen(false); // Dialog 닫기
+  };
 
   const handleArrowToggle = (id: number) => {
     setIsOpen((prev) => {
@@ -41,12 +79,6 @@ export default function PurchaseList() {
       newIsOpen[id] = !newIsOpen[id];
       return newIsOpen;
     });
-  };
-
-  const navigate = useNavigate();
-
-  const handleOrderCancel = (orderId: string) => {
-    postPaymentsCancel({ orderId, body: {} });
   };
 
   return (
@@ -93,7 +125,11 @@ export default function PurchaseList() {
                       주문 정보 보기
                     </Text>
                   </button>
-                  <button css={button} onClick={() => handleOrderCancel(order.id)}>
+                  <button
+                    css={button}
+                    onClick={() => handleOrderCancelClick(order.id)}
+                    disabled={disabledOrders.includes(order.id)} // 주문 취소된 경우 버튼 비활성화
+                  >
                     <Text typo="body3" css={purchaseButton}>
                       주문 취소
                     </Text>
@@ -145,6 +181,19 @@ export default function PurchaseList() {
             </div>
           </div>
         ))}
+
+        {/* 주문 취소 확인 Dialog */}
+        {isDialogOpen && (
+          <Dialog
+            title="정말로 취소하시겠어요?"
+            description="이 작업은 되돌릴 수 없습니다."
+            primaryActionLabel="예"
+            secondaryActionLabel="아니오"
+            onPrimaryAction={handleDialogConfirm} // '예' 버튼 클릭 시 취소
+            onSecondaryAction={handleDialogCancel} // '아니오' 버튼 클릭 시 닫기
+            type="error"
+          />
+        )}
       </main>
     </Layout>
   );
