@@ -12,7 +12,7 @@ export default function Order() {
   const { data: user } = useGetUsersProfileQuery();
   const { data: product } = useGetProductsDetailQuery(productId!);
 
-  if (!product || !user) return <div>Loading...</div>;
+  if (!product || !user) return alert('로그인이 필요해요.');
 
   return (
     <Layout>
