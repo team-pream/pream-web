@@ -34,7 +34,7 @@ export default function Address() {
     if (showUpdateMessage) {
       const timer = setTimeout(() => {
         setShowUpdateMessage(false);
-      }, 2000);
+      }, 1700);
 
       return () => clearTimeout(timer);
     }
