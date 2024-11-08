@@ -32,7 +32,7 @@ export default function Order() {
               navigate(ROUTE_PATHS.LOGIN);
             }}
           >
-            메인으로
+            로그인
           </Button>
         </div>
       </Layout>
